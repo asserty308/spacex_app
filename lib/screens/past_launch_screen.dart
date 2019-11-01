@@ -3,13 +3,14 @@ import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 
-class NextLaunchScreen extends StatefulWidget {
+class PastLaunchScreen extends StatefulWidget {
   @override
-  _NextLaunchScreenState createState() => _NextLaunchScreenState();
+  _PastLaunchScreenState createState() => _PastLaunchScreenState();
 }
 
-class _NextLaunchScreenState extends State<NextLaunchScreen> {
+class _PastLaunchScreenState extends State<PastLaunchScreen> {
   Launch _launch;
+  List<String> _launchImages = List();
 
   @override
   void initState() {
@@ -23,24 +24,21 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Next Launch'),
+        title: Text(_launch?.missionName ?? 'Loading...'),
         backgroundColor: Colors.black,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.message),
-            onPressed: () => scheduleReminder(),
-          )
-        ],
       ),
       drawer: MyDrawer(),
       body: Container(
         color: Colors.black87,
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // TODO: Update to AnimatedOpacity widget that changes the image every 10s
+              _launchImages.isEmpty ? Container() : Image(
+                image: NetworkImage(_launchImages[0]),
+              ),
               Text(
-                _launch?.missionName ?? 'Loading upcoming mission...',
+                _launch?.missionName ?? '',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -74,15 +72,11 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
 
   void fetchLaunchInformation() async {
     final api = SpaceXAPI();
-    final launch = await api.getNextLaunch();
+    final launch = await api.getLatestLaunch();
 
     setState(() {
       _launch = launch;
+      _launchImages = launch.flickrImages;
     });
-  }
-
-  /// Schedules a notification that appears one hour before takeoff
-  void scheduleReminder() {
-
   }
 }

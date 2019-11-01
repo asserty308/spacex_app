@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/screens/next_launch_screen.dart';
+import 'package:spacex_guide/screens/past_launch_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        '/': (context) => NextLaunchScreen(),
+        '/': (context) => PastLaunchScreen(),
       },
     );
   }
