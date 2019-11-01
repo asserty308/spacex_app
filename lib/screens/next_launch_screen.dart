@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/widgets/drawer.dart';
 
 class NextLaunchScreen extends StatefulWidget {
   @override
@@ -8,9 +9,7 @@ class NextLaunchScreen extends StatefulWidget {
 }
 
 class _NextLaunchScreenState extends State<NextLaunchScreen> {
-  var _launchName = 'Loading launch information...';
-  var _launchDate = '';
-  var _rocket = '';
+  Launch _launch;
 
   @override
   void initState() {
@@ -26,14 +25,22 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
       appBar: AppBar(
         title: Text('Next Launch'),
         backgroundColor: Colors.black,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.message),
+            onPressed: () => scheduleReminder(),
+          )
+        ],
       ),
+      drawer: MyDrawer(),
       body: Container(
         color: Colors.black87,
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                _launchName,
+                _launch?.missionName ?? 'Loading upcoming mission...',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -41,14 +48,14 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
                 ),
               ),
               Text(
-                _launchDate,
+                _launch?.formattedLaunchDate() ?? '',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                 ),
               ),
               Text(
-                _rocket,
+                _launch?.rocketName ?? '',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
@@ -67,15 +74,15 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
 
   void fetchLaunchInformation() async {
     final api = SpaceXAPI();
-    final response = await api.getNextLaunch();
-
-    final date = DateTime.fromMillisecondsSinceEpoch(response['launch_date_unix'] * 1000);
-    final dateFormat = DateFormat('dd.MM.yyyy HH:mm:ss').format(date);
+    final launch = await api.getNextLaunch();
 
     setState(() {
-      _launchName = response['mission_name'];
-      _launchDate = dateFormat;
-      _rocket = response['rocket']['rocket_name'];
+      _launch = launch;
     });
+  }
+
+  /// Schedules a notification that appears one hour before takeoff
+  void scheduleReminder() {
+
   }
 }

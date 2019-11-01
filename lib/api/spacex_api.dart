@@ -1,39 +1,45 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:spacex_guide/api/models/launch.dart';
 
 class SpaceXAPI {
   final _baseUrl = 'https://api.spacexdata.com/v3/';
 
   /// Wrapper to fetch JSON from the API
-  Future<dynamic> getJSON(String url) async {
+  Future<dynamic> _fetchJSON(String url) async {
     final response = await http.get(url);
     return json.decode(response.body);
   }
 
   // Launches
 
-  Future<dynamic> getLatestLaunch() async {
+  Future<Launch> _fetchLaunchFromUrl(String url) async {
+    final json = await _fetchJSON(url);
+    return Launch.fromJSON(json);
+  }
+
+  Future<Launch> getLatestLaunch() async {
     final url = '${_baseUrl}launches/latest/';
-    return await getJSON(url);
+    return await _fetchLaunchFromUrl(url);
   }
 
-  Future<dynamic> getNextLaunch() async {
+  Future<Launch> getNextLaunch() async {
     final url = '${_baseUrl}launches/next/';
-    return await getJSON(url);
+    return await _fetchLaunchFromUrl(url);
   }
 
-  Future<dynamic> getAllLaunches() async {
+  Future<Launch> getAllLaunches() async {
     final url = '${_baseUrl}launches/';
-    return await getJSON(url);
+    return await _fetchLaunchFromUrl(url);
   }
 
-  Future<dynamic> getPastLaunches() async {
+  Future<Launch> getPastLaunches() async {
     final url = '${_baseUrl}launches/past';
-    return await getJSON(url);
+    return await _fetchLaunchFromUrl(url);
   }
 
-  Future<dynamic> getUpcomingLaunches() async {
+  Future<Launch> getUpcomingLaunches() async {
     final url = '${_baseUrl}launches/upcoming/';
-    return await getJSON(url);
+    return await _fetchLaunchFromUrl(url);
   }
 }
