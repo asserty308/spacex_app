@@ -5,11 +5,12 @@ class Launch {
     this.flightNumber,
     this.missionName,
     this.launchDateUnix,
+    this.details,
     this.rocketName, // TODO: Update to model Rocket
   });
 
   int flightNumber;
-  String missionName, rocketName;
+  String missionName, rocketName, details;
   int launchDateUnix;
 
   static Launch fromJSON(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class Launch {
       missionName: json['mission_name'],
       launchDateUnix: json['launch_date_unix'],
       rocketName: json['rocket']['rocket_name'],
+      details: json['details'],
     );
   }
 
