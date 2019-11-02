@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/widgets/animated_launch_images.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 
 class PastLaunchScreen extends StatefulWidget {
@@ -33,9 +34,8 @@ class _PastLaunchScreenState extends State<PastLaunchScreen> {
         child: Center(
           child: Column(
             children: <Widget>[
-              // TODO: Update to AnimatedOpacity widget that changes the image every 10s
-              _launchImages.isEmpty ? Container() : Image(
-                image: NetworkImage(_launchImages[0]),
+              AnimatedLaunchImages(
+                imageUrls: _launchImages,
               ),
               Text(
                 _launch?.missionName ?? '',

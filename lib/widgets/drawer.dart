@@ -30,6 +30,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Next Launch'),
             leading: Icon(Icons.timer),
+            onTap: () => showScreen(context, '/next'),
           ),
           ListTile(
             title: Text('All Launches'),
@@ -54,5 +55,9 @@ class MyDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void showScreen(BuildContext context, String id) {
+    Navigator.pushNamed(context, id);
   }
 }

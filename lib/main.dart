@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/screens/next_launch_screen.dart';
 import 'package:spacex_guide/screens/past_launch_screen.dart';
 
+FlutterLocalNotificationsPlugin globalLocalNotifications;
+
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    initLocalNotifications();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +29,33 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => PastLaunchScreen(),
+        '/next': (context) => NextLaunchScreen(),
       },
     );
+  }
+
+  void initLocalNotifications() async {
+    globalLocalNotifications = FlutterLocalNotificationsPlugin();
+
+    // Platform specific setup
+    final androidSettings = AndroidInitializationSettings('app_icon');
+    final iosSettings = IOSInitializationSettings();
+    final settings = InitializationSettings(androidSettings, iosSettings);
+
+    globalLocalNotifications.initialize(
+      settings,
+      onSelectNotification: onSelectNotification,
+    );
+
+    // Fetch app launch details when the app was launced by a notification
+    final launchDetails = await globalLocalNotifications.getNotificationAppLaunchDetails();
+
+    if (launchDetails.didNotificationLaunchApp) {
+      onSelectNotification(launchDetails.payload);
+    }
+  }
+
+  Future onSelectNotification(String payload) async {
+    print('Did select notification with payload $payload');
   }
 }

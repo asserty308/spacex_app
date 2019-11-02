@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/main.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 
 class NextLaunchScreen extends StatefulWidget {
@@ -9,6 +11,8 @@ class NextLaunchScreen extends StatefulWidget {
 }
 
 class _NextLaunchScreenState extends State<NextLaunchScreen> {
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Launch _launch;
 
   @override
@@ -22,13 +26,14 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Next Launch'),
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.message),
-            onPressed: () => scheduleReminder(),
+            onPressed: () => scheduleReminder(context),
           )
         ],
       ),
@@ -82,7 +87,24 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
   }
 
   /// Schedules a notification that appears one hour before takeoff
-  void scheduleReminder() {
+  void scheduleReminder(BuildContext context) async {
+    final scheduledDate = DateTime.now().add(Duration(seconds: 15));
+    final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
+    final iOSDetails = IOSNotificationDetails();
+    final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
 
+    await globalLocalNotifications.schedule(
+      0, 
+      'Launch Reminder', 
+      'The mission ${_launch.missionName} will launch soon!', 
+      scheduledDate, notificationDetails,
+    );
+
+    _scaffoldKey.currentState
+      .showSnackBar(
+        SnackBar(
+          content: Text('Set reminder for ${_launch.missionName}'),
+        )
+      );
   }
 }
