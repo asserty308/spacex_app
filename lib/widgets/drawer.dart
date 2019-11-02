@@ -30,11 +30,12 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Next Launch'),
             leading: Icon(Icons.timer),
-            onTap: () => showScreen(context, '/next'),
+            onTap: () => showScreen(context, '/upcoming_launch'),
           ),
           ListTile(
             title: Text('All Launches'),
             leading: Icon(Icons.all_inclusive),
+            onTap: () => showScreen(context, '/'),
           ),
           ListTile(
             title: Text('All Missions'),

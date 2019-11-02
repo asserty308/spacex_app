@@ -41,8 +41,8 @@ class _LaunchImagesState extends State<LaunchImages> {
   void startAnimation() {
     final delay = Duration(seconds: 20);
     Timer.periodic(delay, (timer) {
-      // not needed when only one image available
-      if (widget.imageUrls == null || widget.imageUrls.length < 2) {
+      // no animation needed when only one image available
+      if (widget.imageUrls == null || widget.imageUrls.length < 2 || !this.mounted) {
         return;
       }
 

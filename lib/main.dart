@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:spacex_guide/screens/next_launch_screen.dart';
+import 'package:spacex_guide/screens/all_launches_screen.dart';
 import 'package:spacex_guide/screens/past_launch_screen.dart';
+import 'package:spacex_guide/screens/upcoming_launch_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
 
@@ -28,8 +29,9 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        '/': (context) => PastLaunchScreen(),
-        '/next': (context) => NextLaunchScreen(),
+        '/': (context) => AllLaunchesScreen(),
+        '/past_launch': (context) => PastLaunchScreen(),
+        '/upcoming_launch': (context) => UpcomingLaunchScreen(),
       },
     );
   }

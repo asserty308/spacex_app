@@ -4,13 +4,14 @@ import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/main.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
+import 'package:spacex_guide/widgets/launch_countdown.dart';
 
-class NextLaunchScreen extends StatefulWidget {
+class UpcomingLaunchScreen extends StatefulWidget {
   @override
-  _NextLaunchScreenState createState() => _NextLaunchScreenState();
+  _UpcomingLaunchScreenState createState() => _UpcomingLaunchScreenState();
 }
 
-class _NextLaunchScreenState extends State<NextLaunchScreen> {
+class _UpcomingLaunchScreenState extends State<UpcomingLaunchScreen> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Launch _launch;
@@ -44,6 +45,9 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              _launch == null ? Container() : LaunchCountdown(
+                launch: _launch,
+              ),
               Text(
                 _launch?.missionName ?? 'Loading upcoming mission...',
                 style: TextStyle(

@@ -28,9 +28,16 @@ class SpaceXAPI {
     return await _fetchLaunchFromUrl(url);
   }
 
-  Future<Launch> getAllLaunches() async {
+  Future<List<Launch>> getAllLaunches() async {
     final url = '${_baseUrl}launches/';
-    return await _fetchLaunchFromUrl(url);
+    final response = await _fetchJSON(url);
+    List<Launch> list = List();
+
+    for (var launch in response) {
+      list.add(Launch.fromJSON(launch));
+    }
+
+    return list;
   }
 
   Future<Launch> getPastLaunches() async {

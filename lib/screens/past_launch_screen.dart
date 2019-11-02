@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/widgets/launch_images.dart';
-import 'package:spacex_guide/widgets/drawer.dart';
+
+class PastLaunchScreenArguments {
+  PastLaunchScreenArguments(this.launch);
+
+  Launch launch;
+}
 
 class PastLaunchScreen extends StatefulWidget {
   @override
@@ -10,35 +14,26 @@ class PastLaunchScreen extends StatefulWidget {
 }
 
 class _PastLaunchScreenState extends State<PastLaunchScreen> {
-  Launch _launch;
-  List<String> _launchImages = List();
-
-  @override
-  void initState() {
-    super.initState();
-
-    // run 'afterFirstlayout' after first build()
-    WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstLayout(context));
-  }
-
   @override
   Widget build(BuildContext context) {
+    final PastLaunchScreenArguments args = ModalRoute.of(context).settings.arguments;
+    final launch = args.launch;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_launch?.missionName ?? 'Loading...'),
+        title: Text(launch.missionName),
         backgroundColor: Colors.black,
       ),
-      drawer: MyDrawer(),
       body: Container(
         color: Colors.black87,
         child: Center(
           child: Column(
             children: <Widget>[
               LaunchImages(
-                imageUrls: _launchImages,
+                imageUrls: launch.flickrImages,
               ),
               Text(
-                _launch?.missionName ?? '',
+                launch.missionName,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -46,14 +41,14 @@ class _PastLaunchScreenState extends State<PastLaunchScreen> {
                 ),
               ),
               Text(
-                _launch?.formattedLaunchDate() ?? '',
+                launch.formattedLaunchDate(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                 ),
               ),
               Text(
-                _launch?.rocket?.name ?? '',
+                launch.rocket.name,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
@@ -64,19 +59,5 @@ class _PastLaunchScreenState extends State<PastLaunchScreen> {
         ),
       ),
     );
-  }
-
-  void afterFirstLayout(BuildContext context) {
-    fetchLaunchInformation();
-  }
-
-  void fetchLaunchInformation() async {
-    final api = SpaceXAPI();
-    final launch = await api.getLatestLaunch();
-
-    setState(() {
-      _launch = launch;
-      _launchImages = launch.flickrImages;
-    });
   }
 }
