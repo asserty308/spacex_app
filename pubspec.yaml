@@ -27,6 +27,10 @@ dependencies:
   intl: # Date formatting
   flutter_local_notifications: # scheduled notifications
   cached_network_image: # image cache
+  path_provider:
+  video_player:
+  flutter_full_pdf_viewer:
+  youtube_player_flutter:
 
 dev_dependencies:
   flutter_test:
