@@ -5,13 +5,14 @@ import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/main.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_countdown.dart';
+import 'package:spacex_guide/widgets/launch_info.dart';
 
-class UpcomingLaunchScreen extends StatefulWidget {
+class NextLaunchScreen extends StatefulWidget {
   @override
-  _UpcomingLaunchScreenState createState() => _UpcomingLaunchScreenState();
+  _NextLaunchScreenState createState() => _NextLaunchScreenState();
 }
 
-class _UpcomingLaunchScreenState extends State<UpcomingLaunchScreen> {
+class _NextLaunchScreenState extends State<NextLaunchScreen> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Launch _launch;
@@ -41,37 +42,8 @@ class _UpcomingLaunchScreenState extends State<UpcomingLaunchScreen> {
       drawer: MyDrawer(),
       body: Container(
         color: Colors.black87,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _launch == null ? Container() : LaunchCountdown(
-                launch: _launch,
-              ),
-              Text(
-                _launch?.missionName ?? 'Loading upcoming mission...',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                _launch?.formattedLaunchDate() ?? '',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                ),
-              ),
-              Text(
-                _launch?.rocket?.name ?? '',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                ),
-              )
-            ],
-          ),
+        child: _launch == null ? Center(child: CircularProgressIndicator()) : LaunchInfo(
+          launch: _launch,
         ),
       ),
     );

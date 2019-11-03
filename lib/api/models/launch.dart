@@ -38,6 +38,10 @@ class Launch {
       flickrImages: List<String>.from(flickrImages),
     );
   }
+  
+  bool isUpcoming() {
+    return (launchDateUnix * 1000) > DateTime.now().millisecondsSinceEpoch;
+  }
 
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.

@@ -29,11 +29,18 @@ class _LaunchImagesState extends State<LaunchImages> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 200,
-      child: widget.imageUrls.isEmpty ? Center(child: CircularProgressIndicator()) : CachedNetworkImage(
-        imageUrl: widget.imageUrls[_imageIndex],
-        fit: BoxFit.cover,
+      child: CachedNetworkImage(
+        imageUrl: widget.imageUrls.isEmpty ? '' : widget.imageUrls[_imageIndex],
+        fit: _imageIndex == 0 ? BoxFit.contain : BoxFit.cover, // always show full badge
         placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        errorWidget: (context, url, error) => Center(
+          child: Text(
+            'No image available',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          )
+        ),
       ),
     );
   }

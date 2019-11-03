@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
-import 'package:spacex_guide/screens/past_launch_screen.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
+
+import 'arguments/launch_arguments.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
                 Navigator.pushNamed(
                   context, 
                   '/past_launch',
-                  arguments: PastLaunchScreenArguments(_launches[i]),
+                  arguments: LaunchScreenArguments(_launches[i]),
                 );
               },
             );
