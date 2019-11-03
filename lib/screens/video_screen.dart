@@ -9,6 +9,7 @@ class VideoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
     final _controller = YoutubePlayerController(
         initialVideoId: launch.youtubeID,
         flags: YoutubePlayerFlags(

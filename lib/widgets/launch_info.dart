@@ -110,11 +110,12 @@ class LaunchInfo extends StatelessWidget {
   }
 
   void showLaunchDetails(BuildContext context) {
-    showOKDialog(context, launch.missionName, launch.details);
+    var content = launch.details != null ? launch.details : 'There are no details available.';
+    showOKDialog(context, launch.missionName, content);
   }
 
   void showPresskit(BuildContext context) async {
-    if (launch.presskit == null || launch.presskit.isEmpty) {
+    if (launch.presskit == null || launch.presskit.isEmpty || !launch.presskit.endsWith('.pdf')) {
       showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
       return;
     }
