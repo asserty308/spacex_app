@@ -4,7 +4,6 @@ import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/main.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
-import 'package:spacex_guide/widgets/launch_countdown.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
 class NextLaunchScreen extends StatefulWidget {

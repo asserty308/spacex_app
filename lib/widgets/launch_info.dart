@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
+import 'package:spacex_guide/screens/pdf_screen.dart';
+import 'package:spacex_guide/screens/video_screen.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
+import 'package:spacex_guide/utility/files.dart';
 import 'package:spacex_guide/widgets/launch_countdown.dart';
 
 class LaunchInfo extends StatelessWidget {
@@ -108,13 +113,32 @@ class LaunchInfo extends StatelessWidget {
     showOKDialog(context, launch.missionName, launch.details);
   }
 
-  void showPresskit(BuildContext context) {
-    // TODO: Implement showPresskit
-    showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
+  void showPresskit(BuildContext context) async {
+    if (launch.presskit == null || launch.presskit.isEmpty) {
+      showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
+      return;
+    }
+
+    File file = await createFileFromUrl(launch.presskit);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PDFScreen(
+        title: '${launch.missionName} Presskit', 
+        filePath: file.path
+      )),
+    );
   }
 
   void showVideo(BuildContext context) {
-    // TODO: Implement showVideo
-    showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
+    if (launch.youtubeID == null || launch.youtubeID.isEmpty) {
+      showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => VideoScreen(launch)),
+    );
   }
 }

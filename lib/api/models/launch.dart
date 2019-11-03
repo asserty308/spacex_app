@@ -10,13 +10,14 @@ class Launch {
     this.missionPatch,
     this.presskit,
     this.videoLink,
+    this.youtubeID,
     this.rocket,
     this.flickrImages,
   });
 
   int flightNumber, launchDateUnix;
   String missionName, details;
-  String missionPatch, presskit, videoLink;
+  String missionPatch, presskit, videoLink, youtubeID;
   Rocket rocket;
   List<String> flickrImages;
 
@@ -35,6 +36,7 @@ class Launch {
       missionPatch: links['mission_patch'],
       presskit: links['presskit'],
       videoLink: links['video_link'],
+      youtubeID: links['youtube_id'],
       flickrImages: List<String>.from(flickrImages),
     );
   }
