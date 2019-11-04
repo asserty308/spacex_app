@@ -31,6 +31,7 @@ dependencies:
   video_player:
   flutter_full_pdf_viewer:
   youtube_player_flutter:
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:

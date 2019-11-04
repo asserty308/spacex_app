@@ -44,7 +44,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   }
 
   List<String> getImageUrls() {
-    var urls = _launch.flickrImages;
+    var urls = List<String>.from(_launch.flickrImages);
 
     // the mission patch should always be the first image to show (when available)
     if (_launch.missionPatch != null && _launch.missionPatch.isNotEmpty) {
