@@ -15,6 +15,7 @@ class LaunchCountdown extends StatefulWidget {
 }
 
 class _LaunchCountdownState extends State<LaunchCountdown> {
+  Timer _launchTimer;
   var _countdownText = '';
 
   @override
@@ -35,10 +36,16 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
     );
   }
 
+  @override
+  void dispose() {
+    _launchTimer.cancel();
+    super.dispose();
+  }
+
   /// Update every second
   void startUpdate() {
     final duration = Duration(seconds: 1);
-    Timer.periodic(duration, (timer) {
+    _launchTimer = Timer.periodic(duration, (timer) {
       setCountdownText();
     });
   }
