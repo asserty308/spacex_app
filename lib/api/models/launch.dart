@@ -7,6 +7,8 @@ class Launch {
     this.missionName,
     this.launchDateUnix,
     this.details,
+    this.tentativeMaxPrecision,
+    this.isTentative,
     this.missionPatch,
     this.presskit,
     this.videoLink,
@@ -16,11 +18,11 @@ class Launch {
   });
 
   int flightNumber, launchDateUnix;
-  String missionName, details;
+  String missionName, details, tentativeMaxPrecision;
+  bool isTentative;
   String missionPatch, presskit, videoLink, youtubeID;
   Rocket rocket;
   List<String> flickrImages;
-
 
   static Launch fromJSON(Map<String, dynamic> json) {
     final rocket = Rocket.fromJSON(json['rocket']);
@@ -33,6 +35,8 @@ class Launch {
       launchDateUnix: json['launch_date_unix'],
       rocket: rocket,
       details: json['details'],
+      tentativeMaxPrecision: json['tentative_max_precision'],
+      isTentative: json['is_tentative'],
       missionPatch: links['mission_patch'],
       presskit: links['presskit'],
       videoLink: links['video_link'],
@@ -49,6 +53,19 @@ class Launch {
   /// The time will always be set to the devices locale.
   String formattedLaunchDate([String format = 'dd.MM.yyyy HH:mm:ss']) {
     final date = DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000);
+
+    if (isTentative) {
+      switch (tentativeMaxPrecision) {
+        case "year":
+          return DateFormat('yyyy').format(date);
+        case "month":
+          return DateFormat('MMMM yyyy').format(date);
+        case "day":
+          return DateFormat('dd.MM.yyyy').format(date);
+        default:
+      }
+    }
+
     return DateFormat(format).format(date);
   }
 }

@@ -22,8 +22,8 @@ class _LaunchImagesState extends State<LaunchImages> {
       viewportFraction: 1.0,
       aspectRatio: 2.0,
       autoPlay: true,
-      autoPlayInterval: Duration(seconds: 10),
-      pauseAutoPlayOnTouch: Duration(seconds: 10),
+      autoPlayInterval: Duration(seconds: 5),
+      pauseAutoPlayOnTouch: Duration(seconds: 5),
       enlargeCenterPage: false,
       enableInfiniteScroll: widget.imageUrls.length > 1, // disable scroll when only one image available
       items: mapFromUrls(
