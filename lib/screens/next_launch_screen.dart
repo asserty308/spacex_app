@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/main.dart';
+import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
@@ -33,7 +34,7 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.message),
+            icon: Icon(Icons.alarm),
             onPressed: () => scheduleReminder(context),
           )
         ],
@@ -61,9 +62,15 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
     });
   }
 
-  /// Schedules a notification that appears one hour before takeoff
+  /// Schedules a notification that appears two hours before launch
   void scheduleReminder(BuildContext context) async {
-    final scheduledDate = DateTime.now().add(Duration(seconds: 15));
+    if (_launch.isTentative) {
+      showOKDialog(context, 'Not available', 'The reminder cannot be set because the time is not final. Please try again later.');
+      return;
+    }
+
+    final launchDate = _launch.getLaunchDate();
+    final scheduledDate = launchDate.subtract(Duration(hours: 2));
     final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
     final iOSDetails = IOSNotificationDetails();
     final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
@@ -78,7 +85,7 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
     _scaffoldKey.currentState
       .showSnackBar(
         SnackBar(
-          content: Text('Set reminder for ${_launch.missionName}'),
+          content: Text('Reminder will appear two hours before launch'),
         )
       );
   }

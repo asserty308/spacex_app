@@ -49,10 +49,14 @@ class Launch {
     return (launchDateUnix * 1000) > DateTime.now().millisecondsSinceEpoch;
   }
 
+  DateTime getLaunchDate() {
+    return DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000);
+  }
+
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.
   String formattedLaunchDate([String format = 'dd.MM.yyyy HH:mm:ss']) {
-    final date = DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000);
+    final date = getLaunchDate();
 
     if (isTentative) {
       switch (tentativeMaxPrecision) {

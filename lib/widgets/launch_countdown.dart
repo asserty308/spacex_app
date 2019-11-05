@@ -56,8 +56,17 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
     final hours = minutes ~/ 60;
     final days = hours ~/ 24;
 
+    var h24 = hours % 24;
+    var m60 = minutes % 60;
+    var s60 = seconds % 60;
+
+    var d = days < 10 ? '0$days' : '$days';
+    var h = h24 < 10 ? '0$h24' : '$h24';
+    var m = m60 < 10 ? '0$m60' : '$m60';
+    var s = s60 < 10 ? '0$s60' : '$s60';
+
     setState(() {
-      _countdownText = 'T-${days}d:${hours % 24}h:${minutes % 60}m:${seconds % 60}s';
+      _countdownText = 'T-${d}d:${h}h:${m}m:${s}s';
     });
   }
 }
