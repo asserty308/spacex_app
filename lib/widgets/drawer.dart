@@ -42,6 +42,10 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.all_inclusive),
           ),
           ListTile(
+            title: Text('Rockets'),
+            leading: Icon(Icons.build),
+          ),
+          ListTile(
             title: Text('Historical Events'),
             leading: Icon(Icons.history),
           ),

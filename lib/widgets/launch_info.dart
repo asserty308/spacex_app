@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/screens/pdf_screen.dart';
-import 'package:spacex_guide/screens/video_screen.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/utility/files.dart';
 import 'package:spacex_guide/widgets/launch_countdown.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class LaunchInfo extends StatelessWidget {
   LaunchInfo({this.launch});
@@ -137,9 +137,31 @@ class LaunchInfo extends StatelessWidget {
       return;
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => VideoScreen(launch)),
+    // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
+    final _controller = YoutubePlayerController(
+        initialVideoId: launch.youtubeID,
+        flags: YoutubePlayerFlags(
+            autoPlay: true,
+        ),
+    );
+
+    final player = YoutubePlayer(
+      controller: _controller,
+      showVideoProgressIndicator: true,
+      progressIndicatorColor: Colors.amber,
+      progressColors: ProgressBarColors(
+        playedColor: Colors.amber,
+        handleColor: Colors.amberAccent,
+      ),
+    );
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        content: player,
+        contentPadding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+      ),
     );
   }
 }
