@@ -76,7 +76,7 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
     final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
 
     await globalLocalNotifications.schedule(
-      0, 
+      _launch.flightNumber,
       'Launch Reminder', 
       'The mission ${_launch.missionName} will launch soon!', 
       scheduledDate, notificationDetails,
