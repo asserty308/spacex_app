@@ -21,6 +21,8 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
   @override
   void initState() {
     super.initState();
+
+    setCountdownText();
     startUpdate();
   }
 
@@ -51,15 +53,18 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
   }
 
   void setCountdownText() {
+    // calculate raw time data
     final seconds = (widget.launch.launchDateUnix - (DateTime.now().millisecondsSinceEpoch / 1000)).toInt();
     final minutes = seconds ~/ 60; // equal to (seconds / 60).toInt() but more efficient
     final hours = minutes ~/ 60;
     final days = hours ~/ 24;
 
+    // convert to time
     var h24 = hours % 24;
     var m60 = minutes % 60;
     var s60 = seconds % 60;
 
+    // formatting
     var d = days < 10 ? '0$days' : '$days';
     var h = h24 < 10 ? '0$h24' : '$h24';
     var m = m60 < 10 ? '0$m60' : '$m60';
