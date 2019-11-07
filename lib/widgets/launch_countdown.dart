@@ -8,7 +8,7 @@ class LaunchCountdown extends StatefulWidget {
     this.launch,
   });
 
-  Launch launch;
+  final Launch launch;
 
   @override
   _LaunchCountdownState createState() => _LaunchCountdownState();

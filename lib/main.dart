@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => AllLaunchesScreen(),
-        '/past_launch': (context) => LaunchScreen(),
+        '/launch': (context) => LaunchScreen(),
         '/upcoming_launch': (context) => NextLaunchScreen(),
       },
     );

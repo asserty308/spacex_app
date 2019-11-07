@@ -7,6 +7,8 @@ import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
+// TODO: Nearly a duplicate of launch_screen. Should be replaced.
+
 class NextLaunchScreen extends StatefulWidget {
   @override
   _NextLaunchScreenState createState() => _NextLaunchScreenState();
@@ -65,7 +67,7 @@ class _NextLaunchScreenState extends State<NextLaunchScreen> {
   /// Schedules a notification that appears two hours before launch
   void scheduleReminder(BuildContext context) async {
     if (_launch.isTentative) {
-      showOKDialog(context, 'Not available', 'The reminder cannot be set because the time is not final. Please try again later.');
+      showOKDialog(context, 'Not available', 'The reminder cannot be set because the launch time is not final. Please try again later.');
       return;
     }
 

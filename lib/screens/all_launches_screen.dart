@@ -63,7 +63,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
 
                 Navigator.pushNamed(
                   context, 
-                  '/past_launch',
+                  '/launch',
                   arguments: LaunchScreenArguments(_launches[i]),
                 );
               },

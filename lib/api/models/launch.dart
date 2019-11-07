@@ -72,4 +72,18 @@ class Launch {
 
     return DateFormat(format).format(date);
   }
+
+  /// Returns a list of the launch's image urls.
+  /// Contains all flickr images as well as the mission patch (when available).
+  /// When the mission patch is available it will be located at position 0 of the list.
+  List<String> getImageUrls() {
+    var urls = List<String>.from(flickrImages);
+
+    // the mission patch should always be the first image to show (when available)
+    if (missionPatch != null && missionPatch.isNotEmpty) {
+      urls.insert(0, missionPatch);
+    }
+
+    return urls;
+  }
 }

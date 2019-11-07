@@ -11,7 +11,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class LaunchInfo extends StatelessWidget {
   LaunchInfo({this.launch});
 
-  Launch launch;
+  final Launch launch;
 
   @override
   Widget build(BuildContext context) {
