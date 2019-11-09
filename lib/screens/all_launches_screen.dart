@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
@@ -47,11 +48,13 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
                 ),
               ),
               leading: CircleAvatar(
-                child: Text(
+                child: _launches[i].missionPatch == null ? Text(
                   '${_launches[i].flightNumber}',
                   style: TextStyle(color: Colors.white),
+                ) : CachedNetworkImage(
+                  imageUrl: _launches[i].missionPatch,
                 ),
-                backgroundColor: Colors.white24,
+                backgroundColor: _launches[i].missionPatch == null ? Colors.white24 : Colors.transparent,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
