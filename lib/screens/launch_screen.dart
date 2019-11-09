@@ -7,24 +7,30 @@ import 'package:spacex_guide/widgets/launch_images.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
 import '../main.dart';
-import 'arguments/launch_arguments.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
-/// The 'All launches' screen transmits the selected launch as [LaunchScreenArguments].
-/// The next launch will be loaded when the arguments object is null.
+/// The 'All launches' screen transmits the selected [launch] as a parameter.
+/// The next launch will be loaded when the parameter is null.
 class LaunchScreen extends StatefulWidget {
+  LaunchScreen([this._launch]);
+
+  final Launch _launch;
+
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Launch _launch;
+  bool _isNextLaunch = false;
 
   @override
   void initState() {
     super.initState();
+
+    _launch = widget._launch;
+    _isNextLaunch = _launch == null;
 
     // run 'afterFirstlayout' after first build()
     WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstLayout(context));
@@ -32,11 +38,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final LaunchScreenArguments args = ModalRoute.of(context).settings.arguments;
-
-    // only initialize once
-    _launch = _launch != null ? _launch : args?.launch;
-
     var imageUrls = _launch?.getImageUrls() ?? List();
     var appBarActions = List<Widget>();
     
@@ -52,7 +53,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(args != null ? _launch?.missionName : 'Next launch'),
+        title: Text(_isNextLaunch ? 'Next launch' : _launch?.missionName),
         backgroundColor: Colors.black,
         actions: appBarActions,
       ),

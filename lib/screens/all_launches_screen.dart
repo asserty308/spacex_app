@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/screens/launch_screen.dart';
+import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
-
-import 'arguments/launch_arguments.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override
@@ -59,13 +59,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
                 size: 18,
               ),
               onTap: () {
-                // TODO: Distinguish between past and upcoming
-
-                Navigator.pushNamed(
-                  context, 
-                  '/launch',
-                  arguments: LaunchScreenArguments(_launches[i]),
-                );
+                showScreen(context, LaunchScreen(_launches[i]));
               },
             );
           },

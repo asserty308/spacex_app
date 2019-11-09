@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/screens/all_launches_screen.dart';
+import 'package:spacex_guide/screens/launch_screen.dart';
+import 'package:spacex_guide/screens/rockets_screen.dart';
+import 'package:spacex_guide/utility/navigation.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -30,12 +34,12 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Next Launch'),
             leading: Icon(Icons.timer),
-            onTap: () => showScreen(context, '/launch'),
+            onTap: () => showScreen(context, LaunchScreen()),
           ),
           ListTile(
             title: Text('All Launches'),
             leading: Icon(Icons.all_inclusive),
-            onTap: () => showScreen(context, '/'),
+            onTap: () => showScreen(context, AllLaunchesScreen()),
           ),
           ListTile(
             title: Text('All Missions'),
@@ -44,6 +48,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Rockets'),
             leading: Icon(Icons.build),
+            onTap: () => showScreen(context, RocketsScreen()),
           ),
           ListTile(
             title: Text('Historical Events'),
@@ -60,9 +65,5 @@ class MyDrawer extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void showScreen(BuildContext context, String id) {
-    Navigator.pushNamed(context, id);
   }
 }

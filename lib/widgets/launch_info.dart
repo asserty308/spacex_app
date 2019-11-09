@@ -5,6 +5,7 @@ import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/screens/pdf_screen.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/utility/files.dart';
+import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/launch_countdown.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -122,13 +123,10 @@ class LaunchInfo extends StatelessWidget {
 
     File file = await createFileFromUrl(launch.presskit);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PDFScreen(
-        title: '${launch.missionName} Presskit', 
-        filePath: file.path
-      )),
-    );
+    showScreen(context, PDFScreen(
+      title: '${launch.missionName} Presskit', 
+      filePath: file.path
+    ));
   }
 
   void showVideo(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:spacex_guide/api/models/launch.dart';
+import 'package:spacex_guide/api/models/rocket.dart';
 
 class SpaceXAPI {
   final _baseUrl = 'https://api.spacexdata.com/v3/';
@@ -33,7 +34,7 @@ class SpaceXAPI {
     final response = await _fetchJSON(url);
     List<Launch> list = List();
 
-    for (var launch in response) {
+    for (final launch in response) {
       list.add(Launch.fromJSON(launch));
     }
 
@@ -48,5 +49,19 @@ class SpaceXAPI {
   Future<Launch> getUpcomingLaunches() async {
     final url = '${_baseUrl}launches/upcoming/';
     return await _fetchLaunchFromUrl(url);
+  }
+
+  // Rockets
+
+  Future<List<Rocket>> getAllRockets() async {
+    final url = '${_baseUrl}rockets/';
+    final response = await _fetchJSON(url);
+    List<Rocket> list = List();
+
+    for (final rocket in response) {
+      list.add(Rocket.fromJSON(rocket));
+    }
+
+    return list;
   }
 }

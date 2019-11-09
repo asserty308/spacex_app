@@ -26,11 +26,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Ranking App',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => AllLaunchesScreen(),
-        '/launch': (context) => LaunchScreen(),
-      },
+      home: AllLaunchesScreen(),
     );
   }
 
