@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/api/models/launch.dart';
+import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/widgets/launch_images.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
@@ -8,6 +9,9 @@ import 'package:spacex_guide/widgets/launch_info.dart';
 import '../main.dart';
 import 'arguments/launch_arguments.dart';
 
+/// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
+/// The 'All launches' screen transmits the selected launch as [LaunchScreenArguments].
+/// The next launch will be loaded when the arguments object is null.
 class LaunchScreen extends StatefulWidget {
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
@@ -19,14 +23,24 @@ class _LaunchScreenState extends State<LaunchScreen> {
   Launch _launch;
 
   @override
+  void initState() {
+    super.initState();
+
+    // run 'afterFirstlayout' after first build()
+    WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstLayout(context));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final LaunchScreenArguments args = ModalRoute.of(context).settings.arguments;
-    _launch = args.launch;
 
-    var imageUrls = _launch.getImageUrls();
+    // only initialize once
+    _launch = _launch != null ? _launch : args?.launch;
+
+    var imageUrls = _launch?.getImageUrls() ?? List();
     var appBarActions = List<Widget>();
     
-    if (_launch.isUpcoming()) {
+    if (_launch?.isUpcoming() == true) {
       appBarActions.add(
         IconButton(
             icon: Icon(Icons.alarm),
@@ -38,14 +52,14 @@ class _LaunchScreenState extends State<LaunchScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(_launch.missionName),
+        title: Text(args != null ? _launch?.missionName : 'Next launch'),
         backgroundColor: Colors.black,
         actions: appBarActions,
       ),
       body: Container(
         color: Colors.black87,
         child: Center(
-          child: Column(
+          child: _launch == null ? CircularProgressIndicator() : Column(
             children: <Widget>[
               // show imageview only when images are available
               imageUrls.isEmpty ? Container() : LaunchImages(
@@ -89,5 +103,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
           content: Text('Reminder will appear two hours before launch'),
         )
       );
+  }
+
+  void afterFirstLayout(BuildContext context) {
+    // only fetch next launch information when _launch has not been set by screen arguments
+    if (_launch == null) {
+      fetchNextLaunch();
+    }
+  }
+
+  void fetchNextLaunch() async {
+    final api = SpaceXAPI();
+    final launch = await api.getNextLaunch();
+
+    setState(() {
+      _launch = launch;
+    });
   }
 }
