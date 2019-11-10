@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/screens/all_launches_screen.dart';
 import 'package:spacex_guide/screens/launch_screen.dart';
-import 'package:spacex_guide/screens/rockets_screen.dart';
+import 'package:spacex_guide/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -48,7 +48,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Rockets'),
             leading: Icon(Icons.build),
-            onTap: () => showScreen(context, RocketsScreen()),
+            onTap: () => showScreen(context, AllRocketsScreen()),
           ),
           ListTile(
             title: Text('Historical Events'),

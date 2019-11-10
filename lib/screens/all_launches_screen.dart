@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/bloc/launch_bloc.dart';
 import 'package:spacex_guide/screens/launch_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
@@ -12,12 +12,18 @@ class AllLaunchesScreen extends StatefulWidget {
 }
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
-  List<Launch> _launches = List();
+  final _bloc = LaunchBloc();
 
   @override
   void initState() {
     super.initState();
-    fetchLaunches();
+    _bloc.fetchAllLaunches();
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
   }
 
   @override
@@ -30,52 +36,59 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
       drawer: MyDrawer(),
       body: Container(
         color: Colors.black87,
-        child: _launches.isEmpty ? Center(child: CircularProgressIndicator(),) : ListView.builder(
-          itemCount: _launches.length,
-          itemBuilder: (context, i) {
-            final launch = _launches[i];
+        child: StreamBuilder(
+          stream: _bloc.allLaunches,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return buildList(snapshot);
+            }
 
-            return ListTile(
-              title: Text(
-                launch.missionName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Text(
-                launch.formattedLaunchDate(),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              leading: CircleAvatar(
-                child: launch.missionPatch == null ? Text(
-                  '${launch.flightNumber}',
-                  style: TextStyle(color: Colors.white),
-                ) : CachedNetworkImage(
-                  imageUrl: launch.missionPatch,
-                ),
-                backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white30,
-                size: 18,
-              ),
-              onTap: () => showScreen(context, LaunchScreen(launch)),
-            );
+            return Center(child: CircularProgressIndicator(),);
           },
-        ),
+        )
       ),
     );
   }
 
-  void fetchLaunches() async {
-    final api = SpaceXAPI();
-    _launches = await api.getAllLaunches();
+  Widget buildList(AsyncSnapshot<List<Launch>> snapshot) {
+    var launches = snapshot.data;
 
-    setState(() {
-    });
+    return ListView.builder(
+      itemCount: launches.length,
+      itemBuilder: (context, i) {
+        final launch = launches[i];
+
+        return ListTile(
+          title: Text(
+            launch.missionName,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            launch.formattedLaunchDate(),
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          leading: CircleAvatar(
+            child: launch.missionPatch == null ? Text(
+              '${launch.flightNumber}',
+              style: TextStyle(color: Colors.white),
+            ) : CachedNetworkImage(
+              imageUrl: launch.missionPatch,
+            ),
+            backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white30,
+            size: 18,
+          ),
+          onTap: () => showScreen(context, LaunchScreen(launch)),
+        );
+      },
+    );
   }
 }

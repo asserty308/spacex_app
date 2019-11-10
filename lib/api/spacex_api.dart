@@ -32,7 +32,7 @@ class SpaceXAPI {
   Future<List<Launch>> getAllLaunches() async {
     final url = '${_baseUrl}launches/';
     final response = await _fetchJSON(url);
-    List<Launch> list = List();
+    var list = List<Launch>();
 
     for (final launch in response) {
       list.add(Launch.fromJSON(launch));
@@ -56,7 +56,7 @@ class SpaceXAPI {
   Future<List<Rocket>> getAllRockets() async {
     final url = '${_baseUrl}rockets/';
     final response = await _fetchJSON(url);
-    List<Rocket> list = List();
+    var list = List<Rocket>();
 
     for (final rocket in response) {
       list.add(Rocket.fromJSON(rocket));

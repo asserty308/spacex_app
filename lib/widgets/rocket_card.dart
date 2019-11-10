@@ -13,7 +13,6 @@ class RocketCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blueAccent,
       elevation: 1.0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       margin: EdgeInsets.all(8),
@@ -28,20 +27,30 @@ class RocketCard extends StatelessWidget {
           Container(
             height: 75,
             color: Colors.teal,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                child: Text(
-                  rocket.name,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                  child: Text(
+                    rocket.name,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-            ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            )
           ),
         ]
       )
