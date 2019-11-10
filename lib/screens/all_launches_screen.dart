@@ -2,9 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/bloc/launch_bloc.dart';
-import 'package:spacex_guide/screens/launch_screen.dart';
+import 'package:spacex_guide/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
+import 'package:spacex_guide/widgets/launch_countdown.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override
@@ -51,12 +52,51 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   }
 
   Widget buildList(AsyncSnapshot<List<Launch>> snapshot) {
-    var launches = snapshot.data;
+    final launches = snapshot.data;
+    final nextLaunch = getNextLaunch(launches);
 
     return ListView.builder(
-      itemCount: launches.length,
+      itemCount: launches.length + 1, // +1 for next launch card
       itemBuilder: (context, i) {
-        final launch = launches[i];
+        if (i == 0) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 1.0,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              margin: EdgeInsets.all(8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              ),
+              color: Colors.indigo,
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        '${nextLaunch.missionName} will launch in', 
+                        style: TextStyle(
+                          color: Colors.white, 
+                          fontSize: 18, 
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      SizedBox(height: 8,),
+                      LaunchCountdown(
+                        launch: nextLaunch,
+                        textSize: 22,
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () => showScreen(context, LaunchDetailScreen(nextLaunch)),
+              ),
+            ),
+          );
+        }
+
+        final launch = launches[i - 1];
 
         return ListTile(
           title: Text(
@@ -86,9 +126,16 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
             color: Colors.white30,
             size: 18,
           ),
-          onTap: () => showScreen(context, LaunchScreen(launch)),
+          onTap: () => showScreen(context, LaunchDetailScreen(launch)),
         );
       },
     );
+  }
+
+  /// Filters [_launches] by upcoming and sorts by date to return the upcoming launch.
+  Launch getNextLaunch(List<Launch> launches) {
+    List<Launch> upcoming = launches.where((l) => l.isUpcoming()).toList();
+    upcoming.sort((l1, l2) => l1.launchDateUnix.compareTo(l2.launchDateUnix));
+    return upcoming.isEmpty ? null : upcoming[0];
   }
 }

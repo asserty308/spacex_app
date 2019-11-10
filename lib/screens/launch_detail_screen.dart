@@ -12,37 +12,24 @@ import '../main.dart';
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
 /// The next launch will be loaded when the parameter is null.
-class LaunchScreen extends StatefulWidget {
-  LaunchScreen([this._launch]);
+class LaunchDetailScreen extends StatefulWidget {
+  LaunchDetailScreen([this._launch]);
 
   final Launch _launch;
 
   @override
-  _LaunchScreenState createState() => _LaunchScreenState();
+  _LaunchDetailScreenState createState() => _LaunchDetailScreenState();
 }
 
-class _LaunchScreenState extends State<LaunchScreen> {
+class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
-  Launch _launch;
-  bool _isNextLaunch = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _launch = widget._launch;
-    _isNextLaunch = _launch == null;
-
-    // run 'afterFirstlayout' after first build()
-    WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstLayout(context));
-  }
 
   @override
   Widget build(BuildContext context) {
-    var imageUrls = _launch?.getImageUrls() ?? List();
+    var imageUrls = widget._launch?.getImageUrls() ?? List();
     var appBarActions = List<Widget>();
     
-    if (_launch?.isUpcoming() == true) {
+    if (widget._launch?.isUpcoming() == true) {
       appBarActions.add(
         IconButton(
             icon: Icon(Icons.alarm),
@@ -54,15 +41,14 @@ class _LaunchScreenState extends State<LaunchScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(_isNextLaunch ? 'Next launch' : _launch?.missionName),
+        title: Text(widget._launch?.missionName),
         backgroundColor: Colors.black,
         actions: appBarActions,
       ),
-      drawer: _isNextLaunch ? MyDrawer() : null,
       body: Container(
         color: Colors.black87,
         child: Center(
-          child: _launch == null ? CircularProgressIndicator() : Column(
+          child: Column(
             children: <Widget>[
               // show imageview only when images are available
               imageUrls.isEmpty ? Container() : LaunchImages(
@@ -70,7 +56,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
               ),
               Expanded(
                 child: LaunchInfo(
-                  launch: _launch,
+                  launch: widget._launch,
                 ),
               ),
             ],
@@ -82,21 +68,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   /// Schedules a notification that appears two hours before launch
   void scheduleReminder(BuildContext context) async {
-    if (_launch.isTentative) {
+    if (widget._launch.isTentative) {
       showOKDialog(context, 'Not available', 'The reminder cannot be set because the launch time is not final. Please try again later.');
       return;
     }
 
-    final launchDate = _launch.getLaunchDate();
+    final launchDate = widget._launch.getLaunchDate();
     final scheduledDate = launchDate.subtract(Duration(hours: 2));
     final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
     final iOSDetails = IOSNotificationDetails();
     final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
 
     await globalLocalNotifications.schedule(
-      _launch.flightNumber,
+      widget._launch.flightNumber,
       'Launch Reminder', 
-      'The mission ${_launch.missionName} will launch soon!', 
+      'The mission ${widget._launch.missionName} will launch soon!', 
       scheduledDate, notificationDetails,
     );
 
@@ -106,21 +92,5 @@ class _LaunchScreenState extends State<LaunchScreen> {
           content: Text('Reminder will appear two hours before launch'),
         )
       );
-  }
-
-  void afterFirstLayout(BuildContext context) {
-    // only fetch next launch information when _launch has not been set by screen arguments
-    if (_launch == null) {
-      fetchNextLaunch();
-    }
-  }
-
-  void fetchNextLaunch() async {
-    final api = SpaceXAPI();
-    final launch = await api.getNextLaunch();
-
-    setState(() {
-      _launch = launch;
-    });
   }
 }
