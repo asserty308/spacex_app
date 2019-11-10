@@ -6,9 +6,13 @@ import 'package:spacex_guide/api/models/launch.dart';
 class LaunchCountdown extends StatefulWidget {
   LaunchCountdown({
     this.launch,
+    this.textColor = Colors.white,
+    this.textSize = 25,
   });
 
   final Launch launch;
+  final Color textColor;
+  final double textSize;
 
   @override
   _LaunchCountdownState createState() => _LaunchCountdownState();
@@ -31,8 +35,8 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
     return Text(
       _countdownText,
       style: TextStyle(
-        color: Colors.white,
-        fontSize: 25,
+        color: widget.textColor,
+        fontSize: widget.textSize,
         fontWeight: FontWeight.bold,
       ),
     );
