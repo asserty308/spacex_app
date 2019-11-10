@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:spacex_guide/screens/all_launches_screen.dart';
-import 'package:spacex_guide/screens/launch_screen.dart';
+import 'package:spacex_guide/screens/splash_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
 
@@ -26,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Ranking App',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: AllLaunchesScreen(),
+      home: SplashScreen(),
     );
   }
 
