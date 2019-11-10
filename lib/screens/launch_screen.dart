@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
+import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_images.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
@@ -57,6 +58,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         backgroundColor: Colors.black,
         actions: appBarActions,
       ),
+      drawer: _isNextLaunch ? MyDrawer() : null,
       body: Container(
         color: Colors.black87,
         child: Center(

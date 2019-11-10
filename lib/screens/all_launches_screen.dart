@@ -33,37 +33,37 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
         child: _launches.isEmpty ? Center(child: CircularProgressIndicator(),) : ListView.builder(
           itemCount: _launches.length,
           itemBuilder: (context, i) {
+            final launch = _launches[i];
+
             return ListTile(
               title: Text(
-                _launches[i].missionName,
+                launch.missionName,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                _launches[i].formattedLaunchDate(),
+                launch.formattedLaunchDate(),
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               leading: CircleAvatar(
-                child: _launches[i].missionPatch == null ? Text(
-                  '${_launches[i].flightNumber}',
+                child: launch.missionPatch == null ? Text(
+                  '${launch.flightNumber}',
                   style: TextStyle(color: Colors.white),
                 ) : CachedNetworkImage(
-                  imageUrl: _launches[i].missionPatch,
+                  imageUrl: launch.missionPatch,
                 ),
-                backgroundColor: _launches[i].missionPatch == null ? Colors.white24 : Colors.transparent,
+                backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.white30,
                 size: 18,
               ),
-              onTap: () {
-                showScreen(context, LaunchScreen(_launches[i]));
-              },
+              onTap: () => showScreen(context, LaunchScreen(launch)),
             );
           },
         ),
