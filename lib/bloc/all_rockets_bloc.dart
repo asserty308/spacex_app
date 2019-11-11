@@ -3,7 +3,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:spacex_guide/api/models/rocket.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 
-class RocketBloc {
+class AllRocketsBloc {
   final _api = SpaceXAPI();
   final _rocketFetcher = PublishSubject<List<Rocket>>();
 

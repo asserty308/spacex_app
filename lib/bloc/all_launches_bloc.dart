@@ -3,7 +3,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/spacex_api.dart';
 
-class LaunchBloc {
+class AllLaunchesBloc {
   final _api = SpaceXAPI();
   final _launchesFetcher = PublishSubject<List<Launch>>();
 

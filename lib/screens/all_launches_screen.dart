@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/bloc/launch_bloc.dart';
+import 'package:spacex_guide/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
@@ -13,7 +13,7 @@ class AllLaunchesScreen extends StatefulWidget {
 }
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
-  final _bloc = LaunchBloc();
+  final _bloc = AllLaunchesBloc();
 
   @override
   void initState() {
