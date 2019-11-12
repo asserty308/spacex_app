@@ -34,6 +34,8 @@ dependencies:
   rxdart: # reactive programming
   flare_flutter: # flare animations
   shared_preferences: # simple persistent store
+  firebase_core:
+  firebase_crashlytics:
 
 dev_dependencies:
   flutter_test:
