@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/api/spacex_api.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
-import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_images.dart';
 import 'package:spacex_guide/widgets/launch_info.dart';
 
@@ -68,6 +66,13 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
   /// Schedules a notification that appears two hours before launch
   void scheduleReminder(BuildContext context) async {
+    final prefKey = 'notif_scheduled_${widget._launch.flightNumber}';
+
+    if (sharedPrefs.getBool(prefKey) ?? false) {
+      showOKDialog(context, 'Already set', 'A scheduled notification for this launch has already been set.');
+      return;
+    }
+
     if (widget._launch.isTentative) {
       showOKDialog(context, 'Not available', 'The reminder cannot be set because the launch time is not final. Please try again later.');
       return;
@@ -85,6 +90,8 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
       'The mission ${widget._launch.missionName} will launch soon!', 
       scheduledDate, notificationDetails,
     );
+
+    await sharedPrefs.setBool(prefKey, true);
 
     _scaffoldKey.currentState
       .showSnackBar(

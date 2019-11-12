@@ -5,7 +5,8 @@ import 'package:spacex_guide/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
-import 'package:spacex_guide/widgets/launch_countdown.dart';
+import 'package:spacex_guide/widgets/launch_list_tile.dart';
+import 'package:spacex_guide/widgets/next_launch_card.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override
@@ -56,85 +57,21 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     final nextLaunch = getNextLaunch(launches);
 
     return ListView.builder(
-      itemCount: launches.length + 1, // +1 for next launch card
+      itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
       itemBuilder: (context, i) {
-        if (i == 0) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 1.0,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              margin: EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-              ),
-              color: Colors.indigo,
-              child: InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        '${nextLaunch.missionName} will launch in', 
-                        style: TextStyle(
-                          color: Colors.white, 
-                          fontSize: 18, 
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      SizedBox(height: 8,),
-                      LaunchCountdown(
-                        launch: nextLaunch,
-                        textSize: 22,
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () => showScreen(context, LaunchDetailScreen(nextLaunch)),
-              ),
-            ),
-          );
+        if (i == 0 && nextLaunch != null) {
+          return NextLaunchCard(nextLaunch: nextLaunch);
         }
 
-        final launch = launches[i - 1];
-
-        return ListTile(
-          title: Text(
-            launch.missionName,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(
-            launch.formattedLaunchDate(),
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          leading: CircleAvatar(
-            child: launch.missionPatch == null ? Text(
-              '${launch.flightNumber}',
-              style: TextStyle(color: Colors.white),
-            ) : CachedNetworkImage(
-              imageUrl: launch.missionPatch,
-            ),
-            backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
-          ),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white30,
-            size: 18,
-          ),
-          onTap: () => showScreen(context, LaunchDetailScreen(launch)),
-        );
+        final launch = nextLaunch == null ? launches[i] : launches[i - 1];
+        return LaunchListTile(launch: launch);
       },
     );
   }
 
-  /// Filters [_launches] by upcoming and sorts by date to return the upcoming launch.
+  /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
   Launch getNextLaunch(List<Launch> launches) {
-    List<Launch> upcoming = launches.where((l) => l.isUpcoming()).toList();
+    List<Launch> upcoming = launches.where((l) => (l.isUpcoming() && !l.isTentative)).toList();
     upcoming.sort((l1, l2) => l1.launchDateUnix.compareTo(l2.launchDateUnix));
     return upcoming.isEmpty ? null : upcoming[0];
   }

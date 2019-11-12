@@ -1,5 +1,5 @@
 name: spacex_guide
-description: A new Flutter project.
+description: SpaceX App made with flutter.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.2+2
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -28,12 +28,12 @@ dependencies:
   flutter_local_notifications: # scheduled notifications
   cached_network_image: # image cache
   path_provider:
-  video_player:
   flutter_full_pdf_viewer:
   youtube_player_flutter:
   carousel_slider:
-  rxdart:
-  flare_flutter:
+  rxdart: # reactive programming
+  flare_flutter: # flare animations
+  shared_preferences: # simple persistent store
 
 dev_dependencies:
   flutter_test:

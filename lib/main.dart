@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spacex_guide/screens/splash_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
+SharedPreferences sharedPrefs;
 
 void main() => runApp(MyApp());
 
@@ -17,6 +19,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     initLocalNotifications();
+    initSharedPrefs();
   }
 
   @override
@@ -52,5 +55,9 @@ class _MyAppState extends State<MyApp> {
 
   Future onSelectNotification(String payload) async {
     print('Did select notification with payload $payload');
+  }
+
+  void initSharedPrefs() async {
+    sharedPrefs = await SharedPreferences.getInstance();
   }
 }

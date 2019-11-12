@@ -37,7 +37,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.asserty.spacex_guide"
+        applicationId "com.asserty.spacex"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
