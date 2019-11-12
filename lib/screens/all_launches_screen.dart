@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/bloc/all_launches_bloc.dart';
-import 'package:spacex_guide/screens/launch_detail_screen.dart';
-import 'package:spacex_guide/utility/navigation.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
 import 'package:spacex_guide/widgets/launch_list_tile.dart';
 import 'package:spacex_guide/widgets/next_launch_card.dart';

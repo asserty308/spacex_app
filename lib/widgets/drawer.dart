@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/screens/all_launches_screen.dart';
-import 'package:spacex_guide/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
 
