@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:spacex_guide/api/models/history.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/api/models/rocket.dart';
 
@@ -60,6 +61,20 @@ class SpaceXAPI {
 
     for (final rocket in response) {
       list.add(Rocket.fromJSON(rocket));
+    }
+
+    return list;
+  }
+
+  // History
+
+  Future<List<History>> getHistory() async {
+    final url = '${_baseUrl}history/';
+    final response = await _fetchJSON(url);
+    var list = List<History>();
+
+    for (final event in response) {
+      list.add(History.fromJSON(event));
     }
 
     return list;
