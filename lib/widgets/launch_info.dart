@@ -6,8 +6,9 @@ import 'package:spacex_guide/screens/pdf_screen.dart';
 import 'package:spacex_guide/utility/dialogs.dart';
 import 'package:spacex_guide/utility/files.dart';
 import 'package:spacex_guide/utility/navigation.dart';
-import 'package:spacex_guide/widgets/launch_countdown.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'launch_countdown_card.dart';
 
 class LaunchInfo extends StatelessWidget {
   LaunchInfo({this.launch});
@@ -18,7 +19,7 @@ class LaunchInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        !launch.isUpcoming() ? Container() : Center(child: LaunchCountdown(launch: launch,)),
+        !launch.isUpcoming() ? Container() : LaunchCountdownCard(launch: launch),
         ListTile(
           title: Text(
             'Mission name',

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
+import 'package:spacex_guide/widgets/launch_countdown_card.dart';
 import 'package:spacex_guide/widgets/launch_list_tile.dart';
-import 'package:spacex_guide/widgets/next_launch_card.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override
@@ -57,7 +57,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
       itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
       itemBuilder: (context, i) {
         if (i == 0 && nextLaunch != null) {
-          return NextLaunchCard(nextLaunch: nextLaunch);
+          return LaunchCountdownCard(launch: nextLaunch);
         }
 
         final launch = nextLaunch == null ? launches[i] : launches[i - 1];

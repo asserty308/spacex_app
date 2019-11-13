@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/utility/navigation.dart';
+import 'package:spacex_guide/widgets/launch_countdown.dart';
 
-import 'launch_countdown.dart';
-
-class NextLaunchCard extends StatelessWidget {
-  const NextLaunchCard({
+class LaunchCountdownCard extends StatelessWidget {
+  const LaunchCountdownCard({
     Key key,
-    @required this.nextLaunch,
+    @required this.launch,
   }) : super(key: key);
 
-  final Launch nextLaunch;
+  final Launch launch;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class NextLaunchCard extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  '${nextLaunch.missionName} will launch in', 
+                  '${launch.missionName} will launch in', 
                   style: TextStyle(
                     color: Colors.white, 
                     fontSize: 18, 
@@ -40,13 +39,13 @@ class NextLaunchCard extends StatelessWidget {
                 ),
                 SizedBox(height: 8,),
                 LaunchCountdown(
-                  launch: nextLaunch,
+                  launch: launch,
                   textSize: 22,
                 ),
               ],
             ),
           ),
-          onTap: () => showScreen(context, LaunchDetailScreen(nextLaunch)),
+          onTap: () => showScreen(context, LaunchDetailScreen(launch)),
         ),
       ),
     );
