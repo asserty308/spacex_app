@@ -79,10 +79,22 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
     }
 
     final launchDate = widget._launch.getLaunchDate();
-    final scheduledDate = launchDate.subtract(Duration(hours: 2));
+    var scheduledDate = launchDate.subtract(Duration(hours: 2));
     final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
     final iOSDetails = IOSNotificationDetails();
     final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
+
+    // When the user schedules a notification less than 2hr before takeoff, 
+    // the notification will appear 15min before launch.
+    // After T-15min the user won't be able to set a notification
+    if (scheduledDate.isAfter(launchDate)) {
+      scheduledDate = launchDate.subtract(Duration(minutes: 15));
+
+      if (scheduledDate.isAfter(launchDate)) {
+        showOKDialog(context, 'The launch will begin soon', 'Watch the live broadcast now by pressing the button below!');
+        return;
+      }
+    }
 
     await globalLocalNotifications.schedule(
       widget._launch.flightNumber,
@@ -96,7 +108,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
     _scaffoldKey.currentState
       .showSnackBar(
         SnackBar(
-          content: Text('Reminder will appear two hours before launch'),
+          content: Text('Reminder set for the ${widget._launch.missionName} launch'),
         )
       );
   }
