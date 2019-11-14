@@ -105,11 +105,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
     await sharedPrefs.setBool(prefKey, true);
 
-    _scaffoldKey.currentState
-      .showSnackBar(
-        SnackBar(
-          content: Text('Reminder set for the ${widget._launch.missionName} launch'),
-        )
-      );
+    showTextScaffold(_scaffoldKey, 'Reminder set for the ${widget._launch.missionName} launch');
   }
 }

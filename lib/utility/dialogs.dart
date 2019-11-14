@@ -60,3 +60,25 @@ void showOKDialog(BuildContext context, String title, String content) {
     }
   );
 }
+
+void showTextScaffold(GlobalKey<ScaffoldState> scaffoldKey, String message) {
+  scaffoldKey.currentState
+    .showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+}
+
+void showActionScaffold(GlobalKey<ScaffoldState> scaffoldKey, String message, String actionLabel, Function onActionPressed) {
+  scaffoldKey.currentState
+    .showSnackBar(
+      SnackBar(
+        content: Text(message),
+        action: SnackBarAction(
+          label: actionLabel,
+          onPressed: onActionPressed,
+        ),
+      ),
+    );
+}
