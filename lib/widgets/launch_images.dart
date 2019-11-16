@@ -19,8 +19,7 @@ class _LaunchImagesState extends State<LaunchImages> {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      viewportFraction: 1.0,
-      aspectRatio: 2.0,
+      viewportFraction: 1.0, // make image use the full screen width
       autoPlay: true,
       autoPlayInterval: Duration(seconds: 5),
       pauseAutoPlayOnTouch: Duration(seconds: 5),

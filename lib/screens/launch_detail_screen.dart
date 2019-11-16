@@ -38,28 +38,31 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text(widget._launch?.missionName),
-        backgroundColor: Colors.black,
-        actions: appBarActions,
-      ),
-      body: Container(
-        color: Colors.black87,
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              // show imageview only when images are available
-              imageUrls.isEmpty ? Container() : LaunchImages(
-                imageUrls: imageUrls,
-              ),
-              Expanded(
-                child: LaunchInfo(
-                  launch: widget._launch,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              backgroundColor: Colors.black,
+              actions: appBarActions,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: false,
+                title: Text(widget._launch?.missionName),
+                background: LaunchImages(
+                  imageUrls: imageUrls,
                 ),
               ),
-            ],
+            )
+          ];
+        },
+        body: Container(
+          color: Colors.black87,
+          child: LaunchInfo(
+            launch: widget._launch,
           ),
-        ),
+        )
       ),
     );
   }

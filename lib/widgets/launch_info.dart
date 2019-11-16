@@ -22,21 +22,6 @@ class LaunchInfo extends StatelessWidget {
         !launch.isUpcoming() ? Container() : LaunchCountdownCard(launch: launch),
         ListTile(
           title: Text(
-            'Mission name',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          subtitle: Text(
-            launch.missionName,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        ListTile(
-          title: Text(
             'Date',
             style: TextStyle(
               fontWeight: FontWeight.bold,
