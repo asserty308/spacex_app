@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/screens/pdf_screen.dart';
-import 'package:spacex_guide/utility/dialogs.dart';
-import 'package:spacex_guide/utility/files.dart';
-import 'package:spacex_guide/utility/navigation.dart';
+import 'package:spacex_guide/core/dialogs.dart';
+import 'package:spacex_guide/core/files.dart';
+import 'package:spacex_guide/core/navigation.dart';
+import 'package:spacex_guide/core/pdf_screen.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'launch_countdown_card.dart';

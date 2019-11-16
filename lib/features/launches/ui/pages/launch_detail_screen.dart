@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/utility/dialogs.dart';
-import 'package:spacex_guide/widgets/launch_images.dart';
-import 'package:spacex_guide/widgets/launch_info.dart';
-
-import '../main.dart';
+import 'package:spacex_guide/core/dialogs.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_images.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
+import 'package:spacex_guide/main.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.

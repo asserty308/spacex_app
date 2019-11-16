@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/widgets/launch_countdown_card.dart';
-import 'package:spacex_guide/widgets/launch_list_tile.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown_card.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_list_tile.dart';
 
 class LaunchList extends StatelessWidget {
   LaunchList({this.launches, this.showNextLaunch});

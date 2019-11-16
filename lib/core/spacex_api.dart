@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:spacex_guide/api/models/history.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/api/models/rocket.dart';
+import 'package:spacex_guide/features/history/data/models/history.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class SpaceXAPI {
   final _baseUrl = 'https://api.spacexdata.com/v3/';

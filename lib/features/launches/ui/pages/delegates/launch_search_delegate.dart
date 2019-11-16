@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/widgets/launch_list.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 
 class LaunchSearchDelegate extends SearchDelegate<Launch> {
   LaunchSearchDelegate({this.launchData});

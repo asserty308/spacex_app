@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/bloc/all_launches_bloc.dart';
-import 'package:spacex_guide/screens/delegtes/launch_search_delegate.dart';
-import 'package:spacex_guide/widgets/drawer.dart';
-import 'package:spacex_guide/widgets/launch_animation.dart';
-import 'package:spacex_guide/widgets/launch_list.dart';
+import 'package:spacex_guide/core/widgets/drawer.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/bloc/all_launches_bloc.dart';
+import 'package:spacex_guide/features/launches/ui/pages/delegates/launch_search_delegate.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
   @override

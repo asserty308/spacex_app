@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:spacex_guide/api/models/rocket.dart';
-import 'package:spacex_guide/api/spacex_api.dart';
+import 'package:spacex_guide/core/spacex_api.dart';
+import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class AllRocketsBloc {
   final _api = SpaceXAPI();

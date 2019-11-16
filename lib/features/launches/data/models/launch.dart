@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:spacex_guide/api/models/rocket.dart';
+import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class Launch {
   Launch({

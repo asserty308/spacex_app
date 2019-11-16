@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/api/models/launch.dart';
-import 'package:spacex_guide/screens/launch_detail_screen.dart';
-import 'package:spacex_guide/utility/navigation.dart';
-import 'package:spacex_guide/widgets/launch_countdown.dart';
+import 'package:spacex_guide/core/navigation.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/pages/launch_detail_screen.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown.dart';
 
 class LaunchCountdownCard extends StatelessWidget {
   const LaunchCountdownCard({

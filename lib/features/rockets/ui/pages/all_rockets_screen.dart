@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/widgets/drawer.dart';
-import 'package:spacex_guide/widgets/rocket_list.dart';
+import 'package:spacex_guide/core/widgets/drawer.dart';
+import 'package:spacex_guide/features/rockets/ui/widgets/rocket_list.dart';
 
 class AllRocketsScreen extends StatefulWidget {
   @override

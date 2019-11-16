@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/screens/all_launches_screen.dart';
-import 'package:spacex_guide/screens/all_rockets_screen.dart';
-import 'package:spacex_guide/utility/navigation.dart';
+import 'package:spacex_guide/core/navigation.dart';
+import 'package:spacex_guide/features/launches/ui/pages/all_launches_screen.dart';
+import 'package:spacex_guide/features/rockets/ui/pages/all_rockets_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
