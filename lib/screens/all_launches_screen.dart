@@ -3,6 +3,7 @@ import 'package:spacex_guide/api/models/launch.dart';
 import 'package:spacex_guide/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/screens/delegtes/launch_search_delegate.dart';
 import 'package:spacex_guide/widgets/drawer.dart';
+import 'package:spacex_guide/widgets/launch_animation.dart';
 import 'package:spacex_guide/widgets/launch_list.dart';
 
 class AllLaunchesScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class AllLaunchesScreen extends StatefulWidget {
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
   var _launchData = List<Launch>();
+  var _showSplash = true;
 
   @override
   void initState() {
@@ -28,19 +30,30 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('All Launches'),
-        backgroundColor: Colors.black,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () => showLaunchSearch(context),
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          appBar: AppBar(
+            title: Text('All Launches'),
+            backgroundColor: Colors.black,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () => showLaunchSearch(context),
+              ),
+            ],
           ),
-        ],
-      ),
-      drawer: MyDrawer(),
-      body: buildList(),
+          drawer: MyDrawer(),
+          body: buildList(),
+        ),
+        _showSplash ? LaunchAnimation(
+          onFinished: () {
+            setState(() {
+              _showSplash = false;
+            });
+          },
+        ) : Container()
+      ],
     );
   }
 

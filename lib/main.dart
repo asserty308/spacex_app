@@ -2,7 +2,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spacex_guide/screens/splash_screen.dart';
+import 'package:spacex_guide/screens/all_launches_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
 SharedPreferences sharedPrefs;
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       title: 'SpaceX',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: SplashScreen(),
+      home: AllLaunchesScreen(),
     );
   }
 
