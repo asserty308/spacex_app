@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown_card.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list_tile.dart';
 

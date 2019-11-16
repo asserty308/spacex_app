@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/navigation.dart';
-import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/core/utility/navigation.dart';
+import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
 import 'package:spacex_guide/features/launches/ui/pages/launch_detail_screen.dart';
 
 class LaunchListTile extends StatelessWidget {

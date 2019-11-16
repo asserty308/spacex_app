@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:spacex_guide/core/dialogs.dart';
-import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/core/utility/dialogs.dart';
+import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_images.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 import 'package:spacex_guide/main.dart';
