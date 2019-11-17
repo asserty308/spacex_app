@@ -23,27 +23,6 @@ class Launch {
   String missionPatch, presskit, videoLink, youtubeID;
   Rocket rocket;
   List<String> flickrImages;
-
-  static Launch fromJSON(Map<String, dynamic> json) {
-    final rocket = Rocket.fromJSON(json['rocket']);
-    final links = json['links'];
-    final flickrImages = links['flickr_images'];
-
-    return Launch(
-      flightNumber: json['flight_number'],
-      missionName: json['mission_name'],
-      launchDateUnix: json['launch_date_unix'],
-      rocket: rocket,
-      details: json['details'],
-      tentativeMaxPrecision: json['tentative_max_precision'],
-      isTentative: json['is_tentative'],
-      missionPatch: links['mission_patch'],
-      presskit: links['presskit'],
-      videoLink: links['video_link'],
-      youtubeID: links['youtube_id'],
-      flickrImages: List<String>.from(flickrImages),
-    );
-  }
   
   bool isUpcoming() {
     return (launchDateUnix * 1000) > DateTime.now().millisecondsSinceEpoch;
