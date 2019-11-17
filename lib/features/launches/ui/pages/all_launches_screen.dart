@@ -6,6 +6,11 @@ import 'package:spacex_guide/features/launches/ui/pages/delegates/launch_search_
 import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 
+/// Indicator whether the splash screen should be displayed or not.
+/// When the splash has been shown for the first time it should not reappear during the session.
+/// This is needed because users can re-open the [AllLaunchesScreen] through the drawer.
+var _showSplash = true;
+
 class AllLaunchesScreen extends StatefulWidget {
   @override
   _AllLaunchesScreenState createState() => _AllLaunchesScreenState();
@@ -14,7 +19,6 @@ class AllLaunchesScreen extends StatefulWidget {
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
   var _launchData = List<Launch>();
-  var _showSplash = true;
 
   @override
   void initState() {
