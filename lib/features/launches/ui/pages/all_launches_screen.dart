@@ -18,18 +18,15 @@ class AllLaunchesScreen extends StatefulWidget {
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
+
   var _launchData = List<Launch>();
 
   @override
   void initState() {
     super.initState();
-    _bloc.fetchAllLaunches();
-  }
 
-  @override
-  void dispose() {
-    _bloc.dispose();
-    super.dispose();
+    // start fetching launches immediately
+    _bloc.add(AllLaunchesEvent.getAllLaunches);
   }
   
   @override
@@ -59,6 +56,12 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
         ) : Container()
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
   }
 
   Widget buildList() {

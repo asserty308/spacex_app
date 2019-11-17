@@ -38,6 +38,7 @@ dependencies:
   firebase_core:
   firebase_crashlytics:
   flutter_launcher_icons:
+  flutter_bloc: # state management
 
 dev_dependencies:
   flutter_test:

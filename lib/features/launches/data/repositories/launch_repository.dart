@@ -12,6 +12,7 @@ class LaunchRepository implements LaunchRepositoryInterface {
     final connected = await networkInfo.isConnected;
 
     if (!connected) {
+      // TODO: Offline handling
       return [];
     }
 
