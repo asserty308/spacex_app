@@ -34,13 +34,13 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void initLocalNotifications() async {
+  Future<void> initLocalNotifications() async {
     globalLocalNotifications = FlutterLocalNotificationsPlugin();
 
     // Platform specific setup
-    final androidSettings = AndroidInitializationSettings('notification_icon');
-    final iosSettings = IOSInitializationSettings();
-    final settings = InitializationSettings(androidSettings, iosSettings);
+    const androidSettings = AndroidInitializationSettings('notification_icon');
+    const iosSettings = IOSInitializationSettings();
+    const settings = InitializationSettings(androidSettings, iosSettings);
 
     globalLocalNotifications.initialize(
       settings,
@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     print('Did select notification with payload $payload');
   }
 
-  void initSharedPrefs() async {
+  Future<void> initSharedPrefs() async {
     sharedPrefs = await SharedPreferences.getInstance();
   }
 

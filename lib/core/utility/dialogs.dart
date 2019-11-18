@@ -24,16 +24,14 @@ Future<String> showInputDialog({BuildContext context, String title, String input
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
             onPressed: () => Navigator.of(context).pop()
           ),
           FlatButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () { 
               // when 'OK' is pressed never return null - null indicates 'cancel'
-              if (inputText == null) {
-                inputText = '';
-              }
+              inputText ??= '';
               Navigator.of(context).pop(inputText); 
             }
           )
@@ -52,7 +50,7 @@ void showOKDialog(BuildContext context, String title, String content) {
         content: SingleChildScrollView(child: Text(content)),
         actions: <Widget>[
           FlatButton(
-            child: Text('OK'),
+            child: const Text('OK'),
             onPressed: () => Navigator.of(context).pop()
           )
         ],

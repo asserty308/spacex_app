@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 
 class LaunchSearchDelegate extends SearchDelegate<Launch> {
@@ -41,15 +41,15 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
 
   Widget showSearchResults() {
     if (launchData == null || launchData.isEmpty) {
-      return Center(child: CircularProgressIndicator(),);
+      return Center(child: const CircularProgressIndicator(),);
     }
 
     final lowerQuery = query.toLowerCase();
-    final launches = launchData.where((l) => (
+    final launches = launchData.where((l) => 
       l.missionName?.toLowerCase()?.contains(lowerQuery) == true ||
       l.details?.toLowerCase()?.contains(lowerQuery) == true ||
       l.rocket?.name?.toLowerCase()?.contains(lowerQuery) == true
-    )).toList();
+    ).toList();
 
     return LaunchList(
       launches: launches,

@@ -1,8 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
-import 'package:spacex_guide/features/launches/domain/usecases/get_all_launches.dart';
 import 'package:bloc/bloc.dart';
 
 enum AllLaunchesState {
@@ -17,8 +16,8 @@ enum AllLaunchesEvent {
 }
 
 class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
-  final _getAllLaunches = GetAllLaunches(LaunchRepository());
-  final _launchesFetcher = PublishSubject<List<Launch>>();
+  final LaunchRepository _repo = LaunchRepository();
+  final PublishSubject<List<Launch>> _launchesFetcher = PublishSubject<List<Launch>>();
 
   Observable<List<Launch>> get allLaunches => _launchesFetcher.stream;
 
@@ -43,7 +42,7 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   Stream<AllLaunchesState> _handleGetAllLaunches() async* {
     yield AllLaunchesState.loading;
 
-    var launches = await _getAllLaunches();
+    final List<Launch> launches = await _repo.getAllLaunches();
 
     if (launches == null || launches.isEmpty) {
       yield AllLaunchesState.error;

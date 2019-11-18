@@ -36,13 +36,13 @@ class _RocketListState extends State<RocketList> {
           return buildList(snapshot);
         }
 
-        return Center(child: CircularProgressIndicator(),);
+        return Center(child: const CircularProgressIndicator(),);
       },
     );
   }
 
   Widget buildList(AsyncSnapshot<List<Rocket>> snapshot) {
-    var rockets = snapshot.data;
+    final rockets = snapshot.data;
 
     return ListView.builder(
       itemCount: rockets.length,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/core/utility/dialogs.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_images.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 import 'package:spacex_guide/main.dart';
@@ -10,7 +10,7 @@ import 'package:spacex_guide/main.dart';
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
 /// The next launch will be loaded when the parameter is null.
 class LaunchDetailScreen extends StatefulWidget {
-  LaunchDetailScreen([this._launch]);
+  const LaunchDetailScreen([this._launch]);
 
   final Launch _launch;
 
@@ -19,12 +19,12 @@ class LaunchDetailScreen extends StatefulWidget {
 }
 
 class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
-  var _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    var imageUrls = widget._launch?.getImageUrls() ?? List();
-    var appBarActions = List<Widget>();
+    final imageUrls = widget._launch?.flickrImages ?? [];
+    final appBarActions = <Widget>[];
     
     if (widget._launch?.isUpcoming() == true) {
       appBarActions.add(
@@ -67,7 +67,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   }
 
   /// Schedules a notification that appears two hours before launch
-  void scheduleReminder(BuildContext context) async {
+  Future<void> scheduleReminder(BuildContext context) async {
     final prefKey = 'notif_scheduled_${widget._launch.flightNumber}';
 
     if (sharedPrefs.getBool(prefKey) ?? false) {

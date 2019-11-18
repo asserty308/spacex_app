@@ -12,13 +12,13 @@ class _AllRocketsScreenState extends State<AllRocketsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SpaceX Rockets'),
+        title: const Text('SpaceX Rockets'),
         backgroundColor: Colors.black,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Container(
         color: Colors.black87,
-        child: RocketList()
+        child: const RocketList()
       )
     );
   }

@@ -15,7 +15,7 @@ class RocketCard extends StatelessWidget {
     return Card(
       elevation: 1.0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)
       ),

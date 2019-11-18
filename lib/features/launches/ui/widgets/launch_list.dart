@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown_card.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list_tile.dart';
 
 class LaunchList extends StatelessWidget {
-  LaunchList({this.launches, this.showNextLaunch});
+  const LaunchList({this.launches, this.showNextLaunch});
 
   final List<Launch> launches;
   final bool showNextLaunch;
@@ -31,7 +31,7 @@ class LaunchList extends StatelessWidget {
 
   /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
   Launch getNextLaunch(List<Launch> launches) {
-    List<Launch> upcoming = launches.where((l) => (l.isUpcoming() && !l.isTentative)).toList();
+    final upcoming = launches.where((l) => l.isUpcoming() && !l.isTentative).toList();
     upcoming.sort((l1, l2) => l1.launchDateUnix.compareTo(l2.launchDateUnix));
     return upcoming.isEmpty ? null : upcoming[0];
   }

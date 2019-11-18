@@ -9,8 +9,8 @@ class AllRocketsBloc {
 
   Observable<List<Rocket>> get allRockets => _rocketFetcher.stream;
 
-  void fetchAllRockets() async {
-    var rockets = await _api.getAllRockets();
+  Future<void> fetchAllRockets() async {
+    final rockets = await _api.getAllRockets();
     _rocketFetcher.sink.add(rockets);
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 
 class PDFScreen extends StatelessWidget {
-  PDFScreen({this.title, this.filePath});
+  const PDFScreen({this.title, this.filePath});
 
   final String title, filePath;
 
@@ -10,10 +10,10 @@ class PDFScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PDFViewerScaffold(
       appBar: AppBar(
-        title: Text(this.title),
+        title: Text(title),
         backgroundColor: Colors.black,
       ),
-      path: this.filePath,
+      path: filePath,
     );
   }
 }

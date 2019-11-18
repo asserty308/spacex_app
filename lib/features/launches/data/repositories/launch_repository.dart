@@ -1,22 +1,22 @@
 import 'package:spacex_guide/core/network/network_info.dart';
 import 'package:spacex_guide/features/launches/data/datasources/launch_remote_datasource.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
-import 'package:spacex_guide/features/launches/domain/repositories/launch_repository_interface.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
-class LaunchRepository implements LaunchRepositoryInterface {
-  final remoteDatasource = LaunchRemoteDatasource();
-  final networkInfo = NetworkInfo();
+class LaunchRepository {
+  final LaunchRemoteDatasource remoteDatasource = LaunchRemoteDatasource();
 
-  @override
   Future<List<Launch>> getAllLaunches() async {
-    final connected = await networkInfo.isConnected;
+    final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
       // TODO: Offline handling
-      return [];
+      return <Launch>[];
     }
 
-    return remoteDatasource.getAllLaunches();
+    final dynamic launches = await remoteDatasource.getAllLaunches();
+
+    // TODO: Handle no data
+    return launches;
   }
 
 }

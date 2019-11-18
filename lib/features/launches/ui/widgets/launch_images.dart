@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class LaunchImages extends StatefulWidget {
-  LaunchImages({
+  const LaunchImages({
     Key key,
     this.imageUrls,
   }) : super(key: key);
@@ -31,8 +31,8 @@ class _LaunchImagesState extends State<LaunchImages> {
             width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(
               imageUrl: imgUrl,
-              fit: index == 0 ? BoxFit.contain : BoxFit.cover, // always show full badge
-              placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Center(child: const CircularProgressIndicator()),
               errorWidget: (context, url, error) => Center(
                 child: Text(
                   'No image available',
@@ -49,7 +49,7 @@ class _LaunchImagesState extends State<LaunchImages> {
   }
 
   List<Widget> mapFromUrls(List list, Function handler) {
-    List<Widget> result = [];
+    final result = <Widget>[];
 
     for (var i = 0; i < list.length; i++) {
       result.add(handler(i, list[i]));

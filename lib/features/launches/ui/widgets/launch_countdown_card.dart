@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/pages/launch_detail_screen.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown.dart';
 
@@ -19,7 +19,7 @@ class LaunchCountdownCard extends StatelessWidget {
       child: Card(
         elevation: 1.0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
         ),
@@ -38,7 +38,7 @@ class LaunchCountdownCard extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                SizedBox(height: 8,),
+                const SizedBox(height: 8,),
                 LaunchCountdown(
                   launch: launch,
                   textSize: 22,

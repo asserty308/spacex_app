@@ -31,29 +31,29 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('All Launches'),
+            title: const Text('All Launches'),
             leading: Icon(Icons.all_inclusive),
             onTap: () => showScreen(context, AllLaunchesScreen()),
           ),
           ListTile(
-            title: Text('All Missions'),
+            title: const Text('All Missions'),
             leading: Icon(Icons.all_inclusive),
           ),
           ListTile(
-            title: Text('Rockets'),
+            title: const Text('Rockets'),
             leading: Icon(Icons.build),
             onTap: () => showScreen(context, AllRocketsScreen()),
           ),
           ListTile(
-            title: Text('Historical Events'),
+            title: const Text('Historical Events'),
             leading: Icon(Icons.history),
           ),
           ListTile(
-            title: Text('About SpaceX'),
+            title: const Text('About SpaceX'),
             leading: Icon(Icons.info_outline),
           ),
           ListTile(
-            title: Text('Settings'),
+            title: const Text('Settings'),
             leading: Icon(Icons.settings),
           )
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
-import 'package:spacex_guide/features/launches/domain/entities/launch.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/features/launches/ui/pages/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
@@ -19,7 +19,7 @@ class AllLaunchesScreen extends StatefulWidget {
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
 
-  var _launchData = List<Launch>();
+  var _launchData = <Launch>[];
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
       children: <Widget>[
         Scaffold(
           appBar: AppBar(
-            title: Text('All Launches'),
+            title: const Text('All Launches'),
             backgroundColor: Colors.black,
             actions: <Widget>[
               IconButton(
@@ -44,7 +44,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
               ),
             ],
           ),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
           body: buildList(),
         ),
         _showSplash ? LaunchAnimation(
@@ -76,7 +76,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
           );
         }
 
-        return Center(child: CircularProgressIndicator(),);
+        return Center(child: const CircularProgressIndicator(),);
       },
     );
   }

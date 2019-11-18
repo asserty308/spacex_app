@@ -2,7 +2,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class LaunchAnimation extends StatelessWidget {
-  LaunchAnimation({this.onFinished});
+  const LaunchAnimation({this.onFinished});
 
   final Function onFinished;
 
@@ -11,8 +11,8 @@ class LaunchAnimation extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: FlareActor(
-        "assets/RocketLaunch.flr", 
-        animation: "launch",
+        'assets/RocketLaunch.flr', 
+        animation: 'launch',
         fit: BoxFit.cover,
         callback: (animation) => onFinished(),
       ),

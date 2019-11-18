@@ -13,7 +13,7 @@ class Rocket {
   List<String> flickrImages;
 
   static Rocket fromJSON(Map<String, dynamic> json) {
-    final flickrImages = json['flickr_images'] ?? List();
+    final flickrImages = json['flickr_images'] ?? [];
 
     return Rocket(
       id: json['rocket_id'],
