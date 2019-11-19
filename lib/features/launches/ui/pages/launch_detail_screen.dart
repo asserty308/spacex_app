@@ -68,6 +68,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
   /// Schedules a notification that appears two hours before launch
   Future<void> scheduleReminder(BuildContext context) async {
+    // TODO: Option to cancel a scheduled notification through the scaffold as well as through the icon
     final prefKey = 'notif_scheduled_${widget._launch.flightNumber}';
 
     if (sharedPrefs.getBool(prefKey) ?? false) {
@@ -82,9 +83,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
     final launchDate = widget._launch.getLaunchDate();
     var scheduledDate = launchDate.subtract(Duration(hours: 2));
-    final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
-    final iOSDetails = IOSNotificationDetails();
-    final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
 
     // When the user schedules a notification less than 2hr before takeoff, 
     // the notification will appear 15min before launch.
@@ -98,6 +96,12 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
       }
     }
 
+    // Schedule notification and show snackbar
+
+    final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
+    final iOSDetails = IOSNotificationDetails();
+    final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
+
     await globalLocalNotifications.schedule(
       widget._launch.flightNumber,
       'Launch Reminder', 
@@ -107,6 +111,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
     await sharedPrefs.setBool(prefKey, true);
 
-    showTextScaffold(_scaffoldKey, 'Reminder set for the ${widget._launch.missionName} launch');
+    showTextSnackbar(_scaffoldKey, 'Reminder set for the ${widget._launch.missionName} launch');
   }
 }

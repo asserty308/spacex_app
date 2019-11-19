@@ -59,7 +59,7 @@ void showOKDialog(BuildContext context, String title, String content) {
   );
 }
 
-void showTextScaffold(GlobalKey<ScaffoldState> scaffoldKey, String message) {
+void showTextSnackbar(GlobalKey<ScaffoldState> scaffoldKey, String message) {
   scaffoldKey.currentState
     .showSnackBar(
       SnackBar(
@@ -68,7 +68,7 @@ void showTextScaffold(GlobalKey<ScaffoldState> scaffoldKey, String message) {
     );
 }
 
-void showActionScaffold(GlobalKey<ScaffoldState> scaffoldKey, String message, String actionLabel, Function onActionPressed) {
+void showActionSnackbar(GlobalKey<ScaffoldState> scaffoldKey, String message, String actionLabel, Function onActionPressed) {
   scaffoldKey.currentState
     .showSnackBar(
       SnackBar(

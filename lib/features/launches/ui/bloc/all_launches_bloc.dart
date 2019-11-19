@@ -16,8 +16,8 @@ enum AllLaunchesEvent {
 }
 
 class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
-  final LaunchRepository _repo = LaunchRepository();
-  final PublishSubject<List<Launch>> _launchesFetcher = PublishSubject<List<Launch>>();
+  final _repo = LaunchRepository();
+  final _launchesFetcher = PublishSubject<List<Launch>>();
 
   Observable<List<Launch>> get allLaunches => _launchesFetcher.stream;
 
@@ -42,7 +42,7 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   Stream<AllLaunchesState> _handleGetAllLaunches() async* {
     yield AllLaunchesState.loading;
 
-    final List<Launch> launches = await _repo.getAllLaunches();
+    final launches = await _repo.getAllLaunches();
 
     if (launches == null || launches.isEmpty) {
       yield AllLaunchesState.error;
