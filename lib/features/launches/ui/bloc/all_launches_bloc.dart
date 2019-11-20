@@ -19,7 +19,7 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   final _repo = LaunchRepository();
   final _launchesFetcher = PublishSubject<List<Launch>>();
 
-  Observable<List<Launch>> get allLaunches => _launchesFetcher.stream;
+  Observable<List<Launch>> get stream => _launchesFetcher.stream;
 
   @override
   AllLaunchesState get initialState => AllLaunchesState.empty;
@@ -28,7 +28,7 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   Stream<AllLaunchesState> mapEventToState(AllLaunchesEvent event) async* {
     switch (event) {
       case AllLaunchesEvent.getAllLaunches:
-        yield* _handleGetAllLaunches();
+        yield* _getAllLaunches();
         break;
     }
   }
@@ -39,7 +39,7 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
     super.close();
   }
 
-  Stream<AllLaunchesState> _handleGetAllLaunches() async* {
+  Stream<AllLaunchesState> _getAllLaunches() async* {
     yield AllLaunchesState.loading;
 
     final launches = await _repo.getAllLaunches();

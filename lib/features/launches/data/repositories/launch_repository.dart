@@ -3,7 +3,7 @@ import 'package:spacex_guide/features/launches/data/datasources/launch_remote_da
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchRepository {
-  final LaunchRemoteDatasource remoteDatasource = LaunchRemoteDatasource();
+  final remoteDatasource = LaunchRemoteDatasource();
 
   Future<List<Launch>> getAllLaunches() async {
     final connected = await NetworkInfo.isConnected;
@@ -13,7 +13,7 @@ class LaunchRepository {
       return <Launch>[];
     }
 
-    final dynamic launches = await remoteDatasource.getAllLaunches();
+    final launches = await remoteDatasource.getAllLaunches();
 
     // TODO: Handle no data
     return launches;

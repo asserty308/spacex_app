@@ -66,7 +66,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
 
   Widget buildList() {
     return StreamBuilder(
-      stream: _bloc.allLaunches,
+      stream: _bloc.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           _launchData = snapshot.data;
