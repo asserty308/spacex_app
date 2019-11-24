@@ -7,10 +7,12 @@ class History {
     this.eventDateUnix,
     this.flightNumber,
     this.details,
+    this.articleUrl,
+    this.wikiUrl,
   });
 
   int id, eventDateUnix, flightNumber;
-  String title, details;
+  String title, details, articleUrl, wikiUrl;
 
   static History fromJSON(Map<String, dynamic> json) {
     return History(
@@ -19,6 +21,8 @@ class History {
       eventDateUnix: json['event_date_unix'],
       flightNumber: json['flight_number'],
       details: json['details'],
+      articleUrl: json['links']['article'],
+      wikiUrl: json['links']['wikipedia'],
     );
   }
 

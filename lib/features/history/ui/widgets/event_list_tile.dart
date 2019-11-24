@@ -8,20 +8,80 @@ class EventListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        event.title,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+    return Card(
+      elevation: 1.0,
+      color: Colors.blueGrey,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
       ),
-      subtitle: Text(
-        event.formattedDate(),
-        style: TextStyle(
-          color: Colors.white,
-        ),
-      ),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              event.formattedDate('dd.MM.yyyy'),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+          Text(
+            event.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              event.details,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16.0
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: getCardButtons(),
+          )
+        ]
+      )
     );
+  }
+
+  List<Widget> getCardButtons() {
+    final list = <Widget>[];
+
+    if (event.articleUrl != null) {
+      list.add(FlatButton(
+        child: Text('Article', style: TextStyle(color: Colors.white70),),
+        onPressed: () {},
+      ));
+    }
+
+    if (event.wikiUrl != null) {
+      list.add(FlatButton(
+        child: Text('Wikipedia', style: TextStyle(color: Colors.white70),),
+        onPressed: () {},
+      ));
+    }
+
+    if (event.wikiUrl != null) {
+      list.add(FlatButton(
+        child: Text('Launch', style: TextStyle(color: Colors.white70),),
+        onPressed: () {},
+      ));
+    }
+
+    return list;
   }
 }

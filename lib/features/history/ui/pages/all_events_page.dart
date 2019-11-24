@@ -12,7 +12,7 @@ class AllEventsScreen extends StatefulWidget {
 class _AllEventsScreenState extends State<AllEventsScreen> {
   final _bloc = AllEventsBloc();
 
-  var _eventsData = List<History>();
+  var _eventsData = <History>[];
 
   @override
   void initState() {
