@@ -1,21 +1,31 @@
+import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/core/network/network_info.dart';
 import 'package:spacex_guide/features/history/data/datasources/history_remote_datasource.dart';
-import 'package:spacex_guide/features/history/data/models/history.dart';
 
 class HistoryRepository {
-  final remoteDatasource = LaunchRemoteDatasource();
+  final _remoteDatasource = LaunchRemoteDatasource();
 
-  Future<List<History>> getAllEvents() async {
+  Future<dynamic> getAllEvents() async {
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
-      // TODO: Offline handling
-      return <History>[];
+      return AppErrorNoNetwork();
     }
 
-    final events = await remoteDatasource.getAllEvents();
+    final events = await _remoteDatasource.getAllEvents();
 
-    // TODO: Handle no data
+    if (events == null) {
+      return AppErrorInternal();
+    }
+
+    if (events is AppError) {
+      return events;
+    }
+
+    if (events.isEmpty) {
+      return AppErrorNoData();
+    }
+
     return events;
   }
 }

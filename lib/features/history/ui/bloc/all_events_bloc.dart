@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -44,7 +45,7 @@ class AllEventsBloc extends Bloc<AllEventsEvent, AllEventsState> {
 
     final events = await _repo.getAllEvents();
 
-    if (events == null || events.isEmpty) {
+    if (events is AppError) {
       yield AllEventsState.error;
       return;
     }

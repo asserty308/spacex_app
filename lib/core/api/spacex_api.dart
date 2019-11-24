@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
@@ -18,8 +19,7 @@ class SpaceXAPI {
     final statusCode = response.statusCode;
 
     if (statusCode != 200) {
-      print('Received error code $statusCode on $url.');
-      return null;
+      return AppErrorApi(code: '$statusCode', message: 'Error received on url $url');
     }
 
     return json.decode(response.body);
