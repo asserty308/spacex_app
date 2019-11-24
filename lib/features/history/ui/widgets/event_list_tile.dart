@@ -58,6 +58,8 @@ class EventListTile extends StatelessWidget {
     );
   }
 
+  /// Builds a list of buttons from the available data.
+  /// Buttons can show the article, the wikipedia page or the launch details.
   List<Widget> getCardButtons() {
     final list = <Widget>[];
 
@@ -75,7 +77,7 @@ class EventListTile extends StatelessWidget {
       ));
     }
 
-    if (event.wikiUrl != null) {
+    if (event.flightNumber != null) {
       list.add(FlatButton(
         child: Text('Launch', style: TextStyle(color: Colors.white70),),
         onPressed: () {},
