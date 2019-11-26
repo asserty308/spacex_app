@@ -45,6 +45,7 @@ class AllEventsBloc extends Bloc<AllEventsEvent, AllEventsState> {
 
     final events = await _repo.getAllEvents();
 
+    // TODO: Handle errors on ui
     if (events is AppError) {
       yield AllEventsState.error;
       return;

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/bloc/all_launches_bloc.dart';
+import 'package:spacex_guide/features/launches/ui/bloc/all_launches_events.dart';
+import 'package:spacex_guide/features/launches/ui/bloc/all_launches_states.dart';
 import 'package:spacex_guide/features/launches/ui/pages/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
@@ -26,7 +29,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     super.initState();
 
     // start fetching launches immediately
-    _bloc.add(AllLaunchesEvent.getAllLaunches);
+    _bloc.add(GetAllLaunches());
   }
   
   @override
@@ -65,18 +68,37 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   }
 
   Widget buildList() {
-    return StreamBuilder(
-      stream: _bloc.stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          _launchData = snapshot.data;
+    return BlocBuilder(
+      bloc: _bloc,
+      builder: (context, state) {
+        if (state is AllLaunchesEmpty || state is AllLaunchesLoading) {
+          return Center(child: const CircularProgressIndicator(),);
+        }
+
+        if (state is AllLaunchesLoaded) {
+          _launchData = state.launches;
+
           return LaunchList(
             launches: _launchData,
             showNextLaunch: true,
           );
         }
 
-        return Center(child: const CircularProgressIndicator(),);
+        if (state is AllLaunchesError) {
+          return Center(
+            child: const Text(
+              'Something went wrong. Please try again later',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        }
+
+        // no state
+        return Container();
       },
     );
   }

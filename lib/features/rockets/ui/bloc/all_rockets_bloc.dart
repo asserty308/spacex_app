@@ -4,7 +4,7 @@ import 'package:spacex_guide/core/api/spacex_api.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class AllRocketsBloc {
-  final _api = SpaceXAPI();
+  final _api = SpaceXApi();
   final _rocketFetcher = PublishSubject<List<Rocket>>();
 
   Observable<List<Rocket>> get allRockets => _rocketFetcher.stream;
