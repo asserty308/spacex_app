@@ -1,57 +1,26 @@
-import 'package:rxdart/rxdart.dart';
-import 'package:rxdart/subjects.dart';
 import 'package:spacex_guide/core/error/error.dart';
-import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:bloc/bloc.dart';
-
-enum AllEventsState {
-  empty,
-  loading,
-  loaded,
-  error
-}
-
-enum AllEventsEvent {
-  getAllEvents,
-}
+import 'package:spacex_guide/features/history/ui/bloc/all_events_events.dart';
+import 'package:spacex_guide/features/history/ui/bloc/all_events_states.dart';
 
 class AllEventsBloc extends Bloc<AllEventsEvent, AllEventsState> {
   final _repo = HistoryRepository();
-  final _historyFetcher = PublishSubject<List<History>>();
-
-  Observable<List<History>> get stream => _historyFetcher.stream;
 
   @override
-  AllEventsState get initialState => AllEventsState.empty;
+  AllEventsState get initialState => AllEventsEmpty();
 
   @override
   Stream<AllEventsState> mapEventToState(AllEventsEvent event) async* {
-    switch (event) {
-      case AllEventsEvent.getAllEvents:
-        yield* _getAllEvents();
-        break;
+    if (event is GetAllEvents) {
+      yield AllEventsLoading();
+
+      try {
+        final events = await _repo.getAllEvents();
+        yield AllEventsLoaded(events);
+      } catch (_) {
+        yield AllEventsError();
+      }
     }
-  }
-
-  @override
-  Future<void> close() async {
-    _historyFetcher.close();
-    super.close();
-  }
-
-  Stream<AllEventsState> _getAllEvents() async* {
-    yield AllEventsState.loading;
-
-    final events = await _repo.getAllEvents();
-
-    // TODO: Handle errors on ui
-    if (events is AppError) {
-      yield AllEventsState.error;
-      return;
-    }
-
-    _historyFetcher.sink.add(events);
-    yield AllEventsState.loaded;
   }
 }

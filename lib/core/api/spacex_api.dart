@@ -17,17 +17,4 @@ class SpaceXApi {
 
     return json.decode(response.body);
   }
-
-  // Rockets
-
-  Future<List<Rocket>> getAllRockets() async {
-    final response = await fetchJSON('rockets/');
-    final list = <Rocket>[];
-
-    for (final rocket in response) {
-      list.add(Rocket.fromJSON(rocket));
-    }
-
-    return list;
-  }
 }

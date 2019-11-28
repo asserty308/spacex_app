@@ -13,19 +13,6 @@ class HistoryRepository {
     }
 
     final events = await _remoteDatasource.getAllEvents();
-
-    if (events == null) {
-      return AppErrorInternal();
-    }
-
-    if (events is AppError) {
-      return events;
-    }
-
-    if (events.isEmpty) {
-      return AppErrorNoData();
-    }
-
     return events;
   }
 }

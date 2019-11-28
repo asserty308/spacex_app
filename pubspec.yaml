@@ -20,7 +20,6 @@ dependencies:
   flutter_full_pdf_viewer:
   youtube_player_flutter:
   carousel_slider:
-  rxdart: # reactive programming
   flare_flutter: # flare animations
   shared_preferences: # simple persistent store
   firebase_core:

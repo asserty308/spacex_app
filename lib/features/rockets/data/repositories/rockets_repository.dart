@@ -1,11 +1,11 @@
 import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/core/network/network_info.dart';
-import 'package:spacex_guide/features/launches/data/datasources/launch_remote_datasource.dart';
+import 'package:spacex_guide/features/rockets/data/datasources/rockets_remote_datasource.dart';
 
-class LaunchRepository {
-  final _remoteDatasource = LaunchRemoteDatasource();
+class RocketsRepository {
+  final _remoteDatasource = RocketsRemoteDatasource();
 
-  Future<dynamic> getAllLaunches() async {
+  Future<dynamic> getAllRockets() async {
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
@@ -13,8 +13,7 @@ class LaunchRepository {
       return AppErrorNoNetwork();
     }
 
-    final launches = await _remoteDatasource.getAllLaunches();
-    return launches;
+    final rockets = _remoteDatasource.getAllRockets();
+    return rockets;
   }
-
 }

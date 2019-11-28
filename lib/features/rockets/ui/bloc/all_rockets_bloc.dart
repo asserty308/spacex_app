@@ -1,20 +1,25 @@
-import 'package:rxdart/rxdart.dart';
-import 'package:rxdart/subjects.dart';
-import 'package:spacex_guide/core/api/spacex_api.dart';
-import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:bloc/bloc.dart';
+import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
+import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_events.dart';
+import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_states.dart';
 
-class AllRocketsBloc {
-  final _api = SpaceXApi();
-  final _rocketFetcher = PublishSubject<List<Rocket>>();
+class AllRocketsBloc extends Bloc<AllRocketsEvent, AllRocketsState> {
+  final _repo = RocketsRepository();
 
-  Observable<List<Rocket>> get allRockets => _rocketFetcher.stream;
+  @override
+  AllRocketsState get initialState => AllRocketsEmpty();
 
-  Future<void> fetchAllRockets() async {
-    final rockets = await _api.getAllRockets();
-    _rocketFetcher.sink.add(rockets);
-  }
+  @override
+  Stream<AllRocketsState> mapEventToState(AllRocketsEvent event) async* {
+    if (event is GetAllRockets) {
+      yield AllRocketsLoading();
 
-  void dispose() {
-    _rocketFetcher.close();
+      try {
+        final rockets = await _repo.getAllRockets();
+        yield AllRocketsLoaded(rockets);
+      } catch (_) {
+        yield AllRocketsError();
+      }
+    }
   }
 }
