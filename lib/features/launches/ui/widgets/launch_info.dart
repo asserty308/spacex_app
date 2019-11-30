@@ -4,12 +4,16 @@ import 'package:spacex_guide/core/utility/dialogs.dart';
 import 'package:spacex_guide/core/utility/files.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'launch_countdown_card.dart';
 
 class LaunchInfo extends StatelessWidget {
-  const LaunchInfo({this.launch});
+  const LaunchInfo({
+    Key key,
+    this.launch
+  }) : super(key: key);
 
   final Launch launch;
 
@@ -17,9 +21,9 @@ class LaunchInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        !launch.isUpcoming() ? Container() : LaunchCountdownCard(launch: launch),
+        !launch.isUpcoming() ? const LaunchDetailActions() : LaunchCountdownCard(launch: launch),
         ListTile(
-          title: Text(
+          title: const Text(
             'Date',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -28,13 +32,13 @@ class LaunchInfo extends StatelessWidget {
           ),
           subtitle: Text(
             launch.formattedLaunchDate(),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Rocket',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -43,7 +47,7 @@ class LaunchInfo extends StatelessWidget {
           ),
           subtitle: Text(
             launch.rocket.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
