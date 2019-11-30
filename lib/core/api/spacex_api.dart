@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class SpaceXApi {
   final _baseUrl = 'https://api.spacexdata.com/v3/';

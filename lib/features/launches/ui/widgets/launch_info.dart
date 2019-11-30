@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/widgets/pdf_screen.dart';
-import 'package:spacex_guide/core/utility/dialogs.dart';
-import 'package:spacex_guide/core/utility/files.dart';
-import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_details_description.dart';
 
 import 'launch_countdown_card.dart';
 
@@ -21,7 +17,7 @@ class LaunchInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        !launch.isUpcoming() ? const LaunchDetailActions() : LaunchCountdownCard(launch: launch),
+        !launch.isUpcoming() ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch),
         ListTile(
           title: const Text(
             'Date',
@@ -52,102 +48,8 @@ class LaunchInfo extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(
-          title: Text(
-            'Details',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onTap: () => showLaunchDetails(context),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white30,
-            size: 18,
-          ),
-        ),
-        ListTile(
-          title: Text(
-            'Presskit',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onTap: () => showPresskit(context),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white30,
-            size: 18,
-          ),
-        ),
-        ListTile(
-          title: Text(
-            'Video',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onTap: () => showVideo(context),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white30,
-            size: 18,
-          ),
-        ),
+        launch.details != null ? LaunchDetailsDescription(launch: launch,) : Container(),
       ],
-    );
-  }
-
-  void showLaunchDetails(BuildContext context) {
-    final content = launch.details != null ? launch.details : 'There are no details available.';
-    showOKDialog(context, launch.missionName, content);
-  }
-
-  Future<void> showPresskit(BuildContext context) async {
-    if (launch.presskit == null || launch.presskit.isEmpty || !launch.presskit.endsWith('.pdf')) {
-      showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
-      return;
-    }
-
-    final file = await createFileFromUrl(launch.presskit);
-
-    showScreen(context, PDFScreen(
-      title: '${launch.missionName} Presskit', 
-      filePath: file.path
-    ));
-  }
-
-  void showVideo(BuildContext context) {
-    if (launch.youtubeID == null || launch.youtubeID.isEmpty) {
-      showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
-      return;
-    }
-
-    // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
-    final _controller = YoutubePlayerController(
-        initialVideoId: launch.youtubeID,
-        flags: const YoutubePlayerFlags(
-            autoPlay: true,
-        ),
-    );
-
-    final player = YoutubePlayer(
-      controller: _controller,
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.amber,
-      progressColors: ProgressBarColors(
-        playedColor: Colors.amber,
-        handleColor: Colors.amberAccent,
-      ),
-    );
-
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        content: player,
-        contentPadding: EdgeInsets.zero,
-        backgroundColor: Colors.transparent,
-      ),
     );
   }
 }

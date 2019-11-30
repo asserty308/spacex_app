@@ -1,7 +1,7 @@
 name: spacex_guide
 description: SpaceX App made with flutter.
 
-version: 0.0.9+9
+version: 0.1.0+10
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

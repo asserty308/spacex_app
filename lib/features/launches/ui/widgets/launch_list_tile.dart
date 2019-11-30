@@ -17,21 +17,21 @@ class LaunchListTile extends StatelessWidget {
     return ListTile(
       title: Text(
         launch.missionName,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),
       subtitle: Text(
         launch.formattedLaunchDate(),
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
         ),
       ),
       leading: CircleAvatar(
         child: launch.missionPatch == null ? Text(
           '${launch.flightNumber}',
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ) : CachedNetworkImage(
           imageUrl: launch.missionPatch,
         ),

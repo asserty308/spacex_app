@@ -1,4 +1,3 @@
-import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:spacex_guide/features/history/ui/bloc/all_events_events.dart';

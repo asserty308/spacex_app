@@ -32,7 +32,7 @@ class LaunchCountdownCard extends StatelessWidget {
                 Text(
                   '${launch.missionName} will launch in', 
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white, 
                     fontSize: 18, 
                     fontWeight: FontWeight.bold
