@@ -5,6 +5,7 @@ import 'package:spacex_guide/core/utility/files.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class LaunchDetailActions extends StatelessWidget {
@@ -46,9 +47,17 @@ class LaunchDetailActions extends StatelessWidget {
     ));
   }
 
-  void playVideo(BuildContext context) {
+  Future<void> playVideo(BuildContext context) async {
     if (launch.youtubeID == null || launch.youtubeID.isEmpty) {
       showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
+      return;
+    }
+
+    // When youtube app is installed open the video there
+    final url = launch.videoLink;
+
+    if (await url_launcher.canLaunch(url)) {
+      await url_launcher.launch(url);
       return;
     }
 

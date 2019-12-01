@@ -17,4 +17,16 @@ class LaunchRepository {
     return launches;
   }
 
+  Future<dynamic> getLaunchWithId(int id) async {
+    final connected = await NetworkInfo.isConnected;
+
+    if (!connected) {
+      // TODO: Offline handling (local datasource with cached data)
+      return AppErrorNoNetwork();
+    }
+
+    final launches = await _remoteDatasource.getLaunchWithId(id);
+    return launches;
+  }
+
 }

@@ -6,12 +6,12 @@ import 'package:spacex_guide/features/history/ui/bloc/all_events_events.dart';
 import 'package:spacex_guide/features/history/ui/bloc/all_events_states.dart';
 import 'package:spacex_guide/features/history/ui/widgets/all_events_list.dart';
 
-class AllEventsScreen extends StatefulWidget {
+class AllEventsPage extends StatefulWidget {
   @override
-  _AllEventsScreenState createState() => _AllEventsScreenState();
+  _AllEventsPageState createState() => _AllEventsPageState();
 }
 
-class _AllEventsScreenState extends State<AllEventsScreen> {
+class _AllEventsPageState extends State<AllEventsPage> {
   final _bloc = AllEventsBloc();
 
   @override

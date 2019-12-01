@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/core/ui/widgets/webview_page.dart';
+import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
+import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
+import 'package:spacex_guide/features/launches/ui/pages/launch_detail_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventListTile extends StatelessWidget {
   const EventListTile({Key key, this.event}) : super(key: key);
@@ -33,7 +38,7 @@ class EventListTile extends StatelessWidget {
             event.title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 20.0
             ),
@@ -44,14 +49,14 @@ class EventListTile extends StatelessWidget {
               event.details,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 16.0
               ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: getCardButtons(),
+            children: getCardButtons(context),
           )
         ]
       )
@@ -60,30 +65,44 @@ class EventListTile extends StatelessWidget {
 
   /// Builds a list of buttons from the available data.
   /// Buttons can show the article, the wikipedia page or the launch details.
-  List<Widget> getCardButtons() {
+  List<Widget> getCardButtons(BuildContext context) {
     final list = <Widget>[];
 
     if (event.articleUrl != null) {
       list.add(FlatButton(
         child: Text('Article', style: TextStyle(color: Colors.white70),),
-        onPressed: () {},
+        onPressed: () => showArticle(context),
       ));
     }
 
     if (event.wikiUrl != null) {
       list.add(FlatButton(
         child: Text('Wikipedia', style: TextStyle(color: Colors.white70),),
-        onPressed: () {},
+        onPressed: () => showWikipedia(context),
       ));
     }
 
     if (event.flightNumber != null) {
       list.add(FlatButton(
         child: Text('Launch', style: TextStyle(color: Colors.white70),),
-        onPressed: () {},
+        onPressed: () => showLaunch(context),
       ));
     }
 
     return list;
+  }
+
+  Future<void> showArticle(BuildContext context) async {
+    showWebView(context, event.articleUrl, event.title);
+  }
+
+  Future<void> showWikipedia(BuildContext context) async {
+    showWebView(context, event.wikiUrl, event.title);
+  }
+
+  Future<void> showLaunch(BuildContext context) async {
+    final repo = LaunchRepository();
+    final launch = await repo.getLaunchWithId(event.flightNumber);
+    showScreen(context, LaunchDetailScreen(launch));
   }
 }

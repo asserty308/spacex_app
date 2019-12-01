@@ -11,4 +11,9 @@ class LaunchRemoteDatasource extends SpaceXApi {
     return list;
   }
 
+  Future<Launch> getLaunchWithId(int id) async {
+    final response = await fetchJSON('launches/$id');
+    return Launch.fromJSON(response);
+  }
+
 }

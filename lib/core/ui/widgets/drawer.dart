@@ -48,7 +48,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Historical Events'),
             leading: Icon(Icons.history),
-            onTap: () => showScreen(context, AllEventsScreen()),
+            onTap: () => showScreen(context, AllEventsPage()),
           ),
           ListTile(
             title: const Text('About SpaceX'),

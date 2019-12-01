@@ -26,6 +26,8 @@ dependencies:
   firebase_crashlytics:
   flutter_launcher_icons: # app icon
   flutter_bloc: # state management
+  url_launcher:
+  webview_flutter:
 
 dev_dependencies:
   flutter_test:

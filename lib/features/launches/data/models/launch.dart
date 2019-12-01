@@ -9,6 +9,7 @@ class Launch {
     this.details,
     this.tentativeMaxPrecision,
     this.isTentative,
+    this.launchSuccess,
     this.missionPatch,
     this.presskit,
     this.videoLink,
@@ -19,7 +20,7 @@ class Launch {
 
   int flightNumber, launchDateUnix;
   String missionName, details, tentativeMaxPrecision;
-  bool isTentative;
+  bool isTentative, launchSuccess;
   String missionPatch, presskit, videoLink, youtubeID;
   Rocket rocket;
   List<String> flickrImages;
@@ -37,6 +38,7 @@ class Launch {
       details: json['details'],
       tentativeMaxPrecision: json['tentative_max_precision'],
       isTentative: json['is_tentative'],
+      launchSuccess: json['launch_success'],
       missionPatch: links['mission_patch'],
       presskit: links['presskit'],
       videoLink: links['video_link'],
