@@ -77,3 +77,4 @@ android/fastlane**
 ios/fastlane**
 android/app/google-services.json
 android/key.properties
+ios/Runner/GoogleService-Info.plist
