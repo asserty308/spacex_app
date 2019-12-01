@@ -1,7 +1,7 @@
+import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
+import 'package:spacex_guide/features/launches/bloc/all_launches_states.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:spacex_guide/features/launches/ui/bloc/all_launches_events.dart';
-import 'package:spacex_guide/features/launches/ui/bloc/all_launches_states.dart';
 
 class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   final _repo = LaunchRepository();

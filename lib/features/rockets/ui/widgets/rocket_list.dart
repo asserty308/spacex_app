@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spacex_guide/features/rockets/bloc/all_rockets_bloc.dart';
+import 'package:spacex_guide/features/rockets/bloc/all_rockets_events.dart';
+import 'package:spacex_guide/features/rockets/bloc/all_rockets_states.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_bloc.dart';
-import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_events.dart';
-import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_states.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';
 
 class RocketList extends StatefulWidget {

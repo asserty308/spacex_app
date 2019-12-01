@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:spacex_guide/features/rockets/bloc/all_rockets_events.dart';
+import 'package:spacex_guide/features/rockets/bloc/all_rockets_states.dart';
 import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
-import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_events.dart';
-import 'package:spacex_guide/features/rockets/ui/bloc/all_rockets_states.dart';
 
 class AllRocketsBloc extends Bloc<AllRocketsEvent, AllRocketsState> {
   final _repo = RocketsRepository();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
-import 'package:spacex_guide/features/history/ui/bloc/all_events_bloc.dart';
-import 'package:spacex_guide/features/history/ui/bloc/all_events_events.dart';
-import 'package:spacex_guide/features/history/ui/bloc/all_events_states.dart';
+import 'package:spacex_guide/features/history/bloc/all_events_bloc.dart';
+import 'package:spacex_guide/features/history/bloc/all_events_events.dart';
+import 'package:spacex_guide/features/history/bloc/all_events_states.dart';
 import 'package:spacex_guide/features/history/ui/widgets/all_events_list.dart';
 
 class AllEventsPage extends StatefulWidget {
