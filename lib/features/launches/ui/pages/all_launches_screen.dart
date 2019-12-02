@@ -21,7 +21,6 @@ class AllLaunchesScreen extends StatefulWidget {
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
-
   var _launchData = <Launch>[];
 
   @override
@@ -34,29 +33,11 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return IndexedStack(
+      index: _showSplash ? 0 : 1,
       children: <Widget>[
-        Scaffold(
-          appBar: AppBar(
-            title: const Text('All Launches'),
-            backgroundColor: Colors.black,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () => showLaunchSearch(context),
-              ),
-            ],
-          ),
-          drawer: const MyDrawer(),
-          body: buildList(),
-        ),
-        _showSplash ? LaunchAnimation(
-          onFinished: () {
-            setState(() {
-              _showSplash = false;
-            });
-          },
-        ) : Container()
+        buildLaunchAnimation(),
+        buildScaffold(context),
       ],
     );
   }
@@ -67,39 +48,70 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     super.dispose();
   }
 
-  Widget buildList() {
-    return BlocBuilder(
-      bloc: _bloc,
-      builder: (context, state) {
-        if (state is AllLaunchesEmpty || state is AllLaunchesLoading) {
-          return Center(child: const CircularProgressIndicator(),);
-        }
-
-        if (state is AllLaunchesLoaded) {
-          _launchData = state.launches;
-
-          return LaunchList(
-            launches: _launchData,
-            showNextLaunch: true,
-          );
-        }
-
-        if (state is AllLaunchesError) {
-          return Center(
-            child: const Text(
-              'Something went wrong. Please try again later',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
-        }
-
-        // no state
-        return Container();
+  Widget buildLaunchAnimation() {
+    return LaunchAnimation(
+      onFinished: () {
+        setState(() {
+          _showSplash = false;
+        });
       },
+    );
+  }
+
+  Widget buildScaffold(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('All Launches'),
+        backgroundColor: Colors.black,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => showLaunchSearch(context),
+          ),
+        ],
+      ),
+      drawer: const MyDrawer(),
+      body: buildScaffoldBody(),
+    );
+  }
+
+  /// Builds the body of the scaffold by taking the current bloc state into account.
+  Widget buildScaffoldBody() {
+    return Container(
+      color: Colors.black87,
+      child: BlocBuilder(
+        bloc: _bloc,
+        builder: (context, state) {
+          if (state is AllLaunchesEmpty || state is AllLaunchesLoading) {
+            return Center(child: const CircularProgressIndicator(),);
+          }
+
+          if (state is AllLaunchesLoaded) {
+            _launchData = state.launches;
+
+            return LaunchList(
+              launches: _launchData,
+              showNextLaunch: true,
+            );
+          }
+
+          if (state is AllLaunchesError) {
+            return Center(
+              child: const Text(
+                'Something went wrong. Please try again later',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          }
+
+          // no state
+          return Container();
+        },
+      ),
     );
   }
 

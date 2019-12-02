@@ -14,7 +14,6 @@ class LaunchList extends StatelessWidget {
     final nextLaunch = showNextLaunch ? getNextLaunch(launches) : null;
 
     return Container(
-      color: Colors.black87,
       child: ListView.builder(
         itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
         itemBuilder: (context, i) {
