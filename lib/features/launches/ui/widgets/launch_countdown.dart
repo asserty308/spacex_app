@@ -58,7 +58,7 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
 
   void setCountdownText() {
     // calculate raw time data
-    final seconds = (widget.launch.launchDateUnix - (DateTime.now().millisecondsSinceEpoch / 1000)).toInt();
+    final seconds = ((widget.launch.launchDate.millisecondsSinceEpoch / 1000) - (DateTime.now().millisecondsSinceEpoch / 1000)).toInt();
     final minutes = seconds ~/ 60; // equal to (seconds / 60).toInt() but more efficient
     final hours = minutes ~/ 60;
     final days = hours ~/ 24;

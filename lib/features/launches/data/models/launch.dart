@@ -5,7 +5,7 @@ class Launch {
   Launch({
     this.flightNumber,
     this.missionName,
-    this.launchDateUnix,
+    this.launchDate,
     this.details,
     this.tentativeMaxPrecision,
     this.isTentative,
@@ -18,7 +18,8 @@ class Launch {
     this.flickrImages,
   });
 
-  int flightNumber, launchDateUnix;
+  int flightNumber;
+  DateTime launchDate;
   String missionName, details, tentativeMaxPrecision;
   bool isTentative, launchSuccess;
   String missionPatch, presskit, videoLink, youtubeID;
@@ -30,10 +31,12 @@ class Launch {
     final links = json['links'];
     final images = links['flickr_images'];
 
+    final launchDateUnix = json['launch_date_unix'];
+
     return Launch(
       flightNumber: json['flight_number'],
       missionName: json['mission_name'],
-      launchDateUnix: json['launch_date_unix'],
+      launchDate: DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000),
       rocket: rocket,
       details: json['details'],
       tentativeMaxPrecision: json['tentative_max_precision'],
@@ -48,30 +51,24 @@ class Launch {
   }
   
   bool isUpcoming() {
-    return (launchDateUnix * 1000) > DateTime.now().millisecondsSinceEpoch;
-  }
-
-  DateTime getLaunchDate() {
-    return DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000);
+    return launchDate.isAfter(DateTime.now());
   }
 
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.
   String formattedLaunchDate([String format = 'dd.MM.yyyy HH:mm:ss']) {
-    final date = getLaunchDate();
-
     if (isTentative) {
       switch (tentativeMaxPrecision) {
         case 'year':
-          return DateFormat('yyyy').format(date);
+          return DateFormat('yyyy').format(launchDate);
         case 'month':
-          return DateFormat('MMMM yyyy').format(date);
+          return DateFormat('MMMM yyyy').format(launchDate);
         case 'day':
-          return DateFormat('dd.MM.yyyy').format(date);
+          return DateFormat('dd.MM.yyyy').format(launchDate);
         default:
       }
     }
 
-    return DateFormat(format).format(date);
+    return DateFormat(format).format(launchDate);
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/core/utility/dialogs.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_images.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 import 'package:spacex_guide/main.dart';
 
@@ -49,7 +49,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 title: Text(widget._launch?.missionName),
-                background: LaunchImages(
+                background: ImageCarousel(
                   imageUrls: imageUrls,
                 ),
               ),
@@ -81,7 +81,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
       return;
     }
 
-    final launchDate = widget._launch.getLaunchDate();
+    final launchDate = widget._launch.launchDate;
     var scheduledDate = launchDate.subtract(Duration(hours: 2));
 
     // When the user schedules a notification less than 2hr before takeoff, 
@@ -106,7 +106,8 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
       widget._launch.flightNumber,
       'Launch Reminder', 
       'The mission ${widget._launch.missionName} will launch soon!', 
-      scheduledDate, notificationDetails,
+      scheduledDate, 
+      notificationDetails,
     );
 
     await sharedPrefs.setBool(prefKey, true);

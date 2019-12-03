@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class LaunchImages extends StatefulWidget {
-  const LaunchImages({
+class ImageCarousel extends StatefulWidget {
+  const ImageCarousel({
     Key key,
     this.imageUrls,
   }) : super(key: key);
@@ -11,10 +11,10 @@ class LaunchImages extends StatefulWidget {
   final List<String> imageUrls;
 
   @override
-  _LaunchImagesState createState() => _LaunchImagesState();
+  _ImageCarouselState createState() => _ImageCarouselState();
 }
 
-class _LaunchImagesState extends State<LaunchImages> {
+class _ImageCarouselState extends State<ImageCarousel> {
 
   @override
   Widget build(BuildContext context) {

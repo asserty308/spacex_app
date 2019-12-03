@@ -26,7 +26,7 @@ class LaunchDetailsDescription extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               launch.details,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 height: 1.2,
                 fontSize: 16,

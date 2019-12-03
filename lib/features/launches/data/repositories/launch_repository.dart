@@ -10,7 +10,7 @@ class LaunchRepository {
 
     if (!connected) {
       // TODO: Offline handling (local datasource with cached data)
-      return AppErrorNoNetwork();
+      throw Exception('App is not connected to the internet');
     }
 
     final launches = await _remoteDatasource.getAllLaunches();

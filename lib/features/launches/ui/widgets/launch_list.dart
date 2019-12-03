@@ -31,7 +31,7 @@ class LaunchList extends StatelessWidget {
   /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
   Launch getNextLaunch(List<Launch> launches) {
     final upcoming = launches.where((l) => l.isUpcoming() && !l.isTentative).toList();
-    upcoming.sort((l1, l2) => l1.launchDateUnix.compareTo(l2.launchDateUnix));
+    upcoming.sort((l1, l2) => l1.launchDate.compareTo(l2.launchDate));
     return upcoming.isEmpty ? null : upcoming[0];
   }
 }
