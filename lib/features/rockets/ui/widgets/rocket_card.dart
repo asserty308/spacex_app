@@ -39,7 +39,7 @@ class RocketCard extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                     child: Text(
                       rocket.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

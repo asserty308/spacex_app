@@ -35,7 +35,7 @@ class EventListTile extends StatelessWidget {
           Text(
             event.title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 20.0
@@ -46,7 +46,7 @@ class EventListTile extends StatelessWidget {
             child: Text(
               event.details,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16.0
               ),
