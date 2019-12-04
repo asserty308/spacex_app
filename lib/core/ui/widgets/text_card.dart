@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
-class LaunchDetailsDescription extends StatelessWidget {
-  const LaunchDetailsDescription({
+class TextCard extends StatelessWidget {
+  const TextCard({
     Key key,
-    this.launch,
+    this.text,
+    this.backgroundColor = Colors.indigo,
+    this.textColor = Colors.white,
   }) : super(key: key);
 
-  final Launch launch;
+  final String text;
+  final Color backgroundColor, textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,14 @@ class LaunchDetailsDescription extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
         ),
-        color: Colors.indigo,
+        color: backgroundColor,
         child: Container(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              launch.details,
-              style: const TextStyle(
-                color: Colors.white,
+              text,
+              style: TextStyle(
+                color: textColor,
                 height: 1.2,
                 fontSize: 16,
               ),

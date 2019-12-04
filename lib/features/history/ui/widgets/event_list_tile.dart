@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
-import 'package:spacex_guide/features/launches/ui/pages/launch_detail_screen.dart';
+import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
 
 class EventListTile extends StatelessWidget {
   const EventListTile({Key key, this.event}) : super(key: key);

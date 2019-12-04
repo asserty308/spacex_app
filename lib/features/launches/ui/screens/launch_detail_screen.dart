@@ -48,7 +48,9 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
               actions: appBarActions,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
-                title: Text(widget._launch?.missionName),
+                title: Text(
+                  widget._launch?.missionName,
+                ),
                 background: ImageCarousel(
                   imageUrls: imageUrls,
                 ),

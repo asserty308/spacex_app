@@ -2,7 +2,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spacex_guide/features/launches/ui/pages/all_launches_screen.dart';
+import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
 SharedPreferences sharedPrefs;

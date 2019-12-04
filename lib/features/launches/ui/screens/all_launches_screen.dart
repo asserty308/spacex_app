@@ -5,7 +5,7 @@ import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_states.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/pages/delegates/launch_search_delegate.dart';
+import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 

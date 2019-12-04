@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebviewPage extends StatefulWidget {
-  const WebviewPage({
+class WebviewScreen extends StatefulWidget {
+  const WebviewScreen({
     this.initialUrl,
     this.title,
   });
@@ -10,10 +10,10 @@ class WebviewPage extends StatefulWidget {
   final String initialUrl, title;
 
   @override
-  _WebviewPageState createState() => _WebviewPageState();
+  _WebviewScreenState createState() => _WebviewScreenState();
 }
 
-class _WebviewPageState extends State<WebviewPage> {
+class _WebviewScreenState extends State<WebviewScreen> {
   bool _urlLoaded = false;
 
   @override

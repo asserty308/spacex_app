@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:spacex_guide/features/rockets/ui/widgets/rocket_info.dart';
 
-class RocketDetailsPage extends StatefulWidget {
-  const RocketDetailsPage({
+class RocketDetailsScreen extends StatefulWidget {
+  const RocketDetailsScreen({
     this.rocket,
   });
 
   final Rocket rocket;
   
   @override
-  _RocketDetailsPageState createState() => _RocketDetailsPageState();
+  _RocketDetailsScreenState createState() => _RocketDetailsScreenState();
 }
 
-class _RocketDetailsPageState extends State<RocketDetailsPage> {
+class _RocketDetailsScreenState extends State<RocketDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _RocketDetailsPageState extends State<RocketDetailsPage> {
         },
         body: Container(
           color: Colors.black87,
-          child: const Placeholder(),
+          child: RocketInfo(rocket: widget.rocket,),
         )
       ),
     );

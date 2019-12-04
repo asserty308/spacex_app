@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/widgets/webview_page.dart';
+import 'package:spacex_guide/core/ui/widgets/webview_screen.dart';
 
 void showScreen(BuildContext context, Widget screen) {
   Navigator.push(
@@ -9,5 +9,5 @@ void showScreen(BuildContext context, Widget screen) {
 }
 
 void showWebView(BuildContext context, String url, String title) {
-  showScreen(context, WebviewPage(initialUrl: url, title: title,));
+  showScreen(context, WebviewScreen(initialUrl: url, title: title,));
 }

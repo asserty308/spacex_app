@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
-import 'package:spacex_guide/features/history/ui/pages/all_events_page.dart';
-import 'package:spacex_guide/features/launches/ui/pages/all_launches_screen.dart';
-import 'package:spacex_guide/features/rockets/ui/pages/all_rockets_screen.dart';
+import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
+import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
+import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -48,7 +48,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Historical Events'),
             leading: Icon(Icons.history),
-            onTap: () => showScreen(context, AllEventsPage()),
+            onTap: () => showScreen(context, AllEventsScreen()),
           ),
           ListTile(
             title: const Text('About SpaceX'),

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:spacex_guide/features/rockets/ui/pages/rocket_details.dart';
+import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 
 class RocketCard extends StatelessWidget {
   const RocketCard({
@@ -23,7 +23,7 @@ class RocketCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          showScreen(context, RocketDetailsPage(rocket: rocket));
+          showScreen(context, RocketDetailsScreen(rocket: rocket));
         },
         child: Column(
           children: <Widget>[
