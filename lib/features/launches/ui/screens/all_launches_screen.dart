@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
+import 'package:spacex_guide/core/utility/notifications.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_states.dart';
@@ -88,6 +89,9 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
 
           if (state is AllLaunchesLoaded) {
             _launchData = state.launches;
+
+            // Schedule notifications for all upcoming launches
+            scheduleReminders(context, _launchData);
 
             return LaunchList(
               launches: _launchData,
