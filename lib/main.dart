@@ -1,4 +1,4 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
 
     initLocalNotifications();
     initSharedPrefs();
-    initCrashlytics();
+    //initCrashlytics();
   }
 
   @override
@@ -64,8 +64,8 @@ class _MyAppState extends State<MyApp> {
     sharedPrefs = await SharedPreferences.getInstance();
   }
 
-  void initCrashlytics() {
+  /*void initCrashlytics() {
     // Pass all uncaught errors from the framework to Crashlytics.
     FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  }
+  }*/
 }

@@ -1,4 +1,4 @@
-package com.example.spacex_guide
+package com.asserty.spacex
 
 import android.os.Bundle
 

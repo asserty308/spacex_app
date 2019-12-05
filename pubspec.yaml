@@ -22,8 +22,6 @@ dependencies:
   carousel_slider:
   flare_flutter: # flare animations
   shared_preferences: # simple persistent store
-  firebase_core:
-  firebase_crashlytics:
   flutter_launcher_icons: # app icon
   flutter_bloc: # state management
   url_launcher:
