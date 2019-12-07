@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
 
@@ -9,15 +10,15 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
-    return theme.copyWith(
-      primaryColor: Colors.white,
-      primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.grey),
+    return defaultTheme.copyWith(
+      primaryColor: const Color.fromARGB(255, 1, 1, 1),
+      primaryIconTheme: defaultTheme.primaryIconTheme.copyWith(color: Colors.white),
       primaryColorBrightness: Brightness.dark,
-      textTheme: theme.textTheme.copyWith(
-        title: TextStyle(fontWeight: FontWeight.normal),
-        
+      textTheme: defaultTheme.textTheme.copyWith(
+        title: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+      ),
+      inputDecorationTheme: defaultTheme.inputDecorationTheme.copyWith(
+        hintStyle: TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
       ),
     );
   }

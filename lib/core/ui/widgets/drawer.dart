@@ -21,7 +21,7 @@ class MyDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             child: Center(
-              child: Text(
+              child: const Text(
                 'SpaceX',
                 style: TextStyle(
                   color: Colors.white,
@@ -33,16 +33,16 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text('All Launches'),
-            leading: Icon(Icons.all_inclusive),
+            leading: Icon(Icons.label),
             onTap: () => showScreen(context, AllLaunchesScreen()),
           ),
           ListTile(
             title: const Text('All Missions'),
-            leading: Icon(Icons.all_inclusive),
+            leading: Icon(Icons.label),
           ),
           ListTile(
             title: const Text('Rockets'),
-            leading: Icon(Icons.build),
+            leading: Icon(Icons.label),
             onTap: () => showScreen(context, AllRocketsScreen()),
           ),
           ListTile(
