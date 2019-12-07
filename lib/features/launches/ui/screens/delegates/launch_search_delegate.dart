@@ -8,6 +8,21 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
   final List<Launch> launchData;
 
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return theme.copyWith(
+      primaryColor: Colors.white,
+      primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.grey),
+      primaryColorBrightness: Brightness.dark,
+      textTheme: theme.textTheme.copyWith(
+        title: TextStyle(fontWeight: FontWeight.normal),
+        
+      ),
+    );
+  }
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     // add a 'clear query' button
     return [

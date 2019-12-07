@@ -13,11 +13,9 @@ class _AllRocketsScreenState extends State<AllRocketsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('SpaceX Rockets'),
-        backgroundColor: Colors.black,
       ),
       drawer: const MyDrawer(),
       body: Container(
-        color: Colors.black87,
         child: const RocketList()
       )
     );

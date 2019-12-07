@@ -10,7 +10,6 @@ class AllEventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black87,
       child: ListView.builder(
         itemCount: events.length,
         itemBuilder: (context, i) {

@@ -63,7 +63,6 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Launches'),
-        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -79,7 +78,6 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   /// Builds the body of the scaffold by taking the current bloc state into account.
   Widget buildScaffoldBody() {
     return Container(
-      color: Colors.black87,
       child: BlocBuilder(
         bloc: _bloc,
         builder: (context, state) {

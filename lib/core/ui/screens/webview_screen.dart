@@ -21,7 +21,6 @@ class _WebviewScreenState extends State<WebviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.black,
       ),
       body: IndexedStack(
         index: _urlLoaded ? 0 : 1,

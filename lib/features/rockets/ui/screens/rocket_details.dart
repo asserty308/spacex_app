@@ -25,7 +25,6 @@ class _RocketDetailsScreenState extends State<RocketDetailsScreen> {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
-              backgroundColor: Colors.black,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 title: Text(widget.rocket.name),
@@ -37,7 +36,6 @@ class _RocketDetailsScreenState extends State<RocketDetailsScreen> {
           ];
         },
         body: Container(
-          color: Colors.black87,
           child: RocketInfo(rocket: widget.rocket,),
         )
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/widgets/pdf_screen.dart';
+import 'package:spacex_guide/core/ui/screens/pdf_screen.dart';
 import 'package:spacex_guide/core/utility/dialogs.dart';
 import 'package:spacex_guide/core/utility/files.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';

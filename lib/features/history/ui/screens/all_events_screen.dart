@@ -27,7 +27,6 @@ class _AllEventsScreenState extends State<AllEventsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Events'),
-        backgroundColor: Colors.black,
       ),
       drawer: const MyDrawer(),
       body: buildList(),

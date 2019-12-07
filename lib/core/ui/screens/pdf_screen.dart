@@ -11,7 +11,6 @@ class PDFScreen extends StatelessWidget {
     return PDFViewerScaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: Colors.black,
       ),
       path: filePath,
     );

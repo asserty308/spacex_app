@@ -10,22 +10,22 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: # ios icons
-  http: # calling api
-  data_connection_checker: # check network connection
-  intl: # date formatting
-  flutter_local_notifications: # scheduled notifications
-  cached_network_image: # image cache
-  path_provider:
-  flutter_full_pdf_viewer:
-  youtube_player_flutter:
-  carousel_slider:
-  flare_flutter: # flare animations
-  shared_preferences: # simple persistent store
-  flutter_launcher_icons: # app icon
-  flutter_bloc: # state management
-  url_launcher:
-  webview_flutter:
+  cupertino_icons: ^0.1.3
+  http: ^0.12.0+2 # calling api
+  data_connection_checker: ^0.3.4 # check network connection
+  intl: ^0.16.0 # date formatting
+  flutter_local_notifications: ^0.8.4+3 # scheduled notifications
+  cached_network_image: ^1.1.3 # image cache
+  path_provider: ^1.4.5
+  flutter_full_pdf_viewer: ^1.0.6
+  youtube_player_flutter: ^6.0.3+2
+  carousel_slider: ^1.3.1
+  flare_flutter: ^1.8.0 # flare animations
+  shared_preferences: ^0.5.4+8 # simple persistent store
+  flutter_launcher_icons: ^0.7.4 # app icon
+  flutter_bloc: ^2.1.1 # state management
+  url_launcher: ^5.2.7
+  webview_flutter: ^0.3.17
 
 dev_dependencies:
   flutter_test:

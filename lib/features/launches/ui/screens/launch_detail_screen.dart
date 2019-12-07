@@ -31,7 +31,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
-              backgroundColor: Colors.black,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 title: Text(
@@ -45,7 +44,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
           ];
         },
         body: Container(
-          color: Colors.black87,
           child: LaunchInfo(
             launch: widget._launch,
           ),

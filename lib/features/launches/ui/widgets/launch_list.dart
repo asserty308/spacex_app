@@ -4,7 +4,11 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown_card.
 import 'package:spacex_guide/features/launches/ui/widgets/launch_list_tile.dart';
 
 class LaunchList extends StatelessWidget {
-  const LaunchList({this.launches, this.showNextLaunch});
+  const LaunchList({
+    Key key,
+    this.launches, 
+    this.showNextLaunch
+  }) : super(key: key);
 
   final List<Launch> launches;
   final bool showNextLaunch;

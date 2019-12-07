@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
@@ -28,8 +29,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SpaceX',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: defaultTheme,
       home: AllLaunchesScreen(),
     );
   }
