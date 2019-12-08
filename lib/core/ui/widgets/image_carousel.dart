@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 
 class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
@@ -32,7 +33,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
             child: CachedNetworkImage(
               imageUrl: imgUrl,
               fit: BoxFit.cover,
-              placeholder: (context, url) => Center(child: const CircularProgressIndicator()),
+              placeholder: (context, url) => MyProgressIndicator(),
               errorWidget: (context, url, error) => Center(
                 child: Text(
                   'No image available',

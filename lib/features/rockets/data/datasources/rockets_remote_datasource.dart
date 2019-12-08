@@ -10,4 +10,10 @@ class RocketsRemoteDatasource extends SpaceXApi {
     response.forEach((rocket) => list.add(Rocket.fromJSON(rocket)));
     return list;
   }
+
+  /// Calls the rockets/id endpoint endpoint on the SpaceX api.
+  Future<Rocket> getRocket(String id) async {
+    final response = await fetchJSON('rockets/$id');
+    return Rocket.fromJSON(response);
+  }
 }

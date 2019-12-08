@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
+import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/core/utility/notifications.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
@@ -82,7 +83,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
         bloc: _bloc,
         builder: (context, state) {
           if (state is AllLaunchesEmpty || state is AllLaunchesLoading) {
-            return Center(child: const CircularProgressIndicator(),);
+            return MyProgressIndicator();
           }
 
           if (state is AllLaunchesLoaded) {

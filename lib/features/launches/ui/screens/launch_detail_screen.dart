@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
+import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -18,10 +20,18 @@ class LaunchDetailScreen extends StatefulWidget {
 class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<String> _imageUrls = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // run 'afterFirstlayout' after first build()
+    WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstlayout(context));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final imageUrls = widget._launch?.flickrImages ?? [];
-
     return Scaffold(
       key: _scaffoldKey,
       body: NestedScrollView(
@@ -37,7 +47,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
                   widget._launch?.missionName,
                 ),
                 background: ImageCarousel(
-                  imageUrls: imageUrls,
+                  imageUrls: _imageUrls,
                 ),
               ),
             )
@@ -50,5 +60,25 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
         )
       ),
     );
+  }
+
+  void afterFirstlayout(BuildContext context) {
+    // show search when showing screen
+    loadImages();
+  }
+
+  Future<void> loadImages() async {
+    _imageUrls = widget._launch?.flickrImages ?? [];
+
+    if (_imageUrls.isEmpty) {
+      final response = await RocketsRepository().getRocket(widget._launch.rocket.id);
+      
+      if (response is Rocket) {
+        _imageUrls = response.flickrImages;
+      }
+    }
+
+    setState(() {
+    });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
+import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/features/history/bloc/all_events_bloc.dart';
 import 'package:spacex_guide/features/history/bloc/all_events_events.dart';
 import 'package:spacex_guide/features/history/bloc/all_events_states.dart';
@@ -44,7 +45,7 @@ class _AllEventsScreenState extends State<AllEventsScreen> {
       bloc: _bloc,
       builder: (context, state) {
         if (state is AllEventsEmpty || state is AllEventsLoading) {
-          return Center(child: const CircularProgressIndicator(),);
+          return MyProgressIndicator();
         }
 
         if (state is AllEventsLoaded) {

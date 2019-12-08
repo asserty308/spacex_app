@@ -13,7 +13,17 @@ class RocketsRepository {
       return AppErrorNoNetwork();
     }
 
-    final rockets = _remoteDatasource.getAllRockets();
-    return rockets;
+    return _remoteDatasource.getAllRockets();
+  }
+
+  Future<dynamic> getRocket(String id) async {
+    final connected = await NetworkInfo.isConnected;
+
+    if (!connected) {
+      // TODO: Offline handling (local datasource with cached data)
+      return AppErrorNoNetwork();
+    }
+
+    return _remoteDatasource.getRocket(id);
   }
 }

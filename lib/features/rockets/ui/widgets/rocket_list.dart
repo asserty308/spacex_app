@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/features/rockets/bloc/all_rockets_bloc.dart';
 import 'package:spacex_guide/features/rockets/bloc/all_rockets_events.dart';
 import 'package:spacex_guide/features/rockets/bloc/all_rockets_states.dart';
@@ -30,7 +31,7 @@ class _RocketListState extends State<RocketList> {
       bloc: _bloc,
       builder: (context, state) {
         if (state is AllRocketsEmpty || state is AllRocketsLoading) {
-          return Center(child: const CircularProgressIndicator(),);
+          return MyProgressIndicator();
         }
 
         if (state is AllRocketsLoaded) {
