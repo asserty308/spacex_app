@@ -23,7 +23,6 @@ class AllLaunchesScreen extends StatefulWidget {
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllLaunchesBloc();
-  var _launchData = <Launch>[];
 
   @override
   void initState() {
@@ -87,13 +86,11 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
           }
 
           if (state is AllLaunchesLoaded) {
-            _launchData = state.launches;
-
             // Schedule notifications for all upcoming launches
-            scheduleReminders(context, _launchData);
+            scheduleReminders(context, allLaunchesData);
 
             return LaunchList(
-              launches: _launchData,
+              launches: allLaunchesData,
               showNextLaunch: true,
             );
           }
@@ -122,7 +119,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     showSearch<Launch>(
       context: context,
       delegate: LaunchSearchDelegate(
-        launchData: _launchData,
+        launchData: allLaunchesData,
       ),
     );
   }

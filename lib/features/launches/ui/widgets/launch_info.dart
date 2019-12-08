@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/text_card.dart';
+import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions.dart';
+import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 
 import 'launch_countdown_card.dart';
 
@@ -17,7 +19,7 @@ class LaunchInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        !launch.isUpcoming() ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch),
+        !launch.upcoming ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch),
         ListTile(
           title: const Text(
             'Date',

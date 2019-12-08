@@ -1,7 +1,10 @@
 import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_states.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 import 'package:bloc/bloc.dart';
+
+var allLaunchesData = <Launch>[];
 
 class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
   final _repo = LaunchRepository();
@@ -15,8 +18,8 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
       yield AllLaunchesLoading();
 
       try {
-        final launches = await _repo.getAllLaunches();
-        yield AllLaunchesLoaded(launches);
+        allLaunchesData = await _repo.getAllLaunches();
+        yield AllLaunchesLoaded(/*allLaunchesData*/);
       } catch (_) {
         yield AllLaunchesError();
       }

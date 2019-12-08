@@ -16,12 +16,13 @@ class Launch {
     this.youtubeID,
     this.rocket,
     this.flickrImages,
+    this.upcoming,
   });
 
   int flightNumber;
   DateTime launchDate;
   String missionName, details, tentativeMaxPrecision;
-  bool isTentative, launchSuccess;
+  bool isTentative, launchSuccess, upcoming;
   String missionPatch, presskit, videoLink, youtubeID;
   Rocket rocket;
   List<String> flickrImages;
@@ -47,11 +48,8 @@ class Launch {
       videoLink: links['video_link'],
       youtubeID: links['youtube_id'],
       flickrImages: List<String>.from(images),
+      upcoming: json['upcoming'],
     );
-  }
-  
-  bool isUpcoming() {
-    return launchDate.isAfter(DateTime.now());
   }
 
   /// Converts the unix timestamp of the launch to a human readable string.

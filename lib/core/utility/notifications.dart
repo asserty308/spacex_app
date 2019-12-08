@@ -5,7 +5,7 @@ import 'package:spacex_guide/main.dart';
 
 /// Schedules a notification for all upcoming launches
 Future<void> scheduleReminders(BuildContext context, List<Launch> launches) async {
-  final upcoming = launches.where((l) => l.isUpcoming()).toList();
+  final upcoming = launches.where((l) => l.upcoming).toList();
 
   for (final launch in upcoming) {
     await _scheduleLaunchReminder(context, launch);

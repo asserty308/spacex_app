@@ -22,9 +22,7 @@ class RocketCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: InkWell(
-        onTap: () {
-          showScreen(context, RocketDetailsScreen(rocket: rocket));
-        },
+        onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
         child: Column(
           children: <Widget>[
             CachedNetworkImage(
