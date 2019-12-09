@@ -39,8 +39,8 @@ class _RocketListState extends State<RocketList> {
         }
 
         if (state is AllRocketsError) {
-          return Center(
-            child: const Text(
+          return const Center(
+            child: Text(
               'Something went wrong. Please try again later',
               style: TextStyle(
                 color: Colors.white,

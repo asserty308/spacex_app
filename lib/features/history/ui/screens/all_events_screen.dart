@@ -53,8 +53,8 @@ class _AllEventsScreenState extends State<AllEventsScreen> {
         }
 
         if (state is AllEventsError) {
-          return Center(
-            child: const Text(
+          return const Center(
+            child: Text(
               'Something went wrong. Please try again later',
               style: TextStyle(
                 color: Colors.white,

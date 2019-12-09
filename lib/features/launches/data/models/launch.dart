@@ -17,13 +17,14 @@ class Launch {
     this.rocket,
     this.flickrImages,
     this.upcoming,
+    this.launchSiteName,
   });
 
   int flightNumber;
   DateTime launchDate;
   String missionName, details, tentativeMaxPrecision;
   bool isTentative, launchSuccess, upcoming;
-  String missionPatch, presskit, videoLink, youtubeID;
+  String missionPatch, presskit, videoLink, youtubeID, launchSiteName;
   Rocket rocket;
   List<String> flickrImages;
 
@@ -49,6 +50,7 @@ class Launch {
       youtubeID: links['youtube_id'],
       flickrImages: List<String>.from(images),
       upcoming: json['upcoming'],
+      launchSiteName: json['launch_site']['site_name']
     );
   }
 

@@ -35,7 +35,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               fit: BoxFit.cover,
               placeholder: (context, url) => MyProgressIndicator(),
               errorWidget: (context, url, error) => Center(
-                child: Text(
+                child: const Text(
                   'No image available',
                   style: TextStyle(
                     color: Colors.white,

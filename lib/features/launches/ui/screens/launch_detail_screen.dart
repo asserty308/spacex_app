@@ -42,10 +42,6 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                title: Text(
-                  widget._launch?.missionName,
-                ),
                 background: ImageCarousel(
                   imageUrls: _imageUrls,
                 ),
