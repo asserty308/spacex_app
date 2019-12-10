@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_list.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
 
 class LaunchSearchDelegate extends SearchDelegate<Launch> {
   LaunchSearchDelegate({this.launchData});

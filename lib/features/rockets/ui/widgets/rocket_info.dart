@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
-import 'package:spacex_guide/core/ui/widgets/text_card.dart';
 import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_list_tile.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketInfo extends StatelessWidget {
@@ -33,7 +32,36 @@ class RocketInfo extends StatelessWidget {
 
     return ListView(
       children: <Widget>[
-        TextCard(text: rocket.description,),
+        ListTile(
+          title: Text(
+            rocket.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+            child: Text(
+              rocket.description,
+              style: const TextStyle(
+                  color: Colors.white,
+                  height: 1.2,
+                  fontSize: 16,
+                ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
+          child: Text(
+            'Launches',
+            style: Theme.of(context).textTheme.subhead.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
         Theme(
           data: defaultTheme.copyWith(
             accentColor: Colors.white, // arrow color when expanded

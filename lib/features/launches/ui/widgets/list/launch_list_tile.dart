@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_avatar.dart';
 
 class LaunchListTile extends StatelessWidget {
   const LaunchListTile({
@@ -28,15 +29,7 @@ class LaunchListTile extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      leading: CircleAvatar(
-        child: launch.missionPatch == null ? Text(
-          '${launch.flightNumber}',
-          style: const TextStyle(color: Colors.white),
-        ) : CachedNetworkImage(
-          imageUrl: launch.missionPatch,
-        ),
-        backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
-      ),
+      leading: LaunchListAvatar(launch: launch,),
       trailing: Icon(
         Icons.arrow_forward_ios,
         color: Colors.white30,
