@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/core/ui/screens/pdf_screen.dart';
 import 'package:spacex_guide/core/utility/dialogs.dart';
+import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -30,22 +32,19 @@ class LaunchDetailActions extends StatelessWidget {
   }
 
   Future<void> showPresskit(BuildContext context) async {
-    if (launch.presskit == null || launch.presskit.isEmpty || !launch.presskit.endsWith('.pdf')) {
+    if (launch.presskit == null || launch.presskit.isEmpty) {
       showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
       return;
     }
 
-    if (await url_launcher.canLaunch(launch.presskit)) {
-      await url_launcher.launch(launch.presskit);
-      return;
-    }
+    //if (await url_launcher.canLaunch(launch.presskit)) {
+    //  await url_launcher.launch(launch.presskit));
+    //}
 
-    //final file = await createFileFromUrl(launch.presskit);
-
-    /*showScreen(context, PDFScreen(
+    showScreen(context, PDFScreen(
       title: '${launch.missionName} Presskit', 
-      filePath: file.path
-    ));*/
+      url: launch.presskit
+    ));
   }
 
   Future<void> playVideo(BuildContext context) async {
@@ -59,7 +58,6 @@ class LaunchDetailActions extends StatelessWidget {
 
     if (await url_launcher.canLaunch(url)) {
       await url_launcher.launch(url);
-      return;
     }
 
     // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
