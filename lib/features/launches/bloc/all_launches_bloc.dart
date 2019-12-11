@@ -18,7 +18,11 @@ class AllLaunchesBloc extends Bloc<AllLaunchesEvent, AllLaunchesState> {
       yield AllLaunchesLoading();
 
       try {
-        allLaunchesData = await _repo.getAllLaunches();
+        if (allLaunchesData.isEmpty) {
+          // only load once when the app starts because it is unlikely that 
+          // data is updated on the api while the app is running
+          allLaunchesData = await _repo.getAllLaunches();
+        }
         yield AllLaunchesLoaded(/*allLaunchesData*/);
       } catch (_) {
         yield AllLaunchesError();

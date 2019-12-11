@@ -15,8 +15,8 @@ void main() {
     const failText = 'This tests "test can fail" condition.';
 
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MaterialApp(
-      home: const TextCard(
+    await tester.pumpWidget(const MaterialApp(
+      home: TextCard(
         text: testText,
       ),
     ));

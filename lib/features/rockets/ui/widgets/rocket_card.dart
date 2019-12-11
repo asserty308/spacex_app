@@ -44,7 +44,7 @@ class RocketCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
                     child: Icon(

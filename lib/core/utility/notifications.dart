@@ -18,8 +18,8 @@ Future<void> _scheduleLaunchReminder(BuildContext context, Launch launch) async 
   }
 
   final launchDate = launch.launchDate;
-  final schedule2hr = launchDate.subtract(Duration(hours: 2));
-  final schedule15min = launchDate.subtract(Duration(minutes: 15));
+  final schedule2hr = launchDate.subtract(const Duration(hours: 2));
+  final schedule15min = launchDate.subtract(const Duration(minutes: 15));
 
   // Schedule notification and show snackbar
 

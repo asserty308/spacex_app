@@ -22,7 +22,7 @@ class LaunchList extends StatelessWidget {
         itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
         itemBuilder: (context, i) {
           if (i == 0 && nextLaunch != null) {
-            return LaunchCountdownCard(launch: nextLaunch);
+            return LaunchCountdownCard(launch: nextLaunch, showLaunchOnTap: true,);
           }
 
           final launch = nextLaunch == null ? launches[i] : launches[i - 1];

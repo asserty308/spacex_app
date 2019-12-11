@@ -8,9 +8,11 @@ class LaunchCountdownCard extends StatelessWidget {
   const LaunchCountdownCard({
     Key key,
     @required this.launch,
+    this.showLaunchOnTap,
   }) : super(key: key);
 
   final Launch launch;
+  final bool showLaunchOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,13 @@ class LaunchCountdownCard extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () => showScreen(context, LaunchDetailScreen(launch)),
+          onTap: () { 
+            if (!showLaunchOnTap) {
+              return;
+            }
+            
+            showScreen(context, LaunchDetailScreen(launch)); 
+          },
         ),
       ),
     );

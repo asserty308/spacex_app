@@ -16,7 +16,7 @@ class LaunchInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        !launch.upcoming ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch),
+        !launch.upcoming ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
         const SizedBox(height: 8,),
         ListTile(
           title: Text(

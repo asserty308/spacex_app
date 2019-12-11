@@ -50,7 +50,7 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
 
   /// Update every second
   void startUpdate() {
-    final duration = Duration(seconds: 1);
+    const duration = Duration(seconds: 1);
     _launchTimer = Timer.periodic(duration, (timer) {
       setCountdownText();
     });

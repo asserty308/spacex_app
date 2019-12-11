@@ -35,7 +35,7 @@ class RocketInfo extends StatelessWidget {
         ListTile(
           title: Text(
             rocket.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

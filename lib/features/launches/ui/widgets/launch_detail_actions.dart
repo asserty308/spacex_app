@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/screens/pdf_screen.dart';
 import 'package:spacex_guide/core/utility/dialogs.dart';
-import 'package:spacex_guide/core/utility/files.dart';
-import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class LaunchDetailActions extends StatelessWidget {
   const LaunchDetailActions({
@@ -39,12 +35,17 @@ class LaunchDetailActions extends StatelessWidget {
       return;
     }
 
-    final file = await createFileFromUrl(launch.presskit);
+    if (await url_launcher.canLaunch(launch.presskit)) {
+      await url_launcher.launch(launch.presskit);
+      return;
+    }
 
-    showScreen(context, PDFScreen(
+    //final file = await createFileFromUrl(launch.presskit);
+
+    /*showScreen(context, PDFScreen(
       title: '${launch.missionName} Presskit', 
       filePath: file.path
-    ));
+    ));*/
   }
 
   Future<void> playVideo(BuildContext context) async {
@@ -62,7 +63,7 @@ class LaunchDetailActions extends StatelessWidget {
     }
 
     // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
-    final _controller = YoutubePlayerController(
+    /*final _controller = YoutubePlayerController(
         initialVideoId: launch.youtubeID,
         flags: const YoutubePlayerFlags(
             autoPlay: true,
@@ -86,6 +87,6 @@ class LaunchDetailActions extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         backgroundColor: Colors.transparent,
       ),
-    );
+    );*/
   }
 }

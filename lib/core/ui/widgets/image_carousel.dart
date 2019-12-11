@@ -22,8 +22,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
     return CarouselSlider(
       viewportFraction: 1.0, // make image use the full screen width
       autoPlay: true,
-      autoPlayInterval: Duration(seconds: 5),
-      pauseAutoPlayOnTouch: Duration(seconds: 5),
+      autoPlayInterval: const Duration(seconds: 5),
+      pauseAutoPlayOnTouch: const Duration(seconds: 5),
       enlargeCenterPage: false,
       enableInfiniteScroll: widget.imageUrls.length > 1, // disable scroll when only one image available
       items: mapFromUrls(
@@ -34,8 +34,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
               imageUrl: imgUrl,
               fit: BoxFit.cover,
               placeholder: (context, url) => MyProgressIndicator(),
-              errorWidget: (context, url, error) => Center(
-                child: const Text(
+              errorWidget: (context, url, error) => const Center(
+                child: Text(
                   'No image available',
                   style: TextStyle(
                     color: Colors.white,
