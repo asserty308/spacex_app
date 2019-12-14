@@ -37,10 +37,6 @@ class MyDrawer extends StatelessWidget {
             onTap: () => showScreen(context, AllLaunchesScreen()),
           ),
           ListTile(
-            title: const Text('All Missions'),
-            leading: Icon(Icons.label),
-          ),
-          ListTile(
             title: const Text('Rockets'),
             leading: Icon(Icons.label),
             onTap: () => showScreen(context, AllRocketsScreen()),
