@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
+import 'package:spacex_guide/core/ui/widgets/error_message.dart';
 import 'package:spacex_guide/features/history/ui/widgets/all_events_list.dart';
 
 class AllEventsScreen extends StatefulWidget {
@@ -22,15 +23,8 @@ class _AllEventsScreenState extends State<AllEventsScreen> {
   }
 
   Widget buildList() {
-    return globalHistoryData.isNotEmpty ? AllEventsList(events: globalHistoryData,) : Center(
-      child: Text(
-        'Something went wrong. Please try again later',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+    return globalHistoryData.isNotEmpty ? AllEventsList(events: globalHistoryData,) : const ErrorMessage(
+      message: 'Unable to load history. Please try again later',
     );
   }
 }

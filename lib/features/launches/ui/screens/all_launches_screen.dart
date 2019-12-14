@@ -29,7 +29,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     super.initState();
 
     // start fetching launches immediately
-    _bloc.add(GetAllData());
+    //_bloc.add(GetAllData());
   }
   
   @override
@@ -52,6 +52,8 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   Widget buildLaunchAnimation() {
     return LaunchAnimation(
       onFinished: () {
+        _bloc.add(GetAllData());
+        
         setState(() {
           _showSplash = false;
         });
@@ -71,12 +73,15 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
         ],
       ),
       drawer: const MyDrawer(),
-      body: buildScaffoldBody(),
+      body: globalLaunchData.isEmpty ? buildWithBloc() : LaunchList(
+        launches: globalLaunchData,
+        showNextLaunch: true,
+      ),
     );
   }
 
   /// Builds the body of the scaffold by taking the current bloc state into account.
-  Widget buildScaffoldBody() {
+  Widget buildWithBloc() {
     return Container(
       child: BlocBuilder(
         bloc: _bloc,
