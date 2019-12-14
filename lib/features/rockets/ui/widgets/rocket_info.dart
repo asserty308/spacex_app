@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
-import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
@@ -15,7 +15,7 @@ class RocketInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // filter all launches to find the current rocket's launch history - show latest launch first
-    final previousLaunches = allLaunchesData.where((l) => l.rocket.id == rocket.id && !l.upcoming).toList().reversed;
+    final previousLaunches = globalLaunchData.where((l) => l.rocket.id == rocket.id && !l.upcoming).toList().reversed;
 
     final previousList = <Widget>[];
     for (final l in previousLaunches) {
@@ -23,7 +23,7 @@ class RocketInfo extends StatelessWidget {
     }
 
     // filter all launches to find the current rocket's upcoming launches - show next launch first
-    final upcomingLaunches = allLaunchesData.where((l) => l.rocket.id == rocket.id && l.upcoming).toList();
+    final upcomingLaunches = globalLaunchData.where((l) => l.rocket.id == rocket.id && l.upcoming).toList();
 
     final upcomingList = <Widget>[];
     for (final l in upcomingLaunches) {

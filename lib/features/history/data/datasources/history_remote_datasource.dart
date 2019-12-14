@@ -3,7 +3,7 @@ import 'package:spacex_guide/features/history/data/models/history.dart';
 
 class LaunchRemoteDatasource extends SpaceXApi {
   /// Calls the history endpoint endpoint on the SpaceX api.
-  Future<dynamic> getAllEvents() async {
+  Future<List<History>> getAllEvents() async {
     final response = await fetchJSON('history/');
 
     final list = <History>[];

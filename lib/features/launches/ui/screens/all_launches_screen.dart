@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/core/utility/notifications.dart';
-import 'package:spacex_guide/features/launches/bloc/all_launches_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/all_launches_events.dart';
-import 'package:spacex_guide/features/launches/bloc/all_launches_states.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_animation.dart';
@@ -22,14 +22,14 @@ class AllLaunchesScreen extends StatefulWidget {
 }
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
-  final _bloc = AllLaunchesBloc();
+  final _bloc = AllDataBloc();
 
   @override
   void initState() {
     super.initState();
 
     // start fetching launches immediately
-    _bloc.add(GetAllLaunches());
+    _bloc.add(GetAllData());
   }
   
   @override
@@ -81,21 +81,21 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
       child: BlocBuilder(
         bloc: _bloc,
         builder: (context, state) {
-          if (state is AllLaunchesEmpty || state is AllLaunchesLoading) {
+          if (state is AllDataEmpty || state is AllDataLoading) {
             return MyProgressIndicator();
           }
 
-          if (state is AllLaunchesLoaded) {
+          if (state is AllDataLoaded) {
             // Schedule notifications for all upcoming launches
-            scheduleReminders(context, allLaunchesData);
+            scheduleReminders(context, globalLaunchData);
 
             return LaunchList(
-              launches: allLaunchesData,
+              launches: globalLaunchData,
               showNextLaunch: true,
             );
           }
 
-          if (state is AllLaunchesError) {
+          if (state is AllDataError) {
             return const Center(
               child: Text(
                 'Something went wrong. Please try again later',
@@ -119,7 +119,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
     showSearch<Launch>(
       context: context,
       delegate: LaunchSearchDelegate(
-        launchData: allLaunchesData,
+        launchData: globalLaunchData,
       ),
     );
   }

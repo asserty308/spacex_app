@@ -1,11 +1,11 @@
-import 'package:spacex_guide/core/error/error.dart';
 import 'package:spacex_guide/core/network/network_info.dart';
 import 'package:spacex_guide/features/launches/data/datasources/launch_remote_datasource.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchRepository {
   final _remoteDatasource = LaunchRemoteDatasource();
 
-  Future<dynamic> getAllLaunches() async {
+  Future<List<Launch>> getAllLaunches() async {
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
@@ -17,12 +17,12 @@ class LaunchRepository {
     return launches;
   }
 
-  Future<dynamic> getLaunchWithId(int id) async {
+  Future<Launch> getLaunchWithId(int id) async {
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
       // TODO: Offline handling (local datasource with cached data)
-      return AppErrorNoNetwork();
+      throw Exception('App is not connected to the internet');
     }
 
     final launches = await _remoteDatasource.getLaunchWithId(id);
