@@ -25,8 +25,11 @@ class RocketCard extends StatelessWidget {
         onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
         child: Column(
           children: <Widget>[
-            CachedNetworkImage(
-              imageUrl: rocket.flickrImages[0],
+            Hero(
+              tag: '${rocket.id}Hero',
+              child: CachedNetworkImage(
+                imageUrl: rocket.flickrImages[0],
+              ),
             ),
             Container(
               height: 75,

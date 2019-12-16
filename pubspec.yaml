@@ -1,7 +1,7 @@
 name: spacex_guide
 description: SpaceX App made with flutter.
 
-version: 0.1.8+18
+version: 0.1.9+19
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -15,7 +15,7 @@ dependencies:
   data_connection_checker: # check network connection
   intl: # date formatting
   flutter_local_notifications: # scheduled notifications
-  cached_network_image: ^2.0.0-rc.1 # image cache
+  cached_network_image: ^2.0.0-rc.1
   path_provider:
   flutter_full_pdf_viewer:
   #youtube_player_flutter: 
