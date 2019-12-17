@@ -23,14 +23,6 @@ class AllLaunchesScreen extends StatefulWidget {
 
 class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   final _bloc = AllDataBloc();
-
-  @override
-  void initState() {
-    super.initState();
-
-    // start fetching launches immediately
-    //_bloc.add(GetAllData());
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -52,6 +44,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
   Widget buildLaunchAnimation() {
     return LaunchAnimation(
       onFinished: () {
+        // loading data here makes the animation more performant
         _bloc.add(GetAllData());
         
         setState(() {

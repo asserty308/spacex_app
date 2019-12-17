@@ -16,10 +16,10 @@ class ImageCarousel extends StatefulWidget {
 }
 
 class _ImageCarouselState extends State<ImageCarousel> {
-
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
+      height: 1000, // set big height to make the images fit inside the given space without bottom border
       viewportFraction: 1.0, // make image use the full screen width
       autoPlay: true,
       autoPlayInterval: const Duration(seconds: 5),
@@ -27,25 +27,30 @@ class _ImageCarouselState extends State<ImageCarousel> {
       enlargeCenterPage: false,
       enableInfiniteScroll: widget.imageUrls.length > 1, // disable scroll when only one image available
       items: mapFromUrls(
-        widget.imageUrls, (index, imgUrl) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            child: CachedNetworkImage(
-              imageUrl: imgUrl,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => MyProgressIndicator(),
-              errorWidget: (context, url, error) => const Center(
-                child: Text(
-                  'No image available',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                )
-              ),
-            ),
-          );
+        widget.imageUrls, 
+        (index, imgUrl) {
+          return buildImageContainer(context, imgUrl);
         },
       )
+    );
+  }
+
+  Container buildImageContainer(BuildContext context, imgUrl) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: CachedNetworkImage(
+        imageUrl: imgUrl,
+        fit: BoxFit.cover,
+        placeholder: (context, url) => MyProgressIndicator(),
+        errorWidget: (context, url, error) => const Center(
+          child: Text(
+            'No image available',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          )
+        ),
+      ),
     );
   }
 
