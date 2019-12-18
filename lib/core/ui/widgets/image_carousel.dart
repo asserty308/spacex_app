@@ -19,7 +19,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      height: 1000, // set big height to make the images fit inside the given space without bottom border
+      height: double.infinity, // set big height to make the images fit inside the given space without bottom border
       viewportFraction: 1.0, // make image use the full screen width
       autoPlay: true,
       autoPlayInterval: const Duration(seconds: 5),

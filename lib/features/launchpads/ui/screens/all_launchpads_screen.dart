@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
+import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_list.dart';
 
 class AllLaunchpadsScreen extends StatefulWidget {
   @override
@@ -14,6 +15,9 @@ class _AllLaunchpadsScreenState extends State<AllLaunchpadsScreen> {
         title: const Text('All Launchpads'),
       ),
       drawer: const MyDrawer(),
+      body: Container(
+        child: const LaunchpadList(),
+      )
     );
   }
 }
