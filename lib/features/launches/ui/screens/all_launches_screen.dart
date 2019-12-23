@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
+import 'package:spacex_guide/core/ui/widgets/center_text.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/core/utility/notifications.dart';
@@ -65,7 +66,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
           ),
         ],
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: globalLaunchData.isEmpty ? buildWithBloc() : LaunchList(
         launches: globalLaunchData,
         showNextLaunch: true,
@@ -94,14 +95,12 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
           }
 
           if (state is AllDataError) {
-            return const Center(
-              child: Text(
-                'Something went wrong. Please try again later',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
+            return CenterText(
+              'Something went wrong. Please try again later',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
               ),
             );
           }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_carousel.dart';
-import 'package:spacex_guide/features/rockets/ui/widgets/rocket_list.dart';
 
 class AllRocketsScreen extends StatefulWidget {
   @override
@@ -15,7 +14,7 @@ class _AllRocketsScreenState extends State<AllRocketsScreen> {
       appBar: AppBar(
         title: const Text('SpaceX Rockets'),
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: Container(
         child: RocketCarousel()
       )

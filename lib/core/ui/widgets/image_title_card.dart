@@ -21,18 +21,18 @@ class ImageTitleCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)
       ),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        child: Column(
+        child: Stack(
           children: <Widget>[
             Container(height: 250, child: mainWidget),
             Container(
-              height: 75,
-              color: Colors.teal,
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+              height: 250,
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       title,
                       style: const TextStyle(
@@ -41,18 +41,9 @@ class ImageTitleCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 24,
-                      color: Colors.white,
-                    ),
                   )
-                ],
-              )
+                ),
+              ),
             ),
           ]
         ),

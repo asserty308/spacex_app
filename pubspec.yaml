@@ -1,7 +1,7 @@
 name: spacex_guide
 description: SpaceX App made with flutter.
 
-version: 0.2.0+20
+version: 0.2.2+22
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -11,14 +11,13 @@ dependencies:
     sdk: flutter
 
   cupertino_icons:
-  http: # calling api
+  http: # call api
   data_connection_checker: # check network connection
   intl: # date formatting
   flutter_local_notifications: # scheduled notifications
   cached_network_image: ^2.0.0-rc.1
   path_provider:
   flutter_full_pdf_viewer:
-  #youtube_player_flutter: 
   carousel_slider: 
   flare_flutter: # flare animations
   shared_preferences: # simple persistent store
