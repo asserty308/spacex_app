@@ -35,28 +35,28 @@ class RocketInfo extends StatelessWidget {
         ListTile(
           title: Text(
             rocket.name,
-            style: const TextStyle(
+            style: Theme.of(context).textTheme.display1.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
           subtitle: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
             child: Text(
               rocket.description,
               style: const TextStyle(
-                  color: Colors.white,
-                  height: 1.2,
-                  fontSize: 16,
-                ),
+                color: Colors.white,
+                height: 1.3,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
-        Padding(
+        previousList.isEmpty && upcomingList.isEmpty ? Container() : Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
           child: Text(
             'Launches',
-            style: Theme.of(context).textTheme.subhead.copyWith(
+            style: Theme.of(context).textTheme.headline.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

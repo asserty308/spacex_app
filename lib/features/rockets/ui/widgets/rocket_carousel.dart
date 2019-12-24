@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/center_text.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
+
+bool shouldReloadRocketCarousel = false;
 
 class RocketCarousel extends StatefulWidget {
   @override
@@ -35,6 +38,16 @@ class _RocketCarouselState extends State<RocketCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    // update state when popping back from rocket details to make the pages appear correctly
+    if (shouldReloadRocketCarousel) {
+      shouldReloadRocketCarousel = false;
+
+      // wait for previous setState to finish
+      Future.delayed(const Duration(milliseconds: 1), () {
+        afterFirstLayout(context);
+      });
+    }
+
     return Container(
       child: PageView.builder(
         onPageChanged: (value) {
@@ -50,7 +63,6 @@ class _RocketCarouselState extends State<RocketCarousel> {
     );
   }
 
-  // TODO: Find a way to call this when popping from rocket details
   void afterFirstLayout(BuildContext context) {
     // on the first render, the pageController.page is null
     setState(() {});
@@ -60,11 +72,6 @@ class _RocketCarouselState extends State<RocketCarousel> {
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        Future.delayed(const Duration(microseconds: 1), () {
-          // update state when popping back from rocket details
-          afterFirstLayout(context);
-        });
-        
         // calculate the height of each page
         // the current page should be larger than the other pages
         double value = 1.0;
@@ -103,8 +110,8 @@ class _RocketCarouselState extends State<RocketCarousel> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.network(
-            rocket.flickrImages[0],
+          CachedNetworkImage(
+            imageUrl: rocket.flickrImages[0],
             fit: BoxFit.cover,
           ),
           Container(

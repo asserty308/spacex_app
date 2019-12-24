@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
-import 'package:spacex_guide/core/ui/widgets/center_text.dart';
+import 'package:spacex_guide/core/ui/widgets/default_texts.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_card.dart';
 
@@ -17,14 +17,7 @@ class _LaunchpadListState extends State<LaunchpadList> {
   
   @override
   Widget build(BuildContext context) {
-    return globalLaunchpadData.isNotEmpty ? buildList(globalLaunchpadData) : CenterText(
-      'Something went wrong. Please try again later',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    return globalLaunchpadData.isNotEmpty ? buildList(globalLaunchpadData) : DefaultScreenError();
   }
 
   Widget buildList(List<Launchpad> launchpads) {
