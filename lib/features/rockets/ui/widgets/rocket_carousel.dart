@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/center_text.dart';
@@ -12,15 +11,14 @@ class RocketCarousel extends StatefulWidget {
 }
 
 class _RocketCarouselState extends State<RocketCarousel> {
-  PageController controller;
-  int currentpage = 0;
-  bool viewIsReady = false; 
+  PageController _controller;
+  int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-    controller = PageController(
-      initialPage: currentpage,
+    _controller = PageController(
+      initialPage: _currentPage,
       keepPage: false,
       viewportFraction: 0.825, // width each page can use (relative to the parent)
     );
@@ -31,7 +29,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -41,11 +39,11 @@ class _RocketCarouselState extends State<RocketCarousel> {
       child: PageView.builder(
         onPageChanged: (value) {
           setState(() {
-            currentpage = value;
+            _currentPage = value;
           });
         },
         pageSnapping: true,
-        controller: controller,
+        controller: _controller,
         itemCount: golbalRocketData.length,
         itemBuilder: (context, index) => builder(context, index)
       ),
@@ -60,17 +58,18 @@ class _RocketCarouselState extends State<RocketCarousel> {
 
   Widget builder(BuildContext context, int index) {
     return AnimatedBuilder(
-      animation: controller,
+      animation: _controller,
       builder: (context, child) {
         Future.delayed(const Duration(microseconds: 1), () {
           // update state when popping back from rocket details
           afterFirstLayout(context);
         });
         
+        // calculate the height of each page
+        // the current page should be larger than the other pages
         double value = 1.0;
-
-        if (controller.position.haveDimensions) {
-          value = controller.page - index;
+        if (_controller.position.haveDimensions) {
+          value = _controller.page - index;
           value = (1 - (value.abs() * .3)).clamp(0.0, 1.0);
         }
 
@@ -80,7 +79,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
     );
   }
 
-  GestureDetector buildRocketPage(BuildContext context, Rocket rocket, double value) {
+  Widget buildRocketPage(BuildContext context, Rocket rocket, double value) {
     return GestureDetector(
       onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
       child: Center(
@@ -92,8 +91,9 @@ class _RocketCarouselState extends State<RocketCarousel> {
     );
   }
 
-  Card buildRocketCard(Rocket rocket) {
+  Widget buildRocketCard(Rocket rocket) {
     return Card(
+      color: Colors.transparent,
       margin: const EdgeInsets.all(8.0),
       elevation: 1.0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -103,7 +103,10 @@ class _RocketCarouselState extends State<RocketCarousel> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          CachedNetworkImage(imageUrl: rocket.flickrImages[0], fit: BoxFit.cover,),
+          Image.network(
+            rocket.flickrImages[0],
+            fit: BoxFit.cover,
+          ),
           Container(
             color: const Color.fromARGB(20, 0, 0, 0),
           ),

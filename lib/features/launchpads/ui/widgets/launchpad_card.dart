@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:spacex_guide/core/ui/widgets/image_title_card.dart';
-import 'package:spacex_guide/core/utility/navigation.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
-import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 import 'package:latlong/latlong.dart';
 
 class LaunchpadCard extends StatelessWidget {

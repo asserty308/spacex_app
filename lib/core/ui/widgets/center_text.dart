@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CenterText extends StatelessWidget {
-  CenterText(
+  const CenterText(
     this.text, {this.style}
   );
 
-  String text;
-  TextStyle style;
+  final String text;
+  final TextStyle style;
 
   @override
   Widget build(BuildContext context) {

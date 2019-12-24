@@ -15,6 +15,7 @@ class ImageTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.transparent,
       elevation: 1.0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       margin: const EdgeInsets.all(8),
