@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/core/extensions/duration.dart';
 
 class LaunchCountdown extends StatefulWidget {
   const LaunchCountdown({
@@ -50,8 +51,7 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
 
   /// Update every second
   void startUpdate() {
-    const duration = Duration(seconds: 1);
-    _launchTimer = Timer.periodic(duration, (timer) {
+    _launchTimer = Timer.periodic(1.toSeconds(), (timer) {
       setCountdownText();
     });
   }

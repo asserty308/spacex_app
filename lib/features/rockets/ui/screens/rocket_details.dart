@@ -35,11 +35,8 @@ class _RocketDetailsScreenState extends State<RocketDetailsScreen> {
                 floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Hero(
-                    tag: '${widget.rocket.id}Hero',
-                    child: ImageCarousel(
-                      imageUrls: widget.rocket.flickrImages,
-                    ),
+                  background: ImageCarousel(
+                    imageUrls: widget.rocket.flickrImages,
                   ),
                 ),
               )

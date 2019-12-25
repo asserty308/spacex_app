@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/main.dart';
+import 'package:spacex_guide/core/extensions/duration.dart';
 
 /// Schedules a notification for all upcoming launches
 Future<void> scheduleReminders(BuildContext context, List<Launch> launches) async {
@@ -21,10 +22,8 @@ Future<void> _scheduleLaunchReminder(BuildContext context, Launch launch) async 
   }
 
   final launchDate = launch.launchDate;
-  final schedule2hr = launchDate.subtract(const Duration(hours: 2));
-  final schedule15min = launchDate.subtract(const Duration(minutes: 15));
-
-  // Schedule notification and show snackbar
+  final schedule2hr = launchDate.subtract(2.toHours());
+  final schedule15min = launchDate.subtract(15.toMinutes());
 
   final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
   final iOSDetails = IOSNotificationDetails();

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
+import 'package:spacex_guide/core/extensions/duration.dart';
 
 class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
@@ -22,8 +23,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
       height: double.infinity, // set big height to make the images fit inside the given space without bottom border
       viewportFraction: 1.0, // make image use the full screen width
       autoPlay: true,
-      autoPlayInterval: const Duration(seconds: 5),
-      pauseAutoPlayOnTouch: const Duration(seconds: 5),
+      autoPlayInterval: 5.toSeconds(),
+      pauseAutoPlayOnTouch: 5.toSeconds(),
       enlargeCenterPage: false,
       enableInfiniteScroll: widget.imageUrls.length > 1, // disable scroll when only one image available
       items: mapFromUrls(

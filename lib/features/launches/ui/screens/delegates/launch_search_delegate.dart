@@ -47,14 +47,10 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
   }
 
   @override
-  Widget buildResults(BuildContext context) {
-    return showSearchResults();
-  }
+  Widget buildResults(BuildContext context) => showSearchResults();
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    return showSearchResults();
-  }
+  Widget buildSuggestions(BuildContext context) => showSearchResults();
 
   Widget showSearchResults() {
     if (launchData == null || launchData.isEmpty) {

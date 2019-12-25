@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Returns the name of the list entered in the textfield
+/// Returns the text entered in the input field
 Future<String> showInputDialog({BuildContext context, String title, String inputHint, String initialText = '', String withError = ''}) async {
   String inputText;
 

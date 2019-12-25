@@ -20,9 +20,10 @@ class _RocketCarouselState extends State<RocketCarousel> {
   @override
   void initState() {
     super.initState();
+
     _controller = PageController(
       initialPage: _currentPage,
-      keepPage: false,
+      keepPage: true,
       viewportFraction: 0.825, // width each page can use (relative to the parent)
     );
 
@@ -80,13 +81,14 @@ class _RocketCarouselState extends State<RocketCarousel> {
           value = (1 - (value.abs() * .3)).clamp(0.0, 1.0);
         }
 
-        final rocket = golbalRocketData[index];
-        return buildRocketPage(context, rocket, value);
+        return buildRocketPage(context, index, value);
       },
     );
   }
 
-  Widget buildRocketPage(BuildContext context, Rocket rocket, double value) {
+  Widget buildRocketPage(BuildContext context, int index, double value) {
+    final rocket = golbalRocketData[index];
+    
     return GestureDetector(
       onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
       child: Center(
@@ -99,6 +101,39 @@ class _RocketCarouselState extends State<RocketCarousel> {
   }
 
   Widget buildRocketCard(Rocket rocket) {
+    final titleStyle = TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+      shadows: [
+        Shadow(
+          blurRadius: 2.0,
+          color: Colors.black26,
+          offset: const Offset(1.0, 1.0),
+        ),
+      ]
+    );
+
+    final stack = Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        // Background image
+        CachedNetworkImage(
+          imageUrl: rocket.flickrImages[0],
+          fit: BoxFit.cover,
+        ),
+        // Alpha layer
+        Container(
+          color: const Color.fromARGB(20, 0, 0, 0),
+        ),
+        // Title
+        CenterText(
+          rocket.name,
+          style: titleStyle,
+        ),
+      ]
+    );
+
     return Card(
       color: Colors.transparent,
       margin: const EdgeInsets.all(8.0),
@@ -107,33 +142,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16)
       ),
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          CachedNetworkImage(
-            imageUrl: rocket.flickrImages[0],
-            fit: BoxFit.cover,
-          ),
-          Container(
-            color: const Color.fromARGB(20, 0, 0, 0),
-          ),
-          CenterText(
-            rocket.name,
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              shadows: [
-                Shadow(
-                  blurRadius: 2.0,
-                  color: Colors.black26,
-                  offset: const Offset(1.0, 1.0),
-                ),
-              ]
-            ),
-          ),
-        ]
-      )
+      child: stack
     );
   }
 }
