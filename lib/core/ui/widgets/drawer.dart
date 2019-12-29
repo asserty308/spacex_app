@@ -18,7 +18,7 @@ class MyDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.black,
             ),
-            child: CenterText(
+            child: const CenterText(
               'SpaceX',
               style: TextStyle(
                 color: Colors.white,

@@ -10,7 +10,8 @@ class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
     builder: builder,
     maintainState: maintainState,
     settings: settings,
-    fullscreenDialog: fullscreenDialog);
+    fullscreenDialog: fullscreenDialog
+  );
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,

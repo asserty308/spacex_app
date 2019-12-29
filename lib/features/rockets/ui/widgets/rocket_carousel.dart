@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
-import 'package:spacex_guide/core/ui/widgets/center_text.dart';
 import 'package:spacex_guide/core/utility/navigation.dart';
-import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
+import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';
 
 bool shouldReloadRocketCarousel = false;
 
@@ -74,75 +72,29 @@ class _RocketCarouselState extends State<RocketCarousel> {
       animation: _controller,
       builder: (context, child) {
         // calculate the height of each page
-        // the current page should be larger than the other pages
-        double value = 1.0;
+        // the current page should be larger than its direct neigbors (70% of main height)
+        double heightFactor = 1.0;
         if (_controller.position.haveDimensions) {
-          value = _controller.page - index;
-          value = (1 - (value.abs() * .3)).clamp(0.0, 1.0);
+          heightFactor = _controller.page - index;
+          heightFactor = (1 - (heightFactor.abs() * .3)).clamp(0.0, 1.0);
         }
 
-        return buildRocketPage(context, index, value);
+        return buildRocketPage(context, index, heightFactor);
       },
     );
   }
 
-  Widget buildRocketPage(BuildContext context, int index, double value) {
+  Widget buildRocketPage(BuildContext context, int index, double heightFactor) {
     final rocket = golbalRocketData[index];
     
     return GestureDetector(
       onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
       child: Center(
         child: SizedBox(
-          height: Curves.easeOut.transform(value) * (MediaQuery.of(context).size.height * 0.8),
-          child: buildRocketCard(rocket)
+          height: Curves.easeOut.transform(heightFactor) * (MediaQuery.of(context).size.height * 0.8),
+          child: RocketCard(rocket: rocket),
         ),
       ),
-    );
-  }
-
-  Widget buildRocketCard(Rocket rocket) {
-    final titleStyle = TextStyle(
-      fontSize: 36,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-      shadows: [
-        Shadow(
-          blurRadius: 2.0,
-          color: Colors.black26,
-          offset: const Offset(1.0, 1.0),
-        ),
-      ]
-    );
-
-    final stack = Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        // Background image
-        CachedNetworkImage(
-          imageUrl: rocket.flickrImages[0],
-          fit: BoxFit.cover,
-        ),
-        // Alpha layer
-        Container(
-          color: const Color.fromARGB(20, 0, 0, 0),
-        ),
-        // Title
-        CenterText(
-          rocket.name,
-          style: titleStyle,
-        ),
-      ]
-    );
-
-    return Card(
-      color: Colors.transparent,
-      margin: const EdgeInsets.all(8.0),
-      elevation: 1.0,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16)
-      ),
-      child: stack
     );
   }
 }

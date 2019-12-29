@@ -4,7 +4,7 @@ import 'package:spacex_guide/core/ui/widgets/center_text.dart';
 class DefaultScreenError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CenterText(
+    return const CenterText(
       'Something went wrong. Please try again later',
       style: TextStyle(
         color: Colors.white,
