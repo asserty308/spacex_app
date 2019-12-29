@@ -1,12 +1,9 @@
-//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
-SharedPreferences sharedPrefs;
 
 void main() => runApp(MyApp());
 
@@ -21,8 +18,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     initLocalNotifications();
-    initSharedPrefs();
-    //initCrashlytics();
   }
 
   @override
@@ -60,13 +55,4 @@ class _MyAppState extends State<MyApp> {
   Future onSelectNotification(String payload) async {
     print('Did select notification with payload $payload');
   }
-
-  Future<void> initSharedPrefs() async {
-    sharedPrefs = await SharedPreferences.getInstance();
-  }
-
-  /*void initCrashlytics() {
-    // Pass all uncaught errors from the framework to Crashlytics.
-    FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  }*/
 }
