@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
+import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
               });
             },
           ),
-          MyProgressIndicator(),
+          CenterProgressIndicator(),
         ]
       ),
     );

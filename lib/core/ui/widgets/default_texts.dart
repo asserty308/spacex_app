@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/ui/widgets/center_text.dart';
+import 'package:flutter_core/ui/widgets/center_text.dart';
 
 class DefaultScreenError extends StatelessWidget {
   @override

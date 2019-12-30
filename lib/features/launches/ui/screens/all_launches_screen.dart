@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
 import 'package:spacex_guide/core/ui/widgets/default_texts.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
-import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/core/utility/notifications.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
@@ -81,7 +81,7 @@ class _AllLaunchesScreenState extends State<AllLaunchesScreen> {
         bloc: _bloc,
         builder: (context, state) {
           if (state is AllDataEmpty || state is AllDataLoading) {
-            return MyProgressIndicator();
+            return CenterProgressIndicator();
           }
 
           if (state is AllDataLoaded) {

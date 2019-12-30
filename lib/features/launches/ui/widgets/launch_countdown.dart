@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/core/extensions/duration.dart';
+import 'package:flutter_core/utility/extensions/int_duration.dart';
 
 class LaunchCountdown extends StatefulWidget {
   const LaunchCountdown({

@@ -26,6 +26,9 @@ dependencies:
   webview_flutter:
   flutter_map:
 
+  flutter_core:
+    path: '../flutter_core/'
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

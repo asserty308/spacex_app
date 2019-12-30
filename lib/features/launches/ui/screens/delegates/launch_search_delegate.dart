@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
-import 'package:spacex_guide/core/ui/widgets/progress_indicator.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
 
@@ -54,7 +54,7 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
 
   Widget showSearchResults() {
     if (launchData == null || launchData.isEmpty) {
-      return MyProgressIndicator();
+      return CenterProgressIndicator();
     }
 
     final lowerQuery = query.toLowerCase();
