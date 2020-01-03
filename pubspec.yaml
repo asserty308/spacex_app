@@ -9,6 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_core:
+    git:
+      url: git://github.com/asserty308/flutter_core.git
 
   cupertino_icons:
   http: # call api
@@ -25,9 +29,6 @@ dependencies:
   url_launcher:
   webview_flutter:
   flutter_map:
-
-  flutter_core:
-    path: '../flutter_core/'
 
 dev_dependencies:
   flutter_test:
