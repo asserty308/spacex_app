@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
@@ -18,10 +17,8 @@ class LaunchListAvatar extends StatelessWidget {
     );
 
     return CircleAvatar(
-      child: launch.missionPatch == null ? text : CachedNetworkImage(
-        imageUrl: launch.missionPatch,
-        placeholder: (context, url) => text,
-        errorWidget: (context, url, error) => text,
+      child: launch.missionPatch == null ? text : Image.network(
+        launch.missionPatch,
       ),
       backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
     );

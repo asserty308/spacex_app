@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/ui/dialogs.dart';
-import 'package:flutter_core/utility/routing/routing.dart';
+import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/core/ui/screens/pdf_screen.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';

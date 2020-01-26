@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/utility/routing/routing.dart';
+import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';

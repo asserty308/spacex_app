@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
@@ -39,18 +38,9 @@ class _ImageCarouselState extends State<ImageCarousel> {
   Container buildImageContainer(BuildContext context, imgUrl) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: imgUrl,
+      child: Image.network(
+        imgUrl,
         fit: BoxFit.cover,
-        placeholder: (context, url) => CenterProgressIndicator(),
-        errorWidget: (context, url, error) => const Center(
-          child: Text(
-            'No image available',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          )
-        ),
       ),
     );
   }

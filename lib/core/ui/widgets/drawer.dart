@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_core/routing/routing.dart';
 import 'package:flutter_core/ui/widgets/center_text.dart';
-import 'package:flutter_core/utility/routing/routing.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';

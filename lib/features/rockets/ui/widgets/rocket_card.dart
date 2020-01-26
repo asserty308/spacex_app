@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core/ui/widgets/center_text.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
@@ -38,8 +37,8 @@ class RocketCard extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           // Background image
-          CachedNetworkImage(
-            imageUrl: rocket.flickrImages[0],
+          Image.network(
+            rocket.flickrImages[0],
             fit: BoxFit.cover,
           ),
           // Alpha layer

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/utility/routing/routing.dart';
+import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/core/utility/routing.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';

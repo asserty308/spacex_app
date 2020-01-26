@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/utility/routing/routing.dart';
+import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/core/ui/screens/webview_screen.dart';
 
 void showWebView(BuildContext context, String url, String title) {
