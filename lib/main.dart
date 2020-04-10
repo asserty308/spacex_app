@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     globalLocalNotifications = FlutterLocalNotificationsPlugin();
 
     // Platform specific setup
-    const androidSettings = AndroidInitializationSettings('notification_icon');
+    const androidSettings = AndroidInitializationSettings('ic_launcher');
     const iosSettings = IOSInitializationSettings();
     const settings = InitializationSettings(androidSettings, iosSettings);
 

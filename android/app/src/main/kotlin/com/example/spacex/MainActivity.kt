@@ -1,4 +1,4 @@
-package com.asserty.spacex_guide
+package com.example.spacex
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
