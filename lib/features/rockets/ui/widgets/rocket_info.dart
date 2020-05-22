@@ -35,7 +35,7 @@ class RocketInfo extends StatelessWidget {
         ListTile(
           title: Text(
             rocket.name,
-            style: Theme.of(context).textTheme.display1.copyWith(
+            style: Theme.of(context).textTheme.headline4.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -56,7 +56,7 @@ class RocketInfo extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
           child: Text(
             'Launches',
-            style: Theme.of(context).textTheme.headline.copyWith(
+            style: Theme.of(context).textTheme.headline5.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

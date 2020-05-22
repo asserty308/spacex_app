@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:flutter_core/utility/extensions/int_duration.dart';
 
 class ImageCarousel extends StatefulWidget {
@@ -19,13 +18,15 @@ class _ImageCarouselState extends State<ImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      height: double.infinity, // set big height to make the images fit inside the given space without bottom border
-      viewportFraction: 1.0, // make image use the full screen width
-      autoPlay: true,
-      autoPlayInterval: 5.toSeconds(),
-      pauseAutoPlayOnTouch: 5.toSeconds(),
-      enlargeCenterPage: false,
-      enableInfiniteScroll: widget.imageUrls.length > 1, // disable scroll when only one image available
+      options: CarouselOptions(
+        height: double.infinity, // set big height to make the images fit inside the given space without bottom border
+        viewportFraction: 1.0, // make image use the full screen width
+        autoPlay: true,
+        autoPlayInterval: 5.toSeconds(),
+        pauseAutoPlayOnTouch: true,
+        enlargeCenterPage: false,
+        enableInfiniteScroll: widget.imageUrls.length > 1,
+      ),
       items: mapFromUrls(
         widget.imageUrls, 
         (index, imgUrl) {

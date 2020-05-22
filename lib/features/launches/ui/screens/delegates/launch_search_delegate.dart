@@ -16,7 +16,7 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
       primaryIconTheme: defaultTheme.primaryIconTheme.copyWith(color: Colors.white),
       primaryColorBrightness: Brightness.dark,
       textTheme: defaultTheme.textTheme.copyWith(
-        title: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+        headline6: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
       ),
       inputDecorationTheme: defaultTheme.inputDecorationTheme.copyWith(
         hintStyle: TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
