@@ -56,7 +56,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
         },
         pageSnapping: true,
         controller: _controller,
-        itemCount: golbalRocketData.length,
+        itemCount: globalRocketData.length,
         itemBuilder: (context, index) => builder(context, index)
       ),
     );
@@ -85,7 +85,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
   }
 
   Widget buildRocketPage(BuildContext context, int index, double heightFactor) {
-    final rocket = golbalRocketData[index];
+    final rocket = globalRocketData[index];
     
     return GestureDetector(
       onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),

@@ -25,9 +25,9 @@ Future<void> _scheduleLaunchReminder(BuildContext context, Launch launch) async 
   final schedule2hr = launchDate.subtract(2.toHours());
   final schedule15min = launchDate.subtract(15.toMinutes());
 
-  final androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
-  final iOSDetails = IOSNotificationDetails();
-  final notificationDetails = NotificationDetails(androidDetails, iOSDetails);
+  const androidDetails = AndroidNotificationDetails('launch_reminder', 'Launch Reminder', 'Reminds you about a SpaceX launch');
+  const iOSDetails = IOSNotificationDetails();
+  const notificationDetails = NotificationDetails(androidDetails, iOSDetails);
 
   // both ids must differ but stay the same for each app launch
   var id2hr = int.tryParse('2${launch.flightNumber}');

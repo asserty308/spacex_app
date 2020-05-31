@@ -12,7 +12,7 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 
 // TODO: Provide as local datasource
 var globalLaunchData = <Launch>[];
-var golbalRocketData = <Rocket>[];
+var globalRocketData = <Rocket>[];
 var globalHistoryData = <History>[];
 var globalLaunchpadData = <Launchpad>[];
 
@@ -28,30 +28,23 @@ class AllDataBloc extends Bloc<AllDataEvent, AllDataState> {
   @override
   Stream<AllDataState> mapEventToState(AllDataEvent event) async* {
     if (event is GetAllData) {
-      yield AllDataLoading();
+      yield* _mapGetAllDataToState(event);
+    }
+  }
 
-      try {
-        if (globalLaunchData.isEmpty) {
-          globalLaunchData = await _launchRepo.getAllLaunches();
-        }
+  Stream<AllDataState> _mapGetAllDataToState(GetAllData event) async* {
+    yield AllDataLoading();
 
-        if (golbalRocketData.isEmpty) {
-          golbalRocketData = await _rocketRepo.getAllRockets();
-        }
+    try {
+      globalLaunchData = await _launchRepo.getAllLaunches();
+      globalRocketData = await _rocketRepo.getAllRockets();
+      globalHistoryData = await _historyRepo.getAllEvents();
+      globalLaunchpadData = await _launchpadRepo.getAllLaunchpads();
 
-        if (globalHistoryData.isEmpty) {
-          globalHistoryData = await _historyRepo.getAllEvents();
-        }
-
-        if (globalLaunchpadData.isEmpty) {
-          globalLaunchpadData = await _launchpadRepo.getAllLaunchpads();
-        }
-
-        yield AllDataLoaded();
-      } catch (e) {
-        print(e);
-        yield AllDataError();
-      }
+      yield AllDataStateLoaded();
+    } catch (e) {
+      print(e);
+      yield AllDataError();
     }
   }
 }

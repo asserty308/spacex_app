@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/routing/routing.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/widgets/center_text.dart';
-import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
-import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
-import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
-import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
+import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_bloc.dart';
+import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_events.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -28,24 +26,24 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('All Launches'),
+            title: const Text('Upcoming'),
             leading: Icon(Icons.label),
-            onTap: () => _showScreen(context, AllLaunchesScreen()),
+            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowUpcomingLaunches()),
           ),
           ListTile(
             title: const Text('Rockets'),
             leading: Icon(Icons.label),
-            onTap: () => _showScreen(context, AllRocketsScreen()),
+            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowRockets()),
           ),
           ListTile(
             title: const Text('Launchpads'),
             leading: Icon(Icons.location_on),
-            onTap: () => _showScreen(context, AllLaunchpadsScreen()),
+            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowLaunchpads()),
           ),
           ListTile(
             title: const Text('Historical Events'),
             leading: Icon(Icons.history),
-            onTap: () => _showScreen(context, AllEventsScreen()),
+            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowHistory()),
           ),
           ListTile(
             title: const Text('About SpaceX'),
@@ -58,13 +56,5 @@ class MyDrawer extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _showScreen(context, Widget screen) {
-    // close drawer
-    Navigator.pop(context);
-
-    // navigate to new screen
-    showScreen(context, screen);
   }
 }

@@ -1,12 +1,37 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
+import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_bloc.dart';
+import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_states.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
-import 'package:spacex_guide/features/launches/ui/screens/all_launches_screen.dart';
+import 'package:spacex_guide/core/utility/notifications.dart';
+import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
+import 'package:spacex_guide/features/launches/ui/screens/upcoming_launches_screen.dart';
+import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
+import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
+import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
 
 FlutterLocalNotificationsPlugin globalLocalNotifications;
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AppNavigationBloc>(
+          create: (BuildContext context) => AppNavigationBloc(),
+        ),
+        BlocProvider<AllDataBloc>(
+          create: (BuildContext context) => AllDataBloc(),
+        ),
+      ], 
+      child: MyApp()
+    )
+  );
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -19,6 +44,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     initLocalNotifications();
+    BlocProvider.of<AllDataBloc>(context).add(GetAllData());
   }
 
   @override
@@ -27,9 +53,49 @@ class _MyAppState extends State<MyApp> {
       title: 'SpaceX',
       debugShowCheckedModeBanner: false,
       theme: defaultTheme,
-      home: AllLaunchesScreen(),
+      home: _dataListener,
     );
   }
+
+  Widget get _dataListener => BlocListener<AllDataBloc, AllDataState>(
+    listener: (context, state) {
+      if (state is AllDataStateLoaded) {
+        // Schedule notifications for all upcoming launches
+        scheduleReminders(context, globalLaunchData);
+      }
+    },
+    child: _navigationBuilder,
+  );
+
+  Widget get _navigationBuilder => BlocBuilder<AppNavigationBloc, AppNavigationState>(
+    builder: (context, state) {
+      if (state is AppNavigationStateSplash) {
+        return SplashScreen();
+      }
+
+      if (state is AppNavigationStateUpcomingLaunches) {
+        return UpcomingLaunchesScreen();
+      }
+
+      if (state is AppNavigationStatePreviousLaunches) {
+        return Container();
+      }
+
+      if (state is AppNavigationStateHistory) {
+        return AllEventsScreen();
+      }
+
+      if (state is AppNavigationStateRockets) {
+        return AllRocketsScreen();
+      }
+
+      if (state is AppNavigationStateLaunchpads) {
+        return AllLaunchpadsScreen();
+      }
+
+      return Container();
+    },
+  );
 
   Future<void> initLocalNotifications() async {
     // do not use on web

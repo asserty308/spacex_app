@@ -30,21 +30,19 @@ class _ImageCarouselState extends State<ImageCarousel> {
       items: mapFromUrls(
         widget.imageUrls, 
         (index, imgUrl) {
-          return buildImageContainer(context, imgUrl);
+          return _imageContainer(imgUrl);
         },
       )
     );
   }
 
-  Container buildImageContainer(BuildContext context, imgUrl) {
-    return Container(
+  Widget _imageContainer(String imgUrl) => Container(
       width: MediaQuery.of(context).size.width,
       child: Image.network(
         imgUrl,
         fit: BoxFit.cover,
       ),
     );
-  }
 
   List<Widget> mapFromUrls(List list, Function handler) {
     final result = <Widget>[];
