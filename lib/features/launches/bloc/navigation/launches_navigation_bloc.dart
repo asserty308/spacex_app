@@ -3,11 +3,15 @@ import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigati
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_states.dart';
 
 class LaunchesNavigationBloc extends Bloc<LaunchesNavigationEvent, LaunchesNavigationState> {
+  final _eventHistory = <LaunchesNavigationEvent>[];
+
   @override
   LaunchesNavigationState get initialState => LaunchesNavigationStateUpcoming();
 
   @override
   Stream<LaunchesNavigationState> mapEventToState(LaunchesNavigationEvent event) async* {
+    _eventHistory.add(event);
+
     if (event is ShowUpcomingLaunches) {
       yield* _mapShowUpcomingLaunchesToState(event);
     }
@@ -31,6 +35,17 @@ class LaunchesNavigationBloc extends Bloc<LaunchesNavigationEvent, LaunchesNavig
 
   Stream<LaunchesNavigationState> _mapShowLaunchDetailsToState(ShowLaunchDetails event) async* {
     yield LaunchesNavigationStateDetails(event.launch);
+  }
+
+  void popState() {
+    _eventHistory.removeLast();
+
+    if (_eventHistory.isEmpty) {
+      add(ShowUpcomingLaunches());
+      return;
+    }
+
+    add(_eventHistory.last);
   }
 
 }

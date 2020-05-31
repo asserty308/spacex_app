@@ -5,6 +5,7 @@ import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_events.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_states.dart';
+import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 
@@ -27,7 +28,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _loadImages();
+    _bloc.add(LoadLaunchDetails(widget.launch));
   }
 
   @override
@@ -38,9 +39,15 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: _blocBuilder,
+    return WillPopScope(
+      child: Scaffold(
+        key: _scaffoldKey,
+        body: _blocBuilder,
+      ),
+      onWillPop: () async {
+        _dismissScreen();
+        return false;
+      },
     );
   }
 
@@ -68,6 +75,10 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
           expandedHeight: 200.0,
           floating: false,
           pinned: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => _dismissScreen(),
+          ),
           flexibleSpace: FlexibleSpaceBar(
             background: ImageCarousel(
               imageUrls: state.imageUrls,
@@ -85,7 +96,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
   // Function
 
-  void _loadImages() {
-    _bloc.add(LoadLaunchDetails(widget.launch));
+  void _dismissScreen() {
+    BlocProvider.of<LaunchesNavigationBloc>(context).popState();
   }
 }

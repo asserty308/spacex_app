@@ -12,7 +12,7 @@ class LaunchDetailsBloc extends Bloc<LaunchDetailsEvent, LaunchDetailsState> {
 
   @override
   Stream<LaunchDetailsState> mapEventToState(LaunchDetailsEvent event) async* {
-    if (state is LoadLaunchDetails) {
+    if (event is LoadLaunchDetails) {
       yield* _mapLoadLaunchDetailsToState(event);
     }
   }
