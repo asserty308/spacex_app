@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/upcoming/upcoming_launches_events.dart';
-import 'package:spacex_guide/features/launches/bloc/upcoming/upcoming_launches_states.dart';
+import 'package:spacex_guide/features/launches/bloc/upcoming_list/upcoming_launches_events.dart';
+import 'package:spacex_guide/features/launches/bloc/upcoming_list/upcoming_launches_states.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
 class UpcomingLaunchesBloc extends Bloc<UpcomingLaunchesEvent, UpcomingLaunchesState> {

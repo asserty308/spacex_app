@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:spacex_guide/core/ui/screens/app.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/main.dart';
 import 'package:flutter_core/utility/extensions/int_duration.dart';
 
 /// Schedules a notification for all upcoming launches

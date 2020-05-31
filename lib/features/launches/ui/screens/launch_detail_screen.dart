@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
+import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_bloc.dart';
+import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_events.dart';
+import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_states.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
-import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
 /// The next launch will be loaded when the parameter is null.
 class LaunchDetailScreen extends StatefulWidget {
-  const LaunchDetailScreen([this._launch]);
+  const LaunchDetailScreen(this.launch);
 
-  final Launch _launch;
+  final Launch launch;
 
   @override
   _LaunchDetailScreenState createState() => _LaunchDetailScreenState();
@@ -19,62 +22,70 @@ class LaunchDetailScreen extends StatefulWidget {
 
 class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<String> _imageUrls = [];
+  final _bloc = LaunchDetailsBloc();
 
   @override
   void initState() {
     super.initState();
+    _loadImages();
+  }
 
-    // run 'afterFirstlayout' after first build()
-    WidgetsBinding.instance.addPostFrameCallback((_) => afterFirstlayout(context));
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                background: ImageCarousel(
-                  imageUrls: _imageUrls,
-                ),
-              ),
-            )
-          ];
-        },
-        body: Container(
-          child: LaunchInfo(
-            launch: widget._launch,
-          ),
-        )
-      ),
+      body: _blocBuilder,
     );
   }
 
-  void afterFirstlayout(BuildContext context) {
-    // show search when showing screen
-    loadImages();
-  }
+  // Widget
 
-  Future<void> loadImages() async {
-    _imageUrls = widget._launch?.flickrImages ?? [];
-
-    if (_imageUrls.isEmpty) {
-      final response = await RocketsRepository().getRocket(widget._launch.rocket.id);
-      
-      if (response is Rocket) {
-        _imageUrls = response.flickrImages;
+  Widget get _blocBuilder => BlocBuilder(
+    bloc: _bloc,
+    builder: (context, state) {
+      if (state is LaunchDetailsStateLoading) {
+        return CenterProgressIndicator();
       }
-    }
 
-    setState(() {
-    });
+      if (state is LaunchDetailsStateLoaded) {
+        return _body(state);
+      }
+      
+      return Container();
+    },
+  );
+
+  Widget _body(LaunchDetailsStateLoaded state) => NestedScrollView(
+    headerSliverBuilder: (context, innerBoxIsScrolled) {
+      return <Widget>[
+        SliverAppBar(
+          expandedHeight: 200.0,
+          floating: false,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            background: ImageCarousel(
+              imageUrls: state.imageUrls,
+            ),
+          ),
+        )
+      ];
+    },
+    body: Container(
+      child: LaunchInfo(
+        launch: widget.launch,
+      ),
+    )
+  );
+
+  // Function
+
+  void _loadImages() {
+    _bloc.add(LoadLaunchDetails(widget.launch));
   }
 }

@@ -28,7 +28,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Upcoming'),
             leading: Icon(Icons.label),
-            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowUpcomingLaunches()),
+            onTap: () => BlocProvider.of<AppNavigationBloc>(context).add(ShowLaunchesModule()),
           ),
           ListTile(
             title: const Text('Rockets'),

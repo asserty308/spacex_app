@@ -10,10 +10,8 @@ class AppNavigationBloc extends Bloc<AppNavigationEvent, AppNavigationState> {
   Stream<AppNavigationState> mapEventToState(AppNavigationEvent event) async* {
     if (event is ShowSplash) {
       yield* _mapShowSplashToState(event);
-    } else if (event is ShowUpcomingLaunches) {
-      yield* _mapShowUpcomingLaunchesToState(event);
-    } else if (event is ShowPreviousLaunches) {
-      yield* _mapShowPreviousLaunchesToState(event);
+    } else if (event is ShowLaunchesModule) {
+      yield* _mapShowLaunchesModuleToState(event);
     } else if (event is ShowRockets) {
       yield* _mapShowRocketsToState(event);
     } else if (event is ShowHistory) {
@@ -25,12 +23,8 @@ class AppNavigationBloc extends Bloc<AppNavigationEvent, AppNavigationState> {
     yield AppNavigationStateSplash();
   }
 
-  Stream<AppNavigationState> _mapShowUpcomingLaunchesToState(ShowUpcomingLaunches event) async* {
-    yield AppNavigationStateUpcomingLaunches();
-  }
-
-  Stream<AppNavigationState> _mapShowPreviousLaunchesToState(ShowPreviousLaunches event) async* {
-    yield AppNavigationStatePreviousLaunches();
+  Stream<AppNavigationState> _mapShowLaunchesModuleToState(ShowLaunchesModule event) async* {
+    yield AppNavigationStateLaunches();
   }
 
   Stream<AppNavigationState> _mapShowRocketsToState(ShowRockets event) async* {

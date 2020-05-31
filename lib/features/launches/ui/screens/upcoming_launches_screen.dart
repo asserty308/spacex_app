@@ -4,9 +4,9 @@ import 'package:flutter_core/ui/dialogs.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
-import 'package:spacex_guide/features/launches/bloc/upcoming/upcoming_launches_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/upcoming/upcoming_launches_events.dart';
-import 'package:spacex_guide/features/launches/bloc/upcoming/upcoming_launches_states.dart';
+import 'package:spacex_guide/features/launches/bloc/upcoming_list/upcoming_launches_bloc.dart';
+import 'package:spacex_guide/features/launches/bloc/upcoming_list/upcoming_launches_events.dart';
+import 'package:spacex_guide/features/launches/bloc/upcoming_list/upcoming_launches_states.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
@@ -50,7 +50,7 @@ class _UpcomingLaunchesScreenState extends State<UpcomingLaunchesScreen> {
       if (state is UpcomingLaunchesStateError) {
         showOKDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
       }
-    }, 
+    },
     builder: (context, state) {
       if (state is UpcomingLaunchesStateLoading) {
         return CenterProgressIndicator();

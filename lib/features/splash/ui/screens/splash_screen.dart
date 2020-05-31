@@ -13,9 +13,9 @@ class SplashScreen extends StatelessWidget {
   // Widgets
 
   Widget _launchAnimation(BuildContext context) => LaunchAnimation(
-      onFinished: () {
-        // loading data when animation ended makes the animation more performant
-        BlocProvider.of<AppNavigationBloc>(context).add(ShowUpcomingLaunches());
-      },
-    );
+    onFinished: () {
+      // loading data when animation ended makes the animation more performant
+      BlocProvider.of<AppNavigationBloc>(context).add(ShowLaunchesModule());
+    },
+  );
 }

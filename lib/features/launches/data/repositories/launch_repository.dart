@@ -22,6 +22,10 @@ class LaunchRepository {
     return globalLaunchData.where((element) => element.upcoming).toList();
   }
 
+  List<Launch> getPreviousLaunches() {
+    return globalLaunchData.where((element) => !element.upcoming).toList();
+  }
+
   Future<Launch> getLaunchWithId(int id) async {
     final connected = await NetworkInfo.isConnected;
 
