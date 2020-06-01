@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_states.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
+import 'package:spacex_guide/features/launches/ui/screens/previous_launches_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/upcoming_launches_screen.dart';
 
 class LaunchesMasterScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class LaunchesMasterScreen extends StatelessWidget {
       }
 
       if (state is LaunchesNavigationStatePrevious) {
-        return Container();
+        return PreviousLaunchesScreen();
       }
 
       if (state is LaunchesNavigationStateDetails) {

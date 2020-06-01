@@ -13,18 +13,18 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
 
-class UpcomingLaunchesScreen extends StatefulWidget {
+class PreviousLaunchesScreen extends StatefulWidget {
   @override
-  _UpcomingLaunchesScreenState createState() => _UpcomingLaunchesScreenState();
+  _PreviousLaunchesScreenState createState() => _PreviousLaunchesScreenState();
 }
 
-class _UpcomingLaunchesScreenState extends State<UpcomingLaunchesScreen> {
+class _PreviousLaunchesScreenState extends State<PreviousLaunchesScreen> {
   final _bloc = LaunchListBloc();
 
   @override
   void initState() {
     super.initState();
-    _bloc.add(LoadUpcomingLaunches());
+    _bloc.add(LoadPreviousLaunches());
   }
 
   @override
@@ -39,15 +39,15 @@ class _UpcomingLaunchesScreenState extends State<UpcomingLaunchesScreen> {
   // Widgets
 
   Widget get _appBar => AppBar(
-    title: const Text('Upcoming Launches'),
+    title: const Text('Previous Launches'),
     actions: <Widget>[
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () => showLaunchSearch(context),
       ),
       IconButton(
-        icon: Icon(Icons.history),
-        onPressed: () => BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowPreviousLaunches()),
+        icon: Icon(Icons.local_activity),
+        onPressed: () => BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowUpcomingLaunches()),
       ),
     ],
   );
@@ -62,13 +62,6 @@ class _UpcomingLaunchesScreenState extends State<UpcomingLaunchesScreen> {
     builder: (context, state) {
       if (state is LaunchListStateLoading) {
         return CenterProgressIndicator();
-      }
-
-      if (state is LaunchListStateUpcomingLoaded) {
-        return LaunchList(
-          launches: state.launches,
-          showNextLaunch: true,
-        );
       }
 
       if (state is LaunchListStatePreviousLoaded) {

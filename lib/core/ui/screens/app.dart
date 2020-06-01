@@ -11,7 +11,6 @@ import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/core/utility/notifications.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
-import 'package:spacex_guide/features/launches/ui/screens/upcoming_launches_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
@@ -28,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    initLocalNotifications();
+    _initLocalNotifications();
     BlocProvider.of<AllDataBloc>(context).add(GetAllData());
   }
 
@@ -41,6 +40,8 @@ class _MyAppState extends State<MyApp> {
       home: _dataListener,
     );
   }
+
+  // Widgets
 
   Widget get _dataListener => BlocListener<AllDataBloc, AllDataState>(
     listener: (context, state) {
@@ -78,7 +79,7 @@ class _MyAppState extends State<MyApp> {
     },
   );
 
-  Future<void> initLocalNotifications() async {
+  Future<void> _initLocalNotifications() async {
     // do not use on web
     if (kIsWeb) {
       return;
@@ -93,19 +94,19 @@ class _MyAppState extends State<MyApp> {
 
     globalLocalNotifications.initialize(
       settings,
-      onSelectNotification: onSelectNotification,
+      onSelectNotification: _onSelectNotification,
     );
 
     // Fetch app launch details when the app was launced by a notification
     final launchDetails = await globalLocalNotifications.getNotificationAppLaunchDetails();
 
     if (launchDetails.didNotificationLaunchApp) {
-      onSelectNotification(launchDetails.payload);
+      _onSelectNotification(launchDetails.payload);
     }
   }
 
   /// Callback for both foreground and background
-  Future onSelectNotification(String payload) async {
+  Future<void> _onSelectNotification(String payload) async {
     print('Did select notification with payload $payload');
   }
 }
