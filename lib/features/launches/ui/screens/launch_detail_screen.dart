@@ -97,6 +97,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   // Function
 
   void _dismissScreen() {
-    BlocProvider.of<LaunchesNavigationBloc>(context).popState();
+    //BlocProvider.of<LaunchesNavigationBloc>(context).popState();
+    Navigator.of(context).pop();
   }
 }

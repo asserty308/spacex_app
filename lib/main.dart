@@ -4,6 +4,8 @@ import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_bloc.dart';
 import 'package:spacex_guide/core/ui/screens/app.dart';
 
+import 'features/launches/bloc/navigation/launches_navigation_bloc.dart';
+
 void main() {
   runApp(
     MultiBlocProvider(
@@ -13,6 +15,9 @@ void main() {
         ),
         BlocProvider<AllDataBloc>(
           create: (context) => AllDataBloc(),
+        ),
+        BlocProvider<LaunchesNavigationBloc>(
+          create: (context) => LaunchesNavigationBloc(),
         ),
       ], 
       child: MyApp()

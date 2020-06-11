@@ -16,10 +16,10 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
       primaryIconTheme: defaultTheme.primaryIconTheme.copyWith(color: Colors.white),
       primaryColorBrightness: Brightness.dark,
       textTheme: defaultTheme.textTheme.copyWith(
-        headline6: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+        headline6: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
       ),
       inputDecorationTheme: defaultTheme.inputDecorationTheme.copyWith(
-        hintStyle: TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
+        hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
       ),
     );
   }
@@ -29,7 +29,7 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
     // add a 'clear query' button
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -41,7 +41,7 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
   Widget buildLeading(BuildContext context) {
     // show a back button to close the search
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () => close(context, null),
     );
   }

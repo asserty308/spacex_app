@@ -23,7 +23,7 @@ class LaunchRepository {
   }
 
   List<Launch> getPreviousLaunches() {
-    return globalLaunchData.where((element) => !element.upcoming).toList();
+    return globalLaunchData.where((element) => !element.upcoming).toList().reversed.toList();
   }
 
   Future<Launch> getLaunchWithId(int id) async {
