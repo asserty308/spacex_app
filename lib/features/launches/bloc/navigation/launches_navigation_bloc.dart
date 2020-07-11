@@ -34,7 +34,7 @@ class LaunchesNavigationBloc extends Bloc<LaunchesNavigationEvent, LaunchesNavig
   }
 
   Stream<LaunchesNavigationState> _mapShowLaunchDetailsToState(ShowLaunchDetails event) async* {
-    yield LaunchesNavigationStateDetails(event.launch);
+    yield LaunchesNavigationStateDetails(event.navContext, event.launch);
   }
 
   void popState() {

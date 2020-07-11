@@ -18,8 +18,8 @@ class LaunchesMasterScreen extends StatelessWidget {
   Widget get _blocBuilder => BlocConsumer<LaunchesNavigationBloc, LaunchesNavigationState>(
     listener: (context, state) {
       if (state is LaunchesNavigationStateDetails) {
-        // TODO: showScreen is called directly inside LaunchListTile because popping the navigator does not work when called from here
-        //showScreen(context, LaunchDetailScreen(state.launch));
+        // TODO: showScreen does not word here - only when calling directly from the screen itself
+        Navigator.of(state.navContext).push(MaterialPageRoute(builder: (_) => LaunchDetailScreen(state.launch)));
       }
     },
     builder: (context, state) {

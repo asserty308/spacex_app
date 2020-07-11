@@ -54,7 +54,7 @@ class LaunchCountdownCard extends StatelessWidget {
               return;
             }
             
-            BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(launch));
+            BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
           },
         ),
       ),

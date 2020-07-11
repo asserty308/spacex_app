@@ -38,8 +38,8 @@ class LaunchListTile extends StatelessWidget {
         size: 18,
       ),
       onTap: () { 
-        //BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(launch));
-        showScreen(context, LaunchDetailScreen(launch));
+        BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
+        //showScreen(context, LaunchDetailScreen(launch));
       }
     );
   }

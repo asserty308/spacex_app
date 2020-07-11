@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/routing/routing.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/utility/routing.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
+import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
+import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_events.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
-import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
 
 class EventListTile extends StatelessWidget {
   const EventListTile({Key key, this.event}) : super(key: key);
@@ -102,6 +103,7 @@ class EventListTile extends StatelessWidget {
   Future<void> showLaunch(BuildContext context) async {
     final repo = LaunchRepository();
     final launch = await repo.getLaunchWithId(event.flightNumber);
-    showScreen(context, LaunchDetailScreen(launch));
+    //showScreen(context, LaunchDetailScreen(launch));
+    BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
   }
 }
