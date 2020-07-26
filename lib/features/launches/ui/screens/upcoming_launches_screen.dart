@@ -53,7 +53,7 @@ class _UpcomingLaunchesScreenState extends State<UpcomingLaunchesScreen> {
   );
 
   Widget get _bodyConsumer => BlocConsumer(
-    bloc: _bloc, 
+    cubit: _bloc, 
     listener: (context, state) {
       if (state is LaunchListStateError) {
         showOKDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');

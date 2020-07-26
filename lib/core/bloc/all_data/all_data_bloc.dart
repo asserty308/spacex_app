@@ -17,13 +17,12 @@ var globalHistoryData = <History>[];
 var globalLaunchpadData = <Launchpad>[];
 
 class AllDataBloc extends Bloc<AllDataEvent, AllDataState> {
+  AllDataBloc() : super(AllDataEmpty());
+
   final _launchRepo = LaunchRepository();
   final _rocketRepo = RocketsRepository();
   final _historyRepo = HistoryRepository();
   final _launchpadRepo = LaunchpadRepository();
-
-  @override
-  AllDataState get initialState => AllDataEmpty();
 
   @override
   Stream<AllDataState> mapEventToState(AllDataEvent event) async* {

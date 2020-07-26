@@ -3,8 +3,7 @@ import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_events.dart
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_states.dart';
 
 class AppNavigationBloc extends Bloc<AppNavigationEvent, AppNavigationState> {
-  @override
-  AppNavigationState get initialState => AppNavigationStateSplash();
+  AppNavigationBloc() : super(AppNavigationStateSplash());
 
   @override
   Stream<AppNavigationState> mapEventToState(AppNavigationEvent event) async* {

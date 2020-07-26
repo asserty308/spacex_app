@@ -4,10 +4,9 @@ import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_stat
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
 class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
-  final _repo = LaunchRepository();
+  LaunchListBloc() : super(LaunchListStateInitial());
 
-  @override
-  LaunchListState get initialState => LaunchListStateInitial();
+  final _repo = LaunchRepository();
 
   @override
   Stream<LaunchListState> mapEventToState(LaunchListEvent event) async* {

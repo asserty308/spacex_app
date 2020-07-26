@@ -54,7 +54,7 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
   // Widget
 
   Widget get _blocBuilder => BlocBuilder(
-    bloc: _bloc,
+    cubit: _bloc,
     builder: (context, state) {
       if (state is LaunchDetailsStateLoading) {
         return CenterProgressIndicator();
