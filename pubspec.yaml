@@ -18,7 +18,6 @@ dependencies:
   http: # call api
   data_connection_checker: # check network connection
   intl: # date formatting
-  flutter_local_notifications: # scheduled notifications
   path_provider:
   flutter_full_pdf_viewer:
   carousel_slider: 
@@ -28,6 +27,7 @@ dependencies:
   url_launcher:
   webview_flutter:
   flutter_map:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:

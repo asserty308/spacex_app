@@ -1,4 +1,4 @@
-import 'package:spacex_guide/core/network/network_info.dart';
+import 'package:spacex_guide/core/data/services/network_info.dart';
 import 'package:spacex_guide/features/rockets/data/datasources/rockets_remote_datasource.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 

@@ -1,21 +1,16 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_bloc.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_states.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
-import 'package:spacex_guide/core/utility/notifications.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
-
-FlutterLocalNotificationsPlugin globalLocalNotifications;
 
 class MyApp extends StatefulWidget {
   @override
@@ -23,11 +18,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _firebaseMessaging = FirebaseMessaging();
+
   @override
   void initState() {
     super.initState();
-
-    _initLocalNotifications();
+    initMessaging();
     BlocProvider.of<AllDataBloc>(context).add(GetAllData());
   }
 
@@ -37,21 +33,11 @@ class _MyAppState extends State<MyApp> {
       title: 'SpaceX',
       debugShowCheckedModeBanner: false,
       theme: defaultTheme,
-      home: _dataListener,
+      home: _navigationBuilder,
     );
   }
 
   // Widgets
-
-  Widget get _dataListener => BlocListener<AllDataBloc, AllDataState>(
-    listener: (context, state) {
-      if (state is AllDataStateLoaded) {
-        // Schedule notifications for all upcoming launches
-        scheduleReminders(context, globalLaunchData);
-      }
-    },
-    child: _navigationBuilder,
-  );
 
   Widget get _navigationBuilder => BlocBuilder<AppNavigationBloc, AppNavigationState>(
     builder: (context, state) {
@@ -79,34 +65,30 @@ class _MyAppState extends State<MyApp> {
     },
   );
 
-  Future<void> _initLocalNotifications() async {
-    // do not use on web
-    if (kIsWeb) {
-      return;
-    }
+  // Functions
 
-    globalLocalNotifications = FlutterLocalNotificationsPlugin();
-
-    // Platform specific setup
-    const androidSettings = AndroidInitializationSettings('ic_launcher');
-    const iosSettings = IOSInitializationSettings();
-    const settings = InitializationSettings(androidSettings, iosSettings);
-
-    globalLocalNotifications.initialize(
-      settings,
-      onSelectNotification: _onSelectNotification,
+  void initMessaging() {
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('onMessage: $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('onLaunch: $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('onResume: $message');
+      },
     );
+    
+    const iosSettings = IosNotificationSettings(sound: true, badge: true, alert: true, provisional: true);
+    _firebaseMessaging.requestNotificationPermissions(iosSettings);
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+      print('Settings registered: $settings');
+    });
 
-    // Fetch app launch details when the app was launced by a notification
-    final launchDetails = await globalLocalNotifications.getNotificationAppLaunchDetails();
-
-    if (launchDetails.didNotificationLaunchApp) {
-      _onSelectNotification(launchDetails.payload);
-    }
-  }
-
-  /// Callback for both foreground and background
-  Future<void> _onSelectNotification(String payload) async {
-    print('Did select notification with payload $payload');
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      print('Push Messaging token: $token');
+    });
   }
 }

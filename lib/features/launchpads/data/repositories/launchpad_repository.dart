@@ -1,4 +1,4 @@
-import 'package:spacex_guide/core/network/network_info.dart';
+import 'package:spacex_guide/core/data/services/network_info.dart';
 import 'package:spacex_guide/features/launchpads/data/datasource/launchpads_remote_datasource.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 

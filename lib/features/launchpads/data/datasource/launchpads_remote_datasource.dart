@@ -1,4 +1,4 @@
-import 'package:spacex_guide/core/api/spacex_api.dart';
+import 'package:spacex_guide/core/data/datasources/remote/spacex_api.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 
 class LaunchpadRemoteDatasource extends SpaceXApi {

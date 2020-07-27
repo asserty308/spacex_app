@@ -1,4 +1,4 @@
-import 'package:spacex_guide/core/api/spacex_api.dart';
+import 'package:spacex_guide/core/data/datasources/remote/spacex_api.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketsRemoteDatasource extends SpaceXApi {
