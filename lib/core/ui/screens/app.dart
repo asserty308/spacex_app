@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
-import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_bloc.dart';
-import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_states.dart';
+import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
@@ -39,7 +38,7 @@ class _MyAppState extends State<MyApp> {
 
   // Widgets
 
-  Widget get _navigationBuilder => BlocBuilder<AppNavigationBloc, AppNavigationState>(
+  Widget get _navigationBuilder => BlocBuilder<AppNavigationCubit, AppNavigationState>(
     builder: (context, state) {
       if (state is AppNavigationStateSplash) {
         return SplashScreen();
