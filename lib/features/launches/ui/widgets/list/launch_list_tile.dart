@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_events.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_avatar.dart';
 
 class LaunchListTile extends StatelessWidget {

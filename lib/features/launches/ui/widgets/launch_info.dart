@@ -44,7 +44,7 @@ class LaunchInfo extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-            launch.launchSiteName,
+            launch.launchSiteName ?? 'Unknown',
             style: const TextStyle(
               color: Colors.white,
               height: 1.2,

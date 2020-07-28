@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/routing/routing.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_states.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.dart';
@@ -18,7 +17,7 @@ class LaunchesMasterScreen extends StatelessWidget {
   Widget get _blocBuilder => BlocConsumer<LaunchesNavigationBloc, LaunchesNavigationState>(
     listener: (context, state) {
       if (state is LaunchesNavigationStateDetails) {
-        // TODO: showScreen does not word here - only when calling directly from the screen itself
+        // TODO: showScreen does not work here - only when calling directly from the screen itself
         Navigator.of(state.navContext).push(MaterialPageRoute(builder: (_) => LaunchDetailScreen(state.launch)));
       }
     },

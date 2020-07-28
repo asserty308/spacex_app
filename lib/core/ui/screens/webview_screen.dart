@@ -1,42 +1,45 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebviewScreen extends StatefulWidget {
-  const WebviewScreen({
-    this.initialUrl,
-    this.title,
-  });
+class WebviewScreen extends StatelessWidget {
+  WebviewScreen({
+    Key key, 
+    @required this.title,
+    @required this.initialUrl, 
+  }) : super(key: key);
 
-  final String initialUrl, title;
+  final String title, initialUrl;
 
-  @override
-  _WebviewScreenState createState() => _WebviewScreenState();
-}
-
-class _WebviewScreenState extends State<WebviewScreen> {
-  bool _urlLoaded = false;
+  final _controller = Completer<WebViewController>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: IndexedStack(
-        index: _urlLoaded ? 0 : 1,
-        children: <Widget>[
-          WebView(
-            initialUrl: widget.initialUrl,
-            onPageFinished: (_) {
-              setState(() {
-                _urlLoaded = true;
-              });
-            },
-          ),
-          CenterProgressIndicator(),
-        ]
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+    appBar: _appBar,
+    body: _body,
+  );
+
+  // Widgets
+
+  Widget get _appBar => AppBar(
+    title: Text(title),
+  );
+
+  Widget get _body => WebView(
+    initialUrl: initialUrl.replaceFirst('http://', 'https://'),
+    gestureNavigationEnabled: true,
+    onWebViewCreated: (webViewController) {
+      _controller.complete(webViewController);
+    },
+    onPageStarted: (url) {
+      print('$url loading');
+    },
+    onPageFinished: (url) {
+      print('$url finished loading');
+    },
+    onWebResourceError: (error) {
+      print('WebView error occured: $error');
+    },
+  );
 }
