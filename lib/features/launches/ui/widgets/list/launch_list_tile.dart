@@ -14,31 +14,38 @@ class LaunchListTile extends StatelessWidget {
   final Launch launch;
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        launch.missionName,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Text(
-        launch.formattedLaunchDate(),
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      leading: LaunchListAvatar(launch: launch,),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        color: Colors.white30,
-        size: 18,
-      ),
-      onTap: () { 
-        BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
-        //showScreen(context, LaunchDetailScreen(launch));
-      }
-    );
-  }
+  Widget build(BuildContext context) => ListTile(
+    title: _title,
+    subtitle: _subtitle,
+    leading: LaunchListAvatar(launch: launch,),
+    trailing: _trailing,
+    onTap: () => _onTap(context),
+  );
+
+  // Widgets
+
+  Widget get _title => Text(
+    launch.missionName,
+    style: const TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+
+  Widget get _subtitle => Text(
+    launch.formattedLaunchDate(),
+    style: const TextStyle(
+      color: Colors.white,
+    ),
+  );
+
+  Widget get _trailing => Icon(
+    Icons.arrow_forward_ios,
+    color: Colors.white30,
+    size: 18,
+  );
+
+  // Functions
+
+  void _onTap(BuildContext context) => BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
 }

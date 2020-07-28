@@ -6,8 +6,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.
 class LaunchList extends StatelessWidget {
   const LaunchList({
     Key key,
-    this.launches, 
-    this.showNextLaunch
+    @required this.launches, 
+    this.showNextLaunch = true,
   }) : super(key: key);
 
   final List<Launch> launches;
@@ -18,19 +18,25 @@ class LaunchList extends StatelessWidget {
     final nextLaunch = showNextLaunch ? getNextLaunch(launches) : null;
 
     return Container(
-      child: ListView.builder(
-        itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
-        itemBuilder: (context, i) {
-          if (i == 0 && nextLaunch != null) {
-            return LaunchCountdownCard(launch: nextLaunch, showLaunchOnTap: true,);
-          }
-
-          final launch = nextLaunch == null ? launches[i] : launches[i - 1];
-          return LaunchListTile(launch: launch);
-        },
-      ),
+      child: _listView(nextLaunch),
     );
   }
+
+  // Widgets
+
+  Widget _listView(Launch nextLaunch) => ListView.builder(
+    itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
+    itemBuilder: (context, i) {
+      if (i == 0 && nextLaunch != null) {
+        return LaunchCountdownCard(launch: nextLaunch, showLaunchOnTap: true,);
+      }
+
+      final launch = nextLaunch == null ? launches[i] : launches[i - 1];
+      return LaunchListTile(launch: launch);
+    },
+  );
+
+  // Functions
 
   /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
   Launch getNextLaunch(List<Launch> launches) {
