@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/ui/widgets/default_texts.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/history/ui/widgets/all_events_list.dart';

@@ -1,5 +1,3 @@
-import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_states.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
@@ -10,29 +8,24 @@ import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_rep
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 
+part 'all_data_state.dart';
+
 // TODO: Provide as local datasource
 var globalLaunchData = <Launch>[];
 var globalRocketData = <Rocket>[];
 var globalHistoryData = <History>[];
 var globalLaunchpadData = <Launchpad>[];
 
-class AllDataBloc extends Bloc<AllDataEvent, AllDataState> {
-  AllDataBloc() : super(AllDataEmpty());
+class AllDataCubit extends Cubit<AllDataState> {
+  AllDataCubit() : super(AllDataEmpty());
 
   final _launchRepo = LaunchRepository();
   final _rocketRepo = RocketsRepository();
   final _historyRepo = HistoryRepository();
   final _launchpadRepo = LaunchpadRepository();
 
-  @override
-  Stream<AllDataState> mapEventToState(AllDataEvent event) async* {
-    if (event is GetAllData) {
-      yield* _mapGetAllDataToState(event);
-    }
-  }
-
-  Stream<AllDataState> _mapGetAllDataToState(GetAllData event) async* {
-    yield AllDataLoading();
+  void getAllData() async {
+    emit(AllDataLoading());
 
     try {
       globalLaunchData = await _launchRepo.getAllLaunches();
@@ -40,10 +33,10 @@ class AllDataBloc extends Bloc<AllDataEvent, AllDataState> {
       globalHistoryData = await _historyRepo.getAllEvents();
       globalLaunchpadData = await _launchpadRepo.getAllLaunchpads();
 
-      yield AllDataStateLoaded();
+      emit(AllDataStateLoaded());
     } catch (e) {
       print(e);
-      yield AllDataError();
+      emit(AllDataError());
     }
   }
 }

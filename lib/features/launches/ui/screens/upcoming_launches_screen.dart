@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/dialogs.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_events.dart';

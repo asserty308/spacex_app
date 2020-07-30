@@ -1,8 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_events.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
@@ -23,18 +22,16 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initMessaging();
-    BlocProvider.of<AllDataBloc>(context).add(GetAllData());
+    BlocProvider.of<AllDataCubit>(context).getAllData();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SpaceX',
-      debugShowCheckedModeBanner: false,
-      theme: defaultTheme,
-      home: _navigationBuilder,
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    title: 'SpaceX',
+    debugShowCheckedModeBanner: false,
+    theme: defaultTheme,
+    home: _navigationBuilder,
+  );
 
   // Widgets
 

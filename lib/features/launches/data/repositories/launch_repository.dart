@@ -1,4 +1,4 @@
-import 'package:spacex_guide/core/bloc/all_data/all_data_bloc.dart';
+import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/data/services/network_info.dart';
 import 'package:spacex_guide/features/launches/data/datasources/launch_remote_datasource.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
