@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
@@ -64,6 +65,11 @@ class _MyAppState extends State<MyApp> {
   // Functions
 
   void initMessaging() {
+    if (kIsWeb) {
+      // Not supported on web
+      return;
+    }
+    
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('onMessage: $message');

@@ -59,32 +59,5 @@ class LaunchDetailActions extends StatelessWidget {
     if (await url_launcher.canLaunch(url)) {
       await url_launcher.launch(url);
     }
-
-    // TODO: Some videos throw error code 150 which means that the uploader didn't allow embedding.
-    /*final _controller = YoutubePlayerController(
-        initialVideoId: launch.youtubeID,
-        flags: const YoutubePlayerFlags(
-            autoPlay: true,
-        ),
-    );
-
-    final player = YoutubePlayer(
-      controller: _controller,
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.amber,
-      progressColors: ProgressBarColors(
-        playedColor: Colors.amber,
-        handleColor: Colors.amberAccent,
-      ),
-    );
-
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        content: player,
-        contentPadding: EdgeInsets.zero,
-        backgroundColor: Colors.transparent,
-      ),
-    );*/
   }
 }
