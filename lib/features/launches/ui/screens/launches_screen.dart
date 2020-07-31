@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/dialogs.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
+import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_events.dart';
@@ -20,21 +21,16 @@ class LaunchesScreen extends StatelessWidget {
 
   // Widgets
 
-  Widget _scaffold(BuildContext context) => Scaffold(
-    appBar: _appBar(context),
-    drawer: AppDrawer(),
-    body: _body,
-  );
-
-  Widget _appBar(BuildContext context) => AppBar(
+  Widget _scaffold(BuildContext context) => AppScaffold(
     title: _title,
-    actions: <Widget>[
+    actions: [
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () => showLaunchSearch(context),
       ),
       _toggleLaunchesButton,
     ],
+    child: _body,
   );
 
   Widget get _body => BlocConsumer<LaunchListBloc, LaunchListState>(
@@ -100,12 +96,10 @@ class LaunchesScreen extends StatelessWidget {
 
   // Functions
 
-  void showLaunchSearch(BuildContext context) {
-    showSearch<Launch>(
-      context: context,
-      delegate: LaunchSearchDelegate(
-        launchData: globalLaunchData,
-      ),
-    );
-  }
+  void showLaunchSearch(BuildContext context) => showSearch<Launch>(
+    context: context,
+    delegate: LaunchSearchDelegate(
+      launchData: globalLaunchData,
+    ),
+  );
 }

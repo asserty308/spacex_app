@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: const Text('Upcoming'),
+          title: const Text('Launches'),
           leading: Icon(Icons.label),
           onTap: () => BlocProvider.of<AppNavigationCubit>(context).showLaunches(),
         ),
