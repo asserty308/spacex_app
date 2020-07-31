@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_events.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown.dart';
 
@@ -70,6 +69,6 @@ class LaunchCountdownCard extends StatelessWidget {
       return;
     }
       
-    BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
+    BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
   }
 }

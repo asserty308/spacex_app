@@ -14,7 +14,7 @@ class _AllLaunchpadsScreenState extends State<AllLaunchpadsScreen> {
       appBar: AppBar(
         title: const Text('All Launchpads'),
       ),
-      drawer: MyDrawer(),
+      drawer: AppDrawer(),
       body: Container(
         child: const LaunchpadList(),
       )

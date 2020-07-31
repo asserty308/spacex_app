@@ -17,7 +17,7 @@ class _AllEventsScreenState extends State<AllEventsScreen> {
       appBar: AppBar(
         title: const Text('All Events'),
       ),
-      drawer: MyDrawer(),
+      drawer: AppDrawer(),
       body: buildList(),
     );
   }

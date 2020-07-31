@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/data/services/routing.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_events.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
 class EventListTile extends StatelessWidget {
@@ -12,56 +11,54 @@ class EventListTile extends StatelessWidget {
   final History event;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 1.0,
-      color: Colors.blueGrey,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      margin: const EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      ),
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              event.formattedDate('dd.MM.yyyy'),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16.0,
-              ),
+  Widget build(BuildContext context) => Card(
+    elevation: 1.0,
+    color: Colors.blueGrey,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    margin: const EdgeInsets.all(8),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10)
+    ),
+    child: Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            event.formattedDate('dd.MM.yyyy'),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 16.0,
             ),
           ),
-          Text(
-            event.title,
+        ),
+        Text(
+          event.title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            event.details,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0
+              fontSize: 16.0
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              event.details,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16.0
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: getCardButtons(context),
-          )
-        ]
-      )
-    );
-  }
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: getCardButtons(context),
+        )
+      ]
+    )
+  );
 
   /// Builds a list of buttons from the available data.
   /// Buttons can show the article, the wikipedia page or the launch details.
@@ -92,18 +89,13 @@ class EventListTile extends StatelessWidget {
     return list;
   }
 
-  Future<void> showArticle(BuildContext context) async {
-    showWebView(context, event.articleUrl, event.title);
-  }
-
-  Future<void> showWikipedia(BuildContext context) async {
-    showWebView(context, event.wikiUrl, event.title);
-  }
+  Future<void> showArticle(BuildContext context) async => showWebView(context, event.articleUrl, event.title);
+  
+  Future<void> showWikipedia(BuildContext context) async => showWebView(context, event.wikiUrl, event.title);
 
   Future<void> showLaunch(BuildContext context) async {
     final repo = LaunchRepository();
     final launch = await repo.getLaunchWithId(event.flightNumber);
-    //showScreen(context, LaunchDetailScreen(launch));
-    BlocProvider.of<LaunchesNavigationBloc>(context).add(ShowLaunchDetails(context, launch));
+    BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
   }
 }

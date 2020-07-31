@@ -14,8 +14,8 @@ class AppBlocProvider extends StatelessWidget {
       BlocProvider<AllDataCubit>(
         create: (context) => AllDataCubit(),
       ),
-      BlocProvider<LaunchesNavigationBloc>(
-        create: (context) => LaunchesNavigationBloc(),
+      BlocProvider<LaunchesNavigationCubit>(
+        create: (context) => LaunchesNavigationCubit(),
       ),
     ],
     child: child,

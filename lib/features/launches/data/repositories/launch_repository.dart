@@ -19,7 +19,9 @@ class LaunchRepository {
   }
 
   List<Launch> getUpcomingLaunches() {
-    return globalLaunchData.where((element) => element.upcoming).toList();
+    final launches = globalLaunchData.where((element) => element.upcoming).toList();
+    launches.sort((l1, l2) => l1.launchDate.compareTo(l2.launchDate));
+    return launches;
   }
 
   List<Launch> getPreviousLaunches() {

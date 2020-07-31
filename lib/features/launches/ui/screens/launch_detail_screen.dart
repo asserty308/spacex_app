@@ -5,7 +5,6 @@ import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_events.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_states.dart';
-import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 
@@ -96,9 +95,5 @@ class _LaunchDetailScreenState extends State<LaunchDetailScreen> {
 
   // Function
 
-  void _dismissScreen() {
-    // resume to the previous state and pop navigator as the details screen has been pushed
-    BlocProvider.of<LaunchesNavigationBloc>(context).popState();
-    Navigator.of(context).pop();
-  }
+  void _dismissScreen() => Navigator.of(context).pop();
 }

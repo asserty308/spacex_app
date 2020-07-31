@@ -14,7 +14,7 @@ class _AllRocketsScreenState extends State<AllRocketsScreen> {
       appBar: AppBar(
         title: const Text('SpaceX Rockets'),
       ),
-      drawer: MyDrawer(),
+      drawer: AppDrawer(),
       body: Container(
         child: RocketCarousel()
       )
