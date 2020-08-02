@@ -1,12 +1,16 @@
-import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/data/services/network_info.dart';
-import 'package:spacex_guide/features/launches/data/datasources/launch_remote_datasource.dart';
+import 'package:spacex_guide/features/launches/data/datasources/local/launches_local_datasource.dart';
+import 'package:spacex_guide/features/launches/data/datasources/remote/launch_remote_datasource.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchRepository {
   final _remoteDatasource = LaunchRemoteDatasource();
 
   Future<List<Launch>> getAllLaunches() async {
+    if (LaunchesLocalDS.allLaunches != null && LaunchesLocalDS.allLaunches.isNotEmpty) {
+      return LaunchesLocalDS.allLaunches;
+    }
+
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {
@@ -14,18 +18,20 @@ class LaunchRepository {
       throw Exception('App is not connected to the internet');
     }
 
-    final launches = await _remoteDatasource.getAllLaunches();
-    return launches;
+    LaunchesLocalDS.allLaunches = await _remoteDatasource.getAllLaunches();
+    return LaunchesLocalDS.allLaunches;
   }
 
-  List<Launch> getUpcomingLaunches() {
-    final launches = globalLaunchData.where((element) => element.upcoming).toList();
+  Future<List<Launch>> getUpcomingLaunches() async {
+    final all = await getAllLaunches();
+    final launches = all.where((element) => element.upcoming).toList();
     launches.sort((l1, l2) => l1.launchDate.compareTo(l2.launchDate));
     return launches;
   }
 
-  List<Launch> getPreviousLaunches() {
-    return globalLaunchData.where((element) => !element.upcoming).toList().reversed.toList();
+  Future<List<Launch>> getPreviousLaunches() async {
+    final all = await getAllLaunches();
+    return all.where((element) => !element.upcoming).toList().reversed.toList();
   }
 
   Future<Launch> getLaunchWithId(int id) async {

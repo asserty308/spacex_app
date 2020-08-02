@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketInfo extends StatelessWidget {
   const RocketInfo({
     Key key,
-    this.rocket,
+    @required this.rocket,
+    @required this.allLaunches,
   }) : super(key: key);
 
   final Rocket rocket;
+  final List<Launch> allLaunches;
 
   @override
   Widget build(BuildContext context) {
     // filter all launches to find the current rocket's launch history - show latest launch first
-    final previousLaunches = globalLaunchData.where((l) => l.rocket.id == rocket.id && !l.upcoming).toList().reversed;
+    final previousLaunches = allLaunches.where((l) => l.rocket.id == rocket.id && !l.upcoming).toList().reversed;
 
     final previousList = <Widget>[];
     for (final l in previousLaunches) {
@@ -23,7 +25,7 @@ class RocketInfo extends StatelessWidget {
     }
 
     // filter all launches to find the current rocket's upcoming launches - show next launch first
-    final upcomingLaunches = globalLaunchData.where((l) => l.rocket.id == rocket.id && l.upcoming).toList();
+    final upcomingLaunches = allLaunches.where((l) => l.rocket.id == rocket.id && l.upcoming).toList();
 
     final upcomingList = <Widget>[];
     for (final l in upcomingLaunches) {

@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
+import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
+import 'package:spacex_guide/features/rockets/bloc/rocket_details/rocket_details_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_carousel.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_info.dart';
 
 class RocketDetailsScreen extends StatelessWidget {
   const RocketDetailsScreen({
-    this.rocket,
-    this.allRocketsScreen,
-  });
+    Key key, 
+    @required this.rocket, 
+  }) : super(key: key);
 
   final Rocket rocket;
-  final AllRocketsScreen allRocketsScreen;
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
+  Widget build(BuildContext context) => BlocProvider(
+    create: (context) => RocketDetailsCubit(
+      launchRepository: RepositoryProvider.of<LaunchRepository>(context),
+    )..loadDetails(),
+    child: _willPopScope,
+  );
+  
+  Widget get _willPopScope => WillPopScope(
     onWillPop: () async {
       shouldReloadRocketCarousel = true;
       return true;
@@ -47,7 +56,20 @@ class RocketDetailsScreen extends StatelessWidget {
     ),
   );
 
-  Widget get _body => Container(
-    child: RocketInfo(rocket: rocket,),
+  Widget get _body => BlocBuilder<RocketDetailsCubit, RocketDetailsState>(
+    builder: (context, state) {
+      if (state is RocketDetailsLoaded) {
+        return Container(
+          child: RocketInfo(
+            rocket: rocket,
+            allLaunches: state.launches,
+          ),
+        );
+      }
+
+      return CenterProgressIndicator();
+    }
   );
+  
+   
 }

@@ -21,17 +21,13 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
 
   Stream<LaunchListState> _mapLoadUpcomingLaunchesToState(LoadUpcomingLaunches event) async* {
     yield LaunchListStateLoading();
-
-    final upcoming = _repo.getUpcomingLaunches();
-
+    final upcoming = await _repo.getUpcomingLaunches();
     yield LaunchListStateUpcomingLoaded(upcoming);
   }
 
   Stream<LaunchListState> _mapLoadPreviousLaunchesToState(LoadPreviousLaunches event) async* {
     yield LaunchListStateLoading();
-
-    final previous = _repo.getPreviousLaunches();
-
+    final previous = await _repo.getPreviousLaunches();
     yield LaunchListStatePreviousLoaded(previous);
   }
   

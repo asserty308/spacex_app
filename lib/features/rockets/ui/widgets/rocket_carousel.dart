@@ -88,7 +88,12 @@ class _RocketCarouselState extends State<RocketCarousel> {
     final rocket = globalRocketData[index];
     
     return GestureDetector(
-      onTap: () => showScreen(context, RocketDetailsScreen(rocket: rocket)),
+      onTap: () => showScreen(
+        context, 
+        RocketDetailsScreen(
+          rocket: rocket,
+        )
+      ),
       child: Center(
         child: SizedBox(
           height: Curves.easeOut.transform(heightFactor) * (MediaQuery.of(context).size.height * 0.8),

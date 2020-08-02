@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/dialogs.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
-import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
-import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_events.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_states.dart';
@@ -24,13 +22,33 @@ class LaunchesScreen extends StatelessWidget {
   Widget _scaffold(BuildContext context) => AppScaffold(
     title: _title,
     actions: [
-      IconButton(
-        icon: Icon(Icons.search),
-        onPressed: () => showLaunchSearch(context),
-      ),
+      _seaerchButton,
       _toggleLaunchesButton,
     ],
     child: _body,
+  );
+
+  Widget get _seaerchButton => BlocBuilder<LaunchListBloc, LaunchListState>(
+    builder: (context, state) {
+      List<Launch> launches = [];
+
+      if (state is LaunchListStatePreviousLoaded) {
+        launches = state.launches;
+      }
+
+      if (state is LaunchListStateUpcomingLoaded) {
+        launches = state.launches;
+      }
+
+      if (launches == null || launches.isEmpty) {
+        return Container();
+      }
+
+      return IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () => showLaunchSearch(context, launches),
+      );
+    }
   );
 
   Widget get _body => BlocConsumer<LaunchListBloc, LaunchListState>(
@@ -96,10 +114,10 @@ class LaunchesScreen extends StatelessWidget {
 
   // Functions
 
-  void showLaunchSearch(BuildContext context) => showSearch<Launch>(
+  void showLaunchSearch(BuildContext context, List<Launch> launches) => showSearch<Launch>(
     context: context,
     delegate: LaunchSearchDelegate(
-      launchData: globalLaunchData,
+      launchData: launches,
     ),
   );
 }
