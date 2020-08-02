@@ -24,13 +24,5 @@ void main() {
     // Verify that the widget shows the correct text and the test works as expected
     expect(find.text(testText), findsOneWidget);
     expect(find.text(failText), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    //await tester.tap(find.byIcon(Icons.add));
-    //await tester.pump();
-
-    // Verify that our counter has incremented.
-    //expect(find.text('0'), findsNothing);
-    //expect(find.text('1'), findsOneWidget);
   });
 }

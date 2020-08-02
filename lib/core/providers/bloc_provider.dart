@@ -1,10 +1,13 @@
 part of 'app_provider.dart';
 
 class AppBlocProvider extends StatelessWidget {
+  const AppBlocProvider({
+    Key key, 
+    @required this.child
+  }) : super(key: key);
+
   final Widget child;
-
-  const AppBlocProvider({Key key, this.child}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
