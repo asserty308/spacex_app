@@ -26,7 +26,6 @@ class RocketDetailsScreen extends StatelessWidget {
   
   Widget get _willPopScope => WillPopScope(
     onWillPop: () async {
-      shouldReloadRocketCarousel = true;
       return true;
     },
     child: _scaffold,

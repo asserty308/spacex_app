@@ -7,7 +7,7 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 class LaunchDetailsBloc extends Bloc<LaunchDetailsEvent, LaunchDetailsState> {
   LaunchDetailsBloc() : super(LaunchDetailsStateInitial());
 
-  final _repo = RocketsRepository();
+  final _repo = RocketRepository();
 
   @override
   Stream<LaunchDetailsState> mapEventToState(LaunchDetailsEvent event) async* {

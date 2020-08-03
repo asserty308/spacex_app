@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
+import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_repository.dart';
+import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 
 class AppRepositoryProvider extends StatelessWidget {
   final Widget child;
@@ -16,6 +18,8 @@ class AppRepositoryProvider extends StatelessWidget {
     providers: [
       RepositoryProvider(create: (context) => LaunchRepository()),
       RepositoryProvider(create: (context) => HistoryRepository()),
+      RepositoryProvider(create: (context) => RocketRepository()),
+      RepositoryProvider(create: (context) => LaunchpadRepository()),
     ],
     child: child,
   );
