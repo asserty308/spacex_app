@@ -5,7 +5,6 @@ import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_details/rocket_details_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:spacex_guide/features/rockets/ui/widgets/rocket_carousel.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_info.dart';
 
 class RocketDetailsScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class RocketDetailsScreen extends StatelessWidget {
     @required this.rocket, 
   }) : super(key: key);
 
-  final Rocket rocket;
+  final RocketModel rocket;
 
   @override
   Widget build(BuildContext context) => BlocProvider(

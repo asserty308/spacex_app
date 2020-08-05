@@ -6,7 +6,7 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 class RocketRepository {
   final _remoteDatasource = RocketsRemoteDatasource();
 
-  Future<List<Rocket>> getAllRockets() async {
+  Future<List<RocketModel>> getAllRockets() async {
     if (RocketsLocalDatasource.allRockets != null && RocketsLocalDatasource.allRockets.isEmpty) {
       return RocketsLocalDatasource.allRockets;
     }
@@ -22,7 +22,7 @@ class RocketRepository {
     return RocketsLocalDatasource.allRockets;
   }
 
-  Future<Rocket> getRocket(String id) async {
+  Future<RocketModel> getRocket(String id) async {
     if (RocketsLocalDatasource.allRockets != null && RocketsLocalDatasource.allRockets.isEmpty) {
       return RocketsLocalDatasource.allRockets.firstWhere((element) => element.id == id);
     }

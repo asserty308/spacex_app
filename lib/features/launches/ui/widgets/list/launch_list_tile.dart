@@ -10,7 +10,7 @@ class LaunchListTile extends StatelessWidget {
     @required this.launch,
   }) : super(key: key);
 
-  final Launch launch;
+  final LaunchModel launch;
 
   @override
   Widget build(BuildContext context) => ListTile(
@@ -24,7 +24,7 @@ class LaunchListTile extends StatelessWidget {
   // Widgets
 
   Widget get _title => Text(
-    launch.missionName,
+    launch.name,
     style: const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,

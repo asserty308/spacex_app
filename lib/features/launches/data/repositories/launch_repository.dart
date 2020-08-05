@@ -6,35 +6,35 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 class LaunchRepository {
   final _remoteDatasource = LaunchRemoteDatasource();
 
-  Future<List<Launch>> getAllLaunches() async {
+  Future<List<LaunchModel>> getAllLaunches() async {
     if (LaunchesLocalDS.allLaunches != null && LaunchesLocalDS.allLaunches.isNotEmpty) {
       return LaunchesLocalDS.allLaunches;
     }
 
-    final connected = await NetworkInfo.isConnected;
+    // final connected = await NetworkInfo.isConnected;
 
-    if (!connected) {
-      // TODO: Offline handling (local datasource with cached data)
-      throw Exception('App is not connected to the internet');
-    }
+    // if (!connected) {
+    //   // TODO: Offline handling (local datasource with cached data)
+    //   throw Exception('App is not connected to the internet');
+    // }
 
     LaunchesLocalDS.allLaunches = await _remoteDatasource.getAllLaunches();
     return LaunchesLocalDS.allLaunches;
   }
 
-  Future<List<Launch>> getUpcomingLaunches() async {
+  Future<List<LaunchModel>> getUpcomingLaunches() async {
     final all = await getAllLaunches();
     final launches = all.where((element) => element.upcoming).toList();
-    launches.sort((l1, l2) => l1.launchDate.compareTo(l2.launchDate));
+    launches.sort((l1, l2) => l1.date.compareTo(l2.date));
     return launches;
   }
 
-  Future<List<Launch>> getPreviousLaunches() async {
+  Future<List<LaunchModel>> getPreviousLaunches() async {
     final all = await getAllLaunches();
     return all.where((element) => !element.upcoming).toList().reversed.toList();
   }
 
-  Future<Launch> getLaunchWithId(int id) async {
+  Future<LaunchModel> getLaunchWithId(int id) async {
     final connected = await NetworkInfo.isConnected;
 
     if (!connected) {

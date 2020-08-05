@@ -12,7 +12,7 @@ class LaunchDetailActions extends StatelessWidget {
     this.launch,
   }) : super(key: key);
 
-  final Launch launch;
+  final LaunchModel launch;
 
   @override
   Widget build(BuildContext context) {
@@ -32,32 +32,31 @@ class LaunchDetailActions extends StatelessWidget {
   }
 
   Future<void> showPresskit(BuildContext context) async {
-    if (launch.presskit == null || launch.presskit.isEmpty) {
+    final presskit = launch.links.presskit;
+    if (presskit == null || presskit.isEmpty) {
       showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
       return;
     }
 
-    //if (await url_launcher.canLaunch(launch.presskit)) {
-    //  await url_launcher.launch(launch.presskit));
-    //}
+    if (await url_launcher.canLaunch(presskit)) {
+      await url_launcher.launch(presskit);
+    }
 
-    showScreen(context, PDFScreen(
-      title: '${launch.missionName} Presskit', 
-      url: launch.presskit
-    ));
+    // showScreen(context, PDFScreen(
+    //   title: '${launch.name} Presskit', 
+    //   url: presskit
+    // ));
   }
 
   Future<void> playVideo(BuildContext context) async {
-    if (launch.youtubeID == null || launch.youtubeID.isEmpty) {
+    final webcast = launch.links.webcast;
+    if (webcast == null || webcast.isEmpty) {
       showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
       return;
     }
 
-    // When youtube app is installed open the video there
-    final url = launch.videoLink;
-
-    if (await url_launcher.canLaunch(url)) {
-      await url_launcher.launch(url);
+    if (await url_launcher.canLaunch(webcast)) {
+      await url_launcher.launch(webcast);
     }
   }
 }

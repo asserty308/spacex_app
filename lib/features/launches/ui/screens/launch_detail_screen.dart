@@ -14,7 +14,7 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 class LaunchDetailScreen extends StatefulWidget {
   const LaunchDetailScreen(this.launch);
 
-  final Launch launch;
+  final LaunchModel launch;
 
   @override
   _LaunchDetailScreenState createState() => _LaunchDetailScreenState();

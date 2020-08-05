@@ -57,7 +57,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
     },
   );
   
-  Widget _rocketCarousel(List<Rocket> rockets) => Container(
+  Widget _rocketCarousel(List<RocketModel> rockets) => Container(
     child: PageView.builder(
       onPageChanged: (value) {
         setState(() {
@@ -71,7 +71,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
     ),
   );
 
-  Widget builder(BuildContext context, int index, Rocket rocket) => AnimatedBuilder(
+  Widget builder(BuildContext context, int index, RocketModel rocket) => AnimatedBuilder(
     animation: _controller,
     builder: (context, child) {
       // calculate the height of each page
@@ -86,7 +86,7 @@ class _RocketCarouselState extends State<RocketCarousel> {
     },
   );
 
-  Widget buildRocketPage(BuildContext context, int index, Rocket rocket, double heightFactor) => GestureDetector(
+  Widget buildRocketPage(BuildContext context, int index, RocketModel rocket, double heightFactor) => GestureDetector(
     onTap: () => showScreen(
       context, 
       RocketDetailsScreen(

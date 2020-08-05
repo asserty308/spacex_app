@@ -6,5 +6,5 @@ class LaunchesNavigationLaunchScreen extends LaunchesNavigationState {}
 class LaunchesNavigationStateDetails extends LaunchesNavigationState {
   LaunchesNavigationStateDetails(this.navContext, this.launch);
   final BuildContext navContext;
-  final Launch launch;
+  final LaunchModel launch;
 }

@@ -7,5 +7,5 @@ part 'launches_navigation_state.dart';
 class LaunchesNavigationCubit extends Cubit<LaunchesNavigationState> {
   LaunchesNavigationCubit() : super(LaunchesNavigationLaunchScreen());
   
-  void showLaunchDetails(BuildContext context, Launch launch) => emit(LaunchesNavigationStateDetails(context, launch));
+  void showLaunchDetails(BuildContext context, LaunchModel launch) => emit(LaunchesNavigationStateDetails(context, launch));
 }

@@ -4,5 +4,5 @@ abstract class LaunchDetailsEvent {}
 
 class LoadLaunchDetails extends LaunchDetailsEvent {
   LoadLaunchDetails(this.launch);
-  final Launch launch;
+  final LaunchModel launch;
 }

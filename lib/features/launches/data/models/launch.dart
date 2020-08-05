@@ -1,74 +1,98 @@
 import 'package:intl/intl.dart';
-import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:meta/meta.dart';
 
-class Launch {
-  Launch({
-    this.flightNumber,
-    this.missionName,
-    this.launchDate,
-    this.details,
-    this.tentativeMaxPrecision,
-    this.isTentative,
-    this.launchSuccess,
-    this.missionPatch,
-    this.presskit,
-    this.videoLink,
-    this.youtubeID,
+part 'launch_fairings.dart';
+part 'launch_cores.dart';
+part 'launch_links.dart';
+part 'date_precision.dart';
+
+class LaunchModel {
+  LaunchModel({
+    @required this.id,
+    @required this.flightNumber,
+    @required this.name,
+    @required this.date,
+    @required this.datePrecision,
+    this.staticFireDate,
+    this.tbd = false,
+    this.net = false,
+    this.window,
     this.rocket,
-    this.flickrImages,
-    this.upcoming,
-    this.launchSiteName,
+    this.success,
+    @required this.upcoming,
+    this.details,
+    this.crew,
+    this.ships,
+    this.capsules,
+    this.payloads,
+    this.launchpad,
+    this.failures,
+    this.fairings,
+    this.cores,
+    this.links,
+    this.autoUpdate,
   });
 
-  int flightNumber;
-  DateTime launchDate;
-  String missionName, details, tentativeMaxPrecision;
-  bool isTentative, launchSuccess, upcoming;
-  String missionPatch, presskit, videoLink, youtubeID, launchSiteName;
-  Rocket rocket;
-  List<String> flickrImages;
+  final int flightNumber, window;
+  final String id, name, rocket, details, launchpad;
+  final DateTime date, staticFireDate;
+  final DatePrecision datePrecision;
+  final bool tbd, net, success, upcoming, autoUpdate;
+  final List<dynamic> failures, crew, ships, capsules, payloads;
+  final LaunchFairingsModel fairings;
+  final List<LaunchCoreModel> cores;
+  final LaunchLinksModel links;
 
-  static Launch fromJSON(Map<String, dynamic> json) {
-    final rocket = Rocket.fromJSON(json['rocket']);
-    final links = json['links'];
-    final images = links['flickr_images'];
-
-    final launchDateUnix = json['launch_date_unix'];
-
-    return Launch(
-      flightNumber: json['flight_number'],
-      missionName: json['mission_name'],
-      launchDate: DateTime.fromMillisecondsSinceEpoch(launchDateUnix * 1000),
-      rocket: rocket,
-      details: json['details'],
-      tentativeMaxPrecision: json['tentative_max_precision'],
-      isTentative: json['is_tentative'],
-      launchSuccess: json['launch_success'],
-      missionPatch: links['mission_patch'],
-      presskit: links['presskit'],
-      videoLink: links['video_link'],
-      youtubeID: links['youtube_id'],
-      flickrImages: List<String>.from(images),
-      upcoming: json['upcoming'],
-      launchSiteName: json['launch_site']['site_name']
-    );
-  }
+  LaunchModel.fromJSON(Map<String, dynamic> json) :
+    flightNumber = json['flight_number'],
+    name = json['name'],
+    date = DateTime.fromMillisecondsSinceEpoch(json['date_unix'] * 1000),
+    datePrecision = DatePrecisionUtil.fromString(json['date_precision']),
+    staticFireDate = _staticFireDateUnix(json['static_fire_date_unix']),
+    tbd = json['tbd'],
+    net = json['net'],
+    window = json['window'],
+    rocket = json['rocket'],
+    success = json['success'],
+    failures = json['failures'],
+    upcoming = json['upcoming'],
+    details = json['details'],
+    fairings = json['fairings'] == null ? null : LaunchFairingsModel.fromJSON(json['fairings']),
+    crew = json['crew'],
+    ships = json['ships'],
+    capsules = json['capsules'],
+    payloads = json['payloads'],
+    launchpad = json['launchpad'],
+    cores = LaunchCoreModel.fromList(json['cores']),
+    links = LaunchLinksModel.fromJSON(json['links']),
+    autoUpdate = json['auto_update'],
+    id = json['id'];
 
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.
-  String formattedLaunchDate([String format = 'dd.MM.yyyy HH:mm:ss']) {
-    if (isTentative) {
-      switch (tentativeMaxPrecision) {
-        case 'year':
-          return DateFormat('yyyy').format(launchDate);
-        case 'month':
-          return DateFormat('MMMM yyyy').format(launchDate);
-        case 'day':
-          return DateFormat('dd.MM.yyyy').format(launchDate);
-        default:
-      }
+  String formattedLaunchDate() {
+    switch (datePrecision) {
+      case DatePrecision.quarter:
+      case DatePrecision.half:
+      case DatePrecision.year:
+        // Runs for quarter, half and year
+        return DateFormat('yyyy').format(date);
+      case DatePrecision.month:
+        return DateFormat('MMMM yyyy').format(date);
+      case DatePrecision.day:
+        return DateFormat('dd.MM.yyyy').format(date);
+      case DatePrecision.hour:
+        return DateFormat('dd.MM.yyyy HH:mm:ss').format(date);
     }
 
-    return DateFormat(format).format(launchDate);
+    return '';
+  }
+
+  static DateTime _staticFireDateUnix(dynamic unix) {
+    if (unix == null) {
+      return null;
+    }
+
+    return DateTime.fromMillisecondsSinceEpoch(unix * 1000);
   }
 }

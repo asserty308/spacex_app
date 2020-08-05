@@ -19,7 +19,7 @@ dependencies:
   data_connection_checker: # check network connection
   intl: # date formatting
   path_provider:
-  flutter_full_pdf_viewer:
+  # flutter_full_pdf_viewer:
   carousel_slider: 
   flare_flutter: # flare animations
   flutter_launcher_icons: # app icon

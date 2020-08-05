@@ -10,7 +10,7 @@ class LaunchList extends StatelessWidget {
     this.showNextLaunch = true,
   }) : super(key: key);
 
-  final List<Launch> launches;
+  final List<LaunchModel> launches;
   final bool showNextLaunch;
 
   @override
@@ -24,7 +24,7 @@ class LaunchList extends StatelessWidget {
 
   // Widgets
 
-  Widget _listView(Launch nextLaunch) => ListView.builder(
+  Widget _listView(LaunchModel nextLaunch) => ListView.builder(
     itemCount: nextLaunch == null ? launches.length : launches.length + 1, // +1 for next launch card
     itemBuilder: (context, i) {
       if (i == 0 && nextLaunch != null) {
@@ -39,9 +39,9 @@ class LaunchList extends StatelessWidget {
   // Functions
 
   /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
-  Launch getNextLaunch(List<Launch> launches) {
-    final upcoming = launches.where((l) => l.upcoming && !l.isTentative).toList();
-    upcoming.sort((l1, l2) => l1.launchDate.compareTo(l2.launchDate));
+  LaunchModel getNextLaunch(List<LaunchModel> launches) {
+    final upcoming = launches.where((l) => l.upcoming && l.datePrecision == DatePrecision.day || l.datePrecision == DatePrecision.hour).toList();
+    upcoming.sort((l1, l2) => l1.date.compareTo(l2.date));
     return upcoming.isEmpty ? null : upcoming[0];
   }
 }

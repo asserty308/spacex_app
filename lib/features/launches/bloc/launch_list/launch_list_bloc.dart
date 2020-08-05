@@ -1,34 +1,27 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_events.dart';
-import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_states.dart';
+import 'package:meta/meta.dart';
+import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
-class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
-  LaunchListBloc() : super(LaunchListStateInitial());
+part 'launch_list_state.dart';
 
-  final _repo = LaunchRepository();
+class LaunchListBloc extends Cubit<LaunchListState> {
+  LaunchListBloc({
+    @required this.launchRepository,
+  }) : super(LaunchListStateInitial());
 
-  @override
-  Stream<LaunchListState> mapEventToState(LaunchListEvent event) async* {
-    if (event is LoadUpcomingLaunches) {
-      yield* _mapLoadUpcomingLaunchesToState(event);
-    }
+  final LaunchRepository launchRepository;
 
-    if (event is LoadPreviousLaunches) {
-      yield* _mapLoadPreviousLaunchesToState(event);
-    }
+  Future<void> loadUpcomingLaunches() async {
+    emit(LaunchListStateLoading());
+    final upcoming = await launchRepository.getUpcomingLaunches();
+    emit(LaunchListStateUpcomingLoaded(upcoming));
   }
 
-  Stream<LaunchListState> _mapLoadUpcomingLaunchesToState(LoadUpcomingLaunches event) async* {
-    yield LaunchListStateLoading();
-    final upcoming = await _repo.getUpcomingLaunches();
-    yield LaunchListStateUpcomingLoaded(upcoming);
-  }
-
-  Stream<LaunchListState> _mapLoadPreviousLaunchesToState(LoadPreviousLaunches event) async* {
-    yield LaunchListStateLoading();
-    final previous = await _repo.getPreviousLaunches();
-    yield LaunchListStatePreviousLoaded(previous);
+  Future<void> loadPreviousLaunches() async {
+    emit(LaunchListStateLoading());
+    final previous = await launchRepository.getPreviousLaunches();
+    emit(LaunchListStatePreviousLoaded(previous));
   }
   
 }

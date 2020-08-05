@@ -4,8 +4,6 @@ import 'package:flutter_core/ui/dialogs.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
-import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_events.dart';
-import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_states.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
@@ -13,7 +11,9 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart'
 class LaunchesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LaunchListBloc()..add(LoadUpcomingLaunches()),
+    create: (context) => LaunchListBloc(
+      launchRepository: RepositoryProvider.of(context),
+    )..loadUpcomingLaunches(),
     child: _scaffold(context),
   );
 
@@ -30,7 +30,7 @@ class LaunchesScreen extends StatelessWidget {
 
   Widget get _seaerchButton => BlocBuilder<LaunchListBloc, LaunchListState>(
     builder: (context, state) {
-      List<Launch> launches = [];
+      List<LaunchModel> launches = [];
 
       if (state is LaunchListStatePreviousLoaded) {
         launches = state.launches;
@@ -92,7 +92,14 @@ class LaunchesScreen extends StatelessWidget {
 
       return IconButton(
         icon: Icon(isUpcoming ? Icons.history : Icons.cloud_upload),
-        onPressed: () => BlocProvider.of<LaunchListBloc>(context).add(isUpcoming ? LoadPreviousLaunches() : LoadUpcomingLaunches()),
+        onPressed: () {
+          if (isUpcoming) {
+            BlocProvider.of<LaunchListBloc>(context).loadPreviousLaunches();
+            return;
+          }
+
+          BlocProvider.of<LaunchListBloc>(context).loadUpcomingLaunches();
+        }
       );
     }
   );
@@ -114,7 +121,7 @@ class LaunchesScreen extends StatelessWidget {
 
   // Functions
 
-  void showLaunchSearch(BuildContext context, List<Launch> launches) => showSearch<Launch>(
+  void showLaunchSearch(BuildContext context, List<LaunchModel> launches) => showSearch<LaunchModel>(
     context: context,
     delegate: LaunchSearchDelegate(
       launchData: launches,

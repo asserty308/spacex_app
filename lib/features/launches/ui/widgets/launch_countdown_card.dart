@@ -11,7 +11,7 @@ class LaunchCountdownCard extends StatelessWidget {
     this.showLaunchOnTap = true,
   }) : super(key: key);
 
-  final Launch launch;
+  final LaunchModel launch;
   final bool showLaunchOnTap;
 
   @override
@@ -48,7 +48,7 @@ class LaunchCountdownCard extends StatelessWidget {
   );
 
   Widget get _title => Text(
-    '${launch.missionName} will launch in', 
+    '${launch.name} will launch in', 
     textAlign: TextAlign.center,
     style: const TextStyle(
       color: Colors.white, 

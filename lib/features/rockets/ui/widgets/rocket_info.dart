@@ -11,13 +11,13 @@ class RocketInfo extends StatelessWidget {
     @required this.allLaunches,
   }) : super(key: key);
 
-  final Rocket rocket;
-  final List<Launch> allLaunches;
+  final RocketModel rocket;
+  final List<LaunchModel> allLaunches;
 
   @override
   Widget build(BuildContext context) {
     // filter all launches to find the current rocket's launch history - show latest launch first
-    final previousLaunches = allLaunches.where((l) => l.rocket.id == rocket.id && !l.upcoming).toList().reversed;
+    final previousLaunches = allLaunches.where((l) => l.rocket == rocket.id && !l.upcoming).toList().reversed;
 
     final previousList = <Widget>[];
     for (final l in previousLaunches) {
@@ -25,7 +25,7 @@ class RocketInfo extends StatelessWidget {
     }
 
     // filter all launches to find the current rocket's upcoming launches - show next launch first
-    final upcomingLaunches = allLaunches.where((l) => l.rocket.id == rocket.id && l.upcoming).toList();
+    final upcomingLaunches = allLaunches.where((l) => l.rocket == rocket.id && l.upcoming).toList();
 
     final upcomingList = <Widget>[];
     for (final l in upcomingLaunches) {

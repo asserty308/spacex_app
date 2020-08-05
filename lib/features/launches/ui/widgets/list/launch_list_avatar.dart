@@ -7,7 +7,7 @@ class LaunchListAvatar extends StatelessWidget {
     @required this.launch
   }) : super(key: key);
 
-  final Launch launch;
+  final LaunchModel launch;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class LaunchListAvatar extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
     );
 
+    final patch = launch.links.patchLarge;
+    
     return CircleAvatar(
-      child: launch.missionPatch == null ? text : Image.network(
-        launch.missionPatch,
-      ),
-      backgroundColor: launch.missionPatch == null ? Colors.white24 : Colors.transparent,
+      child: patch == null ? text : Image.network(patch),
+      backgroundColor: patch == null ? Colors.white24 : Colors.transparent,
     );
   }
 }

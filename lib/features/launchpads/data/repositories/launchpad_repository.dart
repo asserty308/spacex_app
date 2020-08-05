@@ -21,4 +21,12 @@ class LaunchpadRepository {
     LaunchpadsLocalDatasource.allLaunchpads = await _remoteDatasource.getAllLaunchpads();
     return LaunchpadsLocalDatasource.allLaunchpads;
   }
+
+  Future<Launchpad> getLaunchpad(String id) async {
+    if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads.isNotEmpty) {
+      return LaunchpadsLocalDatasource.allLaunchpads.firstWhere((element) => element.id == id);
+    }
+
+    return await _remoteDatasource.getLaunchpad(id);
+  }
 }

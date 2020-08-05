@@ -3,17 +3,17 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchRemoteDatasource extends SpaceXApi {
   /// Calls the launches endpoint endpoint on the SpaceX api.
-  Future<List<Launch>> getAllLaunches() async {
+  Future<List<LaunchModel>> getAllLaunches() async {
     final response = await fetchJSON('launches/');
 
-    final list = <Launch>[];
-    response.forEach((launch) => list.add(Launch.fromJSON(launch)));
+    final list = <LaunchModel>[];
+    response.forEach((launch) => list.add(LaunchModel.fromJSON(launch)));
     return list;
   }
 
-  Future<Launch> getLaunchWithId(int id) async {
+  Future<LaunchModel> getLaunchWithId(int id) async {
     final response = await fetchJSON('launches/$id');
-    return Launch.fromJSON(response);
+    return LaunchModel.fromJSON(response);
   }
 
 }

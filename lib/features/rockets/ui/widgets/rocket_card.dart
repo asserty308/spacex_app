@@ -8,7 +8,7 @@ class RocketCard extends StatelessWidget {
     this.rocket
   }) : super(key: key);
 
-  final Rocket rocket;
+  final RocketModel rocket;
 
   final _titleStyle = TextStyle(
     fontSize: 36,

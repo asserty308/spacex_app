@@ -10,4 +10,9 @@ class LaunchpadRemoteDatasource extends SpaceXApi {
     response.forEach((launch) => list.add(Launchpad.fromJSON(launch)));
     return list;
   }
+
+  Future<Launchpad> getLaunchpad(String id) async {
+    final response = await fetchJSON('launchpads/$id');
+    return Launchpad.fromJSON(response);
+  }
 }

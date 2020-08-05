@@ -19,12 +19,12 @@ class LaunchDetailsBloc extends Bloc<LaunchDetailsEvent, LaunchDetailsState> {
   Stream<LaunchDetailsState> _mapLoadLaunchDetailsToState(LoadLaunchDetails event) async* {
     yield LaunchDetailsStateLoading();
 
-    var imageUrls = event.launch?.flickrImages ?? [];
+    var imageUrls = event.launch?.links?.flickrOriginal ?? [];
 
     if (imageUrls.isEmpty) {
-      final response = await _repo.getRocket(event.launch.rocket.id);
+      final response = await _repo.getRocket(event.launch.rocket);
       
-      if (response is Rocket) {
+      if (response is RocketModel) {
         imageUrls = response.flickrImages;
       }
     }

@@ -16,7 +16,7 @@ class LaunchesMasterScreen extends StatelessWidget {
     builder: (context, state) => LaunchesScreen(),
   );
 
-  void _showDetailsScreen(BuildContext context, Launch launch) => Navigator.of(context).push(
+  void _showDetailsScreen(BuildContext context, LaunchModel launch) => Navigator.of(context).push(
     PageRouteBuilder(pageBuilder: (c, a1, a2) => LaunchDetailScreen(launch))
   );
 }

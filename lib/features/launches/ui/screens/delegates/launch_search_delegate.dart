@@ -4,10 +4,10 @@ import 'package:spacex_guide/core/ui/themes/default_theme.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
 
-class LaunchSearchDelegate extends SearchDelegate<Launch> {
+class LaunchSearchDelegate extends SearchDelegate<LaunchModel> {
   LaunchSearchDelegate({this.launchData});
 
-  final List<Launch> launchData;
+  final List<LaunchModel> launchData;
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -52,6 +52,7 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
   @override
   Widget buildSuggestions(BuildContext context) => showSearchResults();
 
+  // TODO: Re-enable search for rockets
   Widget showSearchResults() {
     if (launchData == null || launchData.isEmpty) {
       return CenterProgressIndicator();
@@ -59,9 +60,9 @@ class LaunchSearchDelegate extends SearchDelegate<Launch> {
 
     final lowerQuery = query.toLowerCase();
     final launches = launchData.where((l) => 
-      l.missionName?.toLowerCase()?.contains(lowerQuery) == true ||
-      l.details?.toLowerCase()?.contains(lowerQuery) == true ||
-      l.rocket?.name?.toLowerCase()?.contains(lowerQuery) == true
+      l.name?.toLowerCase()?.contains(lowerQuery) == true ||
+      l.details?.toLowerCase()?.contains(lowerQuery) == true // ||
+      // l.rocket?.name?.toLowerCase()?.contains(lowerQuery) == true
     ).toList();
 
     return LaunchList(

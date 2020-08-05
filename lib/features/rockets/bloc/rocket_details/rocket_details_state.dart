@@ -8,7 +8,7 @@ class RocketDetailsLoading extends RocketDetailsState {}
 
 class RocketDetailsLoaded extends RocketDetailsState {
   RocketDetailsLoaded(this.launches);
-  final List<Launch> launches;
+  final List<LaunchModel> launches;
 }
 
 class RocketDetailsError extends RocketDetailsState {}

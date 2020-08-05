@@ -8,7 +8,7 @@ class RocketCarouselLoading extends RocketCarouselState {}
 
 class RocketCarouselLoaded extends RocketCarouselState {
   RocketCarouselLoaded(this.allRockets);
-  final List<Rocket> allRockets;
+  final List<RocketModel> allRockets;
 }
 
 class RocketCarouselError extends RocketCarouselState {}
