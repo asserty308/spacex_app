@@ -7,31 +7,10 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';
 
-class RocketCarousel extends StatefulWidget {
-  @override
-  _RocketCarouselState createState() => _RocketCarouselState();
-}
-
-class _RocketCarouselState extends State<RocketCarousel> {
-  PageController _controller;
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = PageController(
-      initialPage: _currentPage,
-      keepPage: true,
-      viewportFraction: 0.825, // width each page can use (relative to the parent)
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class RocketCarousel extends StatelessWidget {
+  final _controller = PageController(
+    viewportFraction: 0.825, // width each page can use (relative to the parent)
+  );
 
   @override
   Widget build(BuildContext context) => BlocProvider(
@@ -59,19 +38,14 @@ class _RocketCarouselState extends State<RocketCarousel> {
   
   Widget _rocketCarousel(List<RocketModel> rockets) => Container(
     child: PageView.builder(
-      onPageChanged: (value) {
-        setState(() {
-          _currentPage = value;
-        });
-      },
-      pageSnapping: true,
       controller: _controller,
       itemCount: rockets.length,
-      itemBuilder: (context, index) => builder(context, index, rockets[index]),
+      itemBuilder: (context, index) => _itemBuilder(context, index, rockets[index]),
+      physics: BouncingScrollPhysics(),
     ),
   );
 
-  Widget builder(BuildContext context, int index, RocketModel rocket) => AnimatedBuilder(
+  Widget _itemBuilder(BuildContext context, int index, RocketModel rocket) => AnimatedBuilder(
     animation: _controller,
     builder: (context, child) {
       // calculate the height of each page
@@ -79,25 +53,29 @@ class _RocketCarouselState extends State<RocketCarousel> {
       double heightFactor = 1.0;
       if (_controller.position.haveDimensions) {
         heightFactor = _controller.page - index;
-        heightFactor = (1 - (heightFactor.abs() * .3)).clamp(0.0, 1.0);
+        heightFactor = (1 - (heightFactor.abs() * 0.3)).clamp(0.0, 1.0);
       }
 
-      return buildRocketPage(context, index, rocket, heightFactor);
+      return _buildRocketCard(context, rocket, heightFactor);
     },
   );
 
-  Widget buildRocketPage(BuildContext context, int index, RocketModel rocket, double heightFactor) => GestureDetector(
-    onTap: () => showScreen(
-      context, 
-      RocketDetailsScreen(
-        rocket: rocket,
-      )
-    ),
+  Widget _buildRocketCard(BuildContext context, RocketModel rocket, double heightFactor) => GestureDetector(
+    onTap: () => _showRocketScreen(context, rocket),
     child: Center(
       child: SizedBox(
         height: Curves.easeOut.transform(heightFactor) * (MediaQuery.of(context).size.height * 0.8),
         child: RocketCard(rocket: rocket),
       ),
     ),
+  );
+
+  // Functions
+
+  void _showRocketScreen(BuildContext context, RocketModel rocket) => showScreen(
+    context, 
+    RocketDetailsScreen(
+      rocket: rocket,
+    )
   );
 }
