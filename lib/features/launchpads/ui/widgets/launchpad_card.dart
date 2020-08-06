@@ -10,7 +10,7 @@ class LaunchpadCard extends StatelessWidget {
     @required this.launchpad,
   }) : super(key: key);
 
-  final Launchpad launchpad;
+  final LaunchpadModel launchpad;
 
   @override
   Widget build(BuildContext context) {

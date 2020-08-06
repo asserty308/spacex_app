@@ -21,7 +21,7 @@ class LaunchInfo extends StatelessWidget {
     create: (context) => LaunchInfoCubit(
       rocketRepository: RepositoryProvider.of(context),
       launchpadRepository: RepositoryProvider.of(context),
-    ),
+    )..loadData(launch),
     child: _body,
   );
 
@@ -35,7 +35,7 @@ class LaunchInfo extends StatelessWidget {
     },
   );
   
-  Widget _listView(RocketModel rocket, Launchpad launchpad) => ListView(
+  Widget _listView(RocketModel rocket, LaunchpadModel launchpad) => ListView(
     children: <Widget>[
       !launch.upcoming ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
       const SizedBox(height: 8,),

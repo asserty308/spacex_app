@@ -1,3 +1,5 @@
+part of 'launch_details_cubit.dart';
+
 abstract class LaunchDetailsState {}
 class LaunchDetailsStateInitial extends LaunchDetailsState {}
 class LaunchDetailsStateLoading extends LaunchDetailsState {}

@@ -19,7 +19,7 @@ class AllEventsScreen extends StatelessWidget {
   
   Widget get _scaffold => AppScaffold(
     title: Text('All Events'),
-    child: _eventList,
+    body: _eventList,
   );
 
   Widget get _eventList => BlocBuilder<AllEventsListCubit, AllEventsListState>(

@@ -12,7 +12,7 @@ class _AllLaunchpadsScreenState extends State<AllLaunchpadsScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: const Text('All Launchpads'),
-      child: Container(
+      body: Container(
         child: const LaunchpadList(),
       )
     );

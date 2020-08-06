@@ -13,7 +13,7 @@ class LaunchInfoLoaded extends LaunchInfoState {
   });
 
   final RocketModel rocket;
-  final Launchpad launchpad;
+  final LaunchpadModel launchpad;
 }
 
 class LaunchInfoError extends LaunchInfoState {}

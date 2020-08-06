@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 
+// TODO: Apply responsive layout 
+
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     Key key, 
-    this.drawerEnabled = true, 
-    this.child,
-    this.title,
+    @required this.title, 
+    @required this.body,
     this.actions,
+    this.drawerEnabled = true, 
   }) : super(key: key);
 
-  final Widget child;
+  final Widget body;
   final bool drawerEnabled;
   final Widget title;
   final List<Widget> actions;
@@ -23,6 +25,6 @@ class AppScaffold extends StatelessWidget {
       actions: actions,
     ),
     drawer: drawerEnabled ? AppDrawer() : null,
-    body: child,
+    body: body,
   );
 }

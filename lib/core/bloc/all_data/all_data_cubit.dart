@@ -26,11 +26,11 @@ class AllDataCubit extends Cubit<AllDataState> {
     try {
       await launchRepository.getAllLaunches();
       await rocketRepository.getAllRockets();
-      await historyRepository.getAllEvents();
+      //await historyRepository.getAllEvents();
       await launchpadRepository.getAllLaunchpads();
       emit(AllDataStateLoaded());
     } catch (e) {
-      print(e);
+      print('AllDataCubit::getAllData ERROR: $e');
       emit(AllDataError());
     }
   }

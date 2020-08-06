@@ -38,20 +38,22 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.location_on),
           onTap: () => BlocProvider.of<AppNavigationCubit>(context).showLaunchpads(),
         ),
-        ListTile(
-          title: const Text('Historical Events'),
-          leading: Icon(Icons.history),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showHistory(),
-        ),
+        // ListTile(
+        //   title: const Text('Historical Events'),
+        //   leading: Icon(Icons.history),
+        //   onTap: () => BlocProvider.of<AppNavigationCubit>(context).showHistory(),
+        // ),
         ListTile(
           title: const Text('About SpaceX'),
           leading: Icon(Icons.info_outline),
-          onTap: null, // TODO: Implement about section
+          onTap: null, // TODO: Implement about screen with information about the company
         ),
         ListTile(
           title: const Text('Settings'),
           leading: Icon(Icons.settings),
-          onTap: null, // TODO: Implement settings section
+          onTap: () => showAboutDialog(
+            context: context,
+          ), // TODO: Implement settings screen
         )
       ],
     ),

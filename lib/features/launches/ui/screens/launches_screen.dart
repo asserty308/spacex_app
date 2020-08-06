@@ -25,7 +25,7 @@ class LaunchesScreen extends StatelessWidget {
       _seaerchButton,
       _toggleLaunchesButton,
     ],
-    child: _body,
+    body: _body,
   );
 
   Widget get _seaerchButton => BlocBuilder<LaunchListBloc, LaunchListState>(

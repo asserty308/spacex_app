@@ -25,6 +25,7 @@ class AllEventsListCubit extends Cubit<AllEventsListState> {
 
       emit(AllEventsListLoaded(events));
     } catch (e) {
+      print('AllEventsListCubit::getAllEvents ERROR: $e');
       emit(AllEventsListError());
     }
   }

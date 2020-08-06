@@ -38,7 +38,8 @@ class LaunchModel {
   final DateTime date, staticFireDate;
   final DatePrecision datePrecision;
   final bool tbd, net, success, upcoming, autoUpdate;
-  final List<dynamic> failures, crew, ships, capsules, payloads;
+  final List<String> failures, crew, ships, capsules;
+  final List<dynamic> payloads;
   final LaunchFairingsModel fairings;
   final List<LaunchCoreModel> cores;
   final LaunchLinksModel links;
@@ -54,13 +55,13 @@ class LaunchModel {
     window = json['window'],
     rocket = json['rocket'],
     success = json['success'],
-    failures = json['failures'],
+    failures = List<String>.from(json['failures']),
     upcoming = json['upcoming'],
     details = json['details'],
     fairings = json['fairings'] == null ? null : LaunchFairingsModel.fromJSON(json['fairings']),
-    crew = json['crew'],
-    ships = json['ships'],
-    capsules = json['capsules'],
+    crew = List<String>.from(json['crew']),
+    ships = List<String>.from(json['ships']),
+    capsules = List<String>.from(json['capsules']),
     payloads = json['payloads'],
     launchpad = json['launchpad'],
     cores = LaunchCoreModel.fromList(json['cores']),

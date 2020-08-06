@@ -25,6 +25,7 @@ class LaunchInfoCubit extends Cubit<LaunchInfoState> {
       final launchpad = await launchpadRepository.getLaunchpad(launch.launchpad);
       emit(LaunchInfoLoaded(rocket: rocket, launchpad: launchpad));
     } catch (e) {
+      print('LaunchInfoCubit::loadData ERROR: $e');
       emit(LaunchInfoError());
     }
   }

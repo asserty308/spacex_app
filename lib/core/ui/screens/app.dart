@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
 
   // Functions
 
-  // TODO: Setup for iOS
+  // TODO: Setup firebase messaging for iOS
   void initMessaging() {
     if (kIsWeb) {
       // Not supported on web

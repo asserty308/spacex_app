@@ -25,7 +25,7 @@ class RocketCarouselCubit extends Cubit<RocketCarouselState> {
 
       emit(RocketCarouselLoaded(rockets));
     } catch (e) {
-      print('RocketCarouselCubit.loadRockets ERROR: $e');
+      print('RocketCarouselCubit::loadRockets ERROR: $e');
       emit(RocketCarouselError());
     }
   }

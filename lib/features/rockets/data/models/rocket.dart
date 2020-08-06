@@ -67,7 +67,7 @@ class RocketModel {
     secondStage = RocketSecondStage.fromJSON(json['second_stage']),
     engines = RocketEngines.fromJSON(json['engines']),
     landingLegs = RocketLandingLegs.fromJSON(json['landing_legs']),
-    flickrImages = json['flickr_images'],
+    flickrImages = List<String>.from(json['flickr_images']),
     wikipedia = json['wikipedia'],
     description = json['description'];
 }

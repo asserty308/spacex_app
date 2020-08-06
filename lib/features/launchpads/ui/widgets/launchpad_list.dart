@@ -39,7 +39,7 @@ class _LaunchpadListState extends State<LaunchpadList> {
     },
   );
 
-  Widget buildList(List<Launchpad> launchpads) {
+  Widget buildList(List<LaunchpadModel> launchpads) {
     return ListView.builder(
       itemCount: launchpads.length,
       itemBuilder: (context, i) {

@@ -11,7 +11,7 @@ class _AllRocketsScreenState extends State<AllRocketsScreen> {
   @override
   Widget build(BuildContext context) => AppScaffold(
     title: const Text('SpaceX Rockets'),
-    child: Container(
+    body: Container(
       child: RocketCarousel()
     )
   );

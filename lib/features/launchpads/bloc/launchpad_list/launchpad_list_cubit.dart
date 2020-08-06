@@ -26,7 +26,7 @@ class LaunchpadListCubit extends Cubit<LaunchpadListState> {
 
       emit(LaunchpadListLoaded(launchpads));
     } catch (e) {
-      print('LaunchpadListCubit.loadData ERROR: $e');
+      print('LaunchpadListCubit::loadData ERROR: $e');
       emit(LaunchpadListError());
     }
   }

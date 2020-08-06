@@ -1,4 +1,3 @@
-import 'package:spacex_guide/core/data/services/network_info.dart';
 import 'package:spacex_guide/features/launches/data/datasources/local/launches_local_datasource.dart';
 import 'package:spacex_guide/features/launches/data/datasources/remote/launch_remote_datasource.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
@@ -11,10 +10,11 @@ class LaunchRepository {
       return LaunchesLocalDS.allLaunches;
     }
 
+    // TODO: Offline handling (local datasource with cached data)
+
     // final connected = await NetworkInfo.isConnected;
 
     // if (!connected) {
-    //   // TODO: Offline handling (local datasource with cached data)
     //   throw Exception('App is not connected to the internet');
     // }
 
@@ -35,13 +35,6 @@ class LaunchRepository {
   }
 
   Future<LaunchModel> getLaunchWithId(int id) async {
-    final connected = await NetworkInfo.isConnected;
-
-    if (!connected) {
-      // TODO: Offline handling (local datasource with cached data)
-      throw Exception('App is not connected to the internet');
-    }
-
     final launches = await _remoteDatasource.getLaunchWithId(id);
     return launches;
   }

@@ -8,7 +8,7 @@ class LaunchpadListLoading extends LaunchpadListState {}
 
 class LaunchpadListLoaded extends LaunchpadListState {
   LaunchpadListLoaded(this.allLaunchpads);
-  final List<Launchpad> allLaunchpads;
+  final List<LaunchpadModel> allLaunchpads;
 }
 
 class LaunchpadListError extends LaunchpadListState {}

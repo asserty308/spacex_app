@@ -18,7 +18,7 @@ class LaunchLinksModel {
 
   final String patchSmall, patchLarge;
   final String redditCampaign, redditLaunch, redditMedia, redditRecovery;
-  final List<dynamic> flickrSmall, flickrOriginal;
+  final List<String> flickrSmall, flickrOriginal;
   final String presskit;
   final String webcast;
   final String article;
@@ -31,8 +31,8 @@ class LaunchLinksModel {
     redditLaunch = json['reddit']['launch'],
     redditMedia = json['reddit']['media'],
     redditRecovery = json['reddit']['recovery'],
-    flickrSmall = json['flickr']['small'],
-    flickrOriginal = json['flickr']['original'],
+    flickrSmall = List<String>.from(json['flickr']['small']),
+    flickrOriginal = List<String>.from(json['flickr']['original']),
     presskit = json['presskit'],
     webcast = json['webcast'],
     article = json['article'],
