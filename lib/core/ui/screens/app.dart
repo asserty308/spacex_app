@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/themes/default_theme.dart';
+import 'package:spacex_guide/features/about/ui/screens/about_screen.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
@@ -56,6 +57,10 @@ class _MyAppState extends State<MyApp> {
 
       if (state is AppNavigationStateLaunchpads) {
         return AllLaunchpadsScreen();
+      }
+
+      if (state is AppNavigationStateAbout) {
+        return AboutScreen();
       }
 
       return Container();

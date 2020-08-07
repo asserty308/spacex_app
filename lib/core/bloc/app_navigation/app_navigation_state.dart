@@ -6,3 +6,4 @@ class AppNavigationStateLaunches extends AppNavigationState {}
 class AppNavigationStateRockets extends AppNavigationState {}
 class AppNavigationStateHistory extends AppNavigationState {}
 class AppNavigationStateLaunchpads extends AppNavigationState {}
+class AppNavigationStateAbout extends AppNavigationState {}

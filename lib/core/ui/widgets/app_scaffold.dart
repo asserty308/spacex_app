@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 
-// TODO: Apply responsive layout 
-
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     Key key, 
@@ -18,13 +16,27 @@ class AppScaffold extends StatelessWidget {
   final List<Widget> actions;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: title,
-      centerTitle: true,
-      actions: actions,
-    ),
-    drawer: drawerEnabled ? AppDrawer() : null,
-    body: body,
-  );
+  Widget build(BuildContext context) => _responsiveScaffold(context);
+
+  Widget _responsiveScaffold(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
+    return Row(
+      children: [
+        if (!isMobile)
+          AppDrawer(),
+        Expanded(
+          child: Scaffold(
+            appBar: AppBar(
+              title: title,
+              centerTitle: true,
+              actions: actions,
+            ),
+            drawer: drawerEnabled && isMobile ? AppDrawer() : null,
+            body: body,
+          ),
+        ),
+      ],
+    );
+  }
 }

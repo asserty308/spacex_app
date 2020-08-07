@@ -10,4 +10,5 @@ class AppNavigationCubit extends Cubit<AppNavigationState> {
   void showRockets() => emit(AppNavigationStateRockets());
   void showHistory() => emit(AppNavigationStateHistory());
   void showLaunchpads() => emit(AppNavigationStateLaunchpads());
+  void showAboutScreen() => emit(AppNavigationStateAbout());
 }
