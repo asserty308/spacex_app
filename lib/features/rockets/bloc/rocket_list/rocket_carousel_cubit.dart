@@ -27,7 +27,7 @@ class RocketCarouselCubit extends Cubit<RocketCarouselState> {
 
       // This is an ugly solution to fix the issue that the initial page is not sized properly on the first load
       // TODO: Find a better way to fix the issue
-      await Future.delayed(Duration(milliseconds: 1));
+      await Future.delayed(Duration(milliseconds: 50));
       emit(RocketCarouselLoaded(rockets));
     } catch (e) {
       print('RocketCarouselCubit::loadRockets ERROR: $e');

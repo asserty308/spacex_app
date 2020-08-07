@@ -72,7 +72,7 @@ class LaunchesScreen extends StatelessWidget {
       if (state is LaunchListStatePreviousLoaded) {
         return LaunchList(
           launches: state.launches,
-          showNextLaunch: true,
+          showNextLaunch: false,
         );
       }
 

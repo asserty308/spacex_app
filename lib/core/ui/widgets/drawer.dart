@@ -46,7 +46,7 @@ class AppDrawer extends StatelessWidget {
         ListTile(
           title: const Text('About SpaceX'),
           leading: Icon(Icons.info_outline),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showAboutScreen(), // TODO: Implement about screen with information about the company
+          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showAboutScreen(),
         ),
         ListTile(
           title: const Text('Settings'),
