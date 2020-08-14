@@ -32,27 +32,16 @@ class LaunchDetailActions extends StatelessWidget {
   }
 
   Future<void> showPresskit(BuildContext context) async {
-    final presskit = launch.links.presskit;
-    if (presskit == null || presskit.isEmpty) {
-      showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.');
-      return;
-    }
-
-    BlocProvider.of<AppNavigationCubit>(context).launchUrl(presskit);
-
-    // showScreen(context, PDFScreen(
-    //   title: '${launch.name} Presskit', 
-    //   url: presskit
-    // ));
+    BlocProvider.of<AppNavigationCubit>(context).launchUrl(
+      launch.links.presskit, 
+      () => showOKDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.')
+    );
   }
 
   Future<void> playVideo(BuildContext context) async {
-    final webcast = launch.links.webcast;
-    if (webcast == null || webcast.isEmpty) {
-      showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.');
-      return;
-    }
-
-    BlocProvider.of<AppNavigationCubit>(context).launchUrl(webcast);
+    BlocProvider.of<AppNavigationCubit>(context).launchUrl(
+      launch.links.webcast, 
+      () => showOKDialog(context, 'Unavailable', 'There is no video availavle for this launch.')
+    );
   }
 }

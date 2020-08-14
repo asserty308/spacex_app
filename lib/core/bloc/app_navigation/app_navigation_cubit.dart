@@ -13,11 +13,17 @@ class AppNavigationCubit extends Cubit<AppNavigationState> {
   void showLaunchpads() => emit(AppNavigationStateLaunchpads());
   void showAboutScreen() => emit(AppNavigationStateAbout());
 
-  Future<void> launchUrl(String url) async {
+  Future<void> launchUrl(String url, Function() onError) async {
+    if (url == null || url.isEmpty) {
+      onError();
+      return;
+    }
+    
     if (await canLaunch(url)) {
       launch(url);
     } else {
       print('AppNavigationCubit::launchURL ERROR on $url');
+      onError();
     }
   }
 }

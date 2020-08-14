@@ -29,7 +29,7 @@ class CompanyInfo extends StatelessWidget {
   Widget _founderTile(BuildContext context) => ListTile(
     title: Text('Founder', style: TextStyle(color: Colors.white),),
     subtitle: Text(state.info.founder, style: TextStyle(color: Colors.white),),
-    onTap: () => BlocProvider.of<AppNavigationCubit>(context).launchUrl(state.info.links.elonTwitter),
+    onTap: () => BlocProvider.of<AppNavigationCubit>(context).launchUrl(state.info.links.elonTwitter, () => null),
   );
 
   Widget get _foundedTile => ListTile(
