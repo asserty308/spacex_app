@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/ui/widgets/company_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // TODO: Fetch and display data
 

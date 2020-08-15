@@ -4,7 +4,6 @@ import 'package:flutter_core/ui/dialogs.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class LaunchDetailActions extends StatelessWidget {
   const LaunchDetailActions({
