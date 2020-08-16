@@ -5,6 +5,7 @@ import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/sliver_scrollview.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -57,30 +58,16 @@ class LaunchDetailScreen extends StatelessWidget {
     },
   );
 
-  Widget _body(LaunchDetailsStateLoaded state) => NestedScrollView(
-    headerSliverBuilder: (context, innerBoxIsScrolled) {
-      return <Widget>[
-        SliverAppBar(
-          expandedHeight: 200.0,
-          floating: false,
-          pinned: true,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => _dismissScreen(context),
-          ),
-          flexibleSpace: FlexibleSpaceBar(
-            background: ImageCarousel(
-              imageUrls: state.imageUrls,
-            ),
-          ),
-        )
-      ];
-    },
+  Widget _body(LaunchDetailsStateLoaded state) => SliverScrollView(
+    header: ImageCarousel(
+      imageUrls: state.imageUrls,
+    ), 
     body: Container(
       child: LaunchInfo(
         launch: launch,
       ),
-    )
+    ),
+    onBackPressed: (context) => _dismissScreen(context),
   );
 
   // Function
