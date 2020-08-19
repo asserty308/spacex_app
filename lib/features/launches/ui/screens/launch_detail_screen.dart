@@ -4,8 +4,8 @@ import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/clipper/launch_details_clipper.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/sliver_scrollview.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -16,7 +16,7 @@ class LaunchDetailScreen extends StatelessWidget {
 
   LaunchDetailScreen({
     Key key, 
-    this.launch
+    @required this.launch
   }) : super(key: key);
 
   @override
@@ -51,23 +51,52 @@ class LaunchDetailScreen extends StatelessWidget {
       }
 
       if (state is LaunchDetailsStateLoaded) {
-        return _body(state);
+        return _body2(state);
       }
       
       return Container();
     },
   );
 
-  Widget _body(LaunchDetailsStateLoaded state) => SliverScrollView(
-    header: ImageCarousel(
-      imageUrls: state.imageUrls,
-    ), 
-    body: Container(
-      child: LaunchInfo(
-        launch: launch,
+  // Widget _body(LaunchDetailsStateLoaded state) => SliverScrollView(
+  //   header: ImageCarousel(
+  //     imageUrls: state.imageUrls,
+  //   ), 
+  //   body: Container(
+  //     child: LaunchInfo(
+  //       launch: launch,
+  //     ),
+  //   ),
+  //   onBackPressed: (context) => _dismissScreen(context),
+  // );
+
+  Widget _body2(LaunchDetailsStateLoaded state) => Stack(
+    children: [
+      ImageCarousel(imageUrls: state.imageUrls,),
+      Padding(
+        padding: EdgeInsets.only(top: 100),
+        child: ClipPath(
+          clipper: LaunchDetailsClipperClipper(heightPx: 100),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.black26, Colors.black],
+              )
+            ),
+          ),
+        ),
       ),
-    ),
-    onBackPressed: (context) => _dismissScreen(context),
+      Padding(
+        padding: EdgeInsets.only(top: 200),
+        child: Container(
+          child: LaunchInfo(
+            launch: launch,
+          )
+        )
+      ),
+    ],
   );
 
   // Function
