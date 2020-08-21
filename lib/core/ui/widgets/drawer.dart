@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/ui/widgets/center_text.dart';
+import 'package:flutter_core/ui/extensions/widget_extension.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -14,7 +14,7 @@ class AppDrawer extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.black,
           ),
-          child: const CenterText(
+          child: const Text(
             'SpaceX',
             style: TextStyle(
               color: Colors.white,
@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
           ),
-        ),
+        ).centered,
         ListTile(
           title: const Text('Launches'),
           leading: Icon(Icons.label),

@@ -3,7 +3,7 @@ import 'package:spacex_guide/features/company_info/data/models/company_info.dart
 
 class CompanyInfoApi extends SpaceXApi {
   Future<CompanyInfoModel> getCompanyInfo() async {
-    final response = await fetchJSON('company/');
+    final response = await requestJSON('company/');
     return CompanyInfoModel.fromJSON(response);
   }
 }

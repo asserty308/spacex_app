@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/widgets/center_text.dart';
+import 'package:flutter_core/ui/extensions/widget_extension.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketCard extends StatelessWidget {
@@ -45,10 +45,10 @@ class RocketCard extends StatelessWidget {
           color: const Color.fromARGB(20, 0, 0, 0),
         ),
         // Title
-        CenterText(
+        Text(
           rocket.name,
           style: _titleStyle,
-        ),
+        ).centered,
       ]
     )
   );

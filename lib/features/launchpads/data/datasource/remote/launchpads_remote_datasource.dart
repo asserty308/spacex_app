@@ -4,7 +4,7 @@ import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 class LaunchpadRemoteDatasource extends SpaceXApi {
   /// Calls the launchpads endpoint on the SpaceX api
   Future<List<LaunchpadModel>> getAllLaunchpads() async {
-    final response = await fetchJSON('launchpads/');
+    final response = await requestJSON('launchpads/');
 
     final list = <LaunchpadModel>[];
     response.forEach((launch) => list.add(LaunchpadModel.fromJSON(launch)));
@@ -12,7 +12,7 @@ class LaunchpadRemoteDatasource extends SpaceXApi {
   }
 
   Future<LaunchpadModel> getLaunchpad(String id) async {
-    final response = await fetchJSON('launchpads/$id');
+    final response = await requestJSON('launchpads/$id');
     return LaunchpadModel.fromJSON(response);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/routing/routing.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_list/rocket_carousel_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
@@ -72,10 +71,8 @@ class RocketCarousel extends StatelessWidget {
 
   // Functions
 
-  void _showRocketScreen(BuildContext context, RocketModel rocket) => showScreen(
-    context, 
-    RocketDetailsScreen(
+  void _showRocketScreen(BuildContext context, RocketModel rocket) => Navigator.of(context).push(
+    PageRouteBuilder(pageBuilder: (context, a1, a2) => RocketDetailsScreen(
       rocket: rocket,
-    )
-  );
+    )));
 }

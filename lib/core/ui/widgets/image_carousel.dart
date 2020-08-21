@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_core/utility/extensions/int_duration.dart';
 
 class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
@@ -22,7 +21,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         height: double.infinity, // set big height to make the images fit inside the given space without bottom border
         viewportFraction: 1.0, // make image use the full screen width
         autoPlay: true,
-        autoPlayInterval: 5.toSeconds(),
+        autoPlayInterval: Duration(seconds: 5),
         pauseAutoPlayOnTouch: true,
         enlargeCenterPage: false,
         enableInfiniteScroll: widget.imageUrls.length > 1,
