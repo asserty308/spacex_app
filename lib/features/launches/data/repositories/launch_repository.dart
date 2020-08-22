@@ -1,9 +1,14 @@
 import 'package:spacex_guide/features/launches/data/datasources/local/launches_local_datasource.dart';
 import 'package:spacex_guide/features/launches/data/datasources/remote/launch_remote_datasource.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:meta/meta.dart';
 
 class LaunchRepository {
-  final _remoteDatasource = LaunchRemoteDatasource();
+  LaunchRepository({
+    @required this.launchRemoteDatasource,
+  });
+
+  final LaunchApi launchRemoteDatasource;
 
   Future<List<LaunchModel>> getAllLaunches() async {
     if (LaunchesLocalDS.allLaunches != null && LaunchesLocalDS.allLaunches.isNotEmpty) {
@@ -18,7 +23,7 @@ class LaunchRepository {
     //   throw Exception('App is not connected to the internet');
     // }
 
-    LaunchesLocalDS.allLaunches = await _remoteDatasource.getAllLaunches();
+    LaunchesLocalDS.allLaunches = await launchRemoteDatasource.getAllLaunches();
     return LaunchesLocalDS.allLaunches;
   }
 
@@ -35,7 +40,7 @@ class LaunchRepository {
   }
 
   Future<LaunchModel> getLaunchWithId(int id) async {
-    final launches = await _remoteDatasource.getLaunchWithId(id);
+    final launches = await launchRemoteDatasource.getLaunchWithId(id);
     return launches;
   }
 

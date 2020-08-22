@@ -94,8 +94,7 @@ class EventListTile extends StatelessWidget {
   Future<void> showWikipedia(BuildContext context) async => showWebView(context, event.wikiUrl, event.title);
 
   Future<void> showLaunch(BuildContext context) async {
-    final repo = LaunchRepository();
-    final launch = await repo.getLaunchWithId(event.flightNumber);
+    final launch = await RepositoryProvider.of<LaunchRepository>(context).getLaunchWithId(event.flightNumber);
     BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
   }
 }

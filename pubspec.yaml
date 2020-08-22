@@ -33,6 +33,7 @@ dependencies:
   webview_flutter:
   flutter_map:
   firebase_messaging:
+  get_it:
 
 dev_dependencies:
   flutter_test:

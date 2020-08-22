@@ -1,7 +1,7 @@
 import 'package:spacex_guide/core/data/datasources/remote/spacex_api.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
-class RocketsRemoteDatasource extends SpaceXApi {
+class RocketsApi extends SpaceXApi {
   /// Calls the rockets endpoint endpoint on the SpaceX api.
   Future<List<RocketModel>> getAllRockets() async {
     final response = await requestJSON('rockets/');

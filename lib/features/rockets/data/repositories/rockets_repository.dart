@@ -1,16 +1,21 @@
 import 'package:spacex_guide/features/rockets/data/datasources/local/rockets_local_datasource.dart';
 import 'package:spacex_guide/features/rockets/data/datasources/remote/rockets_remote_datasource.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:meta/meta.dart';
 
 class RocketRepository {
-  final _remoteDatasource = RocketsRemoteDatasource();
+  RocketRepository({
+    @required this.rocketsRemoteDatasource,
+  });
+
+  final RocketsApi rocketsRemoteDatasource;
 
   Future<List<RocketModel>> getAllRockets() async {
     if (RocketsLocalDatasource.allRockets != null && RocketsLocalDatasource.allRockets.isEmpty) {
       return RocketsLocalDatasource.allRockets;
     }
 
-    RocketsLocalDatasource.allRockets = await _remoteDatasource.getAllRockets();
+    RocketsLocalDatasource.allRockets = await rocketsRemoteDatasource.getAllRockets();
     return RocketsLocalDatasource.allRockets;
   }
 
@@ -19,6 +24,6 @@ class RocketRepository {
       return RocketsLocalDatasource.allRockets.firstWhere((element) => element.id == id);
     }
 
-    return _remoteDatasource.getRocket(id);
+    return rocketsRemoteDatasource.getRocket(id);
   }
 }

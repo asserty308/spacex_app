@@ -21,8 +21,8 @@ class AppDrawer extends StatelessWidget {
               fontSize: 23,
               fontWeight: FontWeight.bold
             ),
-          ),
-        ).centered,
+          ).centered,
+        ),
         ListTile(
           title: const Text('Launches'),
           leading: Icon(Icons.label),

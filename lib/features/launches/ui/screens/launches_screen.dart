@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/services/alerts.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
@@ -54,7 +55,7 @@ class LaunchesScreen extends StatelessWidget {
   Widget get _body => BlocConsumer<LaunchListBloc, LaunchListState>(
     listener: (context, state) {
       if (state is LaunchListStateError) {
-        RepositoryProvider.of<AlertService>(context).showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
+        GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
       }
     },
     builder: (context, state) {
