@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 
-class LaunchDetailsClipperClipper extends CustomClipper<Path> {
-  LaunchDetailsClipperClipper({
+class LaunchDetailsClipper extends CustomClipper<Path> {
+  LaunchDetailsClipper({
     this.heightPx, 
     this.heightPercentage = 0
   });
@@ -12,10 +12,17 @@ class LaunchDetailsClipperClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final height = heightPx.clamp(0, size.height) ?? size.height * heightPercentage.clamp(0, 1);
 
+    final controlPoint = Offset(size.width / 1.5, height / 3);
+    final endPoint = Offset(0, 0);
+    final bezier = Path();
+    bezier.lineTo(size.width, 0);
+    bezier.lineTo(size.width, height);
+    bezier.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+
     return Path.combine(
       PathOperation.difference,
       Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height)),
-      Path()..addPolygon([Offset(0, 0), Offset(size.width, 0), Offset(size.width, height)], true)
+      bezier,
     );
   }
 

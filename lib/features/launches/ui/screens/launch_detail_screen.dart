@@ -4,8 +4,8 @@ import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
+import 'package:spacex_guide/features/launches/ui/clipper/launch_details_clipper.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/sliver_scrollview.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -41,8 +41,6 @@ class LaunchDetailScreen extends StatelessWidget {
       },
     ),
   );
-  
-  
 
   Widget get _blocBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(
     builder: (context, state) {
@@ -58,46 +56,36 @@ class LaunchDetailScreen extends StatelessWidget {
     },
   );
 
-  Widget _body(LaunchDetailsStateLoaded state) => SliverScrollView(
-    header: ImageCarousel(
-      imageUrls: state.imageUrls,
-    ), 
-    body: Container(
-      child: LaunchInfo(
-        launch: launch,
+  Widget _body(LaunchDetailsStateLoaded state) => Stack(
+    children: [
+      ImageCarousel(imageUrls: state.imageUrls,),
+      Padding(
+        padding: EdgeInsets.only(top: 100),
+        child: ClipPath(
+          clipper: LaunchDetailsClipper(heightPx: 100),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.black26, Colors.black],
+                stops: [0.0, 0.8] // bottom 20% are black
+              )
+            ),
+            child: LaunchInfo(
+              launch: launch,
+            ),
+          ),
+        ),
       ),
-    ),
-    onBackPressed: (context) => _dismissScreen(context),
+      Align(
+        alignment: Alignment.topCenter,
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+        ),
+      )
+    ],
   );
-
-  // Widget _body2(LaunchDetailsStateLoaded state) => Stack(
-  //   children: [
-  //     ImageCarousel(imageUrls: state.imageUrls,),
-  //     Padding(
-  //       padding: EdgeInsets.only(top: 100),
-  //       child: ClipPath(
-  //         clipper: LaunchDetailsClipperClipper(heightPx: 100),
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             gradient: LinearGradient(
-  //               begin: Alignment.topCenter,
-  //               end: Alignment.bottomCenter,
-  //               colors: [Colors.black26, Colors.black],
-  //             )
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     Padding(
-  //       padding: EdgeInsets.only(top: 200),
-  //       child: Container(
-  //         child: LaunchInfo(
-  //           launch: launch,
-  //         )
-  //       )
-  //     ),
-  //   ],
-  // );
 
   // Function
 
