@@ -59,32 +59,31 @@ class LaunchDetailScreen extends StatelessWidget {
   Widget _body(LaunchDetailsStateLoaded state) => Stack(
     children: [
       ImageCarousel(imageUrls: state.imageUrls,),
-      Padding(
-        padding: EdgeInsets.only(top: 100),
-        child: ClipPath(
-          clipper: LaunchDetailsClipper(heightPx: 100),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.black26, Colors.black],
-                stops: [0.0, 0.8] // bottom 20% are black
-              )
-            ),
-            child: LaunchInfo(
-              launch: launch,
-            ),
-          ),
+      _launchInfoBody,
+      AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+    ],
+  );
+
+  Widget get _launchInfoBody => Padding(
+    padding: EdgeInsets.only(top: 150),
+    child: ClipPath(
+      clipper: LaunchDetailsClipper(heightPx: 100),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.black26, Colors.black],
+            stops: [0.0, 0.8] // bottom 20% are black
+          )
+        ),
+        child: LaunchInfo(
+          launch: launch,
         ),
       ),
-      Align(
-        alignment: Alignment.topCenter,
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-        ),
-      )
-    ],
+    ),
   );
 
   // Function
