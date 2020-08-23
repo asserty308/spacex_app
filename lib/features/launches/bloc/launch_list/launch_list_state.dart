@@ -5,8 +5,12 @@ class LaunchListStateInitial extends LaunchListState {}
 class LaunchListStateLoading extends LaunchListState {}
 
 class LaunchListStateUpcomingLoaded extends LaunchListState {
-  LaunchListStateUpcomingLoaded(this.launches);
-  final List<LaunchModel> launches;
+  LaunchListStateUpcomingLoaded({
+    this.scheduled, 
+    this.nonScheduled
+  });
+  
+  final List<LaunchModel> scheduled, nonScheduled;
 }
 
 class LaunchListStatePreviousLoaded extends LaunchListState {

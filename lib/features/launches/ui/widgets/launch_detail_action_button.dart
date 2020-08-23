@@ -23,7 +23,7 @@ class LaunchDetailActionButton extends StatelessWidget {
         foregroundColor: _foregroundColor,
         radius: _radius,
       ),
-      onTap: onTap,
+      onTap: () => onTap(),
     );
   }
 }

@@ -36,6 +36,7 @@ class LaunchInfo extends StatelessWidget {
   );
   
   Widget _listView(RocketModel rocket, LaunchpadModel launchpad) => ListView(
+    padding: EdgeInsets.only(top: 24),
     children: <Widget>[
       ListTile(
         leading: launch.links.patchSmall != null ? Image.network(launch.links.patchSmall) : null,

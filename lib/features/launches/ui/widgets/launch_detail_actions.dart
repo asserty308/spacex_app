@@ -34,14 +34,14 @@ class LaunchDetailActions extends StatelessWidget {
   Future<void> showPresskit(BuildContext context) async {
     BlocProvider.of<AppNavigationCubit>(context).launchUrl(
       launch.links.presskit, 
-      () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.')
+      onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.')
     );
   }
 
   Future<void> playVideo(BuildContext context) async {
     BlocProvider.of<AppNavigationCubit>(context).launchUrl(
       launch.links.webcast, 
-      () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no video availavle for this launch.')
+      onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no video availavle for this launch.')
     );
   }
 }

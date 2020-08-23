@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_list.dart';
 
 class LaunchSearchDelegate extends SearchDelegate<LaunchModel> {
   LaunchSearchDelegate({this.launchData});
@@ -65,9 +65,8 @@ class LaunchSearchDelegate extends SearchDelegate<LaunchModel> {
       // l.rocket?.name?.toLowerCase()?.contains(lowerQuery) == true
     ).toList();
 
-    return LaunchList(
+    return PreviousLaunchList(
       launches: launches,
-      showNextLaunch: false,
     );
   }
 }

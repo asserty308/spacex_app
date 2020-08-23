@@ -5,8 +5,8 @@ import 'package:spacex_guide/features/launches/data/repositories/launch_reposito
 
 part 'launch_list_state.dart';
 
-class LaunchListBloc extends Cubit<LaunchListState> {
-  LaunchListBloc({
+class LaunchListCubit extends Cubit<LaunchListState> {
+  LaunchListCubit({
     @required this.launchRepository,
   }) : super(LaunchListStateInitial());
 
@@ -15,7 +15,9 @@ class LaunchListBloc extends Cubit<LaunchListState> {
   Future<void> loadUpcomingLaunches() async {
     emit(LaunchListStateLoading());
     final upcoming = await launchRepository.getUpcomingLaunches();
-    emit(LaunchListStateUpcomingLoaded(upcoming));
+    final scheduled = upcoming.where((element) => element.datePrecision == DatePrecision.hour).toList();
+    final nonScheduled = upcoming.where((element) => element.datePrecision != DatePrecision.hour).toList();
+    emit(LaunchListStateUpcomingLoaded(scheduled: scheduled, nonScheduled: nonScheduled));
   }
 
   Future<void> loadPreviousLaunches() async {

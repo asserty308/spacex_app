@@ -34,6 +34,10 @@ class LaunchDetailScreen extends StatelessWidget {
       child: Scaffold(
         key: _scaffoldKey,
         body: _blocBuilder,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+        ),
+        extendBodyBehindAppBar: true,
       ),
       onWillPop: () async {
         _dismissScreen(context);
@@ -60,9 +64,6 @@ class LaunchDetailScreen extends StatelessWidget {
     children: [
       ImageCarousel(imageUrls: state.imageUrls,),
       _launchInfoBody,
-      AppBar(
-        backgroundColor: Colors.transparent,
-      ),
     ],
   );
 

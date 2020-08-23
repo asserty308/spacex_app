@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/services/alerts.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:get_it/get_it.dart';
-import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
+import 'package:spacex_guide/core/ui/widgets/sliver_app_scaffold.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/screens/delegates/launch_search_delegate.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_list.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_list.dart';
 
 class LaunchesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LaunchListBloc(
+    create: (context) => LaunchListCubit(
       launchRepository: RepositoryProvider.of(context),
     )..loadUpcomingLaunches(),
     child: _scaffold(context),
@@ -20,39 +20,16 @@ class LaunchesScreen extends StatelessWidget {
 
   // Widgets
 
-  Widget _scaffold(BuildContext context) => AppScaffold(
+  Widget _scaffold(BuildContext context) => SliverAppScaffold(
     title: _title,
     actions: [
-      _seaerchButton,
+      _searchButton,
       _toggleLaunchesButton,
     ],
     body: _body,
   );
 
-  Widget get _seaerchButton => BlocBuilder<LaunchListBloc, LaunchListState>(
-    builder: (context, state) {
-      List<LaunchModel> launches = [];
-
-      if (state is LaunchListStatePreviousLoaded) {
-        launches = state.launches;
-      }
-
-      if (state is LaunchListStateUpcomingLoaded) {
-        launches = state.launches;
-      }
-
-      if (launches == null || launches.isEmpty) {
-        return Container();
-      }
-
-      return IconButton(
-        icon: Icon(Icons.search),
-        onPressed: () => showLaunchSearch(context, launches),
-      );
-    }
-  );
-
-  Widget get _body => BlocConsumer<LaunchListBloc, LaunchListState>(
+  Widget get _body => BlocConsumer<LaunchListCubit, LaunchListState>(
     listener: (context, state) {
       if (state is LaunchListStateError) {
         GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
@@ -60,52 +37,29 @@ class LaunchesScreen extends StatelessWidget {
     },
     builder: (context, state) {
       if (state is LaunchListStateLoading) {
-        return CenterProgressIndicator();
+        return SliverToBoxAdapter(child: CenterProgressIndicator());
       }
 
       if (state is LaunchListStateUpcomingLoaded) {
-        return LaunchList(
-          launches: state.launches,
-          showNextLaunch: true,
+        return UpcomingLaunchList(
+          scheduled: state.scheduled,
+          nonScheduled: state.nonScheduled,
         );
       }
 
       if (state is LaunchListStatePreviousLoaded) {
-        return LaunchList(
+        return PreviousLaunchList(
           launches: state.launches,
-          showNextLaunch: false,
         );
       }
 
-      return Container();
+      return SliverToBoxAdapter(child: Container());
     }
   );
 
-  Widget get _toggleLaunchesButton => BlocBuilder<LaunchListBloc, LaunchListState>(
-    builder: (context, state) { 
-      final isUpcoming = state is LaunchListStateUpcomingLoaded;
-      final isPrevious = state is LaunchListStatePreviousLoaded;
+  // AppBar
 
-      // Only show button when state is previous or upcoming
-      if (!isUpcoming && !isPrevious) {
-        return Container();
-      }
-
-      return IconButton(
-        icon: Icon(isUpcoming ? Icons.history : Icons.cloud_upload),
-        onPressed: () {
-          if (isUpcoming) {
-            BlocProvider.of<LaunchListBloc>(context).loadPreviousLaunches();
-            return;
-          }
-
-          BlocProvider.of<LaunchListBloc>(context).loadUpcomingLaunches();
-        }
-      );
-    }
-  );
-
-  Widget get _title => BlocBuilder<LaunchListBloc, LaunchListState>(
+  Widget get _title => BlocBuilder<LaunchListCubit, LaunchListState>(
     builder: (context, state) {
       String text = '';
       if (state is LaunchListStatePreviousLoaded) {
@@ -120,12 +74,67 @@ class LaunchesScreen extends StatelessWidget {
     },
   );
 
+  Widget get _toggleLaunchesButton => BlocBuilder<LaunchListCubit, LaunchListState>(
+    builder: (context, state) { 
+      final isUpcoming = state is LaunchListStateUpcomingLoaded;
+      final isPrevious = state is LaunchListStatePreviousLoaded;
+
+      // Only show button when state is previous or upcoming
+      if (!isUpcoming && !isPrevious) {
+        return Container();
+      }
+
+      return IconButton(
+        icon: Icon(isUpcoming ? Icons.history : Icons.cloud_upload),
+        onPressed: () {
+          if (isUpcoming) {
+            BlocProvider.of<LaunchListCubit>(context).loadPreviousLaunches();
+            return;
+          }
+
+          BlocProvider.of<LaunchListCubit>(context).loadUpcomingLaunches();
+        }
+      );
+    }
+  );
+
+  Widget get _searchButton => BlocBuilder<LaunchListCubit, LaunchListState>(
+    builder: (context, state) {
+      List<LaunchModel> launches = [];
+
+      if (state is LaunchListStatePreviousLoaded) {
+        launches = state.launches;
+      }
+
+      if (state is LaunchListStateUpcomingLoaded) {
+        launches = state.scheduled;
+        launches.addAll(state.nonScheduled);
+      }
+
+      if (launches == null || launches.isEmpty) {
+        return Container();
+      }
+
+      return IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () => showLaunchSearch(context, launches),
+      );
+    }
+  );
+
   // Functions
 
-  void showLaunchSearch(BuildContext context, List<LaunchModel> launches) => showSearch<LaunchModel>(
-    context: context,
-    delegate: LaunchSearchDelegate(
-      launchData: launches,
-    ),
+  // TODO: Fix search for SliverAppBar
+  void showLaunchSearch(BuildContext context, List<LaunchModel> launches) => GetIt.I.get<AlertService>().showDismissDialog(
+    context, 
+    'Under construction', 
+    'The search is temporarily unavailable.'
   );
+  
+  // showSearch<LaunchModel>(
+  //   context: context,
+  //   delegate: LaunchSearchDelegate(
+  //     launchData: launches,
+  //   ),
+  // );
 }
