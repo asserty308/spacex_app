@@ -1,11 +1,8 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:spacex_guide/features/launches/data/models/launch.dart';
+part of 'launch_countdown_card.dart';
 
 class LaunchCountdown extends StatefulWidget {
   const LaunchCountdown({
-    this.launch,
+    @required this.launch,
     this.textColor = Colors.white,
     this.textSize = 25,
   });
@@ -31,23 +28,21 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
-      _countdownText,
-      style: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  @override
   void dispose() {
     _launchTimer.cancel();
     super.dispose();
   }
 
+  @override
+  Widget build(BuildContext context) => Text(
+    _countdownText,
+    style: TextStyle(
+      color: widget.textColor,
+      fontSize: widget.textSize,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+  
   /// Update every second
   void startUpdate() {
     _launchTimer = Timer.periodic(Duration(seconds: 1), (timer) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown_card.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown/launch_countdown_card.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.dart';
 import 'package:flutter_core/ui/extensions/widget_extension.dart';
 

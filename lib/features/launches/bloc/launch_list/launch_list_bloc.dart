@@ -15,8 +15,8 @@ class LaunchListCubit extends Cubit<LaunchListState> {
   Future<void> loadUpcomingLaunches() async {
     emit(LaunchListStateLoading());
     final upcoming = await launchRepository.getUpcomingLaunches();
-    final scheduled = upcoming.where((element) => element.datePrecision == DatePrecision.hour).toList();
-    final nonScheduled = upcoming.where((element) => element.datePrecision != DatePrecision.hour).toList();
+    final scheduled = upcoming.where((element) => element.isScheduled).toList();
+    final nonScheduled = upcoming.where((element) => !element.isScheduled).toList();
     emit(LaunchListStateUpcomingLoaded(scheduled: scheduled, nonScheduled: nonScheduled));
   }
 

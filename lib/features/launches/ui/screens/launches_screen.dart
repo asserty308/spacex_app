@@ -10,11 +10,16 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_l
 import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_list.dart';
 
 class LaunchesScreen extends StatelessWidget {
+  const LaunchesScreen({
+    Key key, 
+    @required this.launchListCubit
+  }) : super(key: key);
+
+  final LaunchListCubit launchListCubit;
+
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LaunchListCubit(
-      launchRepository: RepositoryProvider.of(context),
-    )..loadUpcomingLaunches(),
+  Widget build(BuildContext context) => BlocProvider.value(
+    value: launchListCubit..loadUpcomingLaunches(),
     child: _scaffold(context),
   );
 

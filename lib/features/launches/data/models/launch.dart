@@ -89,6 +89,8 @@ class LaunchModel {
     return '';
   }
 
+  bool get isScheduled => datePrecision == DatePrecision.hour;
+
   static DateTime _staticFireDateUnix(dynamic unix) {
     if (unix == null) {
       return null;

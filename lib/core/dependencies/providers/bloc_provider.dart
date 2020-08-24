@@ -25,6 +25,16 @@ class AppBlocProvider extends StatelessWidget {
       BlocProvider<LaunchesNavigationCubit>(
         create: (context) => LaunchesNavigationCubit(),
       ),
+      BlocProvider<LaunchListCubit>(
+        create: (context) => LaunchListCubit(
+          launchRepository: RepositoryProvider.of(context),
+        ),
+      ),
+      BlocProvider<LaunchDetailsCubit>(
+        create: (context) => LaunchDetailsCubit(
+          rocketRepository: RepositoryProvider.of<RocketRepository>(context),
+        ),
+      ),
     ],
     child: child,
   );

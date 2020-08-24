@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown.dart';
+
+part 'launch_countdown_text.dart';
 
 class LaunchCountdownCard extends StatelessWidget {
   const LaunchCountdownCard({
@@ -15,22 +18,25 @@ class LaunchCountdownCard extends StatelessWidget {
   final bool showLaunchOnTap;
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: _card(context),
-  );
+  Widget build(BuildContext context) => _body(context);
 
   // Widgets 
 
-  Widget _card(BuildContext context) => Card(
-    elevation: 1.0,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    margin: const EdgeInsets.all(8),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10)
+  /// Only show the countdown when the launch has been scheduled
+  Widget _body(BuildContext context) => launch.isScheduled ? _card(context) : Container();
+
+  Widget _card(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Card(
+      elevation: 1.0,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
+      ),
+      color: Colors.indigo,
+      child: _cardContent(context),
     ),
-    color: Colors.indigo,
-    child: _cardContent(context),
   );
 
   Widget _cardContent(BuildContext context) => InkWell(

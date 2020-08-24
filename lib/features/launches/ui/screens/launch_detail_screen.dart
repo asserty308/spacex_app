@@ -13,17 +13,17 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 class LaunchDetailScreen extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final LaunchModel launch;
+  final LaunchDetailsCubit launchDetailsCubit;
 
   LaunchDetailScreen({
     Key key, 
-    @required this.launch
+    @required this.launch,
+    @required this.launchDetailsCubit,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LaunchDetailsCubit(
-      rocketRepository: RepositoryProvider.of(context),
-    )..loadLaunchDetails(launch),
+  Widget build(BuildContext context) => BlocProvider.value(
+    value: launchDetailsCubit..loadLaunchDetails(launch),
     child: _willPopScope,
   );
 
