@@ -4,14 +4,17 @@ import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/ui/widgets/company_info.dart';
 
-// TODO: Fetch and display data
-
 class CompanyInfoScreen extends StatelessWidget {
+  const CompanyInfoScreen({
+    Key key, 
+    @required this.companyInfoScreenCubit
+  }) : super(key: key);
+
+  final CompanyInfoScreenCubit companyInfoScreenCubit;
+
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => CompanyInfoScreenCubit(
-      companyInfoRepository: RepositoryProvider.of(context),
-    )..loadCompanyInfo(),
+  Widget build(BuildContext context) => BlocProvider.value(
+    value: companyInfoScreenCubit..loadCompanyInfo(),
     child: _scaffold,
   );
 

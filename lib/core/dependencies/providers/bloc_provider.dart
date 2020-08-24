@@ -16,10 +16,10 @@ class AppBlocProvider extends StatelessWidget {
       ),
       BlocProvider<AllDataCubit>(
         create: (context) => AllDataCubit(
-          launchRepository: RepositoryProvider.of(context), 
-          rocketRepository: RepositoryProvider.of(context), 
-          historyRepository: RepositoryProvider.of(context), 
-          launchpadRepository: RepositoryProvider.of(context),
+          launchRepository: RepositoryProvider.of<LaunchRepository>(context), 
+          rocketRepository: RepositoryProvider.of<RocketRepository>(context), 
+          historyRepository: RepositoryProvider.of<HistoryRepository>(context), 
+          launchpadRepository: RepositoryProvider.of<LaunchpadRepository>(context),
         ),
       ),
       BlocProvider<LaunchesNavigationCubit>(
@@ -27,13 +27,24 @@ class AppBlocProvider extends StatelessWidget {
       ),
       BlocProvider<LaunchListCubit>(
         create: (context) => LaunchListCubit(
-          launchRepository: RepositoryProvider.of(context),
+          launchRepository: RepositoryProvider.of<LaunchRepository>(context),
         ),
       ),
       BlocProvider<LaunchDetailsCubit>(
         create: (context) => LaunchDetailsCubit(
           rocketRepository: RepositoryProvider.of<RocketRepository>(context),
         ),
+      ),
+      BlocProvider<LaunchInfoCubit>(
+        create: (context) => LaunchInfoCubit(
+          rocketRepository: RepositoryProvider.of<RocketRepository>(context),
+          launchpadRepository: RepositoryProvider.of<LaunchpadRepository>(context),
+        ),
+      ),
+      BlocProvider<CompanyInfoScreenCubit>(
+        create: (context) => CompanyInfoScreenCubit(
+          companyInfoRepository: RepositoryProvider.of<CompanyInfoRepository>(context),
+        )
       ),
     ],
     child: child,

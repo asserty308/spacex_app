@@ -4,32 +4,31 @@ import 'package:flutter_core/services/alerts.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_action_button.dart';
+
+part 'launch_detail_action_button.dart';
 
 class LaunchDetailActions extends StatelessWidget {
   const LaunchDetailActions({
     Key key,
-    this.launch,
+    @required this.launch,
   }) : super(key: key);
 
   final LaunchModel launch;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        LaunchDetailActionButton(
-          icon: Icon(Icons.ondemand_video), 
-          onTap: () => playVideo(context),
-        ),
-        LaunchDetailActionButton(
-          icon: Icon(Icons.insert_drive_file), 
-          onTap: () => showPresskit(context),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: <Widget>[
+      LaunchDetailActionButton(
+        icon: Icon(Icons.ondemand_video), 
+        onTap: () => playVideo(context),
+      ),
+      LaunchDetailActionButton(
+        icon: Icon(Icons.insert_drive_file), 
+        onTap: () => showPresskit(context),
+      ),
+    ],
+  );
 
   Future<void> showPresskit(BuildContext context) async {
     BlocProvider.of<AppNavigationCubit>(context).launchUrl(

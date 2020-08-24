@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions/launch_detail_actions.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
@@ -11,17 +11,16 @@ import 'launch_countdown/launch_countdown_card.dart';
 class LaunchInfo extends StatelessWidget {
   const LaunchInfo({
     Key key,
-    this.launch
+    @required this.launch,
+    @required this.launchInfoCubit,
   }) : super(key: key);
 
   final LaunchModel launch;
+  final LaunchInfoCubit launchInfoCubit;
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LaunchInfoCubit(
-      rocketRepository: RepositoryProvider.of(context),
-      launchpadRepository: RepositoryProvider.of(context),
-    )..loadData(launch),
+  Widget build(BuildContext context) => BlocProvider.value(
+    value: launchInfoCubit..loadData(launch),
     child: _body,
   );
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
+import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/clipper/launch_details_clipper.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
@@ -80,11 +81,16 @@ class LaunchDetailScreen extends StatelessWidget {
             stops: [0.0, 0.8] // bottom 20% are black
           )
         ),
-        child: LaunchInfo(
-          launch: launch,
-        ),
+        child: _launchInfo,
       ),
     ),
+  );
+
+  Widget get _launchInfo => Builder(
+    builder: (context) => LaunchInfo(
+      launch: launch,
+      launchInfoCubit: BlocProvider.of<LaunchInfoCubit>(context),
+    )
   );
 
   // Function
