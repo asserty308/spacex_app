@@ -7,11 +7,16 @@ import 'package:spacex_guide/features/history/bloc/all_events_list/all_events_li
 import 'package:spacex_guide/features/history/ui/widgets/all_events_list.dart';
 
 class AllEventsScreen extends StatelessWidget {
+  const AllEventsScreen({
+    Key key,
+    @required this.allEventsListCubit,
+  }) : super(key: key);
+
+  final AllEventsListCubit allEventsListCubit;
+  
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => AllEventsListCubit(
-      repository: RepositoryProvider.of(context),
-    )..getAllEvents(),
+  Widget build(BuildContext context) => BlocProvider.value(
+    value: allEventsListCubit..getAllEvents(),
     child: _scaffold,
   );
 

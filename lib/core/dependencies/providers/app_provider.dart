@@ -6,6 +6,7 @@ import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart'
 import 'package:spacex_guide/core/ui/screens/app.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/data/repositories/company_info_repository.dart';
+import 'package:spacex_guide/features/history/bloc/all_events_list/all_events_list_cubit.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';

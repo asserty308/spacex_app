@@ -46,6 +46,11 @@ class AppBlocProvider extends StatelessWidget {
           companyInfoRepository: RepositoryProvider.of<CompanyInfoRepository>(context),
         )
       ),
+      BlocProvider<AllEventsListCubit>(
+        create: (context) => AllEventsListCubit(
+          repository: RepositoryProvider.of(context),
+        ),
+      )
     ],
     child: child,
   );

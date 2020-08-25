@@ -7,6 +7,7 @@ import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart'
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/ui/screens/company_info_screen.dart';
+import 'package:spacex_guide/features/history/bloc/all_events_list/all_events_list_cubit.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
@@ -49,7 +50,9 @@ class _MyAppState extends State<MyApp> {
       }
 
       if (state is AppNavigationStateHistory) {
-        return AllEventsScreen();
+        return AllEventsScreen(
+          allEventsListCubit: BlocProvider.of<AllEventsListCubit>(context),
+        );
       }
 
       if (state is AppNavigationStateRockets) {
