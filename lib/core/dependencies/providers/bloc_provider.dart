@@ -50,7 +50,12 @@ class AppBlocProvider extends StatelessWidget {
         create: (context) => AllEventsListCubit(
           repository: RepositoryProvider.of(context),
         ),
-      )
+      ),
+      BlocProvider<AllLaunchpadsCubit>(
+        create: (context) => AllLaunchpadsCubit(
+          launchpadRepository: RepositoryProvider.of(context)
+        ),
+      ),
     ],
     child: child,
   );

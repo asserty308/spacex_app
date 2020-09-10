@@ -1,14 +1,14 @@
 part of 'launchpad_list_cubit.dart';
 
 @immutable
-abstract class LaunchpadListState {}
+abstract class AllLaunchpadsState {}
 
-class LaunchpadListInitial extends LaunchpadListState {}
-class LaunchpadListLoading extends LaunchpadListState {}
+class AllLaunchpadsInitial extends AllLaunchpadsState {}
+class AllLaunchpadsLoading extends AllLaunchpadsState {}
 
-class LaunchpadListLoaded extends LaunchpadListState {
-  LaunchpadListLoaded(this.allLaunchpads);
+class AllLaunchpadsLoaded extends AllLaunchpadsState {
+  AllLaunchpadsLoaded(this.allLaunchpads);
   final List<LaunchpadModel> allLaunchpads;
 }
 
-class LaunchpadListError extends LaunchpadListState {}
+class AllLaunchpadsError extends AllLaunchpadsState {}

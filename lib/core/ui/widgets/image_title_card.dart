@@ -6,49 +6,49 @@ class ImageTitleCard extends StatelessWidget {
     @required this.mainWidget,
     @required this.title,
     @required this.onTap,
+    this.borderRadius = 10,
   }) : super(key: key);
 
   final Widget mainWidget;
   final String title;
   final Function() onTap;
+  final double borderRadius;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.transparent,
-      elevation: 1.0,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      margin: const EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      ),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Stack(
-          children: <Widget>[
-            Container(height: 250, child: mainWidget),
-            Container(
-              height: 250,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+  Widget build(BuildContext context) => Card(
+    color: Colors.transparent,
+    elevation: 1.0,
+    clipBehavior: Clip.antiAlias,
+    margin: const EdgeInsets.all(8),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(borderRadius)
+    ),
+    child: GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        children: <Widget>[
+          Container(height: 250, child: mainWidget),
+          Container(
+            height: 250,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )
-                ),
+                  ),
+                )
               ),
             ),
-          ]
-        ),
-      )
-    );
-  }
+          ),
+        ]
+      ),
+    )
+  );
 }

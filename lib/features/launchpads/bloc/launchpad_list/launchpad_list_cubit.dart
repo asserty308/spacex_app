@@ -5,29 +5,29 @@ import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_rep
 
 part 'launchpad_list_state.dart';
 
-class LaunchpadListCubit extends Cubit<LaunchpadListState> {
-  LaunchpadListCubit({
+class AllLaunchpadsCubit extends Cubit<AllLaunchpadsState> {
+  AllLaunchpadsCubit({
     @required this.launchpadRepository,
-  }) : super(LaunchpadListInitial());
+  }) : super(AllLaunchpadsInitial());
 
   final LaunchpadRepository launchpadRepository;
 
   Future<void> loadData() async {
-    emit(LaunchpadListLoading());
+    emit(AllLaunchpadsLoading());
 
     try {
       final launchpads = await launchpadRepository.getAllLaunchpads();
-      emit(LaunchpadListLoaded(launchpads));
+      emit(AllLaunchpadsLoaded(launchpads));
 
       if (launchpads == null || launchpads.isEmpty) {
-        emit(LaunchpadListError());
+        emit(AllLaunchpadsError());
         return;
       }
 
-      emit(LaunchpadListLoaded(launchpads));
+      emit(AllLaunchpadsLoaded(launchpads));
     } catch (e) {
       print('LaunchpadListCubit::loadData ERROR: $e');
-      emit(LaunchpadListError());
+      emit(AllLaunchpadsError());
     }
   }
 }

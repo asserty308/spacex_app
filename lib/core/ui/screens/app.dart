@@ -10,6 +10,7 @@ import 'package:spacex_guide/features/company_info/ui/screens/company_info_scree
 import 'package:spacex_guide/features/history/bloc/all_events_list/all_events_list_cubit.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
+import 'package:spacex_guide/features/launchpads/bloc/launchpad_list/launchpad_list_cubit.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
@@ -60,7 +61,9 @@ class _MyAppState extends State<MyApp> {
       }
 
       if (state is AppNavigationStateLaunchpads) {
-        return AllLaunchpadsScreen();
+        return AllLaunchpadsScreen(
+          allLaunchpadsCubit: BlocProvider.of<AllLaunchpadsCubit>(context),
+        );
       }
 
       if (state is AppNavigationStateAbout) {
