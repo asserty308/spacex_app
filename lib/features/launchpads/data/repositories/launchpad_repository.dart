@@ -1,14 +1,10 @@
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launchpads/data/datasource/local/launchpads_local_datasource.dart';
 import 'package:spacex_guide/features/launchpads/data/datasource/remote/launchpads_remote_datasource.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
-import 'package:meta/meta.dart';
 
 class LaunchpadRepository {
-  final LaunchpadApi launchpadRemoteDatasource;
-
-  LaunchpadRepository({
-    @required this.launchpadRemoteDatasource,
-  });
+  final LaunchpadApi launchpadRemoteDatasource = GetIt.I<LaunchpadApi>();
 
   Future<List<LaunchpadModel>> getAllLaunchpads() async {
     if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads.isNotEmpty) {

@@ -1,14 +1,10 @@
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/rockets/data/datasources/local/rockets_local_datasource.dart';
 import 'package:spacex_guide/features/rockets/data/datasources/remote/rockets_remote_datasource.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
-import 'package:meta/meta.dart';
 
 class RocketRepository {
-  RocketRepository({
-    @required this.rocketsRemoteDatasource,
-  });
-
-  final RocketsApi rocketsRemoteDatasource;
+  final RocketsApi rocketsRemoteDatasource = GetIt.I<RocketsApi>();
 
   Future<List<RocketModel>> getAllRockets() async {
     if (RocketsLocalDatasource.allRockets != null && RocketsLocalDatasource.allRockets.isEmpty) {

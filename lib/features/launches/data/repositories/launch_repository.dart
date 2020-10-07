@@ -1,14 +1,10 @@
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/data/datasources/local/launches_local_datasource.dart';
 import 'package:spacex_guide/features/launches/data/datasources/remote/launch_remote_datasource.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:meta/meta.dart';
 
 class LaunchRepository {
-  LaunchRepository({
-    @required this.launchRemoteDatasource,
-  });
-
-  final LaunchApi launchRemoteDatasource;
+  final LaunchApi launchRemoteDatasource = GetIt.I<LaunchApi>();
 
   Future<List<LaunchModel>> getAllLaunches() async {
     if (LaunchesLocalDS.allLaunches != null && LaunchesLocalDS.allLaunches.isNotEmpty) {

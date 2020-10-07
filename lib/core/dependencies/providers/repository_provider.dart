@@ -11,11 +11,11 @@ class AppRepositoryProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiRepositoryProvider(
     providers: [
-      RepositoryProvider(create: (context) => LaunchRepository(launchRemoteDatasource: GetIt.I.get())),
-      RepositoryProvider(create: (context) => HistoryRepository(historyRemoteDatasource: GetIt.I.get())),
-      RepositoryProvider(create: (context) => RocketRepository(rocketsRemoteDatasource: GetIt.I.get())),
-      RepositoryProvider(create: (context) => LaunchpadRepository(launchpadRemoteDatasource: GetIt.I.get())),
-      RepositoryProvider(create: (context) => CompanyInfoRepository(companyInfoApi: GetIt.I.get())),
+      RepositoryProvider(create: (context) => LaunchRepository()),
+      RepositoryProvider(create: (context) => HistoryRepository()),
+      RepositoryProvider(create: (context) => RocketRepository()),
+      RepositoryProvider(create: (context) => LaunchpadRepository()),
+      RepositoryProvider(create: (context) => CompanyInfoRepository()),
     ],
     child: child,
   );
