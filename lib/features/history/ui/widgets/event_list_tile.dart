@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/data/services/navigation.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
@@ -94,7 +95,7 @@ class EventListTile extends StatelessWidget {
   Future<void> showWikipedia(BuildContext context) async => showWebView(context, event.wikiUrl, event.title);
 
   Future<void> showLaunch(BuildContext context) async {
-    final launch = await RepositoryProvider.of<LaunchRepository>(context).getLaunchWithId(event.flightNumber);
+    final launch = await GetIt.I<LaunchRepository>().getLaunchWithId(event.flightNumber);
     BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
   }
 }

@@ -15,45 +15,38 @@ class AppBlocProvider extends StatelessWidget {
         create: (context) => AppNavigationCubit(),
       ),
       BlocProvider<AllDataCubit>(
-        create: (context) => AllDataCubit(
-          launchRepository: RepositoryProvider.of<LaunchRepository>(context), 
-          rocketRepository: RepositoryProvider.of<RocketRepository>(context), 
-          historyRepository: RepositoryProvider.of<HistoryRepository>(context), 
-          launchpadRepository: RepositoryProvider.of<LaunchpadRepository>(context),
-        ),
+        create: (context) => AllDataCubit(),
       ),
       BlocProvider<LaunchesNavigationCubit>(
         create: (context) => LaunchesNavigationCubit(),
       ),
       BlocProvider<LaunchListCubit>(
         create: (context) => LaunchListCubit(
-          launchRepository: RepositoryProvider.of<LaunchRepository>(context),
+          launchRepository: GetIt.I<LaunchRepository>(),
         ),
       ),
       BlocProvider<LaunchDetailsCubit>(
         create: (context) => LaunchDetailsCubit(
-          rocketRepository: RepositoryProvider.of<RocketRepository>(context),
+          rocketRepository: GetIt.I<RocketRepository>(),
         ),
       ),
       BlocProvider<LaunchInfoCubit>(
         create: (context) => LaunchInfoCubit(
-          rocketRepository: RepositoryProvider.of<RocketRepository>(context),
-          launchpadRepository: RepositoryProvider.of<LaunchpadRepository>(context),
+          rocketRepository: GetIt.I<RocketRepository>(),
+          launchpadRepository: GetIt.I<LaunchpadRepository>(),
         ),
       ),
       BlocProvider<CompanyInfoScreenCubit>(
         create: (context) => CompanyInfoScreenCubit(
-          companyInfoRepository: RepositoryProvider.of<CompanyInfoRepository>(context),
+          companyInfoRepository: GetIt.I<CompanyInfoRepository>(),
         )
       ),
       BlocProvider<AllEventsListCubit>(
-        create: (context) => AllEventsListCubit(
-          repository: RepositoryProvider.of(context),
-        ),
+        create: (context) => AllEventsListCubit(),
       ),
       BlocProvider<AllLaunchpadsCubit>(
         create: (context) => AllLaunchpadsCubit(
-          launchpadRepository: RepositoryProvider.of(context)
+          launchpadRepository: GetIt.I<LaunchpadRepository>(),
         ),
       ),
     ],

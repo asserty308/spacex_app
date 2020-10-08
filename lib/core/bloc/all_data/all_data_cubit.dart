@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_repository.dart';
@@ -8,17 +8,12 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 part 'all_data_state.dart';
 
 class AllDataCubit extends Cubit<AllDataState> {
-  AllDataCubit({
-    @required this.launchRepository,
-    @required this.rocketRepository,
-    @required this.historyRepository,
-    @required this.launchpadRepository,
-  }) : super(AllDataEmpty());
+  AllDataCubit() : super(AllDataEmpty());
 
-  final LaunchRepository launchRepository;
-  final RocketRepository rocketRepository;
-  final HistoryRepository historyRepository;
-  final LaunchpadRepository launchpadRepository;
+  final LaunchRepository launchRepository = GetIt.I<LaunchRepository>();
+  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
+  final HistoryRepository historyRepository = GetIt.I<HistoryRepository>();
+  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
 
   void getAllData() async {
     emit(AllDataLoading());

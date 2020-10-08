@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/screens/app.dart';
@@ -17,13 +18,10 @@ import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_rep
 import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 
 part 'bloc_provider.dart';
-part 'repository_provider.dart';
 
 class AppProvider extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => AppRepositoryProvider(
-    child: AppBlocProvider(
-      child: MyApp(),
-    ),
+  Widget build(BuildContext context) => AppBlocProvider(
+    child: MyApp(),
   );
 }

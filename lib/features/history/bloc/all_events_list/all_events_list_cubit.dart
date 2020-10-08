@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
@@ -6,11 +7,9 @@ import 'package:spacex_guide/features/history/data/repositories/history_reposito
 part 'all_events_list_state.dart';
 
 class AllEventsListCubit extends Cubit<AllEventsListState> {
-  AllEventsListCubit({
-    @required this.repository,
-  }) : super(AllEventsListInitial());
+  AllEventsListCubit() : super(AllEventsListInitial());
 
-  final HistoryRepository repository;
+  final HistoryRepository repository = GetIt.I<HistoryRepository>();
 
   Future<void> getAllEvents() async {
     emit(AllEventsListLoading());

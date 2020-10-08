@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_list/rocket_carousel_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
+import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';
 
@@ -14,7 +16,7 @@ class RocketCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
     create: (context) => RocketCarouselCubit(
-      rocketsRepository: RepositoryProvider.of(context),
+      rocketsRepository: GetIt.I<RocketRepository>(),
     )..loadRockets(),
     child: _body,
   );
