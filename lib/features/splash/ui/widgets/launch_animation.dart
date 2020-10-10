@@ -7,15 +7,13 @@ class LaunchAnimation extends StatelessWidget {
   final Function onFinished;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: FlareActor(
-        'assets/RocketLaunch.flr', 
-        animation: 'launch',
-        fit: BoxFit.cover,
-        callback: (animation) => onFinished(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Container(
+    color: Colors.white,
+    child: FlareActor(
+      'assets/RocketLaunch.flr', 
+      animation: 'launch',
+      fit: BoxFit.cover,
+      callback: (animation) => onFinished(),
+    ),
+  );
 }

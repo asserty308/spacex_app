@@ -11,9 +11,6 @@ class AppBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
-      BlocProvider<AppNavigationCubit>(
-        create: (context) => AppNavigationCubit(),
-      ),
       BlocProvider<AllDataCubit>(
         create: (context) => AllDataCubit(),
       ),
@@ -21,33 +18,22 @@ class AppBlocProvider extends StatelessWidget {
         create: (context) => LaunchesNavigationCubit(),
       ),
       BlocProvider<LaunchListCubit>(
-        create: (context) => LaunchListCubit(
-          launchRepository: GetIt.I<LaunchRepository>(),
-        ),
+        create: (context) => LaunchListCubit(),
       ),
       BlocProvider<LaunchDetailsCubit>(
-        create: (context) => LaunchDetailsCubit(
-          rocketRepository: GetIt.I<RocketRepository>(),
-        ),
+        create: (context) => LaunchDetailsCubit(),
       ),
       BlocProvider<LaunchInfoCubit>(
-        create: (context) => LaunchInfoCubit(
-          rocketRepository: GetIt.I<RocketRepository>(),
-          launchpadRepository: GetIt.I<LaunchpadRepository>(),
-        ),
+        create: (context) => LaunchInfoCubit(),
       ),
       BlocProvider<CompanyInfoScreenCubit>(
-        create: (context) => CompanyInfoScreenCubit(
-          companyInfoRepository: GetIt.I<CompanyInfoRepository>(),
-        )
+        create: (context) => CompanyInfoScreenCubit()
       ),
       BlocProvider<AllEventsListCubit>(
         create: (context) => AllEventsListCubit(),
       ),
       BlocProvider<AllLaunchpadsCubit>(
-        create: (context) => AllLaunchpadsCubit(
-          launchpadRepository: GetIt.I<LaunchpadRepository>(),
-        ),
+        create: (context) => AllLaunchpadsCubit(),
       ),
     ],
     child: child,

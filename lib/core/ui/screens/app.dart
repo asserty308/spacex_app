@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
@@ -41,6 +42,7 @@ class _MyAppState extends State<MyApp> {
   // Widgets
 
   Widget get _navigationBuilder => BlocBuilder<AppNavigationCubit, AppNavigationState>(
+    cubit: GetIt.I<AppNavigationCubit>(),
     builder: (context, state) {
       if (state is AppNavigationStateSplash) {
         return SplashScreen();

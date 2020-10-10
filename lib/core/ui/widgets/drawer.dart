@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/extensions/widget_extension.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 
 class AppDrawer extends StatelessWidget {
+  final AppNavigationCubit _navigationCubit = GetIt.I<AppNavigationCubit>();
   @override
   Widget build(BuildContext context) => Drawer(
     child: ListView(
@@ -26,27 +27,27 @@ class AppDrawer extends StatelessWidget {
         ListTile(
           title: const Text('Launches'),
           leading: Icon(Icons.label),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showLaunches(),
+          onTap: () => _navigationCubit.showLaunches(),
         ),
         ListTile(
           title: const Text('Rockets'),
           leading: Icon(Icons.label),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showRockets(),
+          onTap: () => _navigationCubit.showRockets(),
         ),
         ListTile(
           title: const Text('Launchpads'),
           leading: Icon(Icons.location_on),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showLaunchpads(),
+          onTap: () => _navigationCubit.showLaunchpads(),
         ),
         // ListTile(
         //   title: const Text('Historical Events'),
         //   leading: Icon(Icons.history),
-        //   onTap: () => BlocProvider.of<AppNavigationCubit>(context).showHistory(),
+        //   onTap: () => _navigationCubit.showHistory(),
         // ),
         ListTile(
           title: const Text('About SpaceX'),
           leading: Icon(Icons.info_outline),
-          onTap: () => BlocProvider.of<AppNavigationCubit>(context).showAboutScreen(),
+          onTap: () => _navigationCubit.showAboutScreen(),
         ),
         ListTile(
           title: const Text('Settings'),

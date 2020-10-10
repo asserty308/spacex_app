@@ -1,16 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
 part 'launch_list_state.dart';
 
 class LaunchListCubit extends Cubit<LaunchListState> {
-  LaunchListCubit({
-    @required this.launchRepository,
-  }) : super(LaunchListStateInitial());
+  LaunchListCubit() : super(LaunchListStateInitial());
 
-  final LaunchRepository launchRepository;
+  final LaunchRepository launchRepository = GetIt.I<LaunchRepository>();
 
   Future<void> loadUpcomingLaunches() async {
     emit(LaunchListStateLoading());

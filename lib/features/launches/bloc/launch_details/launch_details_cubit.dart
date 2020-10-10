@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
@@ -7,11 +7,9 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 part 'launch_details_state.dart';
 
 class LaunchDetailsCubit extends Cubit<LaunchDetailsState> {
-  LaunchDetailsCubit({
-    @required this.rocketRepository,
-  }) : super(LaunchDetailsStateInitial());
+  LaunchDetailsCubit() : super(LaunchDetailsStateInitial());
 
-  final RocketRepository rocketRepository;
+  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
 
   Future<void> loadLaunchDetails(LaunchModel launch) async {
     emit(LaunchDetailsStateLoading());

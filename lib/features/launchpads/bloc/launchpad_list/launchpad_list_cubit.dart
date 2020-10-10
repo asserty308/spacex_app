@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_repository.dart';
@@ -6,11 +7,9 @@ import 'package:spacex_guide/features/launchpads/data/repositories/launchpad_rep
 part 'launchpad_list_state.dart';
 
 class AllLaunchpadsCubit extends Cubit<AllLaunchpadsState> {
-  AllLaunchpadsCubit({
-    @required this.launchpadRepository,
-  }) : super(AllLaunchpadsInitial());
+  AllLaunchpadsCubit() : super(AllLaunchpadsInitial());
 
-  final LaunchpadRepository launchpadRepository;
+  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
 
   Future<void> loadData() async {
     emit(AllLaunchpadsLoading());

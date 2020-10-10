@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
@@ -9,13 +10,10 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 part 'launch_info_state.dart';
 
 class LaunchInfoCubit extends Cubit<LaunchInfoState> {
-  LaunchInfoCubit({
-    @required this.rocketRepository,
-    @required this.launchpadRepository,
-  }) : super(LaunchInfoInitial());
+  LaunchInfoCubit() : super(LaunchInfoInitial());
 
-  final RocketRepository rocketRepository;
-  final LaunchpadRepository launchpadRepository;
+  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
+  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
   
   Future<void> loadData(LaunchModel launch) async {
     emit(LaunchInfoLoading());

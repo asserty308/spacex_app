@@ -20,26 +20,26 @@ dependencies:
       url: git://github.com/asserty308/flutter_packages.git
       path: flutter_web
 
-  cupertino_icons:
-  http: # call api
-  intl: # date formatting
-  path_provider:
+  cupertino_icons: ^1.0.0
+  http: ^0.12.2 # call api
+  intl: ^0.16.1 # date formatting
+  path_provider: ^1.6.18
   # flutter_full_pdf_viewer:
-  carousel_slider: 
-  flare_flutter: # flare animations
-  flutter_launcher_icons: # app icon
-  flutter_bloc: # state management
-  url_launcher:
-  webview_flutter:
-  flutter_map:
-  firebase_messaging:
-  get_it:
+  carousel_slider: ^2.3.1
+  flare_flutter: ^2.0.6
+  flutter_launcher_icons: ^0.8.1
+  flutter_bloc: ^6.0.6
+  url_launcher: ^5.7.2
+  webview_flutter: ^1.0.1
+  flutter_map: ^0.10.1+1 # TODO Replace
+  firebase_messaging: ^7.0.3
+  get_it: ^5.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  mockito:
+  mockito: ^4.1.2
 
 flutter:
   uses-material-design: true

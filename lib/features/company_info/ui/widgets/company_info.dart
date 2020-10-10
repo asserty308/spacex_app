@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/core/utility/int_extension.dart';
@@ -29,7 +29,7 @@ class CompanyInfo extends StatelessWidget {
   Widget _founderTile(BuildContext context) => ListTile(
     title: Text('Founder', style: TextStyle(color: Colors.white),),
     subtitle: Text(state.info.founder, style: TextStyle(color: Colors.white),),
-    onTap: () => BlocProvider.of<AppNavigationCubit>(context).launchUrl(state.info.links.elonTwitter, onError: () => null),
+    onTap: () => GetIt.I<AppNavigationCubit>().launchUrl(state.info.links.elonTwitter, onError: () => null),
   );
 
   Widget get _foundedTile => ListTile(

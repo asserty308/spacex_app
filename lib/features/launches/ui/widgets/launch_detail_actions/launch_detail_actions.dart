@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/services/alerts.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
@@ -31,14 +30,14 @@ class LaunchDetailActions extends StatelessWidget {
   );
 
   Future<void> showPresskit(BuildContext context) async {
-    BlocProvider.of<AppNavigationCubit>(context).launchUrl(
+    GetIt.I<AppNavigationCubit>().launchUrl(
       launch.links.presskit, 
       onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.')
     );
   }
 
   Future<void> playVideo(BuildContext context) async {
-    BlocProvider.of<AppNavigationCubit>(context).launchUrl(
+    GetIt.I<AppNavigationCubit>().launchUrl(
       launch.links.webcast, 
       onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no video availavle for this launch.')
     );
