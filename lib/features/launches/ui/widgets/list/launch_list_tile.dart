@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_avatar.dart';
@@ -46,5 +46,5 @@ class LaunchListTile extends StatelessWidget {
 
   // Functions
 
-  void _onTap(BuildContext context) => BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
+  void _onTap(BuildContext context) => GetIt.I<LaunchesNavigationCubit>().showLaunchDetails(context, launch);
 }

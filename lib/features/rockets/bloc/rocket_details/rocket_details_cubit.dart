@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
@@ -6,11 +7,9 @@ import 'package:spacex_guide/features/launches/data/repositories/launch_reposito
 part 'rocket_details_state.dart';
 
 class RocketDetailsCubit extends Cubit<RocketDetailsState> {
-  RocketDetailsCubit({
-    @required this.launchRepository,
-  }) : super(RocketDetailsInitial());
+  RocketDetailsCubit() : super(RocketDetailsInitial());
 
-  final LaunchRepository launchRepository;
+  final LaunchRepository launchRepository = GetIt.I<LaunchRepository>();
 
   Future<void> loadDetails() async {
     emit(RocketDetailsLoading());

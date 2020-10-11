@@ -96,6 +96,6 @@ class EventListTile extends StatelessWidget {
 
   Future<void> showLaunch(BuildContext context) async {
     final launch = await GetIt.I<LaunchRepository>().getLaunchWithId(event.flightNumber);
-    BlocProvider.of<LaunchesNavigationCubit>(context).showLaunchDetails(context, launch);
+    GetIt.I<LaunchesNavigationCubit>().showLaunchDetails(context, launch);
   }
 }

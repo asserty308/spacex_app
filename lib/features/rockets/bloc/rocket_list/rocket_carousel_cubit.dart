@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/data/repositories/rockets_repository.dart';
@@ -6,11 +7,9 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 part 'rocket_carousel_state.dart';
 
 class RocketCarouselCubit extends Cubit<RocketCarouselState> {
-  RocketCarouselCubit({
-    @required this.rocketsRepository,
-  }) : super(RocketCarouselInitial());
+  RocketCarouselCubit() : super(RocketCarouselInitial());
 
-  final RocketRepository rocketsRepository;
+  final RocketRepository rocketsRepository = GetIt.I<RocketRepository>();
 
   Future<void> loadRockets() async {
     emit(RocketCarouselLoading());

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
-import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
-import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_details/rocket_details_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_info.dart';
@@ -18,9 +16,7 @@ class RocketDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-    create: (context) => RocketDetailsCubit(
-      launchRepository: GetIt.I<LaunchRepository>(),
-    )..loadDetails(),
+    create: (context) => RocketDetailsCubit()..loadDetails(),
     child: _willPopScope,
   );
   
@@ -68,7 +64,5 @@ class RocketDetailsScreen extends StatelessWidget {
 
       return CenterProgressIndicator();
     }
-  );
-  
-   
+  ); 
 }

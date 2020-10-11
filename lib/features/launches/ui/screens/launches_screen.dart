@@ -10,22 +10,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_l
 import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_list.dart';
 
 class LaunchesScreen extends StatelessWidget {
-  const LaunchesScreen({
-    Key key, 
-    @required this.launchListCubit
-  }) : super(key: key);
-
-  final LaunchListCubit launchListCubit;
-
   @override
-  Widget build(BuildContext context) => BlocProvider.value(
-    value: launchListCubit..loadUpcomingLaunches(),
-    child: _scaffold(context),
-  );
-
-  // Widgets
-
-  Widget _scaffold(BuildContext context) => SliverAppScaffold(
+  Widget build(BuildContext context) => SliverAppScaffold(
     title: _title,
     actions: [
       _searchButton,
@@ -35,6 +21,7 @@ class LaunchesScreen extends StatelessWidget {
   );
 
   Widget get _body => BlocConsumer<LaunchListCubit, LaunchListState>(
+    cubit: GetIt.I<LaunchListCubit>()..loadUpcomingLaunches(),
     listener: (context, state) {
       if (state is LaunchListStateError) {
         GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
@@ -93,11 +80,11 @@ class LaunchesScreen extends StatelessWidget {
         icon: Icon(isUpcoming ? Icons.history : Icons.cloud_upload),
         onPressed: () {
           if (isUpcoming) {
-            BlocProvider.of<LaunchListCubit>(context).loadPreviousLaunches();
+            GetIt.I<LaunchListCubit>().loadPreviousLaunches();
             return;
           }
 
-          BlocProvider.of<LaunchListCubit>(context).loadUpcomingLaunches();
+          GetIt.I<LaunchListCubit>().loadUpcomingLaunches();
         }
       );
     }

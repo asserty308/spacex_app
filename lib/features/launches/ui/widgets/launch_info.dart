@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions/launch_detail_actions.dart';
@@ -12,19 +13,13 @@ class LaunchInfo extends StatelessWidget {
   const LaunchInfo({
     Key key,
     @required this.launch,
-    @required this.launchInfoCubit,
   }) : super(key: key);
 
   final LaunchModel launch;
-  final LaunchInfoCubit launchInfoCubit;
 
   @override
-  Widget build(BuildContext context) => BlocProvider.value(
-    value: launchInfoCubit..loadData(launch),
-    child: _body,
-  );
-
-  Widget get _body => BlocBuilder<LaunchInfoCubit, LaunchInfoState>(
+  Widget build(BuildContext context) => BlocBuilder<LaunchInfoCubit, LaunchInfoState>(
+    cubit: GetIt.I<LaunchInfoCubit>()..loadData(launch),
     builder: (context, state) {
       if (state is LaunchInfoLoaded) {
         return _listView(state.rocket, state.launchpad);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';
@@ -12,21 +13,16 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
 /// The next launch will be loaded when the parameter is null.
 class LaunchDetailScreen extends StatelessWidget {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final LaunchModel launch;
-  final LaunchDetailsCubit launchDetailsCubit;
-
   LaunchDetailScreen({
     Key key, 
     @required this.launch,
-    @required this.launchDetailsCubit,
   }) : super(key: key);
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final LaunchModel launch;
+
   @override
-  Widget build(BuildContext context) => BlocProvider.value(
-    value: launchDetailsCubit..loadLaunchDetails(launch),
-    child: _willPopScope,
-  );
+  Widget build(BuildContext context) => _willPopScope;
 
   // Widgets
   
@@ -48,6 +44,7 @@ class LaunchDetailScreen extends StatelessWidget {
   );
 
   Widget get _blocBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(
+    cubit: GetIt.I<LaunchDetailsCubit>()..loadLaunchDetails(launch),
     builder: (context, state) {
       if (state is LaunchDetailsStateLoading) {
         return CenterProgressIndicator();
@@ -89,7 +86,6 @@ class LaunchDetailScreen extends StatelessWidget {
   Widget get _launchInfo => Builder(
     builder: (context) => LaunchInfo(
       launch: launch,
-      launchInfoCubit: BlocProvider.of<LaunchInfoCubit>(context),
     )
   );
 

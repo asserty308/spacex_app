@@ -6,12 +6,9 @@ import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
-import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/ui/screens/company_info_screen.dart';
-import 'package:spacex_guide/features/history/bloc/all_events_list/all_events_list_cubit.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
-import 'package:spacex_guide/features/launchpads/bloc/launchpad_list/launchpad_list_cubit.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
@@ -28,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initMessaging();
-    BlocProvider.of<AllDataCubit>(context).getAllData();
+    GetIt.I<AllDataCubit>().getAllData();
   }
 
   @override
@@ -53,9 +50,7 @@ class _MyAppState extends State<MyApp> {
       }
 
       if (state is AppNavigationStateHistory) {
-        return AllEventsScreen(
-          allEventsListCubit: BlocProvider.of<AllEventsListCubit>(context),
-        );
+        return AllEventsScreen();
       }
 
       if (state is AppNavigationStateRockets) {
@@ -63,15 +58,11 @@ class _MyAppState extends State<MyApp> {
       }
 
       if (state is AppNavigationStateLaunchpads) {
-        return AllLaunchpadsScreen(
-          allLaunchpadsCubit: BlocProvider.of<AllLaunchpadsCubit>(context),
-        );
+        return AllLaunchpadsScreen();
       }
 
       if (state is AppNavigationStateAbout) {
-        return CompanyInfoScreen(
-          companyInfoScreenCubit: BlocProvider.of<CompanyInfoScreenCubit>(context),
-        );
+        return CompanyInfoScreen();
       }
 
       return Container();
