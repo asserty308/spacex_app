@@ -4,7 +4,6 @@ import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
-import 'package:spacex_guide/features/launches/bloc/launch_info/launch_info_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/clipper/launch_details_clipper.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
