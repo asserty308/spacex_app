@@ -26,7 +26,6 @@ class LaunchModel {
     this.capsules,
     this.payloads,
     this.launchpad,
-    this.failures,
     this.fairings,
     this.cores,
     this.links,
@@ -38,7 +37,7 @@ class LaunchModel {
   final DateTime date, staticFireDate;
   final DatePrecision datePrecision;
   final bool tbd, net, success, upcoming, autoUpdate;
-  final List<String> failures, crew, ships, capsules;
+  final List<String> crew, ships, capsules;
   final List<dynamic> payloads;
   final LaunchFairingsModel fairings;
   final List<LaunchCoreModel> cores;
@@ -55,7 +54,6 @@ class LaunchModel {
     window = json['window'],
     rocket = json['rocket'],
     success = json['success'],
-    failures = List<String>.from(json['failures']),
     upcoming = json['upcoming'],
     details = json['details'],
     fairings = json['fairings'] == null ? null : LaunchFairingsModel.fromJSON(json['fairings']),
