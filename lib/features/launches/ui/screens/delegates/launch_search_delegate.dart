@@ -11,14 +11,14 @@ class LaunchSearchDelegate extends SearchDelegate<LaunchModel> {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return defaultTheme.copyWith(
+    return darkTheme.copyWith(
       primaryColor: const Color.fromARGB(255, 1, 1, 1),
-      primaryIconTheme: defaultTheme.primaryIconTheme.copyWith(color: Colors.white),
+      primaryIconTheme: darkTheme.primaryIconTheme.copyWith(color: Colors.white),
       primaryColorBrightness: Brightness.dark,
-      textTheme: defaultTheme.textTheme.copyWith(
+      textTheme: darkTheme.textTheme.copyWith(
         headline6: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
       ),
-      inputDecorationTheme: defaultTheme.inputDecorationTheme.copyWith(
+      inputDecorationTheme: darkTheme.inputDecorationTheme.copyWith(
         hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
       ),
     );

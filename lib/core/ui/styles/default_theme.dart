@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
-final _backgroundColor = Color.fromARGB(255, 33, 33, 33);
+final _backgroundColorDark = Color.fromARGB(255, 33, 33, 33);
+final _backgroundColorLight = Color.fromARGB(255, 200, 200, 200);
 
-final defaultTheme = ThemeData(
+final darkTheme = ThemeData(
   appBarTheme: AppBarTheme(
-    color: _backgroundColor,
+    color: _backgroundColorDark,
     elevation: 0,
   ),
-  scaffoldBackgroundColor: _backgroundColor,
+  scaffoldBackgroundColor: _backgroundColorDark,
+);
+
+final lightTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: _backgroundColorLight,
+    elevation: 0,
+  ),
+  scaffoldBackgroundColor: _backgroundColorLight,
 );

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
+import 'package:spacex_guide/core/bloc/cubit/theme_selector_cubit.dart';
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
 import 'package:spacex_guide/features/company_info/ui/screens/company_info_screen.dart';
 import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart';
@@ -29,10 +30,21 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => BlocBuilder(
+    cubit: GetIt.I<ThemeSelectorCubit>(),
+    builder: (context, state) {
+      if (state is ThemeSelectorDark) {
+        return themedApp(darkTheme);
+      }
+
+      return themedApp(lightTheme);
+    }
+  );
+
+  Widget themedApp(ThemeData theme) => MaterialApp(
     title: 'SpaceX',
     debugShowCheckedModeBanner: false,
-    theme: defaultTheme,
+    theme: theme,
     home: _navigationBuilder,
   );
 

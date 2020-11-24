@@ -3,6 +3,7 @@ import 'package:flutter_web/services/connectivity_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
+import 'package:spacex_guide/core/bloc/cubit/theme_selector_cubit.dart';
 import 'package:spacex_guide/features/company_info/bloc/about_screen/company_info_screen_cubit.dart';
 import 'package:spacex_guide/features/company_info/data/datasources/company_info_api.dart';
 import 'package:spacex_guide/features/company_info/data/repositories/company_info_repository.dart';
@@ -60,5 +61,6 @@ class AppDependencies {
     GetIt.I.registerLazySingleton(() => CompanyInfoScreenCubit());
     GetIt.I.registerLazySingleton(() => AllEventsListCubit());
     GetIt.I.registerLazySingleton(() => AllLaunchpadsCubit());
+    GetIt.I.registerLazySingleton(() => ThemeSelectorCubit());
   }
 }

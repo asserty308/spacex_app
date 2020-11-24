@@ -65,7 +65,7 @@ class RocketInfo extends StatelessWidget {
           ),
         ),
         Theme(
-          data: defaultTheme.copyWith(
+          data: darkTheme.copyWith(
             accentColor: Colors.white, // arrow color when expanded
             unselectedWidgetColor: Colors.white // arrow color when closed
           ),
@@ -80,7 +80,7 @@ class RocketInfo extends StatelessWidget {
           ),
         ),
         Theme(
-          data: defaultTheme.copyWith(
+          data: darkTheme.copyWith(
             accentColor: Colors.white, // arrow color when expanded
             unselectedWidgetColor: Colors.white // arrow color when closed
           ),
