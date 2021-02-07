@@ -20,8 +20,10 @@ class LaunchesScreen extends StatelessWidget {
     body: _body,
   );
 
-  Widget get _body => BlocConsumer<LaunchListCubit, LaunchListState>(
-    cubit: GetIt.I<LaunchListCubit>()..loadUpcomingLaunches(),
+  final _cubit = GetIt.I<LaunchListCubit>();
+
+  Widget get _body => BlocConsumer(
+    cubit: _cubit..loadUpcomingLaunches(),
     listener: (context, state) {
       if (state is LaunchListStateError) {
         GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
@@ -51,7 +53,8 @@ class LaunchesScreen extends StatelessWidget {
 
   // AppBar
 
-  Widget get _title => BlocBuilder<LaunchListCubit, LaunchListState>(
+  Widget get _title => BlocBuilder(
+    cubit: _cubit,
     builder: (context, state) {
       String text = '';
       if (state is LaunchListStatePreviousLoaded) {
@@ -66,7 +69,8 @@ class LaunchesScreen extends StatelessWidget {
     },
   );
 
-  Widget get _toggleLaunchesButton => BlocBuilder<LaunchListCubit, LaunchListState>(
+  Widget get _toggleLaunchesButton => BlocBuilder(
+    cubit: _cubit,
     builder: (context, state) { 
       final isUpcoming = state is LaunchListStateUpcomingLoaded;
       final isPrevious = state is LaunchListStatePreviousLoaded;
@@ -90,7 +94,8 @@ class LaunchesScreen extends StatelessWidget {
     }
   );
 
-  Widget get _searchButton => BlocBuilder<LaunchListCubit, LaunchListState>(
+  Widget get _searchButton => BlocBuilder(
+    cubit: _cubit,
     builder: (context, state) {
       List<LaunchModel> launches = [];
 

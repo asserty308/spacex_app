@@ -1,5 +1,6 @@
 name: spacex_guide
 description: SpaceX App made with flutter.
+publish_to: 'none'
 
 version: 0.2.3+23
 
@@ -20,19 +21,17 @@ dependencies:
       url: git://github.com/asserty308/flutter_packages.git
       path: flutter_web
 
-  cupertino_icons: ^1.0.0
-  http: ^0.12.2 # call api
-  intl: ^0.16.1 # date formatting
-  path_provider: ^1.6.24
-  # flutter_full_pdf_viewer:
-  carousel_slider: ^2.3.1
+  http: ^0.12.2
+  intl: ^0.16.1
+  path_provider: ^1.6.27
+  carousel_slider: ^3.0.0
   flare_flutter: ^2.0.6
-  flutter_bloc: ^6.1.0
+  flutter_bloc: ^6.1.1
   url_launcher: ^5.7.10
-  webview_flutter: ^1.0.6
-  flutter_map: ^0.10.1+1 # TODO Replace
+  webview_flutter: ^1.0.7
+  flutter_map: ^0.11.0 # TODO Replace
   firebase_messaging: ^7.0.3
-  get_it: ^5.0.1
+  get_it: ^5.0.6
 
 dev_dependencies:
   flutter_test:
