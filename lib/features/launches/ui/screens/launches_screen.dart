@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/services/alerts.dart';
@@ -81,7 +83,12 @@ class LaunchesScreen extends StatelessWidget {
       }
 
       return IconButton(
-        icon: Icon(isUpcoming ? Icons.history : Icons.cloud_upload),
+        icon: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.identity()
+            ..rotateY(isUpcoming ? 0 : pi),
+          child: Icon(Icons.history)
+        ),
         onPressed: () {
           if (isUpcoming) {
             GetIt.I<LaunchListCubit>().loadPreviousLaunches();

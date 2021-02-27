@@ -8,7 +8,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Drawer(
     child: ListView(
-      // make the list start at the top of the screen, not under statusbar
+      physics: ClampingScrollPhysics(),
       padding: EdgeInsets.zero,
       children: <Widget>[
         DrawerHeader(
@@ -20,7 +20,7 @@ class AppDrawer extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontSize: 23,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           ).centered,
         ),
