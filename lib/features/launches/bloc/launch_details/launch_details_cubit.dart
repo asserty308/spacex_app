@@ -9,7 +9,7 @@ part 'launch_details_state.dart';
 class LaunchDetailsCubit extends Cubit<LaunchDetailsState> {
   LaunchDetailsCubit() : super(LaunchDetailsStateInitial());
 
-  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
+  final RocketRepository? rocketRepository = GetIt.I<RocketRepository>();
 
   Future<void> loadLaunchDetails(LaunchModel launch) async {
     emit(LaunchDetailsStateLoading());
@@ -18,10 +18,10 @@ class LaunchDetailsCubit extends Cubit<LaunchDetailsState> {
 
     // When no launch images are available, get rocket images
     if (imageUrls.isEmpty) {
-      final response = await rocketRepository.getRocket(launch.rocket);
+      final response = await rocketRepository!.getRocket(launch.rocket);
       
       if (response is RocketModel) {
-        imageUrls = response.flickrImages;
+        imageUrls = response.flickrImages!;
       }
     }
 

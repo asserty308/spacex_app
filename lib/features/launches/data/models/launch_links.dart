@@ -16,13 +16,13 @@ class LaunchLinksModel {
     this.wikipedia,
   });
 
-  final String patchSmall, patchLarge;
-  final String redditCampaign, redditLaunch, redditMedia, redditRecovery;
-  final List<String> flickrSmall, flickrOriginal;
-  final String presskit;
-  final String webcast;
-  final String article;
-  final String wikipedia;
+  final String? patchSmall, patchLarge;
+  final String? redditCampaign, redditLaunch, redditMedia, redditRecovery;
+  final List<String>? flickrSmall, flickrOriginal;
+  final String? presskit;
+  final String? webcast;
+  final String? article;
+  final String? wikipedia;
 
   LaunchLinksModel.fromJSON(Map<String, dynamic> json) :
     patchSmall = json['patch']['small'],

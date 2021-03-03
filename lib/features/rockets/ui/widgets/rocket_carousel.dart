@@ -49,7 +49,7 @@ class RocketCarousel extends StatelessWidget {
       // the current page should be larger than its direct neigbors (70% of main height)
       double heightFactor = 1.0;
       if (_controller.position.haveDimensions) {
-        heightFactor = _controller.page - index;
+        heightFactor = _controller.page! - index;
         heightFactor = (1 - (heightFactor.abs() * 0.3)).clamp(0.0, 1.0);
       }
 

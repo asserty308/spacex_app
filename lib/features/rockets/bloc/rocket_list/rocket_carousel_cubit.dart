@@ -9,13 +9,13 @@ part 'rocket_carousel_state.dart';
 class RocketCarouselCubit extends Cubit<RocketCarouselState> {
   RocketCarouselCubit() : super(RocketCarouselInitial());
 
-  final RocketRepository rocketsRepository = GetIt.I<RocketRepository>();
+  final RocketRepository? rocketsRepository = GetIt.I<RocketRepository>();
 
   Future<void> loadRockets() async {
     emit(RocketCarouselLoading());
 
     try {
-      final rockets = await rocketsRepository.getAllRockets();
+      final rockets = await rocketsRepository!.getAllRockets();
 
       if (rockets == null || rockets.isEmpty) {
         emit(RocketCarouselError());

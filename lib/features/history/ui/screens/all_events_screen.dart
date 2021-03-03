@@ -15,7 +15,7 @@ class AllEventsScreen extends StatelessWidget {
   );
 
   Widget get _eventList => BlocBuilder<AllEventsListCubit, AllEventsListState>(
-    cubit: GetIt.I<AllEventsListCubit>()..getAllEvents(),
+    bloc: GetIt.I<AllEventsListCubit>()..getAllEvents(),
     builder: (context, state) {
       if (state is AllEventsListLoading) {
         return CenterProgressIndicator();

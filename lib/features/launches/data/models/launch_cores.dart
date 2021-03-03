@@ -13,9 +13,9 @@ class LaunchCoreModel {
     this.landingSuccess
   });
 
-  final String core, landingType, landpad;
-  final int flight;
-  final bool gridfins, legs, reused, landingAttempt, landingSuccess;
+  final String? core, landingType, landpad;
+  final int? flight;
+  final bool? gridfins, legs, reused, landingAttempt, landingSuccess;
 
   LaunchCoreModel.fromJSON(Map<String, dynamic> json) :
     core = json['core'],

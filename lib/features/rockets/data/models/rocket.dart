@@ -32,20 +32,20 @@ class RocketModel {
     this.description
   });
 
-  final String id, name, type;
-  final bool active;
-  final num stages, boosters, costPerLaunch, successRate;
-  final DateTime firstFlight;
-  final String country, company;
-  final num heightMeters, diameterMeters, massKg;
-  final List<RocketPayloadWeight> payloadWeights; 
-  final RocketFirstStage firstStage;
-  final RocketSecondStage secondStage;
-  final RocketEngines engines;
-  final RocketLandingLegs landingLegs;
-  final List<String> flickrImages;
-  final String wikipedia;
-  final String description;
+  final String? id, name, type;
+  final bool? active;
+  final num? stages, boosters, costPerLaunch, successRate;
+  final DateTime? firstFlight;
+  final String? country, company;
+  final num? heightMeters, diameterMeters, massKg;
+  final List<RocketPayloadWeight>? payloadWeights; 
+  final RocketFirstStage? firstStage;
+  final RocketSecondStage? secondStage;
+  final RocketEngines? engines;
+  final RocketLandingLegs? landingLegs;
+  final List<String>? flickrImages;
+  final String? wikipedia;
+  final String? description;
 
   RocketModel.fromJSON(Map<String, dynamic> json) :
     id = json['id'],

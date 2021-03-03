@@ -4,8 +4,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.
 
 class PreviousLaunchList extends StatelessWidget {
   const PreviousLaunchList({
-    Key key,
-    @required this.launches, 
+    Key? key,
+    required this.launches, 
   }) : super(key: key);
 
   final List<LaunchModel> launches;

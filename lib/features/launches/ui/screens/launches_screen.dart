@@ -22,16 +22,16 @@ class LaunchesScreen extends StatelessWidget {
     body: _body,
   );
 
-  final _cubit = GetIt.I<LaunchListCubit>();
+  final LaunchListCubit _cubit = GetIt.I<LaunchListCubit>();
 
   Widget get _body => BlocConsumer(
-    cubit: _cubit..loadUpcomingLaunches(),
-    listener: (context, state) {
+    bloc: _cubit..loadUpcomingLaunches(),
+    listener: (context, dynamic state) {
       if (state is LaunchListStateError) {
         GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
       }
     },
-    builder: (context, state) {
+    builder: (context, dynamic state) {
       if (state is LaunchListStateLoading) {
         return SliverToBoxAdapter(child: CenterProgressIndicator());
       }
@@ -56,8 +56,8 @@ class LaunchesScreen extends StatelessWidget {
   // AppBar
 
   Widget get _title => BlocBuilder(
-    cubit: _cubit,
-    builder: (context, state) {
+    bloc: _cubit,
+    builder: (context, dynamic state) {
       String text = '';
       if (state is LaunchListStatePreviousLoaded) {
         text = 'Previous launches';
@@ -72,8 +72,8 @@ class LaunchesScreen extends StatelessWidget {
   );
 
   Widget get _toggleLaunchesButton => BlocBuilder(
-    cubit: _cubit,
-    builder: (context, state) { 
+    bloc: _cubit,
+    builder: (context, dynamic state) { 
       final isUpcoming = state is LaunchListStateUpcomingLoaded;
       final isPrevious = state is LaunchListStatePreviousLoaded;
 
@@ -102,9 +102,9 @@ class LaunchesScreen extends StatelessWidget {
   );
 
   Widget get _searchButton => BlocBuilder(
-    cubit: _cubit,
-    builder: (context, state) {
-      List<LaunchModel> launches = [];
+    bloc: _cubit,
+    builder: (context, dynamic state) {
+      List<LaunchModel>? launches = [];
 
       if (state is LaunchListStatePreviousLoaded) {
         launches = state.launches;
@@ -112,10 +112,10 @@ class LaunchesScreen extends StatelessWidget {
 
       if (state is LaunchListStateUpcomingLoaded) {
         launches = state.scheduled;
-        launches.addAll(state.nonScheduled);
+        launches!.addAll(state.nonScheduled!);
       }
 
-      if (launches == null || launches.isEmpty) {
+      if (launches.isEmpty) {
         return Container();
       }
 
@@ -129,7 +129,7 @@ class LaunchesScreen extends StatelessWidget {
   // Functions
 
   // TODO: Fix search for SliverAppBar
-  void showLaunchSearch(BuildContext context, List<LaunchModel> launches) => GetIt.I.get<AlertService>().showDismissDialog(
+  void showLaunchSearch(BuildContext context, List<LaunchModel>? launches) => GetIt.I.get<AlertService>().showDismissDialog(
     context, 
     'Under construction', 
     'The search is temporarily unavailable.'

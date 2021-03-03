@@ -9,13 +9,13 @@ part 'company_info_screen_state.dart';
 class CompanyInfoScreenCubit extends Cubit<CompanyInfoScreenState> {
   CompanyInfoScreenCubit() : super(CompanyInfoScreenInitial());
 
-  final CompanyInfoRepository companyInfoRepository = GetIt.I<CompanyInfoRepository>();
+  final CompanyInfoRepository? companyInfoRepository = GetIt.I<CompanyInfoRepository>();
 
   Future<void> loadCompanyInfo() async {
     emit(CompanyInfoScreenLoading());
 
     try {
-      final info = await companyInfoRepository.getCompanyInfo();
+      final info = await companyInfoRepository!.getCompanyInfo();
       emit(CompanyInfoScreenLoaded(info));
     } catch (e) {
       print('CompanyInfoScreenCubit::loadCompanyInfo ERROR: $e');

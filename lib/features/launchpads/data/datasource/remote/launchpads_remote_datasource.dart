@@ -11,7 +11,7 @@ class LaunchpadApi extends SpaceXApi {
     return list;
   }
 
-  Future<LaunchpadModel> getLaunchpad(String id) async {
+  Future<LaunchpadModel> getLaunchpad(String? id) async {
     final response = await requestJSON('launchpads/$id');
     return LaunchpadModel.fromJSON(response);
   }

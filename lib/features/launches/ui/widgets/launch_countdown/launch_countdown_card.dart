@@ -9,8 +9,8 @@ part 'launch_countdown_text.dart';
 
 class LaunchCountdownCard extends StatelessWidget {
   const LaunchCountdownCard({
-    Key key,
-    @required this.launch,
+    Key? key,
+    required this.launch,
     this.showLaunchOnTap = true,
   }) : super(key: key);
 

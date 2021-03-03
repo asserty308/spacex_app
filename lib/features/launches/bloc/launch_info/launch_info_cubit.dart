@@ -12,15 +12,15 @@ part 'launch_info_state.dart';
 class LaunchInfoCubit extends Cubit<LaunchInfoState> {
   LaunchInfoCubit() : super(LaunchInfoInitial());
 
-  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
-  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
+  final RocketRepository? rocketRepository = GetIt.I<RocketRepository>();
+  final LaunchpadRepository? launchpadRepository = GetIt.I<LaunchpadRepository>();
   
   Future<void> loadData(LaunchModel launch) async {
     emit(LaunchInfoLoading());
 
     try {
-      final rocket = await rocketRepository.getRocket(launch.rocket);
-      final launchpad = await launchpadRepository.getLaunchpad(launch.launchpad);
+      final rocket = await rocketRepository!.getRocket(launch.rocket);
+      final launchpad = await launchpadRepository!.getLaunchpad(launch.launchpad);
       emit(LaunchInfoLoaded(rocket: rocket, launchpad: launchpad));
     } catch (e) {
       print('LaunchInfoCubit::loadData ERROR: $e');

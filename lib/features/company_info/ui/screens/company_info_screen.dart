@@ -13,7 +13,7 @@ class CompanyInfoScreen extends StatelessWidget {
   );
 
   Widget get _body => BlocBuilder<CompanyInfoScreenCubit, CompanyInfoScreenState>(
-    cubit: GetIt.I<CompanyInfoScreenCubit>()..loadCompanyInfo(),
+    bloc: GetIt.I<CompanyInfoScreenCubit>()..loadCompanyInfo(),
     builder: (context, state) {
       if (state is CompanyInfoScreenLoaded) {
         return CompanyInfo(state: state);

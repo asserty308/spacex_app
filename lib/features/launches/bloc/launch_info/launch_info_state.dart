@@ -12,8 +12,8 @@ class LaunchInfoLoaded extends LaunchInfoState {
     this.launchpad,
   });
 
-  final RocketModel rocket;
-  final LaunchpadModel launchpad;
+  final RocketModel? rocket;
+  final LaunchpadModel? launchpad;
 }
 
 class LaunchInfoError extends LaunchInfoState {}

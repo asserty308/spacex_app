@@ -3,8 +3,8 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchListAvatar extends StatelessWidget {
   const LaunchListAvatar({
-    Key key, 
-    @required this.launch
+    Key? key, 
+    required this.launch
   }) : super(key: key);
 
   final LaunchModel launch;
@@ -16,7 +16,7 @@ class LaunchListAvatar extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
     );
 
-    final patch = launch.links.patchSmall;
+    final patch = launch.links!.patchSmall;
     
     return CircleAvatar(
       child: patch == null ? text : Image.network(patch),

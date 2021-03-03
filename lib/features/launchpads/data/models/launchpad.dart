@@ -17,11 +17,11 @@ class LaunchpadModel {
     this.launches,
   });
 
-  final int launchAttempts, launchSuccesses;
-  final String id, name, fullName, locality, region, timezone;
-  final LaunchpadStatus status;
-  final num latitude, longitude;
-  final List<String> rockets, launches;
+  final int? launchAttempts, launchSuccesses;
+  final String? id, name, fullName, locality, region, timezone;
+  final LaunchpadStatus? status;
+  final num? latitude, longitude;
+  final List<String>? rockets, launches;
   
   LaunchpadModel.fromJSON(Map<String, dynamic> json) :
     id = json['id'],

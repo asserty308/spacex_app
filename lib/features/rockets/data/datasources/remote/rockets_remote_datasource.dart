@@ -12,7 +12,7 @@ class RocketsApi extends SpaceXApi {
   }
 
   /// Calls the rockets/id endpoint endpoint on the SpaceX api.
-  Future<RocketModel> getRocket(String id) async {
+  Future<RocketModel> getRocket(String? id) async {
     final response = await requestJSON('rockets/$id');
     return RocketModel.fromJSON(response);
   }

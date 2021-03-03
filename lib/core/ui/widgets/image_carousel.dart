@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
-    Key key,
+    Key? key,
     this.imageUrls,
   }) : super(key: key);
 
-  final List<String> imageUrls;
+  final List<String>? imageUrls;
 
   @override
   _ImageCarouselState createState() => _ImageCarouselState();
@@ -24,14 +24,14 @@ class _ImageCarouselState extends State<ImageCarousel> {
         autoPlayInterval: Duration(seconds: 5),
         pauseAutoPlayOnTouch: true,
         enlargeCenterPage: false,
-        enableInfiniteScroll: widget.imageUrls.length > 1,
+        enableInfiniteScroll: widget.imageUrls!.length > 1,
       ),
       items: mapFromUrls(
-        widget.imageUrls, 
+        widget.imageUrls!, 
         (index, imgUrl) {
           return _imageContainer(imgUrl);
         },
-      )
+      ) as List<Widget>?
     );
   }
 
@@ -43,8 +43,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
       ),
     );
 
-  List<Widget> mapFromUrls(List list, Function handler) {
-    final result = <Widget>[];
+  List<Widget?> mapFromUrls(List list, Function handler) {
+    final result = <Widget?>[];
 
     for (var i = 0; i < list.length; i++) {
       result.add(handler(i, list[i]));

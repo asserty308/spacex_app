@@ -10,7 +10,7 @@ class LaunchListStateUpcomingLoaded extends LaunchListState {
     this.nonScheduled
   });
   
-  final List<LaunchModel> scheduled, nonScheduled;
+  final List<LaunchModel>? scheduled, nonScheduled;
 }
 
 class LaunchListStatePreviousLoaded extends LaunchListState {

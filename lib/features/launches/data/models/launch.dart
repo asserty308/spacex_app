@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 part 'launch_fairings.dart';
 part 'launch_cores.dart';
@@ -8,12 +7,12 @@ part 'date_precision.dart';
 
 class LaunchModel {
   LaunchModel({
-    @required this.id,
-    @required this.flightNumber,
-    @required this.name,
-    @required this.date,
-    @required this.datePrecision,
-    @required this.upcoming,
+    required this.id,
+    required this.flightNumber,
+    required this.name,
+    required this.date,
+    required this.datePrecision,
+    required this.upcoming,
     this.staticFireDate,
     this.tbd = false,
     this.net = false,
@@ -32,16 +31,16 @@ class LaunchModel {
     this.autoUpdate,
   });
 
-  final int flightNumber, window;
-  final String id, name, rocket, details, launchpad;
-  final DateTime date, staticFireDate;
-  final DatePrecision datePrecision;
-  final bool tbd, net, success, upcoming, autoUpdate;
-  final List<String> crew, ships, capsules;
-  final List<dynamic> payloads;
-  final LaunchFairingsModel fairings;
-  final List<LaunchCoreModel> cores;
-  final LaunchLinksModel links;
+  final int? flightNumber, window;
+  final String? id, name, rocket, details, launchpad;
+  final DateTime? date, staticFireDate;
+  final DatePrecision? datePrecision;
+  final bool? tbd, net, success, upcoming, autoUpdate;
+  final List<String>? crew, ships, capsules;
+  final List<dynamic>? payloads;
+  final LaunchFairingsModel? fairings;
+  final List<LaunchCoreModel>? cores;
+  final LaunchLinksModel? links;
 
   LaunchModel.fromJSON(Map<String, dynamic> json) :
     flightNumber = json['flight_number'],
@@ -70,26 +69,28 @@ class LaunchModel {
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.
   String formattedLaunchDate() {
-    switch (datePrecision) {
+    if (datePrecision == null) {
+      return '';
+    }
+
+    switch (datePrecision!) {
       case DatePrecision.quarter:
       case DatePrecision.half:
       case DatePrecision.year:
         // Runs for quarter, half and year
-        return DateFormat('yyyy').format(date);
+        return DateFormat('yyyy').format(date!);
       case DatePrecision.month:
-        return DateFormat('MMMM yyyy').format(date);
+        return DateFormat('MMMM yyyy').format(date!);
       case DatePrecision.day:
-        return DateFormat('dd.MM.yyyy').format(date);
+        return DateFormat('dd.MM.yyyy').format(date!);
       case DatePrecision.hour:
-        return DateFormat('dd.MM.yyyy HH:mm:ss').format(date);
+        return DateFormat('dd.MM.yyyy HH:mm:ss').format(date!);
     }
-
-    return '';
   }
 
   bool get isScheduled => datePrecision == DatePrecision.hour;
 
-  static DateTime _staticFireDateUnix(dynamic unix) {
+  static DateTime? _staticFireDateUnix(dynamic unix) {
     if (unix == null) {
       return null;
     }

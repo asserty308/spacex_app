@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class SliverScrollView extends StatelessWidget {
   const SliverScrollView({
-    Key key, 
-    @required this.header, 
-    @required this.body, 
+    Key? key, 
+    required this.header, 
+    required this.body, 
     this.onBackPressed
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class SliverScrollView extends StatelessWidget {
   final Widget body;
 
   /// When set, the back button is shown.
-  final Function(BuildContext context) onBackPressed;
+  final Function(BuildContext context)? onBackPressed;
 
   @override
   Widget build(BuildContext context) => NestedScrollView(
@@ -24,7 +24,7 @@ class SliverScrollView extends StatelessWidget {
         elevation: 0,
         leading: onBackPressed == null ? null : IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () => onBackPressed(context),
+          onPressed: () => onBackPressed!(context),
         ),
         flexibleSpace: FlexibleSpaceBar(
           background: header,

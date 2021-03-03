@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class TextCard extends StatelessWidget {
   const TextCard({
-    Key key,
+    Key? key,
     this.text,
     this.backgroundColor = Colors.indigo,
     this.textColor = Colors.white,
   }) : super(key: key);
 
-  final String text;
+  final String? text;
   final Color backgroundColor, textColor;
 
   @override
@@ -27,7 +27,7 @@ class TextCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              text,
+              text!,
               style: TextStyle(
                 color: textColor,
                 height: 1.2,

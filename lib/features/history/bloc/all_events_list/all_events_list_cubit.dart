@@ -9,13 +9,13 @@ part 'all_events_list_state.dart';
 class AllEventsListCubit extends Cubit<AllEventsListState> {
   AllEventsListCubit() : super(AllEventsListInitial());
 
-  final HistoryRepository repository = GetIt.I<HistoryRepository>();
+  final HistoryRepository? repository = GetIt.I<HistoryRepository>();
 
   Future<void> getAllEvents() async {
     emit(AllEventsListLoading());
 
     try {
-      final events = await repository.getAllEvents();
+      final events = await repository!.getAllEvents();
     
       if (events == null || events.isEmpty) {
         emit(AllEventsListError());

@@ -9,13 +9,13 @@ part 'launchpad_list_state.dart';
 class AllLaunchpadsCubit extends Cubit<AllLaunchpadsState> {
   AllLaunchpadsCubit() : super(AllLaunchpadsInitial());
 
-  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
+  final LaunchpadRepository? launchpadRepository = GetIt.I<LaunchpadRepository>();
 
   Future<void> loadData() async {
     emit(AllLaunchpadsLoading());
 
     try {
-      final launchpads = await launchpadRepository.getAllLaunchpads();
+      final launchpads = await launchpadRepository!.getAllLaunchpads();
       emit(AllLaunchpadsLoaded(launchpads));
 
       if (launchpads == null || launchpads.isEmpty) {

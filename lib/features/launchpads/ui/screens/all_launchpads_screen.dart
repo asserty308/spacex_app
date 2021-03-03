@@ -17,9 +17,9 @@ class AllLaunchpadsScreen extends StatelessWidget {
     body: _stateHandler,
   );
   
-  Widget get _stateHandler => BlocBuilder<AllLaunchpadsCubit, AllLaunchpadsState>(
-    cubit: GetIt.I<AllLaunchpadsCubit>()..loadData(),
-    builder: (context, state) {
+  Widget get _stateHandler => BlocBuilder(
+    bloc: GetIt.I<AllLaunchpadsCubit>()..loadData(),
+    builder: (context, dynamic state) {
       if (state is AllLaunchpadsInitial || state is AllLaunchpadsLoading) {
         return CenterProgressIndicator();
       }

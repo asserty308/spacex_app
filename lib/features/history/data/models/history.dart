@@ -11,8 +11,8 @@ class History {
     this.wikiUrl,
   });
 
-  int id, eventDateUnix, flightNumber;
-  String title, details, articleUrl, wikiUrl;
+  int? id, eventDateUnix, flightNumber;
+  String? title, details, articleUrl, wikiUrl;
 
   static History fromJSON(Map<String, dynamic> json) {
     return History(
@@ -27,7 +27,7 @@ class History {
   }
 
   DateTime getDate() {
-    return DateTime.fromMillisecondsSinceEpoch(eventDateUnix * 1000);
+    return DateTime.fromMillisecondsSinceEpoch(eventDateUnix! * 1000);
   }
 
   String formattedDate([String format = 'dd.MM.yyyy HH:mm:ss']) {

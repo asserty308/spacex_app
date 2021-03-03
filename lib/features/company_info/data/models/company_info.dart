@@ -20,14 +20,14 @@ class CompanyInfoModel {
     this.summary
   });
 
-  final String name;
-  final String founder;
-  final int founded, employees, vehicles, launchSites, testSites;
-  final String ceo, cto, coo, ctoPropulsion;
-  final num valuation;
-  final CompanyHeadquarters headquarters;
-  final CompanyLinks links;
-  final String summary;
+  final String? name;
+  final String? founder;
+  final int? founded, employees, vehicles, launchSites, testSites;
+  final String? ceo, cto, coo, ctoPropulsion;
+  final num? valuation;
+  final CompanyHeadquarters? headquarters;
+  final CompanyLinks? links;
+  final String? summary;
 
 
   CompanyInfoModel.fromJSON(Map<String, dynamic> json) :

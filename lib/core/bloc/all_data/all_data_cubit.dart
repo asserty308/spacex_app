@@ -10,19 +10,19 @@ part 'all_data_state.dart';
 class AllDataCubit extends Cubit<AllDataState> {
   AllDataCubit() : super(AllDataEmpty());
 
-  final LaunchRepository launchRepository = GetIt.I<LaunchRepository>();
-  final RocketRepository rocketRepository = GetIt.I<RocketRepository>();
-  final HistoryRepository historyRepository = GetIt.I<HistoryRepository>();
-  final LaunchpadRepository launchpadRepository = GetIt.I<LaunchpadRepository>();
+  final LaunchRepository? launchRepository = GetIt.I<LaunchRepository>();
+  final RocketRepository? rocketRepository = GetIt.I<RocketRepository>();
+  final HistoryRepository? historyRepository = GetIt.I<HistoryRepository>();
+  final LaunchpadRepository? launchpadRepository = GetIt.I<LaunchpadRepository>();
 
   void getAllData() async {
     emit(AllDataLoading());
 
     try {
-      await launchRepository.getAllLaunches();
-      await rocketRepository.getAllRockets();
+      await launchRepository!.getAllLaunches();
+      await rocketRepository!.getAllRockets();
       //await historyRepository.getAllEvents();
-      await launchpadRepository.getAllLaunchpads();
+      await launchpadRepository!.getAllLaunchpads();
       emit(AllDataStateLoaded());
     } catch (e) {
       print('AllDataCubit::getAllData ERROR: $e');

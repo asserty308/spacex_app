@@ -6,18 +6,18 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketInfo extends StatelessWidget {
   const RocketInfo({
-    Key key,
-    @required this.rocket,
-    @required this.allLaunches,
+    Key? key,
+    required this.rocket,
+    required this.allLaunches,
   }) : super(key: key);
 
   final RocketModel rocket;
-  final List<LaunchModel> allLaunches;
+  final List<LaunchModel>? allLaunches;
 
   @override
   Widget build(BuildContext context) {
     // filter all launches to find the current rocket's launch history - show latest launch first
-    final previousLaunches = allLaunches.where((l) => l.rocket == rocket.id && !l.upcoming).toList().reversed;
+    final previousLaunches = allLaunches!.where((l) => l.rocket == rocket.id && !l.upcoming!).toList().reversed;
 
     final previousList = <Widget>[];
     for (final l in previousLaunches) {
@@ -25,7 +25,7 @@ class RocketInfo extends StatelessWidget {
     }
 
     // filter all launches to find the current rocket's upcoming launches - show next launch first
-    final upcomingLaunches = allLaunches.where((l) => l.rocket == rocket.id && l.upcoming).toList();
+    final upcomingLaunches = allLaunches!.where((l) => l.rocket == rocket.id && l.upcoming!).toList();
 
     final upcomingList = <Widget>[];
     for (final l in upcomingLaunches) {
@@ -36,8 +36,8 @@ class RocketInfo extends StatelessWidget {
       children: <Widget>[
         ListTile(
           title: Text(
-            rocket.name,
-            style: Theme.of(context).textTheme.headline4.copyWith(
+            rocket.name!,
+            style: Theme.of(context).textTheme.headline4!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -45,7 +45,7 @@ class RocketInfo extends StatelessWidget {
           subtitle: Padding(
             padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
             child: Text(
-              rocket.description,
+              rocket.description!,
               style: const TextStyle(
                 color: Colors.white,
                 height: 1.3,
@@ -58,7 +58,7 @@ class RocketInfo extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
           child: Text(
             'Launches',
-            style: Theme.of(context).textTheme.headline5.copyWith(
+            style: Theme.of(context).textTheme.headline5!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

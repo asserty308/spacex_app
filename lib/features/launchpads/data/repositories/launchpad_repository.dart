@@ -4,22 +4,22 @@ import 'package:spacex_guide/features/launchpads/data/datasource/remote/launchpa
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 
 class LaunchpadRepository {
-  final LaunchpadApi launchpadRemoteDatasource = GetIt.I<LaunchpadApi>();
+  final LaunchpadApi? launchpadRemoteDatasource = GetIt.I<LaunchpadApi>();
 
-  Future<List<LaunchpadModel>> getAllLaunchpads() async {
-    if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads.isNotEmpty) {
+  Future<List<LaunchpadModel>?> getAllLaunchpads() async {
+    if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads!.isNotEmpty) {
       return LaunchpadsLocalDatasource.allLaunchpads;
     }
 
-    LaunchpadsLocalDatasource.allLaunchpads = await launchpadRemoteDatasource.getAllLaunchpads();
+    LaunchpadsLocalDatasource.allLaunchpads = await launchpadRemoteDatasource!.getAllLaunchpads();
     return LaunchpadsLocalDatasource.allLaunchpads;
   }
 
-  Future<LaunchpadModel> getLaunchpad(String id) async {
-    if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads.isNotEmpty) {
-      return LaunchpadsLocalDatasource.allLaunchpads.firstWhere((element) => element.id == id);
+  Future<LaunchpadModel> getLaunchpad(String? id) async {
+    if (LaunchpadsLocalDatasource.allLaunchpads != null && LaunchpadsLocalDatasource.allLaunchpads!.isNotEmpty) {
+      return LaunchpadsLocalDatasource.allLaunchpads!.firstWhere((element) => element.id == id);
     }
 
-    return await launchpadRemoteDatasource.getLaunchpad(id);
+    return await launchpadRemoteDatasource!.getLaunchpad(id);
   }
 }

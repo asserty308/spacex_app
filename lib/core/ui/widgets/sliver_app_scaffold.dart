@@ -3,9 +3,9 @@ import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 
 class SliverAppScaffold extends StatelessWidget {
   const SliverAppScaffold({
-    Key key, 
-    @required this.title, 
-    @required this.body,
+    Key? key, 
+    required this.title, 
+    required this.body,
     this.actions,
     this.drawerEnabled = true, 
   }) : super(key: key);
@@ -13,7 +13,7 @@ class SliverAppScaffold extends StatelessWidget {
   final Widget body;
   final bool drawerEnabled;
   final Widget title;
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) => _responsiveScaffold(context);

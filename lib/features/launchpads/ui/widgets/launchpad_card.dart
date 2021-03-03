@@ -1,47 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:spacex_guide/core/ui/widgets/image_title_card.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
-import 'package:latlong/latlong.dart';
 
 class LaunchpadCard extends StatelessWidget {
   const LaunchpadCard({
-    Key key,
-    @required this.launchpad,
+    Key? key,
+    required this.launchpad,
   }) : super(key: key);
 
   final LaunchpadModel launchpad;
 
   @override
   Widget build(BuildContext context) {
-    final coordinates = LatLng(launchpad.latitude, launchpad.longitude);
+    final coordinates = LatLng(launchpad.latitude as double, launchpad.longitude as double);
 
     return ImageTitleCard(
-      mainWidget: FlutterMap(
-        options: MapOptions(
-          center: coordinates,
-          zoom: 6,
-          interactive: false,
+      child: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: coordinates,
+          zoom: 12,
         ),
-        layers: <LayerOptions>[
-          TileLayerOptions(
-            urlTemplate: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-            subdomains: ['a', 'b', 'c', 'd'],
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          MarkerLayerOptions(markers: <Marker>[
-            Marker(
-              width: 40.0,
-              height: 40.0,
-              point: coordinates,
-              builder: (context) => Icon(
-                Icons.location_on,
-                color: Theme.of(context).accentColor,
-                size: 40.0,
-              ),
-            )
-          ])
-        ],
+        markers: <Marker>{
+          Marker(
+            markerId: MarkerId('Marker'),
+            position: coordinates,
+          )
+        },
       ),
       title: launchpad.name,
       onTap: () {},

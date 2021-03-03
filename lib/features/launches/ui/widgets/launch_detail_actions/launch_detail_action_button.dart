@@ -2,9 +2,9 @@ part of 'launch_detail_actions.dart';
 
 class LaunchDetailActionButton extends StatelessWidget {
   LaunchDetailActionButton({
-    Key key,
-    @required this.icon,
-    @required this.onTap,
+    Key? key,
+    required this.icon,
+    required this.onTap,
   }) : super(key: key);
 
   final Icon icon;

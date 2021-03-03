@@ -6,8 +6,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_avata
 
 class LaunchListTile extends StatelessWidget {
   const LaunchListTile({
-    Key key,
-    @required this.launch,
+    Key? key,
+    required this.launch,
   }) : super(key: key);
 
   final LaunchModel launch;
@@ -24,7 +24,7 @@ class LaunchListTile extends StatelessWidget {
   // Widgets
 
   Widget get _title => Text(
-    launch.name,
+    launch.name!,
     style: const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,

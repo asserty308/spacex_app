@@ -4,8 +4,8 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketCard extends StatelessWidget {
   RocketCard({
-    Key key,
-    @required this.rocket,
+    Key? key,
+    required this.rocket,
   }) : super(key: key);
 
   final RocketModel rocket;
@@ -37,7 +37,7 @@ class RocketCard extends StatelessWidget {
       children: <Widget>[
         // Background image
         Image.network(
-          rocket.flickrImages[0],
+          rocket.flickrImages![0],
           fit: BoxFit.cover,
         ),
         // Alpha layer
@@ -46,7 +46,7 @@ class RocketCard extends StatelessWidget {
         ),
         // Title
         Text(
-          rocket.name,
+          rocket.name!,
           style: _titleStyle,
         ).centered,
       ]

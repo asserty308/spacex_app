@@ -9,11 +9,11 @@ part 'rocket_details_state.dart';
 class RocketDetailsCubit extends Cubit<RocketDetailsState> {
   RocketDetailsCubit() : super(RocketDetailsInitial());
 
-  final LaunchRepository launchRepository = GetIt.I<LaunchRepository>();
+  final LaunchRepository? launchRepository = GetIt.I<LaunchRepository>();
 
   Future<void> loadDetails() async {
     emit(RocketDetailsLoading());
-    final launches = await launchRepository.getAllLaunches();
+    final launches = await launchRepository!.getAllLaunches();
     emit(RocketDetailsLoaded(launches));
   }
 }

@@ -1,5 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -20,19 +18,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _firebaseMessaging = FirebaseMessaging();
-
   @override
   void initState() {
     super.initState();
-    initMessaging();
     GetIt.I<AllDataCubit>().getAllData();
   }
 
   @override
   Widget build(BuildContext context) => BlocBuilder(
-    cubit: GetIt.I<ThemeSelectorCubit>(),
-    builder: (context, state) {
+    bloc: GetIt.I<ThemeSelectorCubit>(),
+    builder: (context, dynamic state) {
       if (state is ThemeSelectorDark) {
         return themedApp(darkTheme);
       }
@@ -51,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   // Widgets
 
   Widget get _navigationBuilder => BlocBuilder<AppNavigationCubit, AppNavigationState>(
-    cubit: GetIt.I<AppNavigationCubit>(),
+    bloc: GetIt.I<AppNavigationCubit>(),
     builder: (context, state) {
       if (state is AppNavigationStateSplash) {
         return SplashScreen();
@@ -80,36 +75,4 @@ class _MyAppState extends State<MyApp> {
       return Container();
     },
   );
-
-  // Functions
-
-  // TODO: Setup firebase messaging for iOS
-  void initMessaging() {
-    if (kIsWeb) {
-      // Not supported on web
-      return;
-    }
-    
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print('onMessage: $message');
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print('onLaunch: $message');
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print('onResume: $message');
-      },
-    );
-    
-    const iosSettings = IosNotificationSettings(sound: true, badge: true, alert: true, provisional: true);
-    _firebaseMessaging.requestNotificationPermissions(iosSettings);
-    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
-      print('Settings registered: $settings');
-    });
-
-    _firebaseMessaging.getToken().then((String token) {
-      print('Push Messaging token: $token');
-    });
-  }
 }

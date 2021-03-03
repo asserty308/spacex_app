@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class ImageTitleCard extends StatelessWidget {
   const ImageTitleCard({
-    Key key,
-    @required this.mainWidget,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.child,
+    required this.title,
+    required this.onTap,
     this.borderRadius = 10,
   }) : super(key: key);
 
-  final Widget mainWidget;
-  final String title;
+  final Widget child;
+  final String? title;
   final Function() onTap;
   final double borderRadius;
 
@@ -27,7 +27,7 @@ class ImageTitleCard extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         children: <Widget>[
-          Container(height: 250, child: mainWidget),
+          Container(height: 250, child: child),
           Container(
             height: 250,
             child: Align(
@@ -36,7 +36,7 @@ class ImageTitleCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
-                    title,
+                    title!,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,

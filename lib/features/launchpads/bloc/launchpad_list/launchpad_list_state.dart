@@ -8,7 +8,7 @@ class AllLaunchpadsLoading extends AllLaunchpadsState {}
 
 class AllLaunchpadsLoaded extends AllLaunchpadsState {
   AllLaunchpadsLoaded(this.allLaunchpads);
-  final List<LaunchpadModel> allLaunchpads;
+  final List<LaunchpadModel>? allLaunchpads;
 }
 
 class AllLaunchpadsError extends AllLaunchpadsState {}

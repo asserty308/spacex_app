@@ -10,9 +10,9 @@ class RocketFirstStage {
     this.thrustVacuumKm
   });
 
-  final bool reusable;
-  final int engines;
-  final num fuelAmountTons, burnTimeSeconds, thrustSeaLevelKn, thrustVacuumKm;
+  final bool? reusable;
+  final int? engines;
+  final num? fuelAmountTons, burnTimeSeconds, thrustSeaLevelKn, thrustVacuumKm;
 
   RocketFirstStage.fromJSON(Map<String, dynamic> json) :
     reusable = json['reusable'],

@@ -11,18 +11,18 @@ import 'launch_countdown/launch_countdown_card.dart';
 
 class LaunchInfo extends StatelessWidget {
   const LaunchInfo({
-    Key key,
-    @required this.launch,
+    Key? key,
+    required this.launch,
   }) : super(key: key);
 
   final LaunchModel launch;
 
   @override
   Widget build(BuildContext context) => BlocBuilder<LaunchInfoCubit, LaunchInfoState>(
-    cubit: GetIt.I<LaunchInfoCubit>()..loadData(launch),
+    bloc: GetIt.I<LaunchInfoCubit>()..loadData(launch),
     builder: (context, state) {
       if (state is LaunchInfoLoaded) {
-        return _listView(state.rocket, state.launchpad);
+        return _listView(state.rocket!, state.launchpad!);
       }
 
       return Container();
@@ -33,13 +33,13 @@ class LaunchInfo extends StatelessWidget {
     padding: EdgeInsets.only(top: 24),
     children: <Widget>[
       ListTile(
-        leading: launch.links.patchSmall != null ? Image.network(launch.links.patchSmall) : null,
+        leading: launch.links!.patchSmall != null ? Image.network(launch.links!.patchSmall!) : null,
       ),
-      !launch.upcoming ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
+      !launch.upcoming! ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
       const SizedBox(height: 8,),
       ListTile(
         title: Text(
-          launch.name,
+          launch.name!,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -80,7 +80,7 @@ class LaunchInfo extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          rocket.name,
+          rocket.name!,
           style: const TextStyle(
             color: Colors.white,
             height: 1.2,
@@ -100,7 +100,7 @@ class LaunchInfo extends StatelessWidget {
         subtitle: Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
           child: Text(
-            launch.details,
+            launch.details!,
             style: const TextStyle(
                 color: Colors.white,
                 height: 1.2,

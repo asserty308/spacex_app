@@ -7,7 +7,7 @@ class CompanyHeadquarters {
     this.state
   });
 
-  final String address, city, state;
+  final String? address, city, state;
 
   CompanyHeadquarters.fromJSON(Map<String, dynamic> json) :
     address = json['address'],

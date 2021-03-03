@@ -8,8 +8,8 @@ part 'launch_detail_action_button.dart';
 
 class LaunchDetailActions extends StatelessWidget {
   const LaunchDetailActions({
-    Key key,
-    @required this.launch,
+    Key? key,
+    required this.launch,
   }) : super(key: key);
 
   final LaunchModel launch;
@@ -31,14 +31,14 @@ class LaunchDetailActions extends StatelessWidget {
 
   Future<void> showPresskit(BuildContext context) async {
     GetIt.I<AppNavigationCubit>().launchUrl(
-      launch.links.presskit, 
+      launch.links!.presskit, 
       onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no presskit availavle for this launch.')
     );
   }
 
   Future<void> playVideo(BuildContext context) async {
     GetIt.I<AppNavigationCubit>().launchUrl(
-      launch.links.webcast, 
+      launch.links!.webcast, 
       onError: () => GetIt.I.get<AlertService>().showDismissDialog(context, 'Unavailable', 'There is no video availavle for this launch.')
     );
   }

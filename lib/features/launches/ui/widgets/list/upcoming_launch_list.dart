@@ -6,16 +6,16 @@ import 'package:flutter_core/ui/extensions/widget_extension.dart';
 
 class UpcomingLaunchList extends StatelessWidget {
   const UpcomingLaunchList({
-    Key key,
-    @required this.scheduled,
-    @required this.nonScheduled,
+    Key? key,
+    required this.scheduled,
+    required this.nonScheduled,
   }) : super(key: key);
 
-  final List<LaunchModel> scheduled, nonScheduled;
+  final List<LaunchModel>? scheduled, nonScheduled;
 
   @override
   Widget build(BuildContext context) {
-    final nextLaunch = getNextLaunch(scheduled);
+    final nextLaunch = getNextLaunch(scheduled!);
 
     return Container(
       child: _listView(nextLaunch),
@@ -24,9 +24,9 @@ class UpcomingLaunchList extends StatelessWidget {
 
   // Widgets
 
-  Widget _listView(LaunchModel nextLaunch) {
-    final scheduledCount = scheduled == null || scheduled.isEmpty ? 0 : scheduled.length + 1;  // +1 for section header
-    final nonScheduledCount = nonScheduled == null || nonScheduled.isEmpty ? 0 : nonScheduled.length + 1;  // +1 for section header
+  Widget _listView(LaunchModel? nextLaunch) {
+    final scheduledCount = scheduled == null || scheduled!.isEmpty ? 0 : scheduled!.length + 1;  // +1 for section header
+    final nonScheduledCount = nonScheduled == null || nonScheduled!.isEmpty ? 0 : nonScheduled!.length + 1;  // +1 for section header
     final itemCount = scheduledCount + nonScheduledCount;
 
     return SliverList(
@@ -43,7 +43,7 @@ class UpcomingLaunchList extends StatelessWidget {
           }
 
           if (correctIndex < scheduledCount) {
-            final launch = scheduled[correctIndex - 1];
+            final launch = scheduled![correctIndex - 1];
             return LaunchListTile(launch: launch);
           }
 
@@ -52,7 +52,7 @@ class UpcomingLaunchList extends StatelessWidget {
           }
 
           if (correctIndex > scheduledCount) {
-            final launch = nonScheduled[correctIndex - scheduledCount - 1];
+            final launch = nonScheduled![correctIndex - scheduledCount - 1];
             return LaunchListTile(launch: launch);
           }
 
@@ -66,9 +66,9 @@ class UpcomingLaunchList extends StatelessWidget {
   // Functions
 
   /// Filters [_launches] by upcoming, timed launches and sorts them by date to return the upcoming launch.
-  LaunchModel getNextLaunch(List<LaunchModel> launches) {
-    final upcoming = launches.where((l) => l.upcoming && l.datePrecision == DatePrecision.day || l.datePrecision == DatePrecision.hour).toList();
-    upcoming.sort((l1, l2) => l1.date.compareTo(l2.date));
+  LaunchModel? getNextLaunch(List<LaunchModel> launches) {
+    final upcoming = launches.where((l) => l.upcoming! && l.datePrecision == DatePrecision.day || l.datePrecision == DatePrecision.hour).toList();
+    upcoming.sort((l1, l2) => l1.date!.compareTo(l2.date!));
     return upcoming.isEmpty ? null : upcoming[0];
   }
 }

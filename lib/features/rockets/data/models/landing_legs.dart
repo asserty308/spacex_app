@@ -6,8 +6,8 @@ class RocketLandingLegs {
     this.material,
   });
 
-  final num number;
-  final String material;
+  final num? number;
+  final String? material;
 
   RocketLandingLegs.fromJSON(Map<String, dynamic> json) :
     number = json['number'],

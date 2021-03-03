@@ -2,7 +2,7 @@ part of 'launch_countdown_card.dart';
 
 class LaunchCountdown extends StatefulWidget {
   const LaunchCountdown({
-    @required this.launch,
+    required this.launch,
     this.textColor = Colors.white,
     this.textSize = 25,
   });
@@ -16,7 +16,7 @@ class LaunchCountdown extends StatefulWidget {
 }
 
 class _LaunchCountdownState extends State<LaunchCountdown> {
-  Timer _launchTimer;
+  late Timer _launchTimer;
   var _countdownText = '';
 
   @override
@@ -52,7 +52,7 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
 
   void setCountdownText() {
     // calculate raw time data
-    final seconds = ((widget.launch.date.millisecondsSinceEpoch / 1000) - (DateTime.now().millisecondsSinceEpoch / 1000)).toInt();
+    final seconds = ((widget.launch.date!.millisecondsSinceEpoch / 1000) - (DateTime.now().millisecondsSinceEpoch / 1000)).toInt();
     final minutes = seconds ~/ 60; // equal to (seconds / 60).toInt() but more efficient
     final hours = minutes ~/ 60;
     final days = hours ~/ 24;

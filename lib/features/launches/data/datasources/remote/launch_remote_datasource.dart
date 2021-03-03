@@ -11,7 +11,7 @@ class LaunchApi extends SpaceXApi {
     return list;
   }
 
-  Future<LaunchModel> getLaunchWithId(int id) async {
+  Future<LaunchModel> getLaunchWithId(int? id) async {
     final response = await requestJSON('launches/$id');
     return LaunchModel.fromJSON(response);
   }

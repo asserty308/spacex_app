@@ -13,8 +13,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 /// The next launch will be loaded when the parameter is null.
 class LaunchDetailScreen extends StatelessWidget {
   LaunchDetailScreen({
-    Key key, 
-    @required this.launch,
+    Key? key, 
+    required this.launch,
   }) : super(key: key);
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -43,7 +43,7 @@ class LaunchDetailScreen extends StatelessWidget {
   );
 
   Widget get _blocBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(
-    cubit: GetIt.I<LaunchDetailsCubit>()..loadLaunchDetails(launch),
+    bloc: GetIt.I<LaunchDetailsCubit>()..loadLaunchDetails(launch),
     builder: (context, state) {
       if (state is LaunchDetailsStateLoading) {
         return CenterProgressIndicator();

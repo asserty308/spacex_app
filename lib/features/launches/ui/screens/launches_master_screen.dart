@@ -9,7 +9,7 @@ import 'package:spacex_guide/features/launches/ui/screens/launches_screen.dart';
 class LaunchesMasterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocConsumer<LaunchesNavigationCubit, LaunchesNavigationState>(
-    cubit: GetIt.I<LaunchesNavigationCubit>(),
+    bloc: GetIt.I<LaunchesNavigationCubit>(),
     listener: (context, state) {
       if (state is LaunchesNavigationStateDetails) {
         _showDetailsScreen(state.navContext, state.launch);
