@@ -83,3 +83,4 @@ ios/Runner/GoogleService-Info.plist
 web/
 android/app/src/main/AndroidManifest.xml
 ios/Runner/AppDelegate.swift
+.flutter-plugins-dependencies
