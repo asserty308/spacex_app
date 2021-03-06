@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:spacex_guide/features/launches/ui/clipper/launch_details_clipper.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
+import 'package:flutter_core/ui/extensions/widget_extension.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -21,28 +21,29 @@ class LaunchDetailScreen extends StatelessWidget {
   final LaunchModel launch;
 
   @override
-  Widget build(BuildContext context) => _willPopScope;
-
-  // Widgets
-  
-  Widget get _willPopScope => Builder(
-    builder: (context) => WillPopScope(
-      child: Scaffold(
-        key: _scaffoldKey,
-        body: _blocBuilder,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
+  Widget build(BuildContext context) => WillPopScope(
+    child: Scaffold(
+      key: _scaffoldKey,
+      body: _stateBuilder,
+      appBar: AppBar(
+        title: Row(
+          children: [
+            if (launch.links?.patchSmall != null)
+              Image.network(launch.links!.patchSmall!, width: 40, height: 40,).paddingOnly(right: 16),
+            Text(launch.name ?? 'Unbekannter Name'),
+          ],
         ),
-        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
       ),
-      onWillPop: () async {
-        _dismissScreen(context);
-        return false;
-      },
+      extendBodyBehindAppBar: true,
     ),
+    onWillPop: () async {
+      _dismissScreen(context);
+      return false;
+    },
   );
 
-  Widget get _blocBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(
+  Widget get _stateBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(
     bloc: GetIt.I<LaunchDetailsCubit>()..loadLaunchDetails(launch),
     builder: (context, state) {
       if (state is LaunchDetailsStateLoading) {
@@ -64,29 +65,21 @@ class LaunchDetailScreen extends StatelessWidget {
     ],
   );
 
-  Widget get _launchInfoBody => Padding(
-    padding: EdgeInsets.only(top: 150),
-    child: ClipPath(
-      clipper: LaunchDetailsClipper(heightPx: 100),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black26, Colors.black],
-            stops: [0.0, 0.8] // bottom 20% are black
-          )
-        ),
-        child: _launchInfo,
-      ),
+  Widget get _launchInfoBody => Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Colors.black26, Colors.black],
+        stops: [0.0, 0.8] // bottom 20% are black
+      )
     ),
+    child: _launchInfo,
   );
 
-  Widget get _launchInfo => Builder(
-    builder: (context) => LaunchInfo(
-      launch: launch,
-    )
-  );
+  Widget get _launchInfo => LaunchInfo(
+    launch: launch,
+  ).paddingOnly(top: 60);
 
   // Function
 

@@ -32,28 +32,8 @@ class LaunchInfo extends StatelessWidget {
   Widget _listView(RocketModel rocket, LaunchpadModel launchpad) => ListView(
     padding: EdgeInsets.only(top: 24),
     children: <Widget>[
-      ListTile(
-        leading: launch.links!.patchSmall != null ? Image.network(launch.links!.patchSmall!) : null,
-      ),
       !launch.upcoming! ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
       const SizedBox(height: 8,),
-      ListTile(
-        title: Text(
-          launch.name!,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        subtitle: Text(
-          launch.formattedLaunchDate(),
-          style: const TextStyle(
-            color: Colors.white,
-            height: 1.2,
-            fontSize: 16,
-          ),
-        ),
-      ),
       ListTile(
         title: const Text(
           'Launch Site',

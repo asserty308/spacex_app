@@ -31,7 +31,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         (index, imgUrl) {
           return _imageContainer(imgUrl);
         },
-      ) as List<Widget>?
+      )
     );
   }
 
@@ -43,8 +43,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
       ),
     );
 
-  List<Widget?> mapFromUrls(List list, Function handler) {
-    final result = <Widget?>[];
+  List<Widget> mapFromUrls(List list, Function handler) {
+    final result = <Widget>[];
 
     for (var i = 0; i < list.length; i++) {
       result.add(handler(i, list[i]));

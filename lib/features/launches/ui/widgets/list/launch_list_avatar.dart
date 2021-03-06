@@ -16,7 +16,7 @@ class LaunchListAvatar extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
     );
 
-    final patch = launch.links!.patchSmall;
+    final patch = launch.links?.patchSmall;
     
     return CircleAvatar(
       child: patch == null ? text : Image.network(patch),
