@@ -22,14 +22,14 @@ dependencies:
       path: flutter_web
 
   carousel_slider: ^4.0.0-nullsafety.0
-  flare_flutter: ^2.0.6
+  # flare_flutter: ^2.0.6
   flutter_bloc: ^7.0.0-nullsafety.3
   get_it: ^6.0.0
   google_maps_flutter: ^2.0.1
   intl: ^0.17.0
   path_provider: ^2.0.1
-  url_launcher: ^5.7.2
-  webview_flutter: ^2.0.1
+  url_launcher: ^6.0.2
+  webview_flutter: ^2.0.2
 
 dev_dependencies:
   flutter_test:

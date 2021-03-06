@@ -15,7 +15,7 @@ class LaunchListStateUpcomingLoaded extends LaunchListState {
 
 class LaunchListStatePreviousLoaded extends LaunchListState {
   LaunchListStatePreviousLoaded(this.launches);
-  final List<LaunchModel> launches;
+  final List<LaunchModel>? launches;
 }
 
 class LaunchListStateError extends LaunchListState {}

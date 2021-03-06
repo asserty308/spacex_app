@@ -45,7 +45,7 @@ class LaunchesScreen extends StatelessWidget {
 
       if (state is LaunchListStatePreviousLoaded) {
         return PreviousLaunchList(
-          launches: state.launches,
+          launches: state.launches ?? [],
         );
       }
 
@@ -115,7 +115,7 @@ class LaunchesScreen extends StatelessWidget {
         launches!.addAll(state.nonScheduled!);
       }
 
-      if (launches.isEmpty) {
+      if (launches?.isEmpty ?? true) {
         return Container();
       }
 

@@ -10,7 +10,6 @@ import 'package:spacex_guide/features/history/ui/screens/all_events_screen.dart'
 import 'package:spacex_guide/features/launches/ui/screens/launches_master_screen.dart';
 import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_screen.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
-import 'package:spacex_guide/features/splash/ui/screens/splash_screen.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -48,9 +47,9 @@ class _MyAppState extends State<MyApp> {
   Widget get _navigationBuilder => BlocBuilder<AppNavigationCubit, AppNavigationState>(
     bloc: GetIt.I<AppNavigationCubit>(),
     builder: (context, state) {
-      if (state is AppNavigationStateSplash) {
-        return SplashScreen();
-      }
+      // if (state is AppNavigationStateSplash) {
+      //   return SplashScreen();
+      // }
 
       if (state is AppNavigationStateLaunches) {
         return LaunchesMasterScreen();
