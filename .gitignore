@@ -81,6 +81,9 @@ android/key.properties
 ios/Runner/GoogleService-Info.plist
 
 web/
-android/app/src/main/AndroidManifest.xml
-ios/Runner/AppDelegate.swift
+.flutter-plugins-dependencies
+firebase.json
+.gitignore
+.firebase/hosting.YnVpbGQvd2Vi.cache
+.firebaserc
 .flutter-plugins-dependencies

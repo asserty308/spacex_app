@@ -38,8 +38,8 @@ class LaunchesScreen extends StatelessWidget {
 
       if (state is LaunchListStateUpcomingLoaded) {
         return UpcomingLaunchList(
-          scheduled: state.scheduled,
-          nonScheduled: state.nonScheduled,
+          scheduled: state.scheduled ?? [],
+          nonScheduled: state.nonScheduled ?? [],
         );
       }
 
@@ -111,8 +111,8 @@ class LaunchesScreen extends StatelessWidget {
       }
 
       if (state is LaunchListStateUpcomingLoaded) {
-        launches = state.scheduled;
-        launches!.addAll(state.nonScheduled!);
+        launches = List.from(state.scheduled ?? []);
+        launches.addAll(state.nonScheduled ?? []);
       }
 
       if (launches?.isEmpty ?? true) {
@@ -134,11 +134,4 @@ class LaunchesScreen extends StatelessWidget {
     'Under construction', 
     'The search is temporarily unavailable.'
   );
-  
-  // showSearch<LaunchModel>(
-  //   context: context,
-  //   delegate: LaunchSearchDelegate(
-  //     launchData: launches,
-  //   ),
-  // );
 }
