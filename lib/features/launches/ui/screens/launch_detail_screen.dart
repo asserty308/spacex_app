@@ -22,6 +22,10 @@ class LaunchDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => WillPopScope(
+    onWillPop: () async {
+      _dismissScreen(context);
+      return false;
+    },
     child: Scaffold(
       key: _scaffoldKey,
       body: _stateBuilder,
@@ -37,10 +41,6 @@ class LaunchDetailScreen extends StatelessWidget {
       ),
       extendBodyBehindAppBar: true,
     ),
-    onWillPop: () async {
-      _dismissScreen(context);
-      return false;
-    },
   );
 
   Widget get _stateBuilder => BlocBuilder<LaunchDetailsCubit, LaunchDetailsState>(

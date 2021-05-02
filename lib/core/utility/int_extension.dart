@@ -4,11 +4,11 @@ extension IntExtension on int {
   /// Example:
   /// 10000000000 becomes 10,000,000,000
   String toCommaSeparatedString() {
-    final val = this.toString();
+    final val = toString();
     final length = val.length;
 
-    String sep = '';
-    for (int i = length - 1; i >= 0; i--) {
+    var sep = '';
+    for (var i = length - 1; i >= 0; i--) {
       final j = length - i;
       final c = val[i];
 

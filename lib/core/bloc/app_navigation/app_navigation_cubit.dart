@@ -20,7 +20,7 @@ class AppNavigationCubit extends Cubit<AppNavigationState> {
     }
     
     if (await canLaunch(url)) {
-      launch(url);
+      await launch(url);
     } else {
       print('AppNavigationCubit::launchURL ERROR on $url');
       onError!();

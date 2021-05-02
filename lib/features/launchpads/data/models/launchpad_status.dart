@@ -6,7 +6,7 @@ enum LaunchpadStatus {
 
 class LaunchpadStatusUtil {
   static LaunchpadStatus? fromString(String? value) {
-    final Map<String, LaunchpadStatus> dict = {
+    final dict = <String, LaunchpadStatus>{
       'active': LaunchpadStatus.active,
       'inactive': LaunchpadStatus.inactive,
       'unknown': LaunchpadStatus.unknown,

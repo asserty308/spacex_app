@@ -16,12 +16,12 @@ class LaunchDetailActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
+    onTap: () => onTap(),
     child: CircleAvatar(
-      child: icon,
       backgroundColor: _backgroundColor,
       foregroundColor: _foregroundColor,
       radius: _radius,
+      child: icon,
     ),
-    onTap: () => onTap(),
   );
 }

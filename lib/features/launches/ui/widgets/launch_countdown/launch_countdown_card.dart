@@ -40,6 +40,7 @@ class LaunchCountdownCard extends StatelessWidget {
   );
 
   Widget _cardContent(BuildContext context) => InkWell(
+    onTap: () => _onTap(context),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -50,7 +51,6 @@ class LaunchCountdownCard extends StatelessWidget {
         ],
       ),
     ),
-    onTap: () => _onTap(context),
   );
 
   Widget get _title => Text(

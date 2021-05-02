@@ -11,6 +11,8 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_list.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_list.dart';
 
+// TODO: Apply Glassmorphism design (blur bg and glass containers)
+
 class LaunchesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SliverAppScaffold(
@@ -58,7 +60,7 @@ class LaunchesScreen extends StatelessWidget {
   Widget get _title => BlocBuilder(
     bloc: _cubit,
     builder: (context, dynamic state) {
-      String text = '';
+      var text = '';
       if (state is LaunchListStatePreviousLoaded) {
         text = 'Previous launches';
       }

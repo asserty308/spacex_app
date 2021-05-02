@@ -6,7 +6,7 @@ enum DatePrecision {
 
 class DatePrecisionUtil {
   static DatePrecision? fromString(String? value) {
-    final Map<String, DatePrecision> dict = {
+    final dict = <String, DatePrecision>{
       'half': DatePrecision.half,
       'quarter': DatePrecision.quarter,
       'year': DatePrecision.year,

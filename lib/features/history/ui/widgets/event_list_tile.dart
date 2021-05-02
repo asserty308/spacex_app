@@ -67,22 +67,22 @@ class EventListTile extends StatelessWidget {
 
     if (event!.articleUrl != null) {
       list.add(TextButton(
-        child: Text('Article', style: TextStyle(color: Colors.white70),),
         onPressed: () => showArticle(context),
+        child: Text('Article', style: TextStyle(color: Colors.white70),),
       ));
     }
 
     if (event!.wikiUrl != null) {
       list.add(TextButton(
-        child: Text('Wikipedia', style: TextStyle(color: Colors.white70),),
         onPressed: () => showWikipedia(context),
+        child: Text('Wikipedia', style: TextStyle(color: Colors.white70),),
       ));
     }
 
     if (event!.flightNumber != null) {
       list.add(TextButton(
-        child: Text('Launch', style: TextStyle(color: Colors.white70),),
         onPressed: () => showLaunch(context),
+        child: Text('Launch', style: TextStyle(color: Colors.white70),),
       ));
     }
 

@@ -29,7 +29,7 @@ class LaunchCoreModel {
     landpad = json['landpad'];
 
   static List<LaunchCoreModel> fromList(dynamic json) {
-    List<LaunchCoreModel> cores = [];
+    var cores = <LaunchCoreModel>[];
 
     for (final core in json) {
       cores.add(LaunchCoreModel.fromJSON(core));
