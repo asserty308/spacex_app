@@ -5,5 +5,5 @@ import 'package:spacex_guide/core/ui/screens/app.dart';
 void main() {
   AppDependencies.register();
   
-  runApp(MyApp());
+  runApp(const MyApp());
 }

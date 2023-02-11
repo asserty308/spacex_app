@@ -1,18 +1,18 @@
 part of 'launch_countdown_card.dart';
 
 class LaunchCountdown extends StatefulWidget {
-  const LaunchCountdown({
+  const LaunchCountdown({Key? key, 
     required this.launch,
     this.textColor = Colors.white,
     this.textSize = 25,
-  });
+  }) : super(key: key);
 
   final LaunchModel launch;
   final Color textColor;
   final double textSize;
 
   @override
-  _LaunchCountdownState createState() => _LaunchCountdownState();
+  State<LaunchCountdown> createState() => _LaunchCountdownState();
 }
 
 class _LaunchCountdownState extends State<LaunchCountdown> {
@@ -45,7 +45,7 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
   
   /// Update every second
   void startUpdate() {
-    _launchTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _launchTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setCountdownText();
     });
   }

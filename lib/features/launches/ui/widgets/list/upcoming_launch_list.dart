@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown/launch_countdown_card.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/horizontal_launches_list.dart';
-import 'package:flutter_core/ui/extensions/widget_extension.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/vertical_launches_list.dart';
 
 class UpcomingLaunchList extends StatelessWidget {
@@ -31,9 +30,15 @@ class UpcomingLaunchList extends StatelessWidget {
 
         return Column(
           children: [
-            Text('Scheduled', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white),).centered.paddingAll(24),
+            const Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: Text('Scheduled', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white),)),
+            ),
             HorizontalLaunchesList(launches: scheduled),
-            Text('Not scheduled', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white),).centered.paddingAll(24),
+            const Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: Text('Not scheduled', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white),)),
+            ),
             VerticalLaunchesList(launches: nonScheduled),
           ],
         );

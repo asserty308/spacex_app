@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/extensions/widget_extension.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketCard extends StatelessWidget {
-  RocketCard({
+  const RocketCard({
     Key? key,
     required this.rocket,
   }) : super(key: key);
 
   final RocketModel rocket;
   
-  final _titleStyle = TextStyle(
+  final _titleStyle = const TextStyle(
     fontSize: 36,
     fontWeight: FontWeight.bold,
     color: Colors.white,
@@ -18,7 +17,7 @@ class RocketCard extends StatelessWidget {
       Shadow(
         blurRadius: 2.0,
         color: Colors.black26,
-        offset: const Offset(1.0, 1.0),
+        offset: Offset(1.0, 1.0),
       ),
     ],
   );
@@ -45,10 +44,12 @@ class RocketCard extends StatelessWidget {
           color: const Color.fromARGB(20, 0, 0, 0),
         ),
         // Title
-        Text(
-          rocket.name!,
-          style: _titleStyle,
-        ).centered,
+        Center(
+          child: Text(
+            rocket.name!,
+            style: _titleStyle,
+          ),
+        ),
       ]
     )
   );

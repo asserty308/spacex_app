@@ -37,7 +37,7 @@ class RocketInfo extends StatelessWidget {
         ListTile(
           title: Text(
             rocket.name!,
-            style: Theme.of(context).textTheme.headline4!.copyWith(
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -58,7 +58,7 @@ class RocketInfo extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
           child: Text(
             'Launches',
-            style: Theme.of(context).textTheme.headline5!.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -66,8 +66,7 @@ class RocketInfo extends StatelessWidget {
         ),
         Theme(
           data: darkTheme.copyWith(
-            accentColor: Colors.white, // arrow color when expanded
-            unselectedWidgetColor: Colors.white // arrow color when closed
+            unselectedWidgetColor: Colors.white, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white) // arrow color when closed
           ),
           child: previousList.isEmpty ? Container() : ExpansionTile(
             title: const Text(
@@ -81,8 +80,7 @@ class RocketInfo extends StatelessWidget {
         ),
         Theme(
           data: darkTheme.copyWith(
-            accentColor: Colors.white, // arrow color when expanded
-            unselectedWidgetColor: Colors.white // arrow color when closed
+            unselectedWidgetColor: Colors.white, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white) // arrow color when closed
           ),
           child: upcomingList.isEmpty ? Container() : ExpansionTile(
             title: const Text(

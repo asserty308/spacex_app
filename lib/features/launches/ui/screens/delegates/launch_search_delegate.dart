@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/styles/default_theme.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/list/previous_launch_list.dart';
@@ -14,9 +13,8 @@ class LaunchSearchDelegate extends SearchDelegate<LaunchModel?> {
     return darkTheme.copyWith(
       primaryColor: const Color.fromARGB(255, 1, 1, 1),
       primaryIconTheme: darkTheme.primaryIconTheme.copyWith(color: Colors.white),
-      primaryColorBrightness: Brightness.dark,
       textTheme: darkTheme.textTheme.copyWith(
-        headline6: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+        titleLarge: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
       ),
       inputDecorationTheme: darkTheme.inputDecorationTheme.copyWith(
         hintStyle: const TextStyle(color: Colors.white60, fontWeight: FontWeight.normal),
@@ -55,7 +53,9 @@ class LaunchSearchDelegate extends SearchDelegate<LaunchModel?> {
   // TODO: Re-enable search for rockets
   Widget showSearchResults() {
     if (launchData == null || launchData!.isEmpty) {
-      return CenterProgressIndicator();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
 
     final lowerQuery = query.toLowerCase();

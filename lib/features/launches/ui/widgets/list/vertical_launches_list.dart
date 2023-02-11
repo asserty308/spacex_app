@@ -13,7 +13,7 @@ class VerticalLaunchesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView.builder(
     shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics(),
+    physics: const NeverScrollableScrollPhysics(),
     itemCount: launches.length,
     itemBuilder: (context, index) {
       final launch = launches[index];

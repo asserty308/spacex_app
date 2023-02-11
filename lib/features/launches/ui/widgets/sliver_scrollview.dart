@@ -23,7 +23,7 @@ class SliverScrollView extends StatelessWidget {
         pinned: true,
         elevation: 0,
         leading: onBackPressed == null ? null : IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => onBackPressed!(context),
         ),
         flexibleSpace: FlexibleSpaceBar(

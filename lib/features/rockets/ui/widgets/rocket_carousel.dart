@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_list/rocket_carousel_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
@@ -10,6 +9,8 @@ class RocketCarousel extends StatelessWidget {
   final _controller = PageController(
     viewportFraction: 0.825, // width each page can use (relative to the parent)
   );
+
+  RocketCarousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocProvider(
@@ -22,7 +23,9 @@ class RocketCarousel extends StatelessWidget {
   Widget get _body => BlocBuilder<RocketCarouselCubit, RocketCarouselState>(
     builder: (context, state) {
       if (state is RocketCarouselLoading) {
-        return CenterProgressIndicator();
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       }
 
       if (state is RocketCarouselLoaded) {
@@ -33,13 +36,11 @@ class RocketCarousel extends StatelessWidget {
     },
   );
   
-  Widget _rocketCarousel(List<RocketModel> rockets) => Container(
-    child: PageView.builder(
-      controller: _controller,
-      itemCount: rockets.length,
-      itemBuilder: (context, index) => _itemBuilder(context, index, rockets[index]),
-      physics: BouncingScrollPhysics(),
-    ),
+  Widget _rocketCarousel(List<RocketModel> rockets) => PageView.builder(
+    controller: _controller,
+    itemCount: rockets.length,
+    itemBuilder: (context, index) => _itemBuilder(context, index, rockets[index]),
+    physics: const BouncingScrollPhysics(),
   );
 
   Widget _itemBuilder(BuildContext context, int index, RocketModel rocket) => AnimatedBuilder(

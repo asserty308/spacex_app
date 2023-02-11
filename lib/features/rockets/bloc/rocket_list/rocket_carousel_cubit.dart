@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
@@ -26,10 +28,10 @@ class RocketCarouselCubit extends Cubit<RocketCarouselState> {
 
       // This is an ugly solution to fix the issue that the initial page is not sized properly on the first load
       // TODO: Find a better way to fix the issue
-      await Future.delayed(Duration(milliseconds: 50));
+      await Future.delayed(const Duration(milliseconds: 50));
       emit(RocketCarouselLoaded(rockets));
     } catch (e) {
-      print('RocketCarouselCubit::loadRockets ERROR: $e');
+      log('RocketCarouselCubit::loadRockets ERROR: $e');
       emit(RocketCarouselError());
     }
   }

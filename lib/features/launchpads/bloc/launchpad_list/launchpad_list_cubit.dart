@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
@@ -25,7 +27,7 @@ class AllLaunchpadsCubit extends Cubit<AllLaunchpadsState> {
 
       emit(AllLaunchpadsLoaded(launchpads));
     } catch (e) {
-      print('LaunchpadListCubit::loadData ERROR: $e');
+      log('LaunchpadListCubit::loadData ERROR: $e');
       emit(AllLaunchpadsError());
     }
   }

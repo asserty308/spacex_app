@@ -27,23 +27,21 @@ class ImageTitleCard extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         children: <Widget>[
-          Container(height: 250, child: child),
-          Container(
+          SizedBox(height: 250, child: child),
+          SizedBox(
             height: 250,
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    title!,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  title!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                )
+                ),
               ),
             ),
           ),

@@ -1,5 +1,3 @@
-import 'package:flutter_core/services/alerts.dart';
-import 'package:flutter_web/services/connectivity_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/bloc/all_data/all_data_cubit.dart';
 import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart';
@@ -24,15 +22,9 @@ import 'package:spacex_guide/features/rockets/data/repositories/rockets_reposito
 
 class AppDependencies {
   static void register() {
-    _registerServices();
     _registerDatasources();
     _registerRepositories();
     _registerBlocs();
-  }
-
-  static void _registerServices() {
-    GetIt.I.registerLazySingleton(() => ConnectivityService());
-    GetIt.I.registerLazySingleton(() => AlertService());
   }
 
   static void _registerDatasources() {

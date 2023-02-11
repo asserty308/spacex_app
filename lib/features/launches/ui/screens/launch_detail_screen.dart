@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_details/launch_details_cubit.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
 import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
-import 'package:flutter_core/ui/extensions/widget_extension.dart';
 
 /// Handles 'All launches -> Launch details' as well as the 'Next Launch' screen.
 /// The 'All launches' screen transmits the selected [launch] as a parameter.
@@ -33,7 +31,10 @@ class LaunchDetailScreen extends StatelessWidget {
         title: Row(
           children: [
             if (launch.links?.patchSmall != null)
-              Image.network(launch.links!.patchSmall!, width: 40, height: 40,).paddingOnly(right: 16),
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Image.network(launch.links!.patchSmall!, width: 40, height: 40,),
+              ),
             Text(launch.name ?? 'Unbekannter Name'),
           ],
         ),
@@ -47,7 +48,9 @@ class LaunchDetailScreen extends StatelessWidget {
     bloc: GetIt.I<LaunchDetailsCubit>()..loadLaunchDetails(launch),
     builder: (context, state) {
       if (state is LaunchDetailsStateLoading) {
-        return CenterProgressIndicator();
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       }
 
       if (state is LaunchDetailsStateLoaded) {
@@ -66,7 +69,7 @@ class LaunchDetailScreen extends StatelessWidget {
   );
 
   Widget get _launchInfoBody => Container(
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
@@ -77,9 +80,12 @@ class LaunchDetailScreen extends StatelessWidget {
     child: _launchInfo,
   );
 
-  Widget get _launchInfo => LaunchInfo(
-    launch: launch,
-  ).paddingOnly(top: 60);
+  Widget get _launchInfo => Padding(
+    padding: const EdgeInsets.only(top: 60),
+    child: LaunchInfo(
+      launch: launch,
+    ),
+  );
 
   // Function
 

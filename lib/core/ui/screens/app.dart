@@ -12,8 +12,10 @@ import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_scree
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -52,23 +54,23 @@ class _MyAppState extends State<MyApp> {
       // }
 
       if (state is AppNavigationStateLaunches) {
-        return LaunchesMasterScreen();
+        return const LaunchesMasterScreen();
       }
 
       if (state is AppNavigationStateHistory) {
-        return AllEventsScreen();
+        return const AllEventsScreen();
       }
 
       if (state is AppNavigationStateRockets) {
-        return AllRocketsScreen();
+        return const AllRocketsScreen();
       }
 
       if (state is AppNavigationStateLaunchpads) {
-        return AllLaunchpadsScreen();
+        return const AllLaunchpadsScreen();
       }
 
       if (state is AppNavigationStateAbout) {
-        return CompanyInfoScreen();
+        return const CompanyInfoScreen();
       }
 
       return Container();

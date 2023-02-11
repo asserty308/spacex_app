@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/services/alerts.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/sliver_app_scaffold.dart';
 import 'package:spacex_guide/features/launches/bloc/launch_list/launch_list_bloc.dart';
@@ -14,6 +12,8 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_l
 // TODO: Apply Glassmorphism design (blur bg and glass containers)
 
 class LaunchesScreen extends StatelessWidget {
+  LaunchesScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => SliverAppScaffold(
     title: _title,
@@ -30,12 +30,14 @@ class LaunchesScreen extends StatelessWidget {
     bloc: _cubit..loadUpcomingLaunches(),
     listener: (context, dynamic state) {
       if (state is LaunchListStateError) {
-        GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
+        // TODO: GetIt.I.get<AlertService>().showDismissDialog(context, 'Fehler', 'Leider können die Daten nicht geladen werden');
       }
     },
     builder: (context, dynamic state) {
       if (state is LaunchListStateLoading) {
-        return SliverToBoxAdapter(child: CenterProgressIndicator());
+        return const SliverToBoxAdapter(child: Center(
+          child: CircularProgressIndicator(),
+        ));
       }
 
       if (state is LaunchListStateUpcomingLoaded) {
@@ -89,7 +91,7 @@ class LaunchesScreen extends StatelessWidget {
           alignment: Alignment.center,
           transform: Matrix4.identity()
             ..rotateY(isUpcoming ? 0 : pi),
-          child: Icon(Icons.history)
+          child: const Icon(Icons.history)
         ),
         onPressed: () {
           if (isUpcoming) {
@@ -122,8 +124,10 @@ class LaunchesScreen extends StatelessWidget {
       }
 
       return IconButton(
-        icon: Icon(Icons.search),
-        onPressed: () => showLaunchSearch(context, launches),
+        icon: const Icon(Icons.search),
+        onPressed: () { 
+          // showLaunchSearch(context, launches);
+        }
       );
     }
   );
@@ -131,9 +135,9 @@ class LaunchesScreen extends StatelessWidget {
   // Functions
 
   // TODO: Fix search for SliverAppBar
-  void showLaunchSearch(BuildContext context, List<LaunchModel>? launches) => GetIt.I.get<AlertService>().showDismissDialog(
-    context, 
-    'Under construction', 
-    'The search is temporarily unavailable.'
-  );
+  // void showLaunchSearch(BuildContext context, List<LaunchModel>? launches) => GetIt.I.get<AlertService>().showDismissDialog(
+  //   context, 
+  //   'Under construction', 
+  //   'The search is temporarily unavailable.'
+  // );
 }

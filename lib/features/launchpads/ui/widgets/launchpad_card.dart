@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/plugin_api.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:spacex_guide/core/ui/widgets/image_title_card.dart';
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 
@@ -16,20 +17,29 @@ class LaunchpadCard extends StatelessWidget {
     final coordinates = LatLng(launchpad.latitude as double, launchpad.longitude as double);
 
     return ImageTitleCard(
-      child: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: coordinates,
-          zoom: 12,
-        ),
-        markers: <Marker>{
-          Marker(
-            markerId: MarkerId('Marker'),
-            position: coordinates,
-          )
-        },
-      ),
       title: launchpad.name,
       onTap: () {},
+      child: FlutterMap(
+        options: MapOptions(
+          zoom: 12,
+          center: coordinates,
+          interactiveFlags: InteractiveFlag.none,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
+          ),
+          MarkerLayer(
+            markers: [
+              Marker(
+                point: coordinates, 
+                builder: (context) => const Icon(Icons.location_on, color: Colors.red, size: 20,),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

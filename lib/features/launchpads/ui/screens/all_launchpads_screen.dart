@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/core/ui/widgets/default_texts.dart';
@@ -11,6 +10,8 @@ import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_list.dart'
 // This avoids popping widgets due to different loading times and also makes testing easier.
 
 class AllLaunchpadsScreen extends StatelessWidget {
+  const AllLaunchpadsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => AppScaffold(
     title: const Text('All Launchpads'),
@@ -21,14 +22,16 @@ class AllLaunchpadsScreen extends StatelessWidget {
     bloc: GetIt.I<AllLaunchpadsCubit>()..loadData(),
     builder: (context, dynamic state) {
       if (state is AllLaunchpadsInitial || state is AllLaunchpadsLoading) {
-        return CenterProgressIndicator();
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       }
 
       if (state is AllLaunchpadsLoaded) {
         return LaunchpadList(launchpads: state.allLaunchpads);
       }
 
-      return DefaultScreenError();
+      return const DefaultScreenError();
     }
   );
 }

@@ -10,7 +10,7 @@ class ImageCarousel extends StatefulWidget {
   final List<String>? imageUrls;
 
   @override
-  _ImageCarouselState createState() => _ImageCarouselState();
+  State<ImageCarousel> createState() => _ImageCarouselState();
 }
 
 class _ImageCarouselState extends State<ImageCarousel> {
@@ -21,7 +21,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         height: double.infinity, // set big height to make the images fit inside the given space without bottom border
         viewportFraction: 1.0, // make image use the full screen width
         autoPlay: true,
-        autoPlayInterval: Duration(seconds: 5),
+        autoPlayInterval: const Duration(seconds: 5),
         pauseAutoPlayOnTouch: true,
         enlargeCenterPage: false,
         enableInfiniteScroll: widget.imageUrls!.length > 1,
@@ -35,7 +35,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     );
   }
 
-  Widget _imageContainer(String imgUrl) => Container(
+  Widget _imageContainer(String imgUrl) => SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Image.network(
         imgUrl,

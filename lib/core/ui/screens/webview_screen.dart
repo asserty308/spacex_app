@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -8,38 +6,26 @@ class WebviewScreen extends StatelessWidget {
     Key? key, 
     required this.title,
     required this.initialUrl, 
-  }) : super(key: key);
+  }) : super(key: key) {
+    _controller.loadRequest(Uri.parse(initialUrl));
+  }
 
-  final String? title, initialUrl;
+  final String title;
+  final String initialUrl;
 
-  final _controller = Completer<WebViewController>();
+  final _controller = WebViewController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: _appBar as PreferredSizeWidget?,
+    appBar: _appBar,
     body: _body,
   );
 
-  // Widgets
-
-  Widget get _appBar => AppBar(
-    title: Text(title!),
+  AppBar get _appBar => AppBar(
+    title: Text(title),
   );
 
-  Widget get _body => WebView(
-    initialUrl: initialUrl!.replaceFirst('http://', 'https://'),
-    gestureNavigationEnabled: true,
-    onWebViewCreated: (webViewController) {
-      _controller.complete(webViewController);
-    },
-    onPageStarted: (url) {
-      print('$url loading');
-    },
-    onPageFinished: (url) {
-      print('$url finished loading');
-    },
-    onWebResourceError: (error) {
-      print('WebView error occured: $error');
-    },
+  Widget get _body => WebViewWidget(
+    controller: _controller,
   );
 }

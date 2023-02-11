@@ -38,7 +38,7 @@ class LaunchListTile extends StatelessWidget {
     ),
   );
 
-  Widget get _trailing => Icon(
+  Widget get _trailing => const Icon(
     Icons.arrow_forward_ios,
     color: Colors.white30,
     size: 18,

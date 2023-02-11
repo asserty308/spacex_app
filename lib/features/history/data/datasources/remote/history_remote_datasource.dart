@@ -4,11 +4,10 @@ import 'package:spacex_guide/features/history/data/models/history.dart';
 class HistoryApi extends SpaceXApi {
   /// Calls the history endpoint endpoint on the SpaceX api.
   Future<List<History>> getAllEvents() async {
-    final response = await requestJSON('history/');
+    final response = await request('history/') as List;
 
-    final list = <History>[];
-    response.forEach((event) => list.add(History.fromJSON(event)));
-    return list;
+    return response
+      .map((e) => History.fromJSON(e as Map<String, dynamic>))
+      .toList();
   }
-
 }

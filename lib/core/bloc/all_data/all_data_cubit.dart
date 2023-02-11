@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/history/data/repositories/history_repository.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
@@ -25,7 +27,7 @@ class AllDataCubit extends Cubit<AllDataState> {
       await launchpadRepository!.getAllLaunchpads();
       emit(AllDataStateLoaded());
     } catch (e) {
-      print('AllDataCubit::getAllData ERROR: $e');
+      log('AllDataCubit::getAllData ERROR: $e');
       emit(AllDataError());
     }
   }

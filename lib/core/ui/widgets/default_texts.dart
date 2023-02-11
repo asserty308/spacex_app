@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/extensions/widget_extension.dart';
 
 class DefaultScreenError extends StatelessWidget {
+  const DefaultScreenError({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Something went wrong. Please try again later',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
+    return const Center(
+      child: Text(
+        'Something went wrong. Please try again later',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-    ).centered;
+    );
   }
 }

@@ -23,22 +23,22 @@ class CompanyInfo extends StatelessWidget {
 
   Widget get _summary => Padding(
     padding: const EdgeInsets.all(16.0),
-    child: Text(state!.info.summary!, textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),
+    child: Text(state!.info.summary!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white),),
   );
 
   Widget _founderTile(BuildContext context) => ListTile(
-    title: Text('Founder', style: TextStyle(color: Colors.white),),
-    subtitle: Text(state!.info.founder!, style: TextStyle(color: Colors.white),),
+    title: const Text('Founder', style: TextStyle(color: Colors.white),),
+    subtitle: Text(state!.info.founder!, style: const TextStyle(color: Colors.white),),
     onTap: () => GetIt.I<AppNavigationCubit>().launchUrl(state!.info.links!.elonTwitter, onError: () => null),
   );
 
   Widget get _foundedTile => ListTile(
-    title: Text('Founded', style: TextStyle(color: Colors.white),),
-    subtitle: Text(state!.info.founded.toString(), style: TextStyle(color: Colors.white),),
+    title: const Text('Founded', style: TextStyle(color: Colors.white),),
+    subtitle: Text(state!.info.founded.toString(), style: const TextStyle(color: Colors.white),),
   );
 
   Widget get _valuationTile => ListTile(
-    title: Text('Valuation', style: TextStyle(color: Colors.white),),
-    subtitle: Text('\$${state!.info.valuation!.toInt().toCommaSeparatedString()}', style: TextStyle(color: Colors.white),),
+    title: const Text('Valuation', style: TextStyle(color: Colors.white),),
+    subtitle: Text('\$${state!.info.valuation!.toInt().toCommaSeparatedString()}', style: const TextStyle(color: Colors.white),),
   );
 }

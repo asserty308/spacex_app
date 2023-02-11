@@ -23,16 +23,14 @@ class TextCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)
         ),
         color: backgroundColor,
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              text!,
-              style: TextStyle(
-                color: textColor,
-                height: 1.2,
-                fontSize: 16,
-              ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            text!,
+            style: TextStyle(
+              color: textColor,
+              height: 1.2,
+              fontSize: 16,
             ),
           ),
         )

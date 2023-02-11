@@ -4,7 +4,7 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 class LaunchApi extends SpaceXApi {
   /// Calls the launches endpoint endpoint on the SpaceX api.
   Future<List<LaunchModel>> getAllLaunches() async {
-    final response = await requestJSON('launches/');
+    final response = await request('launches/');
 
     final list = <LaunchModel>[];
     response.forEach((launch) => list.add(LaunchModel.fromJSON(launch)));
@@ -12,7 +12,7 @@ class LaunchApi extends SpaceXApi {
   }
 
   Future<LaunchModel> getLaunchWithId(int? id) async {
-    final response = await requestJSON('launches/$id');
+    final response = await request('launches/$id');
     return LaunchModel.fromJSON(response);
   }
 

@@ -5,11 +5,16 @@ import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
-class EventListTile extends StatelessWidget {
+class EventListTile extends StatefulWidget {
   const EventListTile({Key? key, this.event}) : super(key: key);
 
   final History? event;
 
+  @override
+  State<EventListTile> createState() => _EventListTileState();
+}
+
+class _EventListTileState extends State<EventListTile> {
   @override
   Widget build(BuildContext context) => Card(
     elevation: 1.0,
@@ -24,16 +29,16 @@ class EventListTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            event!.formattedDate('dd.MM.yyyy'),
+            widget.event!.formattedDate('dd.MM.yyyy'),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 16.0,
             ),
           ),
         ),
         Text(
-          event!.title!,
+          widget.event!.title!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
@@ -44,7 +49,7 @@ class EventListTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            event!.details!,
+            widget.event!.details!,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
@@ -65,36 +70,39 @@ class EventListTile extends StatelessWidget {
   List<Widget> getCardButtons(BuildContext context) {
     final list = <Widget>[];
 
-    if (event!.articleUrl != null) {
+    if (widget.event!.articleUrl != null) {
       list.add(TextButton(
         onPressed: () => showArticle(context),
-        child: Text('Article', style: TextStyle(color: Colors.white70),),
+        child: const Text('Article', style: TextStyle(color: Colors.white70),),
       ));
     }
 
-    if (event!.wikiUrl != null) {
+    if (widget.event!.wikiUrl != null) {
       list.add(TextButton(
         onPressed: () => showWikipedia(context),
-        child: Text('Wikipedia', style: TextStyle(color: Colors.white70),),
+        child: const Text('Wikipedia', style: TextStyle(color: Colors.white70),),
       ));
     }
 
-    if (event!.flightNumber != null) {
+    if (widget.event!.flightNumber != null) {
       list.add(TextButton(
         onPressed: () => showLaunch(context),
-        child: Text('Launch', style: TextStyle(color: Colors.white70),),
+        child: const Text('Launch', style: TextStyle(color: Colors.white70),),
       ));
     }
 
     return list;
   }
 
-  Future<void> showArticle(BuildContext context) async => showWebView(context, event!.articleUrl, event!.title);
-  
-  Future<void> showWikipedia(BuildContext context) async => showWebView(context, event!.wikiUrl, event!.title);
+  Future<void> showArticle(BuildContext context) async => showWebView(context, widget.event!.articleUrl!, widget.event!.title!);
+
+  Future<void> showWikipedia(BuildContext context) async => showWebView(context, widget.event!.wikiUrl!, widget.event!.title!);
 
   Future<void> showLaunch(BuildContext context) async {
-    final launch = await GetIt.I<LaunchRepository>().getLaunchWithId(event!.flightNumber);
-    GetIt.I<LaunchesNavigationCubit>().showLaunchDetails(context, launch);
+    final launch = await GetIt.I<LaunchRepository>().getLaunchWithId(widget.event!.flightNumber);
+
+    if (mounted) {
+      GetIt.I<LaunchesNavigationCubit>().showLaunchDetails(context, launch);
+    }
   }
 }

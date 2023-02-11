@@ -30,7 +30,7 @@ class LaunchInfo extends StatelessWidget {
   );
   
   Widget _listView(RocketModel rocket, LaunchpadModel launchpad) => ListView(
-    padding: EdgeInsets.only(top: 24),
+    padding: const EdgeInsets.only(top: 24),
     children: <Widget>[
       !launch.upcoming! ? LaunchDetailActions(launch: launch,) : LaunchCountdownCard(launch: launch, showLaunchOnTap: false,),
       const SizedBox(height: 8,),

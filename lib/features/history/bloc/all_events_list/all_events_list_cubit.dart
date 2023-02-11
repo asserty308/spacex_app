@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/history/data/models/history.dart';
@@ -24,7 +26,7 @@ class AllEventsListCubit extends Cubit<AllEventsListState> {
 
       emit(AllEventsListLoaded(events));
     } catch (e) {
-      print('AllEventsListCubit::getAllEvents ERROR: $e');
+      log('AllEventsListCubit::getAllEvents ERROR: $e');
       emit(AllEventsListError());
     }
   }

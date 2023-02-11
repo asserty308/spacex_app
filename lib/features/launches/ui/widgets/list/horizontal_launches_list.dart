@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigation_bloc.dart';
 import 'package:spacex_guide/features/launches/data/models/launch.dart';
-import 'package:flutter_core/ui/extensions/widget_extension.dart';
 
 class HorizontalLaunchesList extends StatelessWidget {
   const HorizontalLaunchesList({
@@ -14,17 +13,17 @@ class HorizontalLaunchesList extends StatelessWidget {
   final double height = 140.0;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
     height: height,
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(left: 16, right: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16),
       itemCount: launches.length,
       itemBuilder: (context, index) {
         final launch = launches[index];
         return _item(context, launch);
       },
-      separatorBuilder: (context, index) => SizedBox(width: 16,),
+      separatorBuilder: (context, index) => const SizedBox(width: 16,),
     ),
   );
 
@@ -42,16 +41,18 @@ class HorizontalLaunchesList extends StatelessWidget {
       child: Column(
         children: [
           Image.network(launch.links?.patchSmall ?? '', width: double.infinity, height: height - 40),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 40,
-            child: Text(
-              launch.name ?? 'Unbekannt', 
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-              maxLines: 2, 
-              overflow: TextOverflow.ellipsis,
-            ).centered,
+            child: Center(
+              child: Text(
+                launch.name ?? 'Unbekannt', 
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                maxLines: 2, 
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           )
         ],
       ),

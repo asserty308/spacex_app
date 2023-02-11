@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:spacex_guide/features/company_info/data/models/company_info.dart';
@@ -18,7 +20,7 @@ class CompanyInfoScreenCubit extends Cubit<CompanyInfoScreenState> {
       final info = await companyInfoRepository!.getCompanyInfo();
       emit(CompanyInfoScreenLoaded(info));
     } catch (e) {
-      print('CompanyInfoScreenCubit::loadCompanyInfo ERROR: $e');
+      log('CompanyInfoScreenCubit::loadCompanyInfo ERROR: $e');
       emit(CompanyInfoScreenError());
     }
   }

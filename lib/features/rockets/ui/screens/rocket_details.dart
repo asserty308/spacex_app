@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:spacex_guide/core/ui/widgets/image_carousel.dart';
 import 'package:spacex_guide/features/rockets/bloc/rocket_details/rocket_details_cubit.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
@@ -54,15 +53,15 @@ class RocketDetailsScreen extends StatelessWidget {
   Widget get _body => BlocBuilder<RocketDetailsCubit, RocketDetailsState>(
     builder: (context, state) {
       if (state is RocketDetailsLoaded) {
-        return Container(
-          child: RocketInfo(
-            rocket: rocket,
-            allLaunches: state.launches,
-          ),
+        return RocketInfo(
+          rocket: rocket,
+          allLaunches: state.launches,
         );
       }
 
-      return CenterProgressIndicator();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
   ); 
 }
