@@ -1,11 +1,11 @@
 part of 'launch_countdown_card.dart';
 
 class LaunchCountdown extends StatefulWidget {
-  const LaunchCountdown({Key? key, 
+  const LaunchCountdown({super.key, 
     required this.launch,
     this.textColor = Colors.white,
     this.textSize = 25,
-  }) : super(key: key);
+  });
 
   final LaunchModel launch;
   final Color textColor;

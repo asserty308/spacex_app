@@ -6,10 +6,10 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/vertical_launches
 
 class UpcomingLaunchList extends StatelessWidget {
   const UpcomingLaunchList({
-    Key? key,
+    super.key,
     required this.scheduled,
     required this.nonScheduled,
-  }) : super(key: key);
+  });
 
   final List<LaunchModel> scheduled, nonScheduled;
 

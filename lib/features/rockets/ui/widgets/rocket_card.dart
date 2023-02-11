@@ -3,9 +3,9 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketCard extends StatelessWidget {
   const RocketCard({
-    Key? key,
+    super.key,
     required this.rocket,
-  }) : super(key: key);
+  });
 
   final RocketModel rocket;
   

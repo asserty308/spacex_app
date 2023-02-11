@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DefaultScreenError extends StatelessWidget {
-  const DefaultScreenError({Key? key}) : super(key: key);
+  const DefaultScreenError({super.key});
 
   @override
   Widget build(BuildContext context) {

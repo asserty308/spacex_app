@@ -3,7 +3,7 @@ import 'package:spacex_guide/core/ui/widgets/app_scaffold.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_carousel.dart';
 
 class AllRocketsScreen extends StatefulWidget {
-  const AllRocketsScreen({Key? key}) : super(key: key);
+  const AllRocketsScreen({super.key});
 
   @override
   State<AllRocketsScreen> createState() => _AllRocketsScreenState();

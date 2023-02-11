@@ -31,17 +31,6 @@ class LaunchModel {
     this.autoUpdate,
   });
 
-  final int? flightNumber, window;
-  final String? id, name, rocket, details, launchpad;
-  final DateTime? date, staticFireDate;
-  final DatePrecision? datePrecision;
-  final bool? tbd, net, success, upcoming, autoUpdate;
-  final List<String>? crew, ships, capsules;
-  final List<dynamic>? payloads;
-  final LaunchFairingsModel? fairings;
-  final List<LaunchCoreModel>? cores;
-  final LaunchLinksModel? links;
-
   LaunchModel.fromJSON(Map<String, dynamic> json) :
     flightNumber = json['flight_number'],
     name = json['name'],
@@ -65,6 +54,17 @@ class LaunchModel {
     links = LaunchLinksModel.fromJSON(json['links']),
     autoUpdate = json['auto_update'],
     id = json['id'];
+
+  final int? flightNumber, window;
+  final String? id, name, rocket, details, launchpad;
+  final DateTime? date, staticFireDate;
+  final DatePrecision? datePrecision;
+  final bool? tbd, net, success, upcoming, autoUpdate;
+  final List<String>? crew, ships, capsules;
+  final List<dynamic>? payloads;
+  final LaunchFairingsModel? fairings;
+  final List<LaunchCoreModel>? cores;
+  final LaunchLinksModel? links;
 
   /// Converts the unix timestamp of the launch to a human readable string.
   /// The time will always be set to the devices locale.

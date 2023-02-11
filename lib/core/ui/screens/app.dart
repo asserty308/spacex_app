@@ -12,7 +12,7 @@ import 'package:spacex_guide/features/launchpads/ui/screens/all_launchpads_scree
 import 'package:spacex_guide/features/rockets/ui/screens/all_rockets_screen.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

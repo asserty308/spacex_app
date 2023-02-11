@@ -6,7 +6,7 @@ import 'package:spacex_guide/features/company_info/bloc/about_screen/company_inf
 import 'package:spacex_guide/features/company_info/ui/widgets/company_info.dart';
 
 class CompanyInfoScreen extends StatelessWidget {
-  const CompanyInfoScreen({Key? key}) : super(key: key);
+  const CompanyInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context) => AppScaffold(

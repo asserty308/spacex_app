@@ -28,31 +28,31 @@ class AppDependencies {
   }
 
   static void _registerDatasources() {
-    GetIt.I.registerLazySingleton(() => CompanyInfoApi());
-    GetIt.I.registerLazySingleton(() => HistoryApi());
-    GetIt.I.registerLazySingleton(() => LaunchApi());
-    GetIt.I.registerLazySingleton(() => LaunchpadApi());
-    GetIt.I.registerLazySingleton(() => RocketsApi());
+    GetIt.I.registerLazySingleton(CompanyInfoApi.new);
+    GetIt.I.registerLazySingleton(HistoryApi.new);
+    GetIt.I.registerLazySingleton(LaunchApi.new);
+    GetIt.I.registerLazySingleton(LaunchpadApi.new);
+    GetIt.I.registerLazySingleton(RocketsApi.new);
   }
 
   static void _registerRepositories() {
-    GetIt.I.registerLazySingleton(() => LaunchRepository());
-    GetIt.I.registerLazySingleton(() => HistoryRepository());
-    GetIt.I.registerLazySingleton(() => RocketRepository());
-    GetIt.I.registerLazySingleton(() => LaunchpadRepository());
-    GetIt.I.registerLazySingleton(() => CompanyInfoRepository());
+    GetIt.I.registerLazySingleton(LaunchRepository.new);
+    GetIt.I.registerLazySingleton(HistoryRepository.new);
+    GetIt.I.registerLazySingleton(RocketRepository.new);
+    GetIt.I.registerLazySingleton(LaunchpadRepository.new);
+    GetIt.I.registerLazySingleton(CompanyInfoRepository.new);
   }
 
   static void _registerBlocs() {
-    GetIt.I.registerLazySingleton(() => AppNavigationCubit());
-    GetIt.I.registerLazySingleton(() => AllDataCubit());
-    GetIt.I.registerLazySingleton(() => LaunchesNavigationCubit());
-    GetIt.I.registerLazySingleton(() => LaunchListCubit());
-    GetIt.I.registerLazySingleton(() => LaunchDetailsCubit());
-    GetIt.I.registerLazySingleton(() => LaunchInfoCubit());
-    GetIt.I.registerLazySingleton(() => CompanyInfoScreenCubit());
-    GetIt.I.registerLazySingleton(() => AllEventsListCubit());
-    GetIt.I.registerLazySingleton(() => AllLaunchpadsCubit());
-    GetIt.I.registerLazySingleton(() => ThemeSelectorCubit());
+    GetIt.I.registerLazySingleton(AppNavigationCubit.new);
+    GetIt.I.registerLazySingleton(AllDataCubit.new);
+    GetIt.I.registerLazySingleton(LaunchesNavigationCubit.new);
+    GetIt.I.registerLazySingleton(LaunchListCubit.new);
+    GetIt.I.registerLazySingleton(LaunchDetailsCubit.new);
+    GetIt.I.registerLazySingleton(LaunchInfoCubit.new);
+    GetIt.I.registerLazySingleton(CompanyInfoScreenCubit.new);
+    GetIt.I.registerLazySingleton(AllEventsListCubit.new);
+    GetIt.I.registerLazySingleton(AllLaunchpadsCubit.new);
+    GetIt.I.registerLazySingleton(ThemeSelectorCubit.new);
   }
 }

@@ -5,7 +5,7 @@ import 'package:spacex_guide/features/company_info/bloc/about_screen/company_inf
 import 'package:spacex_guide/core/utility/int_extension.dart';
 
 class CompanyInfo extends StatelessWidget {
-  const CompanyInfo({Key? key, this.state}) : super(key: key);
+  const CompanyInfo({super.key, this.state});
 
   final CompanyInfoScreenLoaded? state;
 

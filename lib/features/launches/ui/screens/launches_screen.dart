@@ -12,7 +12,7 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/upcoming_launch_l
 // TODO: Apply Glassmorphism design (blur bg and glass containers)
 
 class LaunchesScreen extends StatelessWidget {
-  LaunchesScreen({Key? key}) : super(key: key);
+  LaunchesScreen({super.key});
 
   @override
   Widget build(BuildContext context) => SliverAppScaffold(

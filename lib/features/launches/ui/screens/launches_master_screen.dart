@@ -7,7 +7,7 @@ import 'package:spacex_guide/features/launches/ui/screens/launch_detail_screen.d
 import 'package:spacex_guide/features/launches/ui/screens/launches_screen.dart';
 
 class LaunchesMasterScreen extends StatelessWidget {
-  const LaunchesMasterScreen({Key? key}) : super(key: key);
+  const LaunchesMasterScreen({super.key});
 
   @override
   Widget build(BuildContext context) => BlocConsumer<LaunchesNavigationCubit, LaunchesNavigationState>(

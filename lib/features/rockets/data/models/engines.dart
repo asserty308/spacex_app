@@ -16,13 +16,6 @@ class RocketEngines {
     this.thrustToWeight
   });
 
-  final int? number;
-  final String? type, version, layout;
-  final num? ispSeaLevel, ispVacuum;
-  final num? engineLossMax;
-  final String? propellant1, propellant2;
-  final num? thrustSeaLevelKn, thrustVacuumKn, thrustToWeight;
-
   RocketEngines.fromJSON(Map<String, dynamic> json) :
     number = json['number'],
     type = json['type'],
@@ -36,4 +29,11 @@ class RocketEngines {
     thrustSeaLevelKn = json['thrust_sea_level']['kN'],
     thrustVacuumKn = json['thrust_vacuum']['kN'],
     thrustToWeight = json['thrust_to_weight'];
+
+  final int? number;
+  final String? type, version, layout;
+  final num? ispSeaLevel, ispVacuum;
+  final num? engineLossMax;
+  final String? propellant1, propellant2;
+  final num? thrustSeaLevelKn, thrustVacuumKn, thrustToWeight;
 }

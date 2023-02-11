@@ -1,14 +1,14 @@
 part of 'launch_detail_actions.dart';
 
 class LaunchDetailActionButton extends StatelessWidget {
-  LaunchDetailActionButton({
-    Key? key,
+  const LaunchDetailActionButton({
+    super.key,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final Icon icon;
-  final Function onTap;
+  final VoidCallback onTap;
 
   final Color _foregroundColor = Colors.black87;
   final Color _backgroundColor = Colors.orange;
@@ -16,7 +16,7 @@ class LaunchDetailActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-    onTap: () => onTap(),
+    onTap: onTap,
     child: CircleAvatar(
       backgroundColor: _backgroundColor,
       foregroundColor: _foregroundColor,

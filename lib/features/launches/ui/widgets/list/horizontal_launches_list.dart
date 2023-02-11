@@ -5,9 +5,9 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class HorizontalLaunchesList extends StatelessWidget {
   const HorizontalLaunchesList({
-    Key? key, 
+    super.key, 
     required this.launches
-  }) : super(key: key);
+  });
 
   final List<LaunchModel> launches;
   final double height = 140.0;

@@ -8,11 +8,11 @@ class CompanyLinks {
     this.elonTwitter
   });
 
-  final String? website, flickr, twitter, elonTwitter;
-
   CompanyLinks.fromJSON(Map<String, dynamic> json) :
     website = json['website'],
     flickr = json['flickr'],
     twitter = json['twitter'],
     elonTwitter = json['elon_twitter'];
+
+  final String? website, flickr, twitter, elonTwitter;
 }

@@ -6,7 +6,7 @@ import 'package:spacex_guide/features/launches/bloc/navigation/launches_navigati
 import 'package:spacex_guide/features/launches/data/repositories/launch_repository.dart';
 
 class EventListTile extends StatefulWidget {
-  const EventListTile({Key? key, this.event}) : super(key: key);
+  const EventListTile({super.key, this.event});
 
   final History? event;
 

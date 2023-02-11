@@ -7,9 +7,9 @@ import 'package:spacex_guide/features/rockets/ui/widgets/rocket_info.dart';
 
 class RocketDetailsScreen extends StatelessWidget {
   const RocketDetailsScreen({
-    Key? key, 
+    super.key, 
     required this.rocket, 
-  }) : super(key: key);
+  });
 
   final RocketModel rocket;
 

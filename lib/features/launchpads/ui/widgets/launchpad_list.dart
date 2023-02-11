@@ -4,9 +4,9 @@ import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_card.dart'
 
 class LaunchpadList extends StatelessWidget {
   const LaunchpadList({
-    Key? key, 
+    super.key, 
     required this.launchpads
-  }) : super(key: key);
+  });
 
   final List<LaunchpadModel>? launchpads;
 

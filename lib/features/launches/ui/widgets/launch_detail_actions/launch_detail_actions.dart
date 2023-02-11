@@ -7,9 +7,9 @@ part 'launch_detail_action_button.dart';
 
 class LaunchDetailActions extends StatelessWidget {
   const LaunchDetailActions({
-    Key? key,
+    super.key,
     required this.launch,
-  }) : super(key: key);
+  });
 
   final LaunchModel launch;
 

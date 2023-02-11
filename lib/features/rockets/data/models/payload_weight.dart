@@ -8,14 +8,14 @@ class RocketPayloadWeight {
     this.lb,
   });
 
-  final String? id, name;
-  final num? kg, lb;
-
   RocketPayloadWeight.fromJSON(Map<String, dynamic> json) :
     id = json['id'],
     name = json['name'],
     kg = json['kg'],
     lb = json['lb'];
+
+  final String? id, name;
+  final num? kg, lb;
 
   static List<RocketPayloadWeight> fromList(List<dynamic> json) {
     List<RocketPayloadWeight> payloads = [];

@@ -6,10 +6,10 @@ import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
 class RocketInfo extends StatelessWidget {
   const RocketInfo({
-    Key? key,
+    super.key,
     required this.rocket,
     required this.allLaunches,
-  }) : super(key: key);
+  });
 
   final RocketModel rocket;
   final List<LaunchModel>? allLaunches;

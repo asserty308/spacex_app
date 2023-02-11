@@ -6,11 +6,11 @@ import 'package:spacex_guide/features/rockets/ui/screens/rocket_details.dart';
 import 'package:spacex_guide/features/rockets/ui/widgets/rocket_card.dart';
 
 class RocketCarousel extends StatelessWidget {
+
+  RocketCarousel({super.key});
   final _controller = PageController(
     viewportFraction: 0.825, // width each page can use (relative to the parent)
   );
-
-  RocketCarousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocProvider(

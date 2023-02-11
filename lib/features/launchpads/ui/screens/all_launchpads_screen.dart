@@ -10,7 +10,7 @@ import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_list.dart'
 // This avoids popping widgets due to different loading times and also makes testing easier.
 
 class AllLaunchpadsScreen extends StatelessWidget {
-  const AllLaunchpadsScreen({Key? key}) : super(key: key);
+  const AllLaunchpadsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => AppScaffold(

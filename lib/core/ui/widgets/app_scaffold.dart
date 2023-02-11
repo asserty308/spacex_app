@@ -3,12 +3,12 @@ import 'package:spacex_guide/core/ui/widgets/drawer.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
-    Key? key, 
+    super.key, 
     required this.title, 
     required this.body,
     this.actions,
     this.drawerEnabled = true, 
-  }) : super(key: key);
+  });
 
   final Widget body;
   final bool drawerEnabled;

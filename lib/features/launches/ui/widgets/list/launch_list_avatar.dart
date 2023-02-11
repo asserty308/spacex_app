@@ -3,9 +3,9 @@ import 'package:spacex_guide/features/launches/data/models/launch.dart';
 
 class LaunchListAvatar extends StatelessWidget {
   const LaunchListAvatar({
-    Key? key, 
+    super.key, 
     required this.launch
-  }) : super(key: key);
+  });
 
   final LaunchModel launch;
 

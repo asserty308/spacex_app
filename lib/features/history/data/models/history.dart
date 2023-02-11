@@ -11,10 +11,7 @@ class History {
     this.wikiUrl,
   });
 
-  int? id, eventDateUnix, flightNumber;
-  String? title, details, articleUrl, wikiUrl;
-
-  static History fromJSON(Map<String, dynamic> json) {
+  factory History.fromJSON(Map<String, dynamic> json) {
     return History(
       id: json['id'],
       title: json['title'],
@@ -25,6 +22,9 @@ class History {
       wikiUrl: json['links']['wikipedia'],
     );
   }
+
+  int? id, eventDateUnix, flightNumber;
+  String? title, details, articleUrl, wikiUrl;
 
   DateTime getDate() {
     return DateTime.fromMillisecondsSinceEpoch(eventDateUnix! * 1000);

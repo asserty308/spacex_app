@@ -20,15 +20,6 @@ class CompanyInfoModel {
     this.summary
   });
 
-  final String? name;
-  final String? founder;
-  final int? founded, employees, vehicles, launchSites, testSites;
-  final String? ceo, cto, coo, ctoPropulsion;
-  final num? valuation;
-  final CompanyHeadquarters? headquarters;
-  final CompanyLinks? links;
-  final String? summary;
-
 
   CompanyInfoModel.fromJSON(Map<String, dynamic> json) :
     name = json['name'],
@@ -46,4 +37,13 @@ class CompanyInfoModel {
     headquarters = CompanyHeadquarters.fromJSON(json['headquarters']),
     links = CompanyLinks.fromJSON(json['links']),
     summary = json['summary'];
+
+  final String? name;
+  final String? founder;
+  final int? founded, employees, vehicles, launchSites, testSites;
+  final String? ceo, cto, coo, ctoPropulsion;
+  final num? valuation;
+  final CompanyHeadquarters? headquarters;
+  final CompanyLinks? links;
+  final String? summary;
 }

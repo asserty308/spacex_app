@@ -13,10 +13,6 @@ class LaunchCoreModel {
     this.landingSuccess
   });
 
-  final String? core, landingType, landpad;
-  final int? flight;
-  final bool? gridfins, legs, reused, landingAttempt, landingSuccess;
-
   LaunchCoreModel.fromJSON(Map<String, dynamic> json) :
     core = json['core'],
     flight = json['flight'],
@@ -27,6 +23,10 @@ class LaunchCoreModel {
     landingSuccess = json['landing_success'],
     landingType = json['landing_type'],
     landpad = json['landpad'];
+
+  final String? core, landingType, landpad;
+  final int? flight;
+  final bool? gridfins, legs, reused, landingAttempt, landingSuccess;
 
   static List<LaunchCoreModel> fromList(dynamic json) {
     var cores = <LaunchCoreModel>[];

@@ -7,13 +7,13 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_detail_actions/
 import 'package:spacex_guide/features/launchpads/data/models/launchpad.dart';
 import 'package:spacex_guide/features/rockets/data/models/rocket.dart';
 
-import 'launch_countdown/launch_countdown_card.dart';
+import 'package:spacex_guide/features/launches/ui/widgets/launch_countdown/launch_countdown_card.dart';
 
 class LaunchInfo extends StatelessWidget {
   const LaunchInfo({
-    Key? key,
+    super.key,
     required this.launch,
-  }) : super(key: key);
+  });
 
   final LaunchModel launch;
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class TextCard extends StatelessWidget {
   const TextCard({
-    Key? key,
+    super.key,
     this.text,
     this.backgroundColor = Colors.indigo,
     this.textColor = Colors.white,
-  }) : super(key: key);
+  });
 
   final String? text;
   final Color backgroundColor, textColor;

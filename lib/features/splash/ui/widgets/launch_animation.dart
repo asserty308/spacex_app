@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LaunchAnimation extends StatelessWidget {
-  const LaunchAnimation({Key? key, this.onFinished}) : super(key: key);
+  const LaunchAnimation({super.key, this.onFinished});
 
   final Function? onFinished;
 

@@ -6,9 +6,9 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_avata
 
 class LaunchListTile extends StatelessWidget {
   const LaunchListTile({
-    Key? key,
+    super.key,
     required this.launch,
-  }) : super(key: key);
+  });
 
   final LaunchModel launch;
 

@@ -3,7 +3,7 @@ import 'package:spacex_guide/features/history/data/models/history.dart';
 import 'package:spacex_guide/features/history/ui/widgets/event_list_tile.dart';
 
 class AllEventsList extends StatelessWidget {
-  const AllEventsList({Key? key, this.events}) : super(key: key);
+  const AllEventsList({super.key, this.events});
 
   final List<History>? events;
 

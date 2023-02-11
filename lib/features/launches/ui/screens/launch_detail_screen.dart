@@ -11,9 +11,9 @@ import 'package:spacex_guide/features/launches/ui/widgets/launch_info.dart';
 /// The next launch will be loaded when the parameter is null.
 class LaunchDetailScreen extends StatelessWidget {
   LaunchDetailScreen({
-    Key? key, 
+    super.key, 
     required this.launch,
-  }) : super(key: key);
+  });
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final LaunchModel launch;

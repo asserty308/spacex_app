@@ -3,10 +3,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewScreen extends StatelessWidget {
   WebviewScreen({
-    Key? key, 
+    super.key, 
     required this.title,
     required this.initialUrl, 
-  }) : super(key: key) {
+  }) {
     _controller.loadRequest(Uri.parse(initialUrl));
   }
 

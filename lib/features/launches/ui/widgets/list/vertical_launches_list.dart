@@ -4,9 +4,9 @@ import 'package:spacex_guide/features/launches/ui/widgets/list/launch_list_tile.
 
 class VerticalLaunchesList extends StatelessWidget {
   const VerticalLaunchesList({
-    Key? key, 
+    super.key, 
     required this.launches
-  }) : super(key: key);
+  });
 
   final List<LaunchModel> launches;
 

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
-    Key? key,
+    super.key,
     this.imageUrls,
-  }) : super(key: key);
+  });
 
   final List<String>? imageUrls;
 

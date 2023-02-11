@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class SliverScrollView extends StatelessWidget {
   const SliverScrollView({
-    Key? key, 
+    super.key, 
     required this.header, 
     required this.body, 
     this.onBackPressed
-  }) : super(key: key);
+  });
 
   final Widget header;
   final Widget body;

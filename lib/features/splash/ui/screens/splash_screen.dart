@@ -4,7 +4,7 @@ import 'package:spacex_guide/core/bloc/app_navigation/app_navigation_cubit.dart'
 import 'package:spacex_guide/features/splash/ui/widgets/launch_animation.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) => LaunchAnimation(
