@@ -18,7 +18,7 @@ dependencies:
   intl: ^0.18.0
   latlong2: ^0.8.1
   meta: ^1.8.0
-  path_provider: ^2.0.7
+  path_provider: ^2.0.14
   url_launcher: ^6.1.9
   webview_flutter: ^4.0.2
 
