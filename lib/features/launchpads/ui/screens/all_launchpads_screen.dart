@@ -6,9 +6,6 @@ import 'package:spacex_guide/core/ui/widgets/default_texts.dart';
 import 'package:spacex_guide/features/launchpads/bloc/launchpad_list/launchpad_list_cubit.dart';
 import 'package:spacex_guide/features/launchpads/ui/widgets/launchpad_list.dart';
 
-// TODO: Where it makes sense, put state handling to screen - not widget level. 
-// This avoids popping widgets due to different loading times and also makes testing easier.
-
 class AllLaunchpadsScreen extends StatelessWidget {
   const AllLaunchpadsScreen({super.key});
 
