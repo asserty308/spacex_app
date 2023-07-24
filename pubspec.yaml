@@ -5,18 +5,18 @@ publish_to: 'none'
 version: 0.2.3+23
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   carousel_slider: ^4.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
-  flutter_map: ^4.0.0
+  flutter_map: ^5.0.0
   get_it: ^7.4.1
-  http: ^0.13.6
+  http: ^1.1.0
   intl: ^0.18.1
-  latlong2: ^0.8.1
+  latlong2: ^0.9.0
   meta: ^1.8.0
   path_provider: ^2.0.14
   url_launcher: ^6.1.10
@@ -24,10 +24,9 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.2
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.0
   mockito: ^5.4.0
 
 flutter:
