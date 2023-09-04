@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:spacex_guide/core/ui/widgets/text_card.dart';
+import 'package:spacex_guide/app/ui/widgets/text_card.dart';
 
 void main() {
   testWidgets('TextCard should show text', (WidgetTester tester) async {

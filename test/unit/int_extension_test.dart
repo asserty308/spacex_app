@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:spacex_guide/core/utility/int_extension.dart';
+import 'package:spacex_guide/app/utility/int_extension.dart';
 
 void main() {
   test('Test 1', () {
