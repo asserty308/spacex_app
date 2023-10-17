@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
-  flutter_map: ^5.0.0
+  flutter_map: ^6.0.0
   get_it: ^7.6.4
   http: ^1.1.0
   intl: ^0.18.1
@@ -20,7 +20,7 @@ dependencies:
   meta: ^1.8.0
   path_provider: ^2.1.1
   url_launcher: ^6.1.14
-  webview_flutter: ^4.2.4
+  webview_flutter: ^4.4.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

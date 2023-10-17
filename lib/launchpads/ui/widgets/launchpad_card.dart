@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:spacex_guide/app/ui/widgets/image_title_card.dart';
 import 'package:spacex_guide/launchpads/data/models/launchpad.dart';
@@ -21,9 +21,11 @@ class LaunchpadCard extends StatelessWidget {
       onTap: () {},
       child: FlutterMap(
         options: MapOptions(
-          zoom: 12,
-          center: coordinates,
-          interactiveFlags: InteractiveFlag.none,
+          initialZoom: 12,
+          initialCenter: coordinates,
+          interactionOptions: const InteractionOptions(
+            flags: InteractiveFlag.none,
+          ),
         ),
         children: [
           TileLayer(
@@ -34,7 +36,7 @@ class LaunchpadCard extends StatelessWidget {
             markers: [
               Marker(
                 point: coordinates, 
-                builder: (context) => const Icon(Icons.location_on, color: Colors.red, size: 20,),
+                child: const Icon(Icons.location_on, color: Colors.red, size: 20,),
               ),
             ],
           ),
