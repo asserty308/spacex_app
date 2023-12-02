@@ -9,8 +9,6 @@ import 'package:spacex_guide/launches/data/models/launch.dart';
 import 'package:spacex_guide/launches/ui/widgets/list/previous_launch_list.dart';
 import 'package:spacex_guide/launches/ui/widgets/list/upcoming_launch_list.dart';
 
-// TODO: Apply Glassmorphism design (blur bg and glass containers)
-
 class LaunchesScreen extends StatelessWidget {
   LaunchesScreen({super.key});
 

@@ -19,10 +19,8 @@ class RocketDetailsScreen extends StatelessWidget {
     child: _willPopScope,
   );
   
-  Widget get _willPopScope => WillPopScope(
-    onWillPop: () async {
-      return true;
-    },
+  Widget get _willPopScope => PopScope(
+    canPop: true,
     child: _scaffold,
   );
 

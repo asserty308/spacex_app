@@ -19,10 +19,10 @@ class LaunchDetailScreen extends StatelessWidget {
   final LaunchModel launch;
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-    onWillPop: () async {
+  Widget build(BuildContext context) => PopScope(
+    canPop: false,
+    onPopInvoked: (didPop) {
       _dismissScreen(context);
-      return false;
     },
     child: Scaffold(
       key: _scaffoldKey,
